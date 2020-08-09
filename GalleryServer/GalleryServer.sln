@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30114.105
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GalleryServer", "GalleryServer\GalleryServer.csproj", "{7C552BC3-999C-49BE-A11A-BA61EF6328A5}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GalleryServer", "GalleryServer\GalleryServer.csproj", "{7FDAFA88-D4FF-4425-B769-1AC5AF9BBF99}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,15 +11,15 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{7C552BC3-999C-49BE-A11A-BA61EF6328A5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{7C552BC3-999C-49BE-A11A-BA61EF6328A5}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{7C552BC3-999C-49BE-A11A-BA61EF6328A5}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{7C552BC3-999C-49BE-A11A-BA61EF6328A5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7FDAFA88-D4FF-4425-B769-1AC5AF9BBF99}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7FDAFA88-D4FF-4425-B769-1AC5AF9BBF99}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7FDAFA88-D4FF-4425-B769-1AC5AF9BBF99}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7FDAFA88-D4FF-4425-B769-1AC5AF9BBF99}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {7B1DD3E5-7303-4573-B865-621BFAFE8D70}
+		SolutionGuid = {1FB77B78-930B-46D4-B28D-CFAE3A393779}
 	EndGlobalSection
 EndGlobal
