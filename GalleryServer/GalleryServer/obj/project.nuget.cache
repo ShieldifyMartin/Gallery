@@ -1,9 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "Lv9aW28D43Cm8xC5VySXBvhc6nUxUpeJGJG/4i1d0+fvmqj0tRumBOjACvxEx8c6m4Pzy/Ay6BEg1ilOJHpIrA==",
+  "dgSpecHash": "0DC4x5/D6VkFv69gQcWszQTr4Nbutl6qZnuj8pVKeAJ+ifUPyGC8PoIe6/o9IkyNdSO5EjH+LUifn5JM908aFg==",
   "success": true,
   "projectFilePath": "E:\\Git\\Gallery\\GalleryServer\\GalleryServer\\GalleryServer.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\Martin-Petrov\\.nuget\\packages\\cloudinarydotnet\\1.11.0\\cloudinarydotnet.1.11.0.nupkg.sha512",
     "C:\\Users\\Martin-Petrov\\.nuget\\packages\\microsoft.aspnetcore.authentication.jwtbearer\\3.1.6\\microsoft.aspnetcore.authentication.jwtbearer.3.1.6.nupkg.sha512",
     "C:\\Users\\Martin-Petrov\\.nuget\\packages\\microsoft.aspnetcore.cryptography.internal\\3.1.4\\microsoft.aspnetcore.cryptography.internal.3.1.4.nupkg.sha512",
     "C:\\Users\\Martin-Petrov\\.nuget\\packages\\microsoft.aspnetcore.cryptography.keyderivation\\3.1.4\\microsoft.aspnetcore.cryptography.keyderivation.3.1.4.nupkg.sha512",

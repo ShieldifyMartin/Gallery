@@ -19,8 +19,9 @@ namespace GalleryServer
                 .AddDatabase(this.Configuration)
                 .AddIdentity()
                 .AddJwtAuthentication(services.GetApplicationSettings(this.Configuration))
-                .AddApplicationServices()                
-                .AddApiControllers();        
+                .AddApplicationServices()
+                .AddCloudinaryService(services.GetApplicationSettings(this.Configuration))
+                .AddApiControllers();
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {

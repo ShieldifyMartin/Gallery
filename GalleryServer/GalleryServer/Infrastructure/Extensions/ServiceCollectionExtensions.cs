@@ -2,12 +2,16 @@
 {
     using Catstagram.Server.Features.Identity;
     using Catstagram.Server.Infrastructure.Filters;
+    using CloudinaryDotNet;
     using GalleryServer.Data;
     using GalleryServer.Data.Models;
+    using GalleryServer.Data.Models.Repositories;
+    using GalleryServer.Features.Cats;
+    using GalleryServer.Features.Cloudinary;
     using GalleryServer.Features.Identity;
+    using GalleryServer.Infrastructure.Services;
     using Microsoft.AspNetCore.Authentication.JwtBearer;
     using Microsoft.AspNetCore.Identity;
-    using Microsoft.AspNetCore.Mvc;
     using Microsoft.EntityFrameworkCore;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
@@ -78,8 +82,27 @@
 
         public static IServiceCollection AddApplicationServices(this IServiceCollection services)
             => services
-                .AddTransient<IIdentityService, IdentityService>();                
-        
+                .AddScoped(typeof(IDeletableEntityRepository<>), typeof(DeletableEntityRepository<>))
+                .AddScoped(typeof(BaseRepository<>), typeof(BaseRepository<>))                
+                .AddTransient<ICurrentUserService, CurrentUserService>()
+                .AddTransient<ICloudinaryService, CloudinaryService>()                
+                .AddTransient<IPostsService, PostsService>()
+                .AddTransient<IIdentityService, IdentityService>();
+
+        public static IServiceCollection AddCloudinaryService(this IServiceCollection services, AppSettings appSettings)
+        {
+            Account account = new Account(
+                appSettings.CloudName,
+                appSettings.APIKey,
+                appSettings.APISecret
+            );
+
+            Cloudinary cloudinary = new Cloudinary(account);
+            services.AddSingleton(cloudinary);
+            
+            return services;
+        }
+
         public static void AddApiControllers(this IServiceCollection services)
             => services                
                 .AddAntiforgery(options =>
@@ -88,6 +111,6 @@
                 })
                 .AddControllers(options => options
                     .Filters
-                    .Add<ModelOrNotFoundActionFilter>());                   
+                    .Add<ModelOrNotFoundActionFilter>());        
     }
 }
