@@ -38,6 +38,12 @@
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
+            builder
+                .Entity<Post>()
+                .HasOne(c => c.User)
+                .WithMany(u => u.Posts)
+                .HasForeignKey(c => c.UserId);              
+
             base.OnModelCreating(builder);
         }
 

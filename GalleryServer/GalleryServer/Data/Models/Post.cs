@@ -32,6 +32,6 @@
 
         public DateTime? ModifiedOn { get; set; }
 
-        public string ModifiedBy { get; set; }
+        public string? ModifiedBy { get; set; }
     }
 }
