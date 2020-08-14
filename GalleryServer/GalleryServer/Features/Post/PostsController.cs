@@ -37,5 +37,12 @@
 
             return Created(nameof(this.Create), id);
         }
+
+        public async Task<ActionResult> All()
+        {
+            var posts = await this.posts.GetAll();
+
+            return Accepted(nameof(this.All), posts);
+        }
     }
 }

@@ -4,6 +4,8 @@
     using GalleryServer.Data.Models;
     using GalleryServer.Data.Models.Repositories;
     using System;
+    using System.Collections.Generic;
+    using System.Linq;
     using System.Threading.Tasks;
 
     public class PostsService : IPostsService
@@ -33,5 +35,14 @@
             return post.Id;
         }
 
+        public async Task<List<Post>> GetAll()
+        {
+            var posts = this.postsRepository
+                .All()
+                .OrderByDescending(p => p.CreatedOn)
+                .ToList();
+            
+            return posts;
+        }
     }
 }
