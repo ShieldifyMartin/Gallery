@@ -22,6 +22,8 @@
 
         public DbSet<Post> Posts { get; set; }
 
+        public DbSet<Vote> Votes { get; set; }
+
         public override int SaveChanges(bool acceptAllChangesOnSuccess)
         {            
             this.ApplyAuditInformation();
@@ -42,7 +44,15 @@
                 .Entity<Post>()
                 .HasOne(c => c.User)
                 .WithMany(u => u.Posts)
-                .HasForeignKey(c => c.UserId);              
+                .HasForeignKey(c => c.UserId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            builder
+                .Entity<Vote>()
+                .HasOne(v => v.User)
+                .WithMany()
+                .HasForeignKey(v => v.UserId)
+                .OnDelete(DeleteBehavior.Cascade);
 
             base.OnModelCreating(builder);
         }

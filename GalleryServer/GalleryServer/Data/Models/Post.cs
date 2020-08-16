@@ -2,6 +2,7 @@
 {    
     using GalleryServer.Data.Models.Base;
     using System;
+    using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
 
     using static Validation.Post;
@@ -19,7 +20,9 @@
         public string Description { get; set; }
 
         [Required]
-        public string Picture { get; set; }        
+        public string Picture { get; set; }
+
+        public int Likes { get; set; } = 0;
 
         [Required]
         public string UserId { get; set; }
@@ -33,5 +36,7 @@
         public DateTime? ModifiedOn { get; set; }
 
         public string? ModifiedBy { get; set; }
+
+        public virtual ICollection<Vote> Votes { get; set; }
     }
 }

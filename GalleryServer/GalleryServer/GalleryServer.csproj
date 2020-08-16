@@ -6,6 +6,15 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Data\Migrations\20200816101159_AddVoting.cs" />
+    <Compile Remove="Data\Migrations\20200816101159_AddVoting.Designer.cs" />
+    <Compile Remove="Data\Migrations\20200816101419_AddVoting.cs" />
+    <Compile Remove="Data\Migrations\20200816101419_AddVoting.Designer.cs" />
+    <Compile Remove="Data\Migrations\20200816102628_AddVoting.cs" />
+    <Compile Remove="Data\Migrations\20200816102628_AddVoting.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="CloudinaryDotNet" Version="1.11.0" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="3.1.6" />
     <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="3.1.4" />

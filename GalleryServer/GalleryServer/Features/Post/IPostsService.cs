@@ -1,6 +1,7 @@
 ﻿namespace GalleryServer.Features.Cats
 {
     using GalleryServer.Data.Models;
+    using GalleryServer.Infrastructure.Services;    
     using System.Collections.Generic;
     using System.Threading.Tasks;
 
@@ -11,5 +12,7 @@
         Task<List<Post>> GetAll();
 
         Task<List<Post>> GetTop10();
+
+        Task<Result> LikePost(string userId, string postId);
     }
 }
