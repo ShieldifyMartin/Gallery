@@ -28,7 +28,7 @@ namespace GalleryServer
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-            }
+            }                        
 
             app.UseRouting();
 

@@ -100,7 +100,7 @@ E:\Git\Gallery\GalleryServer\GalleryServer\obj\Debug\netcoreapp3.1\GalleryServer
 E:\Git\Gallery\GalleryServer\GalleryServer\obj\Debug\netcoreapp3.1\GalleryServer.dll
 E:\Git\Gallery\GalleryServer\GalleryServer\obj\Debug\netcoreapp3.1\GalleryServer.pdb
 E:\Git\Gallery\GalleryServer\GalleryServer\obj\Debug\netcoreapp3.1\GalleryServer.genruntimeconfig.cache
+E:\Git\Gallery\GalleryServer\GalleryServer\bin\Debug\netcoreapp3.1\CloudinaryDotNet.dll
 E:\Git\Gallery\GalleryServer\GalleryServer\obj\Debug\netcoreapp3.1\GalleryServer.csproj.CoreCompileInputs.cache
 E:\Git\Gallery\GalleryServer\GalleryServer\obj\Debug\netcoreapp3.1\GalleryServer.MvcApplicationPartsAssemblyInfo.cs
 E:\Git\Gallery\GalleryServer\GalleryServer\obj\Debug\netcoreapp3.1\GalleryServer.MvcApplicationPartsAssemblyInfo.cache
-E:\Git\Gallery\GalleryServer\GalleryServer\bin\Debug\netcoreapp3.1\CloudinaryDotNet.dll

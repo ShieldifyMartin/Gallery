@@ -13,5 +13,10 @@
             public const int MaxNameLength = 40;
             public const int MaxBiographyLength = 150;
         }
+
+        public class Category
+        {
+            public const int MaxTitleLength = 25;
+        }
     }
 }

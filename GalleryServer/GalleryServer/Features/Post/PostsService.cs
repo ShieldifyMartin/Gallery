@@ -21,7 +21,7 @@
             this.postsRepository = postsRepository;
         }
         
-        public async Task<string> Create(string description, string? location, string pictureUrl, string userId)
+        public async Task<string> Create(string description, string? location, string pictureUrl, string userId, int? categoryId)
         {
             var post = new Post
             {
@@ -30,7 +30,8 @@
                 Location = location,
                 Picture = pictureUrl,
                 UserId = userId,
-            };
+                CategoryId = categoryId
+            };         
 
             await this.postsRepository.AddAsync(post);
             await this.data.SaveChangesAsync();

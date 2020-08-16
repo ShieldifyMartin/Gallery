@@ -24,6 +24,10 @@
 
         public int Likes { get; set; } = 0;
 
+        public int? CategoryId { get; set; }
+
+        public virtual Category Category { get; set; }
+
         [Required]
         public string UserId { get; set; }
 

@@ -7,7 +7,7 @@
 
     public interface IPostsService
     {
-        Task<string> Create(string description, string location, string pictureUrl, string userId);
+        Task<string> Create(string description, string? location, string pictureUrl, string userId, int? categoryId);
 
         Task<List<Post>> GetAll();
 

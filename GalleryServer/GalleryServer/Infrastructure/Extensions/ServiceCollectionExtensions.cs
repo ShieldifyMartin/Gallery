@@ -6,6 +6,7 @@
     using GalleryServer.Data;
     using GalleryServer.Data.Models;
     using GalleryServer.Data.Models.Repositories;
+    using GalleryServer.Features.Category;
     using GalleryServer.Features.Cats;
     using GalleryServer.Features.Cloudinary;
     using GalleryServer.Features.Identity;
@@ -17,6 +18,7 @@
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.IdentityModel.Tokens;
     using System.Text;
+    using System.Threading.Tasks;
 
     public static class ServiceCollectionExtensions
     {
@@ -47,8 +49,7 @@
                     options.Password.RequireNonAlphanumeric = false;
                     options.Password.RequireUppercase = false;
                 })
-                .AddEntityFrameworkStores<ApplicationDbContext>();
-
+                .AddEntityFrameworkStores<ApplicationDbContext>();            
             return services;
         }
 
@@ -85,7 +86,8 @@
                 .AddScoped(typeof(IDeletableEntityRepository<>), typeof(DeletableEntityRepository<>))
                 .AddScoped(typeof(BaseRepository<>), typeof(BaseRepository<>))                
                 .AddTransient<ICurrentUserService, CurrentUserService>()
-                .AddTransient<ICloudinaryService, CloudinaryService>()                
+                .AddTransient<ICloudinaryService, CloudinaryService>()
+                .AddTransient<ICategoriesService, CategoriesService>()
                 .AddTransient<IPostsService, PostsService>()
                 .AddTransient<IIdentityService, IdentityService>();
 
