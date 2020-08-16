@@ -19,7 +19,7 @@
         public string Description { get; set; }
 
         [Required]
-        public string Picture { get; set; }
+        public string Picture { get; set; }        
 
         [Required]
         public string UserId { get; set; }

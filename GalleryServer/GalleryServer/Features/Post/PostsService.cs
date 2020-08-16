@@ -44,5 +44,15 @@
             
             return posts;
         }
+
+        public async Task<List<Post>> GetTop10()
+        {
+            var posts = this.postsRepository
+                    .All()
+                    .Take(10)
+                    .ToList();
+
+            return posts;
+        }
     }
 }

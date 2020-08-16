@@ -44,5 +44,12 @@
 
             return Accepted(nameof(this.All), posts);
         }
+
+        public async Task<ActionResult> Top10()
+        {
+            var posts = await this.posts.GetTop10();
+
+            return Accepted(nameof(this.Top10), posts);
+        }
     }
 }
