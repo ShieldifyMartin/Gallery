@@ -7,6 +7,8 @@ namespace GalleryServer
     using Microsoft.Extensions.Hosting;    
     using GalleryServer.Infrastructure;   
     using GalleryServer.Infrastructure.Extensions;
+    using Microsoft.AspNetCore.Identity;
+    using GalleryServer.Data.Models;
 
     public class Startup
     {
@@ -23,7 +25,7 @@ namespace GalleryServer
                 .AddCloudinaryService(services.GetApplicationSettings(this.Configuration))
                 .AddApiControllers();
 
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, UserManager<User> userManager)
         {
             if (env.IsDevelopment())
             {
@@ -44,6 +46,8 @@ namespace GalleryServer
             {
                 endpoints.MapControllers();
             });
+
+            ApplicationDbInitializer.SeedUsers(userManager);
 
             app.ApplyMigrations();
         }

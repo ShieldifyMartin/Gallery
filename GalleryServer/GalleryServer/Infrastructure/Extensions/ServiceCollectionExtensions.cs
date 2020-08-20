@@ -49,6 +49,7 @@
                     options.Password.RequireNonAlphanumeric = false;
                     options.Password.RequireUppercase = false;
                 })
+                .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>();            
             return services;
         }
@@ -113,6 +114,6 @@
                 })
                 .AddControllers(options => options
                     .Filters
-                    .Add<ModelOrNotFoundActionFilter>());        
+                    .Add<ModelOrNotFoundActionFilter>());
     }
 }

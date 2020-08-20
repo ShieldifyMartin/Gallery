@@ -9,6 +9,7 @@
     using System;
     using System.Threading.Tasks;
     using System.Threading;
+    using Microsoft.AspNetCore.Identity;
 
     public class ApplicationDbContext : IdentityDbContext<User>
     {
@@ -23,8 +24,6 @@
         public DbSet<Category> Categories { get; set; }
         public DbSet<Post> Posts { get; set; }
         public DbSet<Vote> Votes { get; set; }
-
-
 
         public override int SaveChanges(bool acceptAllChangesOnSuccess)
         {            
@@ -56,6 +55,10 @@
                 .HasForeignKey(v => v.UserId)
                 .OnDelete(DeleteBehavior.Cascade);
 
+            builder
+                .Entity<IdentityRole>()
+                .HasData(new IdentityRole { Name = "Admin", NormalizedName = "Admin".ToUpper() });
+            
             base.OnModelCreating(builder);
         }
 
