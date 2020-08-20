@@ -91,5 +91,20 @@
 
             return Ok();
         }
+
+        [HttpDelete("{postId}")]
+        [Authorize]
+        public async Task<ActionResult> Delete(string postId)
+        {
+            var userId = this.currentUser.GetId();
+            var result = await this.posts.DeletePost(userId, postId);
+            
+            if (result.Failure)
+            {
+                return BadRequest(result.Error);
+            }
+
+            return Ok();
+        }
     }
 }

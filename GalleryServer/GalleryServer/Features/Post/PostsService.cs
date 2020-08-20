@@ -13,9 +13,9 @@
     public class PostsService : IPostsService
     {
         private readonly ApplicationDbContext data;
-        private readonly BaseRepository<Post> postsRepository;
+        private readonly IDeletableEntityRepository<Post> postsRepository;
 
-        public PostsService(ApplicationDbContext data, BaseRepository<Post> postsRepository)
+        public PostsService(ApplicationDbContext data, IDeletableEntityRepository<Post> postsRepository)
         {
             this.data = data;
             this.postsRepository = postsRepository;
@@ -55,6 +55,7 @@
 
             await this.postsRepository.AddAsync(post);
             await this.data.SaveChangesAsync();
+
             return post.Id;
         }
 
@@ -77,10 +78,33 @@
             post.Description = description;
             post.Location = location;
             post.Picture = pictureUrl;
-            post.CategoryId = categoryId;            
+            post.CategoryId = categoryId;
 
             this.postsRepository.Update(post);
             await this.data.SaveChangesAsync();
+
+            return true;
+        }
+
+        public async Task<Result> DeletePost(string userId, string postId)
+        {
+            var post = this.postsRepository
+                .All()
+                .FirstOrDefault(p => p.Id == postId);
+
+            if (post == null)
+            {
+                return "This post cannot be found.";
+            }
+
+            if (post.UserId != userId)
+            {
+                return "You are not authorized to delete this post.";
+            }
+
+            this.postsRepository.Delete(post);
+            await this.data.SaveChangesAsync();
+
             return true;
         }
 

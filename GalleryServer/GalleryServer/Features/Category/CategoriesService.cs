@@ -10,9 +10,9 @@
     public class CategoriesService : ICategoriesService
     {
         private readonly ApplicationDbContext data;
-        private readonly BaseRepository<Post> postsRepository;
+        private readonly IDeletableEntityRepository<Post> postsRepository;
 
-        public CategoriesService(ApplicationDbContext data, BaseRepository<Post> postsRepository)
+        public CategoriesService(ApplicationDbContext data, IDeletableEntityRepository<Post> postsRepository)
         {
             this.data = data;
             this.postsRepository = postsRepository;

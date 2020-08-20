@@ -21,11 +21,9 @@ namespace GalleryServer.Data.Models.Repositories
 
         public virtual IQueryable<Entity> All() => this.DbSet;
 
-        public virtual IQueryable<Entity> AllAsNoTracking() => this.DbSet.AsNoTracking();
+        public async Task AddAsync(Entity entity) => await this.DbSet.AddAsync(entity).AsTask();
 
-        public virtual async Task AddAsync(Entity entity) => await this.DbSet.AddAsync(entity).AsTask();
-
-        public virtual void Update(Entity entity)
+        public void Update(Entity entity)
         {
             var entry = this.Context.Entry(entity);
             if (entry.State == EntityState.Detached)
