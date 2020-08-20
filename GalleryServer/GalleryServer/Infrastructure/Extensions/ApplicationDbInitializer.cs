@@ -13,7 +13,7 @@ public static class ApplicationDbInitializer
                 Email = "admin@admin.com"
             };
 
-            IdentityResult result = userManager.CreateAsync(user, "Admin").Result;
+            IdentityResult result = userManager.CreateAsync(user, "Admin11").Result;
 
             if (result.Succeeded)
             {

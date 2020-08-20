@@ -7,11 +7,13 @@
 
     public interface IPostsService
     {
-        Task<string> Create(string description, string? location, string pictureUrl, string userId, int? categoryId);
+        List<Post> GetAll();
 
-        Task<List<Post>> GetAll();
+        List<Post> GetTop10();
 
-        Task<List<Post>> GetTop10();
+        Task<string> Create(string? location, string description, string pictureUrl, string userId, int? categoryId);
+        
+        Task<Result> UpdatePost(string userId, string postId, string? location, string description, string pictureUrl, int? categoryId);
 
         Task<Result> LikePost(string userId, string postId);
     }

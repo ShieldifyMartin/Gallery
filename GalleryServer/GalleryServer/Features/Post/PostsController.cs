@@ -40,21 +40,21 @@
             var userId = this.currentUser.GetId();
             //var pictureUrl = await this.cloudinaryService.UploadAsync(this.cloudinary, model.Picture);
             var pictureUrl = "";
-            var id = await this.posts.Create(model.Description, model.Location, pictureUrl, userId, categoryId);
+            var id = await this.posts.Create(model.Location, model.Description, pictureUrl, userId, categoryId);
 
             return Created(nameof(this.Create), id);
         }
 
         public async Task<ActionResult> All()
         {
-            var posts = await this.posts.GetAll();
+            var posts = this.posts.GetAll();
 
             return Accepted(nameof(this.All), posts);
         }
 
         public async Task<ActionResult> Top10()
         {
-            var posts = await this.posts.GetTop10();
+            var posts = this.posts.GetTop10();
 
             return Accepted(nameof(this.Top10), posts);
         }
@@ -65,6 +65,24 @@
         {
             var userId = this.currentUser.GetId();
             var result = await this.posts.LikePost(userId, postId);
+
+            if (result.Failure)
+            {
+                return BadRequest(result.Error);
+            }
+
+            return Ok();
+        }
+
+        [HttpPatch("{postId}")]
+        [Authorize]
+        public async Task<ActionResult> Update(string postId, UpdatePostRequestModel model)
+        {
+            var userId = this.currentUser.GetId();
+            //var pictureUrl = await this.cloudinaryService.UploadAsync(this.cloudinary, model.Picture);
+            var pictureUrl = "";
+
+            var result = await this.posts.UpdatePost(userId, postId, model.Location, model.Description, pictureUrl, model.CategoryId);
 
             if (result.Failure)
             {

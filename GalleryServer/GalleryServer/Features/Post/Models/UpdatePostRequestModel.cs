@@ -5,7 +5,7 @@
 
     using static GalleryServer.Data.Validation.Post;
 
-    public class CreatePostRequestModel
+    public class UpdatePostRequestModel
     {
         //[Required]
         //public IFormFile Picture { get; set; }
@@ -18,5 +18,5 @@
         public string Description { get; set; }
 
         public int? CategoryId { get; set; }
-    }    
+    }
 }
