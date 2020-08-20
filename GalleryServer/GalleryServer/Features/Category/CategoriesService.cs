@@ -10,12 +10,12 @@
     public class CategoriesService : ICategoriesService
     {
         private readonly ApplicationDbContext data;
-        private readonly IDeletableEntityRepository<Post> postsRepository;
+        private readonly IDeletableEntityRepository<Post> posts;
 
-        public CategoriesService(ApplicationDbContext data, IDeletableEntityRepository<Post> postsRepository)
+        public CategoriesService(ApplicationDbContext data, IDeletableEntityRepository<Post> posts)
         {
             this.data = data;
-            this.postsRepository = postsRepository;
+            this.posts = posts;
         }
 
         public async Task<List<Category>> GetAll()
@@ -29,8 +29,8 @@
 
         public async Task<List<Post>> GetPostsByCategory(int id)
         {
-            var posts = this.data
-                .Posts
+            var posts = this.posts
+                .All()
                 .Where(p => p.CategoryId == id)                
                 .ToList();
 
