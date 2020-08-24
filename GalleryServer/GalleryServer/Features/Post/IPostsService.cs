@@ -9,7 +9,7 @@
     {
         List<Post> GetAll();
 
-        List<Post> GetTop10();
+        List<Post> GetTop5();
 
         Task<string> Create(string? location, string description, string pictureUrl, string userId, int? categoryId);
         

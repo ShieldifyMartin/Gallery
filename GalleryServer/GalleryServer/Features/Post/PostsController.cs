@@ -52,11 +52,11 @@
             return Accepted(nameof(this.All), posts);
         }
 
-        public async Task<ActionResult> Top10()
+        public async Task<ActionResult> Top5()
         {
-            var posts = this.posts.GetTop10();
+            var posts = this.posts.GetTop5();
 
-            return Accepted(nameof(this.Top10), posts);
+            return Accepted(nameof(this.Top5), posts);
         }
 
         [HttpPost("{postId}")]

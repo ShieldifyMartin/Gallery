@@ -13,17 +13,17 @@
     public class PostsService : IPostsService
     {
         private readonly ApplicationDbContext data;
-        private readonly IDeletableEntityRepository<Post> postsRepository;
+        private readonly IDeletableEntityRepository<Post> posts;
 
-        public PostsService(ApplicationDbContext data, IDeletableEntityRepository<Post> postsRepository)
+        public PostsService(ApplicationDbContext data, IDeletableEntityRepository<Post> posts)
         {
             this.data = data;
-            this.postsRepository = postsRepository;
+            this.posts = posts;
         }                
 
         public List<Post> GetAll()
         {
-            var posts = this.postsRepository
+            var posts = this.posts
                 .All()
                 .OrderByDescending(p => p.CreatedOn)
                 .ToList();
@@ -31,15 +31,15 @@
             return posts;
         }
 
-        public List<Post> GetTop10()
+        public List<Post> GetTop5()
         {
-            var posts = this.postsRepository
+            var posts = this.posts
                 .All()
-                .Take(10)
+                .OrderByDescending(p => p.Likes)
                 .ToList();
 
             return posts;
-        }
+        }    
 
         public async Task<string> Create(string? location, string description, string pictureUrl, string userId, int? categoryId)
         {
@@ -53,7 +53,7 @@
                 CategoryId = categoryId
             };
 
-            await this.postsRepository.AddAsync(post);
+            await this.posts.AddAsync(post);
             await this.data.SaveChangesAsync();
 
             return post.Id;
@@ -61,7 +61,7 @@
 
         public async Task<Result> UpdatePost(string userId, string postId, string? location, string description, string pictureUrl, int? categoryId)
         {
-            var post = this.postsRepository
+            var post = this.posts
                 .All()
                 .FirstOrDefault(p => p.Id == postId);
             
@@ -80,7 +80,7 @@
             post.Picture = pictureUrl;
             post.CategoryId = categoryId;
 
-            this.postsRepository.Update(post);
+            this.posts.Update(post);
             await this.data.SaveChangesAsync();
 
             return true;
@@ -88,7 +88,7 @@
 
         public async Task<Result> DeletePost(string userId, string postId)
         {
-            var post = this.postsRepository
+            var post = this.posts
                 .All()
                 .FirstOrDefault(p => p.Id == postId);
 
@@ -102,7 +102,7 @@
                 return "You are not authorized to delete this post.";
             }
 
-            this.postsRepository.Delete(post);
+            this.posts.Delete(post);
             await this.data.SaveChangesAsync();
 
             return true;
@@ -129,7 +129,7 @@
 
             await this.data.AddAsync(vote);
 
-            var post = this.postsRepository
+            var post = this.posts
                 .All()
                 .FirstOrDefault(p => p.Id == postId);
 
