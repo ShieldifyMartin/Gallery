@@ -39,7 +39,16 @@
                 .ToList();
 
             return posts;
-        }    
+        }
+
+        public Post GetById(string id)
+        {
+            var post = this.posts
+                .All()
+                .FirstOrDefault(p => p.Id == id);
+
+            return post;
+        }
 
         public async Task<string> Create(string? location, string description, string pictureUrl, string userId, int? categoryId)
         {

@@ -11,6 +11,8 @@
 
         List<Post> GetTop5();
 
+        Post GetById(string id);
+
         Task<string> Create(string? location, string description, string pictureUrl, string userId, int? categoryId);
         
         Task<Result> UpdatePost(string userId, string postId, string? location, string description, string pictureUrl, int? categoryId);

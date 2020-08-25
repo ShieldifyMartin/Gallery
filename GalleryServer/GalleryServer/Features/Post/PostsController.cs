@@ -59,6 +59,14 @@
             return Accepted(nameof(this.Top5), posts);
         }
 
+        [HttpGet("{postId}")]
+        public async Task<ActionResult> ById(string postId)
+        {
+            var post = this.posts.GetById(postId);
+
+            return Accepted(nameof(this.ById), post);
+        }
+
         [HttpPost("{postId}")]
         [Authorize]
         public async Task<ActionResult> Like(string postId)
