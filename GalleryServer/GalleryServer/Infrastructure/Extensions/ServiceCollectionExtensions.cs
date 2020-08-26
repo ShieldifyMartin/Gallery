@@ -10,6 +10,7 @@
     using GalleryServer.Features.Cats;
     using GalleryServer.Features.Cloudinary;
     using GalleryServer.Features.Identity;
+    using GalleryServer.Features.Profile;
     using GalleryServer.Infrastructure.Services;
     using Microsoft.AspNetCore.Authentication.JwtBearer;
     using Microsoft.AspNetCore.Identity;
@@ -17,8 +18,7 @@
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.IdentityModel.Tokens;
-    using System.Text;
-    using System.Threading.Tasks;
+    using System.Text;    
 
     public static class ServiceCollectionExtensions
     {
@@ -90,8 +90,9 @@
                 .AddTransient<ICloudinaryService, CloudinaryService>()
                 .AddTransient<ICategoriesService, CategoriesService>()
                 .AddTransient<IPostsService, PostsService>()
+                .AddTransient<IProfilesService, ProfilesService>()
                 .AddTransient<IIdentityService, IdentityService>();
-
+        
         public static IServiceCollection AddCloudinaryService(this IServiceCollection services, AppSettings appSettings)
         {
             Account account = new Account(

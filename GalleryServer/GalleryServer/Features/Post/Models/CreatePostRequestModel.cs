@@ -1,6 +1,7 @@
 ﻿namespace GalleryServer.Features.Post.Models
 {
     using Microsoft.AspNetCore.Http;
+    using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
 
     using static GalleryServer.Data.Validation.Post;
@@ -18,5 +19,8 @@
         public string Description { get; set; }
 
         public int? CategoryId { get; set; }
+
+        [Required]
+        public List<string> Tags { get; set; }
     }    
 }

@@ -4,7 +4,7 @@
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
-
+    using System.ComponentModel.DataAnnotations.Schema;
     using static Validation.Post;
 
     public class Post : DeletableEntity, IEntity
@@ -40,7 +40,7 @@
         public DateTime? ModifiedOn { get; set; }
 
         public string? ModifiedBy { get; set; }
-
+        
         public virtual ICollection<Vote> Votes { get; set; }
     }
 }

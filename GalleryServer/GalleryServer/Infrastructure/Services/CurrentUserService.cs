@@ -1,5 +1,5 @@
 ﻿namespace GalleryServer.Infrastructure.Services
-{
+{    
     using Microsoft.AspNetCore.Http;
     using System.Linq;
     using System.Security.Claims;
@@ -18,6 +18,6 @@
             => this.user?
                 .Claims
                 .FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)
-                ?.Value;
+                ?.Value;    
     }
 }

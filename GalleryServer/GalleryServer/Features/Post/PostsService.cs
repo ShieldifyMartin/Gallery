@@ -3,6 +3,7 @@
     using GalleryServer.Data;
     using GalleryServer.Data.Models;
     using GalleryServer.Data.Models.Repositories;
+    using GalleryServer.Features.Post.Models;
     using GalleryServer.Infrastructure.Services;    
     using Microsoft.EntityFrameworkCore;
     using System;
@@ -41,10 +42,22 @@
             return posts;
         }
 
-        public Post GetById(string id)
+        public DetailsGetRequestModel GetById(string id)
         {
             var post = this.posts
                 .All()
+                .Select(p => new DetailsGetRequestModel
+                {
+                    Id = p.Id,
+                    Location = p.Location,
+                    Description = p.Description,
+                    Picture = p.Picture,
+                    Likes = p.Likes,
+                    CategoryId = p.CategoryId,
+                    UserId = p.UserId,
+                    CreatedOn = p.CreatedOn,
+                    Votes = p.Votes                 
+                })
                 .FirstOrDefault(p => p.Id == id);
 
             return post;
@@ -59,7 +72,7 @@
                 Description = description,
                 Picture = pictureUrl,
                 UserId = userId,
-                CategoryId = categoryId
+                CategoryId = categoryId      
             };
 
             await this.posts.AddAsync(post);
@@ -87,7 +100,7 @@
             post.Description = description;
             post.Location = location;
             post.Picture = pictureUrl;
-            post.CategoryId = categoryId;
+            post.CategoryId = categoryId;          
 
             this.posts.Update(post);
             await this.data.SaveChangesAsync();

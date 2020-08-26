@@ -1,6 +1,7 @@
 ﻿namespace GalleryServer.Features.Cats
 {
     using GalleryServer.Data.Models;
+    using GalleryServer.Features.Post.Models;
     using GalleryServer.Infrastructure.Services;    
     using System.Collections.Generic;
     using System.Threading.Tasks;
@@ -11,7 +12,7 @@
 
         List<Post> GetTop5();
 
-        Post GetById(string id);
+        DetailsGetRequestModel GetById(string id);
 
         Task<string> Create(string? location, string description, string pictureUrl, string userId, int? categoryId);
         
