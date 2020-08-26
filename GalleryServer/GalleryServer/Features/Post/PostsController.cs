@@ -63,6 +63,11 @@
         public async Task<ActionResult> ById(string postId)
         {
             var post = this.posts.GetById(postId);
+            
+            if (post == null)
+            {
+                return this.NotFound();
+            }
 
             return Accepted(nameof(this.ById), post);
         }
