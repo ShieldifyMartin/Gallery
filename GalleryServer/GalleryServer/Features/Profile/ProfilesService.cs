@@ -66,5 +66,16 @@
 
             return users;
         }
+
+        public async Task<List<Post>> GetLikedPosts(string userId)
+        {
+            var likedPosts = this.data
+                .Votes
+                .Where(v => v.UserId == userId)
+                .Select(v => v.Post)
+                .ToList();
+
+            return likedPosts;
+        }
     }
 }

@@ -53,5 +53,14 @@
 
             return Ok(users);
         }
+
+        [Authorize]
+        public async Task<ActionResult> Liked()
+        {
+            var userId = this.currentUser.GetId();
+            var likedPosts = this.profiles.GetLikedPosts(userId);
+
+            return Accepted(likedPosts);
+        }
     }
 }
