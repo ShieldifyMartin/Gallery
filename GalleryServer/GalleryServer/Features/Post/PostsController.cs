@@ -62,12 +62,7 @@
         [HttpGet("{postId}")]
         public async Task<ActionResult> ById(string postId)
         {
-            var post = this.posts.GetById(postId);
-            
-            if (post == null)
-            {
-                return this.NotFound();
-            }
+            var post = this.posts.GetById(postId);                      
 
             return Accepted(nameof(this.ById), post);
         }

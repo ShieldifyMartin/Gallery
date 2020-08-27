@@ -4,12 +4,12 @@
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
 
-    public class UserDetailsGetRequestModel
-    {
+    public class UserDetails
+    {      
         [Required]
         public string UserName { get; set; }
 
         [Required]
-        public List<Post> Posts { get; set; }
+        public string Email { get; set; }        
     }
 }

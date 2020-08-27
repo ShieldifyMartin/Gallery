@@ -17,21 +17,41 @@
             this.profiles = profiles;
             this.currentUser = currentUser;
         }
-        
-        [Authorize]
-        public async Task<ActionResult> Details()
+                
+        [HttpGet("{userId}")]
+        public async Task<ActionResult> Details(string userId)
         {
-            var userId = this.currentUser.GetId();
-            var userPosts = await this.profiles.GetUserPosts(userId);
+            var userInfo = this.profiles.UseGetInfoById(userId);            
 
-            var userName = currentUser.GetUserName();
-            var userDetails = new UserDetailsGetRequestModel
-            {                
-                UserName = userName,
+            var result = new UserDetails
+            {
+                UserName = userInfo.UserName,
+                Email = userInfo.Email,                
+            };
+
+            return Accepted(result);
+        }
+
+        [HttpGet("{userId}")]
+        public async Task<ActionResult> UserPosts(string userId)
+        {
+            var userPosts = this.profiles.GetUserPosts(userId);
+
+            var result = new UserPosts
+            {
                 Posts = userPosts.Posts
             };
 
-            return Accepted(nameof(this.Details), userDetails);
+            return Ok(result);
+        }
+        
+
+        [HttpGet("{input}")]
+        public async Task<ActionResult> Search(string input)
+        {
+            var users = this.profiles.GetUsers(input);
+
+            return Ok(users);
         }
     }
 }
