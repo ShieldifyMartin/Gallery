@@ -14,6 +14,8 @@
 
         DetailsGetRequestModel GetById(string id);
 
+        SearchResultModel Search(string input);
+
         Task<string> Create(string? location, string description, string pictureUrl, string userId, int? categoryId);
         
         Task<Result> UpdatePost(string userId, string postId, string? location, string description, string pictureUrl, int? categoryId);

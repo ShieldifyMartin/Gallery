@@ -63,6 +63,32 @@
             return post;
         }
 
+        public SearchResultModel Search(string input)
+        {
+            var inputToUpper = input.ToUpper();
+            var posts = this.posts
+                .All()
+                .Where(p => p.Location.ToUpper().Contains(inputToUpper)
+                            || p.Description.ToUpper().Contains(inputToUpper))
+                .Select(p => new SearchModel
+                    {
+                        Id = p.Id,
+                        Likes = p.Likes,
+                        Location = p.Location,
+                        Picture = p.Picture,
+                        CreatedOn = p.CreatedOn,
+                        CreatedBy = p.CreatedBy
+                    })
+                .ToList();
+
+            var result = new SearchResultModel
+            {
+                Posts = posts
+            };
+
+            return result;
+        }
+
         public async Task<string> Create(string? location, string description, string pictureUrl, string userId, int? categoryId)
         {
             var post = new Post

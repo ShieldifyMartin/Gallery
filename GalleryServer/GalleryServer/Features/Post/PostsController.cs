@@ -31,20 +31,7 @@
             this.currentUser = currentUser;
             this.cloudinary = cloudinary;
         }
-
-        [HttpPost]
-        [Authorize]
-        public async Task<ActionResult> Create(CreatePostRequestModel model)
-        {
-            var categoryId = model.CategoryId;
-            var userId = this.currentUser.GetId();
-            //var pictureUrl = await this.cloudinaryService.UploadAsync(this.cloudinary, model.Picture);
-            var pictureUrl = "";
-            var id = await this.posts.Create(model.Location, model.Description, pictureUrl, userId, categoryId);
-
-            return Created(nameof(this.Create), id);
-        }
-
+        
         public async Task<ActionResult> All()
         {
             var posts = this.posts.GetAll();
@@ -67,6 +54,14 @@
             return Accepted(nameof(this.ById), post);
         }
 
+        [HttpGet("{input}")]
+        public async Task<ActionResult> Search(string input)
+        {
+            var posts = this.posts.Search(input);
+
+            return Accepted(nameof(this.Search), posts);
+        }
+
         [HttpPost("{postId}")]
         [Authorize]
         public async Task<ActionResult> Like(string postId)
@@ -80,6 +75,19 @@
             }
 
             return Ok();
+        }
+
+        [HttpPost]
+        [Authorize]
+        public async Task<ActionResult> Create(CreatePostRequestModel model)
+        {
+            var categoryId = model.CategoryId;
+            var userId = this.currentUser.GetId();
+            //var pictureUrl = await this.cloudinaryService.UploadAsync(this.cloudinary, model.Picture);
+            var pictureUrl = "";
+            var id = await this.posts.Create(model.Location, model.Description, pictureUrl, userId, categoryId);
+
+            return Created(nameof(this.Create), id);
         }
 
         [HttpPatch("{postId}")]
@@ -113,6 +121,6 @@
             }
 
             return Ok();
-        }
+        }        
     }
 }
