@@ -56,9 +56,10 @@
                 .OnDelete(DeleteBehavior.Cascade);
 
             builder
-                .Entity<IdentityRole>()
-                .HasData(new IdentityRole { Name = "Admin", NormalizedName = "Admin".ToUpper() });
-            
+                .Entity<Category>()
+                .HasIndex(c => c.Title)
+                .IsUnique();
+
             base.OnModelCreating(builder);
         }
 

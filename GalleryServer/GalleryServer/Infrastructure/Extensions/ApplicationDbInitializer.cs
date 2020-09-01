@@ -1,10 +1,11 @@
 ﻿using GalleryServer.Data.Models;
 using Microsoft.AspNetCore.Identity;
+using System.Threading.Tasks;
 
-public static class ApplicationDbInitializer
+public class ApplicationDbInitializer
 {
-    public static void SeedUsers(UserManager<User> userManager)
-    {
+    public static async Task SeedUsers(UserManager<User> userManager, RoleManager<IdentityRole> roleManager)
+    {        
         if (userManager.FindByEmailAsync("admin@admin.com").Result == null)
         {
             User user = new User
@@ -12,13 +13,14 @@ public static class ApplicationDbInitializer
                 UserName = "Admin",
                 Email = "admin@admin.com"
             };
+        
+            IdentityResult result = userManager.CreateAsync(user, "Admin11!").Result;
+            IdentityResult roleResult = await roleManager.CreateAsync(new IdentityRole("Administrator"));
 
-            IdentityResult result = userManager.CreateAsync(user, "Admin11").Result;
-
-            if (result.Succeeded)
+            if (result.Succeeded && roleResult.Succeeded)
             {
-                userManager.AddToRoleAsync(user, "Admin").Wait();
+                await userManager.AddToRoleAsync(user, "Administrator");
             }
         }
-    }
+    }    
 }

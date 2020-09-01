@@ -8,6 +8,8 @@
     {
         Task<List<Category>> GetAll();
 
-        Task<List<Post>> GetPostsByCategory(int id);        
+        Task<List<Post>> GetPostsByCategory(int id);
+
+        Task<Category> Add(string title);
     }
 }

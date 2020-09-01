@@ -91,7 +91,8 @@
                 .AddTransient<ICategoriesService, CategoriesService>()
                 .AddTransient<IPostsService, PostsService>()
                 .AddTransient<IProfilesService, ProfilesService>()
-                .AddTransient<IIdentityService, IdentityService>();
+                .AddTransient<IIdentityService, IdentityService>()
+                .AddTransient<ApplicationDbInitializer>();
         
         public static IServiceCollection AddCloudinaryService(this IServiceCollection services, AppSettings appSettings)
         {

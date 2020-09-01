@@ -16,7 +16,7 @@
         public int Id { get; set; }
 
         [Required]
-        [MaxLength(MaxTitleLength)]
+        [MaxLength(MaxTitleLength)]        
         public string Title { get; set; }
 
         public virtual ICollection<Post> Posts { get; set; }

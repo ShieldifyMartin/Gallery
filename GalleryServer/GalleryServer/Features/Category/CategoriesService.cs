@@ -35,6 +35,19 @@
                 .ToList();
 
             return posts;
-        }        
+        }
+
+        public async Task<Category> Add(string title)
+        {
+            var category = new Category
+            {
+                Title = title
+            };
+
+            await this.data.AddAsync(category);
+            await this.data.SaveChangesAsync();
+
+            return category;
+        }
     }
 }
