@@ -6,7 +6,7 @@
 
     using static GalleryServer.Data.Validation.Post;
 
-    public class UpdatePostRequestModel
+    public class UpdatePatchRequestModel
     {
         //[Required]
         //public IFormFile Picture { get; set; }

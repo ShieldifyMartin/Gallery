@@ -8,7 +8,6 @@
 
     public class CategoriesController : AdminsApiController
     {
-
         private readonly ICategoriesService categories;
 
         public CategoriesController(ICategoriesService categories)
@@ -22,6 +21,6 @@
             var category = await this.categories.Add(model.Title);
 
             return Accepted(nameof(this.Add), category);
-        }
+        }        
     }
 }

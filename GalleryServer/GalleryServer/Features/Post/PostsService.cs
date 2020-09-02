@@ -134,6 +134,28 @@
             return true;
         }
 
+        public async Task<Result> UpdatePostAdmin(string userId, string postId, string? location, string description, string pictureUrl, int? categoryId)
+        {
+            var post = this.posts
+                .All()
+                .FirstOrDefault(p => p.Id == postId);
+
+            if (post == null)
+            {
+                return "This post cannot be found.";
+            }           
+
+            post.Description = description;
+            post.Location = location;
+            post.Picture = pictureUrl;
+            post.CategoryId = categoryId;
+
+            this.posts.Update(post);
+            await this.data.SaveChangesAsync();
+
+            return true;
+        }
+
         public async Task<Result> DeletePost(string userId, string postId)
         {
             var post = this.posts
@@ -148,6 +170,23 @@
             if (post.UserId != userId)
             {
                 return "You are not authorized to delete this post.";
+            }
+
+            this.posts.Delete(post);
+            await this.data.SaveChangesAsync();
+
+            return true;
+        }
+
+        public async Task<Result> DeletePostAdmin(string userId, string postId)
+        {
+            var post = this.posts
+                .All()
+                .FirstOrDefault(p => p.Id == postId);
+
+            if (post == null)
+            {
+                return "This post cannot be found.";
             }
 
             this.posts.Delete(post);

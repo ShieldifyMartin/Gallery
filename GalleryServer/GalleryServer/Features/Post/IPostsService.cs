@@ -20,7 +20,11 @@
         
         Task<Result> UpdatePost(string userId, string postId, string? location, string description, string pictureUrl, int? categoryId);
 
+        Task<Result> UpdatePostAdmin(string userId, string postId, string? location, string description, string pictureUrl, int? categoryId);
+
         Task<Result> DeletePost(string userId, string postId);
+
+        Task<Result> DeletePostAdmin(string userId, string postId);
 
         Task<Result> LikePost(string userId, string postId);
     }

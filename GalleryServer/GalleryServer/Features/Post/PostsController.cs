@@ -92,7 +92,7 @@
 
         [HttpPatch("{postId}")]
         [Authorize]
-        public async Task<ActionResult> Update(string postId, UpdatePostRequestModel model)
+        public async Task<ActionResult> Update(string postId, UpdatePatchRequestModel model)
         {
             var userId = this.currentUser.GetId();
             //var pictureUrl = await this.cloudinaryService.UploadAsync(this.cloudinary, model.Picture);
