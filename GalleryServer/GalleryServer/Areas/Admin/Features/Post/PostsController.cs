@@ -17,6 +17,13 @@
             this.posts = posts;
         }
 
+        public async Task<ActionResult> All()
+        {
+            var posts = this.posts.GetAllAdmin();
+
+            return Accepted(nameof(this.All), posts);
+        }
+
         [HttpPatch("{postId}")]
         public async Task<ActionResult> Update(string postId, UpdatePatchRequestModel model)
         {       

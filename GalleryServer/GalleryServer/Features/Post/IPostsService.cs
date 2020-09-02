@@ -8,9 +8,11 @@
 
     public interface IPostsService
     {
-        List<Post> GetAll();
+        List<GetAllGetRequestModel> GetAll();
 
-        List<Post> GetTop5();
+        List<Post> GetAllAdmin();
+
+        List<GetAllGetRequestModel> GetTop5();
 
         DetailsGetRequestModel GetById(string id);
 

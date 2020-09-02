@@ -20,23 +20,58 @@
         {
             this.data = data;
             this.posts = posts;
-        }                
+        }
 
-        public List<Post> GetAll()
+        public List<GetAllGetRequestModel> GetAll()
         {
             var posts = this.posts
                 .All()
                 .OrderByDescending(p => p.CreatedOn)
+                .Select(p => new GetAllGetRequestModel
+                {
+                    Id = p.Id,
+                    Location = p.Location,
+                    Description = p.Description,
+                    Picture = p.Picture,
+                    Likes = p.Likes,
+                    CategoryId = p.CategoryId,
+                    UserId = p.UserId,
+                    CreatedOn = p.CreatedOn,
+                    CreatedBy = p.CreatedBy
+                })
                 .ToList();
             
             return posts;
         }
+        
+        public List<Post> GetAllAdmin()
+        {
+            var posts = this.posts
+                .AllWithDeleted()
+                .OrderByDescending(p => p.CreatedOn)
+                .ToList();
 
-        public List<Post> GetTop5()
+            return posts;
+        }
+
+        public List<GetAllGetRequestModel> GetTop5()
         {
             var posts = this.posts
                 .All()
                 .OrderByDescending(p => p.Likes)
+                .Take(5)
+                .Select(p => new GetAllGetRequestModel
+                {
+                    Id = p.Id,
+                    Location = p.Location,
+                    Description = p.Description,
+                    Picture = p.Picture,
+                    Likes = p.Likes,
+                    CategoryId = p.CategoryId,
+                    UserId = p.UserId,
+                    CreatedOn = p.CreatedOn,
+                    CreatedBy = p.CreatedBy
+                })
                 .ToList();
 
             return posts;
