@@ -8,8 +8,8 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-import AppHeader from "./components/core/Header.vue";
-// import AppFooter from './components/core/Footer.vue';
+import AppHeader from '@/components/core/Header.vue';
+// import AppFooter from '@/components/core/Footer.vue';
 
 export default defineComponent({
   name: 'Home',

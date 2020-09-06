@@ -1,7 +1,6 @@
 <template>
   <div class="login">
     <h1>Login</h1>
-    <p class="error">{{error}}</p>
     <form method="post" @submit.prevent="handleSubmit">
       <input type="text" v-model="email" name="email" placeholder="Email" />
       <input type="text" v-model="username" name="username" placeholder="Username" />
@@ -14,8 +13,6 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import router from "../router";
-import { userService } from "../services";
 
 export default defineComponent({
   name: "Login",
@@ -24,19 +21,16 @@ export default defineComponent({
       email: "",
       username: "",
       password: "",
-      error: "",
     };
   },
-  methods: {    
-    async handleSubmit() {
+  methods: {
+    handleSubmit() {
       const { email, username, password } = this;
-
-      const status = await userService.login(email, username, password);
-      if (status === 200) {        
-        router.push("/");
-      } else {
-        this.error = "Something went wrong!";
-      }
+      console.log({ email, username, password });
+      //const { dispatch } = this.$store;
+      //if (username && password) {
+      //  dispatch("authentication/login", { username, password });
+      //}
     },
   },
 });
@@ -47,10 +41,6 @@ export default defineComponent({
   * {
     display: block;
     margin: 1em auto;
-  }
-
-  .error {
-    color: red;
   }
 
   input {
