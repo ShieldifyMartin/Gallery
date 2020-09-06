@@ -3,9 +3,9 @@
     <h1>Login</h1>
     <p class="error">{{error}}</p>
     <form method="post" @submit.prevent="handleSubmit">
-      <input type="text" v-model="email" name="email" placeholder="Email" />
-      <input type="text" v-model="username" name="username" placeholder="Username" />
-      <input type="password" v-model="password" name="password" placeholder="Password" />
+      <input type="email" v-model="email" name="email" placeholder="Email" required />
+      <input type="text" v-model="username" name="username" placeholder="Username" required />
+      <input type="password" v-model="password" name="password" placeholder="Password" required />
       <input type="submit" value="Send" class="submit-btn" />
     </form>
     <router-link to="/register">Don't have an account</router-link>
@@ -27,15 +27,17 @@ export default defineComponent({
       error: "",
     };
   },
-  methods: {    
+  methods: {
     async handleSubmit() {
       const { email, username, password } = this;
 
       const status = await userService.login(email, username, password);
-      if (status === 200) {        
+
+      if (status === 200) {
         router.push("/");
       } else {
         this.error = "Something went wrong!";
+        this.password = "";
       }
     },
   },

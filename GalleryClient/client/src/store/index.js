@@ -5,7 +5,7 @@ export default createStore({
   state: {
     auth
   },
-  getters: {
+  getters: {    
   },
   mutations: {
   },

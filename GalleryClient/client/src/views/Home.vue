@@ -11,8 +11,8 @@ import { defineComponent } from 'vue';
 export default defineComponent({
   name: 'Home',
   computed: {
-    isAuth () {      
-      return this.$store.state.auth.state.token !== null
+    isAuth () {            
+      return this.$store.state.auth.state.token !== null;
     }
   }
 });
