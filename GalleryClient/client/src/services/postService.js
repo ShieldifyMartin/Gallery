@@ -39,7 +39,7 @@ const create = async (picture, location, description, categoryId) => {
             'Content-Type': 'application/json',
             'Authorization': authtorization
         },
-        body: JSON.stringify({ location, description, categoryId })
+        body: JSON.stringify({ picture, location, description, categoryId })
     };    
 
     return await fetch(`${config.restAPI}/posts/create`, requestOptions)

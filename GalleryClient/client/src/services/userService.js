@@ -12,8 +12,8 @@ const login = async (email, username, password) => {
         .then(res => res.json())
         .then(res => {
             if (res.token) {
-                localStorage.setItem('token', JSON.stringify(res.token));
-                localStorage.setItem('username', JSON.stringify(username));
+                localStorage.setItem("token", res.token);
+                localStorage.setItem("username", username);
             }
 
             return res.status || 200;
