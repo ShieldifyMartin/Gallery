@@ -1,13 +1,14 @@
 <template>
   <div class="submit-photo">
     <h1>Submit a photo</h1>
+    <p class="error">{{state.error}}</p>
     <form method="post" @submit.prevent="handleSubmit">            
-      <input type="file" class="photo">
-      <input type="text" v-model="location" name="location" placeholder="Location" />
-      <input type="text" v-model="description" name="description" placeholder="Description" required />
-      <select v-model="categoryId">
+      <input type="file" class="photo" ref="picture" @change="handleFileUpload">
+      <input type="text" v-model="state.location" name="location" placeholder="Location" />
+      <input type="text" v-model="state.description" name="description" placeholder="Description" required />      
+      <select v-model="state.categoryId">
           <option disabled selected> -- select a category -- </option>
-          <option v-for="category in state.categories" :key="category.id" value="category.title">
+          <option v-for="category in state.categories" :key="category.id" :value="category.title">
             {{category.title}}
           </option>
       </select>
@@ -18,6 +19,7 @@
 
 <script lang="ts">
 import { defineComponent, reactive, watchEffect } from 'vue';
+import router from "../router";
 import { postService } from "../services";
 
 export default defineComponent({
@@ -25,19 +27,81 @@ export default defineComponent({
     const state = reactive({
       categories: [],
       picture: null,
-      location: null,
-      description: null,
-      categoryId: null
+      location: '',
+      description: '',
+      categoryId: null,
+      error: '',
+      maxSize: 15728640
     });
 
     watchEffect(async () => {
       const categories = await postService.getCategories();
       console.log(categories);
       state.categories = categories;
-    })
+    });
+
+    function handleFileUpload(e){
+        let files = e.target.files || e.dataTransfer.files;
+        
+        if (!files.length) return
+
+        if(files.length === 1) {            
+            if (files.size > state.maxSize) {
+                state.error = "Too large picture!";                
+            } else {
+                console.log(files[0])
+                state.picture = files[0];
+            }
+        } else {
+            state.error = "Only one photo is allowed!";
+        }        
+    }
+
+    async function handleSubmit() {
+        const { picture, location, description, categoryId } = state;
+        const isCorrect = validate();
+
+        if(!isCorrect) {
+            return;
+        }
+                
+        var response = await postService.create(picture, location, description, categoryId);
+
+        if(response === 401) {
+            router.push("/login");                
+        } else if(response === 400) {            
+            state.error = "Something went wrong!";
+        } else {
+            router.push("/");
+        }       
+    }
+
+    const validate = () => {        
+      if (
+        state.picture === null ||        
+        state.description.length === 0
+      ) {
+        state.error = "Invalid date!";
+        return false;
+      }
+        
+      if (state.description.length > 2000) {
+        state.error = "Max description length is 2000!";
+        return false;
+      }
+
+      if (state.location.length > 40) {
+        state.error = "Max location length is 40!";
+        return false;
+      }
+
+      return true;
+    }
 
     return {
-      state,      
+      state,
+      handleSubmit,
+      handleFileUpload
     }
   }    
 });
