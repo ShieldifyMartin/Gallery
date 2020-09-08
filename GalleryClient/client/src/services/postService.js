@@ -1,61 +1,51 @@
 import config from '@/config';
+import axios from 'axios';
 
-const get = async () => {
-    const requestOptions = {
-        method: 'GET',
-        headers: { 'Content-Type': 'application/json' },
-    };
-
-    return await fetch(`${config.restAPI}/posts/all`, requestOptions)
-        .then(res => {
+const get = async () => {   
+    return await axios.get(`${config.restAPI}/posts/all`)
+        .then(res => {            
             if (res.status >= 200 && res.status < 300) {
-                var posts = res.json();
+                var posts = res.data;
                 return posts;
             }
         });
 }
 
 const getCategories = async () => {
-    const requestOptions = {
-        method: 'GET',
-        headers: { 'Content-Type': 'application/json' },
-    };
-
-    return await fetch(`${config.restAPI}/categories/all`, requestOptions)
+    return await axios.get(`${config.restAPI}/categories/all`)
         .then(res => {
             if (res.status >= 200 && res.status < 300) {
-                var categories = res.json();
+                var categories = res.data;
                 return categories;
             }
         });
 }
 
-const create = async (picture, location, description, categoryId) => {
-    const authtorization = 'Bearer ' + localStorage.getItem('token');
-    
-    const requestOptions = {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-            'Authorization': authtorization
-        },
-        body: JSON.stringify({ picture, location, description, categoryId })
-    };    
+const create = async (token, picture, location, description, categoryId) => {
+    axios.defaults.headers = {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + token
+    };
 
-    return await fetch(`${config.restAPI}/posts/create`, requestOptions)
-        .then(res => {            
-            if (res.status >= 200 && res.status < 300) {                
-                var postId = res.json();
-                return postId;
-            } else if(res.status === 401) {                
-                return res.status;
-            }
-        })
-        .catch(err => console.log(err));
+    const formData = new FormData();
+    formData.append('picture', picture);
+    formData.append('location', location);
+    formData.append('description', description);
+    formData.append('categoryId', categoryId);
+
+    return await axios.post(`${config.restAPI}/posts/create`, formData)
+      .then(res => {
+        if (res.status >= 200 && res.status < 300) {                
+            var postId = res.data;
+            return postId;
+        } else if(res.status === 401) {
+            return res.status;
+        }})
+        .catch(err => console.log(err));      
 }
 
 export const postService = {
     get,
     getCategories,
-    create
+    create  
 };

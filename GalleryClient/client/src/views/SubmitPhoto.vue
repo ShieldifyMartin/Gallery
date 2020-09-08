@@ -18,7 +18,7 @@
         <option
           v-for="category in state.categories"
           :key="category.id"
-          :value="category.title"
+          :value="category.id"
         >{{category.title}}</option>
       </select>
       <input type="submit" value="Send" class="submit-btn" />
@@ -38,7 +38,7 @@ export default defineComponent({
       picture: null,
       location: "",
       description: "",
-      categoryId: null,
+      categoryId: "",
       error: "",
       maxSize: 15728640,
     });
@@ -49,16 +49,15 @@ export default defineComponent({
     });
 
     function handleFileUpload(e) {
-      let files = e.target.files || e.dataTransfer.files;
+      let file = e.target.files[0];
 
-      if (!files.length) return;
+      if (!e.target.files.length) return;
 
-      if (files.length === 1) {
-        if (files.size > state.maxSize) {
+      if (e.target.files.length === 1) {
+        if (file.size > state.maxSize) {
           state.error = "Too large picture!";
-        } else {
-          console.log(files[0]);
-          state.picture = files[0];
+        } else {          
+          state.picture = file;
         }
       } else {
         state.error = "Only one photo is allowed!";
@@ -67,6 +66,7 @@ export default defineComponent({
 
     async function handleSubmit() {
       const { picture, location, description, categoryId } = state;
+
       const isCorrect = validate();
 
       if (!isCorrect) {
@@ -74,12 +74,13 @@ export default defineComponent({
       }
 
       var response = await postService.create(
+        this.$store.state.auth.state.token,
         picture,
         location,
         description,
         categoryId
       );
-
+ 
       if (response === 401) {
         router.push("/login");
       } else if (response === 400) {
@@ -134,10 +135,10 @@ export default defineComponent({
   }
 
   .photo-upload::-webkit-file-upload-button {
-    visibility: hidden;    
+    visibility: hidden;
   }
 
-  .photo-upload {    
+  .photo-upload {
     width: 25em;
     text-align: center;
   }
@@ -146,7 +147,7 @@ export default defineComponent({
     background-color: #eeeeee;
     color: #000;
     border: none;
-    border-radius: 5px;    
+    border-radius: 5px;
     width: 20em;
     padding: 0.5em 1.5em;
   }

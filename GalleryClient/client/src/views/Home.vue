@@ -2,10 +2,10 @@
   <div class="home">
     <h1>Home page</h1>
     isAuth: {{isAuth()}}
-    <ul>
-      <img v-if="state.loading" src="../assets/loading.gif">
+    <ul class="posts">
+      <img v-if="state.loading" class="loader" src="@/assets/loading.gif">
       <li v-for="post in state.posts" :key="post.id">
-          <img src="post.picture" alt=post.description>
+          <img :src="post.picture" :alt=post.description>
           <p>{{post.description}}</p>
           <p>{{post.location}}</p>
       </li>
@@ -29,8 +29,7 @@ export default defineComponent({
     }
 
     watchEffect(async () => {
-      const posts = await postService.get();
-      console.log(posts);
+      const posts = await postService.get();      
       state.posts = posts;
       state.loading = false;
     });
@@ -42,3 +41,27 @@ export default defineComponent({
   }    
 });
 </script>
+
+<style lang="scss">
+.home {
+  .posts {
+    display: flex;
+    justify-content: space-between;
+    width: 80vw;
+    margin: 0 auto;
+  }
+
+  .posts li {
+    list-style: none;
+  }
+
+  img {
+    height: 10em;
+    width: auto;
+  }
+
+  .loader {
+    margin: 0 auto;
+  }
+}
+</style>
