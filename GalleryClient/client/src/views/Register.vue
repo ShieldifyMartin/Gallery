@@ -1,34 +1,33 @@
 <template>
   <div class="register">
     <h1>Register</h1>
-    <p class="error">{{error}}</p>
+    <p class="error">{{state.error}}</p>
     <form method="post" @submit.prevent="handleSubmit">
-      <input type="email" v-model="email" name="email" placeholder="Email" required />
-      <input type="text" v-model="username" name="username" placeholder="Username" required />
-      <input type="password" v-model="password" name="password" placeholder="Password" required />
+      <input type="email" v-model="state.email" name="email" placeholder="Email" required />
+      <input type="text" v-model="state.username" name="username" placeholder="Username" required />
+      <input type="password" v-model="state.password" name="password" placeholder="Password" required />
       <input type="submit" value="Send" class="submit-btn" />
     </form>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent, reactive } from "vue";
 import { userService } from "../services";
 
 export default defineComponent({
   name: "Register",
-  data() {
-    return {
+  setup() {
+    const state = reactive({      
       email: "",
       username: "",
       password: "",
       error: "",
-    };
-  },
-  methods: {
-    async handleSubmit() {
-      const { email, username, password } = this;
-      const isCorrect = this.validate();
+    });
+
+    const handleSubmit = async() => {
+      const { email, username, password } = state;
+      const isCorrect = validate();
       
       if (!isCorrect) {
         return;
@@ -36,32 +35,38 @@ export default defineComponent({
       var description = await userService.register(email, username, password);
 
       if (description !== null) {
-        this.error = description;
+        state.error = description;
       }
-    },
-    validate() {
+    }
+
+    const validate = () => {
       if (
-        this.email.length === 0 ||
-        this.username.length === 0 ||
-        this.password.length === 0
+        state.email.length === 0 ||
+        state.username.length === 0 ||
+        state.password.length === 0
       ) {
-        this.error = "Invalid date!";
+        state.error = "Invalid date!";
         return false;
       }
         
-      if (this.email.length < 4) {
-        this.error = "Invalid email!";
+      if (state.email.length < 4) {
+        state.error = "Invalid email!";
         return false;
       }
 
-      if (this.password.length < 6) {
-        this.error = "Invalid password!";
+      if (state.password.length < 6) {
+        state.error = "Invalid password!";
         return false;
       }
 
       return true;
-    },
-  },
+    };
+    
+    return {
+      state,
+      handleSubmit
+    }
+  }
 });
 </script>
 
