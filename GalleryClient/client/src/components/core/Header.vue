@@ -1,8 +1,8 @@
 <template>
   <div id="nav">
-    <router-link to="/">Home</router-link>|
-    <router-link to="/submit">Submit a photo</router-link> |
-    <a  href="#" @click="logout" v-if="isAuth()">Logout</a>
+    <router-link to="/">Home</router-link>
+    <router-link to="/submit" v-if="isAuth()">Submit a photo</router-link>
+    <a href="#" @click="logout" v-if="isAuth()">Logout</a>
     <router-link to="/login" v-else>Login</router-link>
   </div>
 </template>
@@ -33,3 +33,11 @@ export default defineComponent({
   }
 });
 </script>
+
+<style lang="scss">
+  #nav {
+    a {
+      margin: 0 0.2em;
+    }
+  }
+</style>

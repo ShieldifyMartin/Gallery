@@ -44,10 +44,12 @@ export default defineComponent({
 <style lang="scss">
 .home {
   .posts {
-    display: flex;
+    width: 65em;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
     justify-content: space-between;
-    width: 80vw;
-    margin: 0 auto;
+    margin: 2em auto 0 auto;
+    background-color: antiquewhite;
   }
 
   .posts li {
@@ -55,8 +57,9 @@ export default defineComponent({
   }
 
   img {
-    height: 10em;
-    width: auto;
+    height: auto;
+    max-height: 5em;
+    width: 6em;
   }
 
   .loader {
