@@ -3,16 +3,16 @@ import auth from './authModule';
 
 export default createStore({
   state: {
-    auth
+    auth  
   },
-  getters: {    
+  getters: {
   },
-  mutations: {
+  mutations: {    
   },
   actions: {
   },
   modules: {
   }
-})
+});
 
 export const authHelper = createNamespacedHelpers('auth');

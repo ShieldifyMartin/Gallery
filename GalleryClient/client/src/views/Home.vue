@@ -3,7 +3,7 @@
     <h1>Home page</h1>    
     <img v-if="state.loading" class="loader" src="@/assets/loading.gif" />
     <div class="posts">
-      <router-link v-for="post in state.posts" :to="post.id" :key="post.id">
+      <router-link :to="post.id" v-for="post in state.posts" :key="post.id">
         <img :src="post.picture" :alt="post.description" />
         <p>{{post.description}}</p>
         <p>{{post.location}}</p>
@@ -20,7 +20,7 @@ export default defineComponent({
   setup() {
     const state = reactive({
       posts: [],
-      loading: true,
+      loading: true      
     });
 
     function isAuth() {
@@ -61,7 +61,7 @@ export default defineComponent({
   }
 
   img {
-    width: 10em;
+    width: 15em;
     height: auto;    
   }
 

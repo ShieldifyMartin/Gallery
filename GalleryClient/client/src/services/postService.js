@@ -11,6 +11,16 @@ const get = async () => {
         });
 }
 
+const getById = async (id) => {
+    return await axios.get(`${config.restAPI}/posts/byId/${id}`)
+        .then(res => {            
+            if (res.status >= 200 && res.status < 300) {
+                var post = res.data;
+                return post;
+            }
+        });
+}
+
 const getCategories = async () => {
     return await axios.get(`${config.restAPI}/categories/all`)
         .then(res => {
@@ -46,6 +56,7 @@ const create = async (token, picture, location, description, categoryId) => {
 
 export const postService = {
     get,
+    getById,
     getCategories,
     create  
 };
