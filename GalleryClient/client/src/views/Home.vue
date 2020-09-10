@@ -1,14 +1,14 @@
 <template>
   <div class="home">
     <h1>Home page</h1>    
-    <ul class="posts">
-      <img v-if="state.loading" class="loader" src="@/assets/loading.gif" />
-      <li v-for="post in state.posts" :key="post.id">
+    <img v-if="state.loading" class="loader" src="@/assets/loading.gif" />
+    <div class="posts">
+      <router-link v-for="post in state.posts" :to="post.id" :key="post.id">
         <img :src="post.picture" :alt="post.description" />
         <p>{{post.description}}</p>
         <p>{{post.location}}</p>
-      </li>
-    </ul>
+      </router-link>
+    </div>
   </div>
 </template>
 
@@ -43,27 +43,50 @@ export default defineComponent({
 
 <style lang="scss">
 .home {
-  .posts {
-    width: 65em;
+  .posts {    
+    width: 90%;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(8, 3em);
+    justify-items: center;
     justify-content: space-between;
+    grid-gap: 3em;
     margin: 2em auto 0 auto;
-    background-color: antiquewhite;
+    
   }
 
-  .posts li {
-    list-style: none;
+  .posts a {
+    text-decoration: none;
+    color: #000;
   }
 
   img {
-    height: auto;
-    max-height: 5em;
-    width: 6em;
+    width: 10em;
+    height: auto;    
   }
 
   .loader {
     margin: 0 auto;
+  }
+  
+  @media only screen and (max-width: 998px) {  
+    .posts {
+      grid-template-columns: repeat(2, 1fr);      
+    }
+  }
+
+  @media only screen and (max-width: 767px) {  
+    .posts {
+      display: block;      
+    }
+
+    .posts a  {
+      margin-top: 2em;
+    }
+
+    .posts a:first-child  {
+      margin-top: 0;
+    }
   }
 }
 </style>
