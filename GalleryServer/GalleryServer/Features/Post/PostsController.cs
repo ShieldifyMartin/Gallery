@@ -79,16 +79,16 @@
 
         [HttpPost]
         [Authorize]
-        public async Task<ActionResult> Create(CreatePostRequestModel model)
+        public async Task<ActionResult> Create([FromForm] CreatePostRequestModel model)
         {
             var categoryId = model.CategoryId;
             var userId = this.currentUser.GetId();
-            //var pictureUrl = await this.cloudinaryService.UploadAsync(this.cloudinary, model.Picture);
-            var pictureUrl = "";
+            var pictureUrl = await this.cloudinaryService.UploadAsync(this.cloudinary, model.Picture);
+            
             var id = await this.posts.Create(model.Location, model.Description, pictureUrl, userId, categoryId);
 
             return Created(nameof(this.Create), id);
-        }
+        }  
 
         [HttpPatch("{postId}")]
         [Authorize]

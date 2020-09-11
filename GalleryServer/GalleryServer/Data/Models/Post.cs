@@ -13,7 +13,7 @@
         public string Id { get; set; }
 
         [MaxLength(MaxLocationLength)]
-        public string Location { get; set; }
+        public string? Location { get; set; }
 
         [Required]
         [MaxLength(MaxDescriptionLength)]

@@ -36,7 +36,8 @@ namespace GalleryServer
             app.UseRouting();
 
             app.UseCors(options => options
-                .AllowAnyOrigin()
+                .WithOrigins("http://localhost:8080")
+                .AllowCredentials()
                 .AllowAnyHeader()
                 .AllowAnyMethod());
 

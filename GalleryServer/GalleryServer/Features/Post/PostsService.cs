@@ -261,6 +261,6 @@
             await this.data.SaveChangesAsync();
             
             return true;
-        }        
+        }
     }
 }

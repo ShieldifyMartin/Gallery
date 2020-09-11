@@ -10,7 +10,7 @@
     {
         public async Task<string> UploadAsync(Cloudinary cloudinary, IFormFile picture)
         {
-            string link;
+            string link = "";
 
             byte[] destinationImage;
 
