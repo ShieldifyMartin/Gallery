@@ -51,8 +51,7 @@ export default defineComponent({
     justify-items: center;
     justify-content: space-between;
     grid-gap: 3em;
-    margin: 2em auto 0 auto;
-    
+    margin: 2em auto 0 auto;    
   }
 
   .posts a {
