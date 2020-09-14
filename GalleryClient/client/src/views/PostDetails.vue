@@ -1,14 +1,31 @@
 <template>
   <div class="details">
-    <h1>Details page</h1>
-    <div class="post">
-      <p>Created on: {{ state.createdOn }}</p>
-      <p>Likes: {{ state.post.likes }}</p>
-      <img v-if="state.loading" class="loader" src="@/assets/loading.gif" />
-      <img :src="state.post.picture" :alt="state.post.description" /><br />
-      <p>Description: {{ state.post.description }}</p>
-      <p>Location: {{ state.post.location || "none" }}</p>      
-      <p>Created by: {{ state.post.userId }}</p>
+    <div class="post-header">
+      <div>
+        <img src="@/assets/icons/profile.png" class="profile-icon" />
+        <p>Created by: NAME Martin</p>
+      </div>
+      <div>
+        <img v-if="state.isLiked" class="heart-icon" src="@/assets/icons/heart-solid.svg" @click="like" alt="liked heart" />
+        <img v-else class="heart-icon" src="@/assets/icons/heart-regular.svg" @click="like" alt="like heart" />
+        <p>Likes: {{ state.post.likes }}</p>
+        {{ state.createdOn }}
+      </div>
+    </div>
+
+    <img v-if="state.loading" class="loader" src="@/assets/loading.gif" />
+    <img :src="state.post.picture" :alt="state.post.description" /><br />
+
+    <div class="post-footer">
+      <p>{{ state.post.description }}</p>
+      <div v-if="state.post.location">
+        <img
+          class="location-icon"
+          src="@/assets/icons/map-marker-solid.svg"
+          alt="location"
+        />
+        <p>{{ state.post.location || "none" }}</p>
+      </div>
     </div>
   </div>
 </template>
@@ -22,8 +39,8 @@ export default defineComponent({
   setup() {
     const state = reactive({
       post: [],
-      loading: true,
-      createdOn: null
+      createdOn: null,
+      isLiked: false
     });
 
     watchEffect(async () => {
@@ -31,12 +48,17 @@ export default defineComponent({
       const post = await postService.getById(id);
 
       state.post = post;
-      state.loading = false;
       state.createdOn = moment(post.createdOn, "YYYYMMDD").fromNow();
     });
 
+    const like = () => {
+      state.isLiked = true;
+      console.log('like');
+    }
+
     return {
-      state
+      state,
+      like
     };
   }
 });
@@ -44,17 +66,45 @@ export default defineComponent({
 
 <style lang="scss">
 .details {
-  .post {
-    margin-top: 1em;
+  margin-top: 1em;
 
-    img {
-      width: 15em;
-      height: auto;
-    }
+  .post-header {
+    display: flex;
+    margin: 0 auto;
+  }
 
-    .loader {
-      margin: 0 auto;
-    }
+  .post-header > div {
+    width: 9%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  img {
+    width: 25em;
+    height: auto;
+  }
+
+  .profile-icon {
+    width: 3em;    
+  }
+
+  .heart-icon {
+    width: 2em;
+  }
+
+  .location-icon {
+    width: 0.8em;
+    margin-right: 0.4em;
+  }
+
+  .post-footer {
+    margin: 0 auto;
+    width: 9em;
+    text-align: center;
+  }
+
+  .post-footer > div {
+    display: flex;
   }
 }
 </style>
