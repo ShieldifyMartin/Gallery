@@ -88,8 +88,8 @@
                     Description = p.Description,
                     Picture = p.Picture,
                     Likes = p.Likes,
-                    CategoryId = p.CategoryId,
-                    UserId = p.UserId,
+                    CategoryId = p.CategoryId,                    
+                    UserName = p.User.UserName,
                     CreatedOn = p.CreatedOn,
                     Votes = p.Votes                 
                 })

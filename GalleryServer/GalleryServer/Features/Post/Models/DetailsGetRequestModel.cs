@@ -25,7 +25,7 @@
         public int? CategoryId { get; set; }
 
         [Required]
-        public string UserId { get; set; }
+        public string UserName { get; set; }
 
         [Required]
         public DateTime CreatedOn { get; set; }
