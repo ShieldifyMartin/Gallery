@@ -8,21 +8,33 @@
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.Extensions.Options;
     using GalleryServer.Features.Identity;
+    using CloudinaryDotNet;
+    using GalleryServer.Infrastructure.Services;
+    using GalleryServer.Features.Cloudinary;
 
     public class IdentityController : ApiController
     {
         private readonly UserManager<User> userManager;
         private readonly IIdentityService identity;
+        private readonly ICloudinaryService cloudinaryService;
+        private readonly Cloudinary cloudinary;
         private readonly AppSettings appSettings;
+        private readonly ICurrentUserService currentUser;
 
         public IdentityController(
             UserManager<User> userManager,
             IIdentityService identity,
+            Cloudinary cloudinary,
+            ICloudinaryService cloudinaryService,
+            ICurrentUserService currentUser,
             IOptions<AppSettings> appSettings)
         {
             this.userManager = userManager;
             this.identity = identity;
+            this.cloudinaryService = cloudinaryService;
+            this.cloudinary = cloudinary;
             this.appSettings = appSettings.Value;
+            this.currentUser = currentUser;
         }
 
         [HttpPost]
@@ -45,7 +57,7 @@
         }
 
         [HttpPost]
-        [AllowAnonymous]        
+        [AllowAnonymous]
         public async Task<ActionResult<LoginResponseModel>> Login(LoginRequestModel model)
         {
             var user = await this.userManager.FindByNameAsync(model.UserName);
@@ -69,6 +81,21 @@
             {
                 Token = token
             };
+        }
+
+        [HttpPost]
+        [Authorize]
+        public async Task<ActionResult> ProfilePicture([FromForm] AddProfilePictureRequestModel model)
+        {
+            var pictureUrl = await this.cloudinaryService.UploadAsync(this.cloudinary, model.Picture);
+            var result = await this.identity.AddProfilePicture(this.currentUser.GetId(), pictureUrl);
+
+            if (result.Failure)
+            {
+                return BadRequest(result.Error);
+            }
+
+            return Ok();
         }
     }
 }

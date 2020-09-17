@@ -14,22 +14,22 @@
     {
         private readonly ICategoriesService categories;
         private readonly IPostsService posts;
-        private readonly ICloudinaryService cloudinaryService;
         private readonly ICurrentUserService currentUser;
+        private readonly ICloudinaryService cloudinaryService;
         private readonly Cloudinary cloudinary;
 
         public PostsController(
             ICategoriesService categories,
             IPostsService posts,
             ICloudinaryService cloudinaryService,
-            ICurrentUserService currentUser,
-            Cloudinary cloudinary)
+            Cloudinary cloudinary,
+            ICurrentUserService currentUser)
         {
             this.categories = categories;
             this.posts = posts;
             this.cloudinaryService = cloudinaryService;
-            this.currentUser = currentUser;
             this.cloudinary = cloudinary;
+            this.currentUser = currentUser;
         }
         
         public async Task<ActionResult> All()

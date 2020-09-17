@@ -1,7 +1,6 @@
 ﻿namespace GalleryServer.Infrastructure.Extensions
 {
-    using Catstagram.Server.Features.Identity;
-    using Catstagram.Server.Infrastructure.Filters;
+    using GalleryServer.Infrastructure.Filters;
     using CloudinaryDotNet;
     using GalleryServer.Data;
     using GalleryServer.Data.Models;

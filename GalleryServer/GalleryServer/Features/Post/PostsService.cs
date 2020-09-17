@@ -90,6 +90,7 @@
                     Likes = p.Likes,
                     CategoryId = p.CategoryId,                    
                     UserName = p.User.UserName,
+                    ProfilePicture = p.User.PictureUrl,
                     CreatedOn = p.CreatedOn,
                     Votes = p.Votes                 
                 })
@@ -148,14 +149,14 @@
                 .All()
                 .FirstOrDefault(p => p.Id == postId);
             
-            if (post == null)
-            {
-                return "This post cannot be found.";
-            }
-
             if (post.UserId != userId)
             {
                 return "You are not authorized to update this post.";
+            }
+
+            if (post == null)
+            {
+                return "This post cannot be found.";
             }
 
             post.Description = description;

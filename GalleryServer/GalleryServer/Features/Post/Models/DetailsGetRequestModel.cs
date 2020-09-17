@@ -19,6 +19,9 @@
         public string Picture { get; set; }
 
         [Required]
+        public string ProfilePicture { get; set; }        
+
+        [Required]
         public int Likes { get; set; }
 
         [Required]

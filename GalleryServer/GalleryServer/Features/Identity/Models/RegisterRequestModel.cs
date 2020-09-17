@@ -1,5 +1,5 @@
 ﻿namespace GalleryServer.Models.Identity
-{
+{    
     using System.ComponentModel.DataAnnotations;
 
     public class RegisterRequestModel

@@ -1,14 +1,27 @@
-﻿namespace Catstagram.Server.Features.Identity
+﻿namespace GalleryServer.Features.Identity
 {
     using System;
     using System.IdentityModel.Tokens.Jwt;
+    using System.Linq;
     using System.Security.Claims;
     using System.Text;
+    using System.Threading.Tasks;
+    using GalleryServer.Data;
     using GalleryServer.Features.Identity;
+    using GalleryServer.Infrastructure.Services;
+    using GalleryServer.Models.Identity;
+    using Microsoft.AspNetCore.Mvc;
     using Microsoft.IdentityModel.Tokens;
 
     public class IdentityService : IIdentityService
     {
+        private readonly ApplicationDbContext data;
+
+        public IdentityService(ApplicationDbContext data)
+        {
+            this.data = data;
+        }
+
         public string GenerateJwtToken(string userId, string userName, string secret)
         {
             var tokenHandler = new JwtSecurityTokenHandler();
@@ -29,5 +42,28 @@
 
             return encryptedToken;
         }
+
+        public async Task<Result> AddProfilePicture(string userId, string pictureUrl)
+        {
+            var user = this.data
+                .Users
+                .FirstOrDefault(u => u.Id == userId);
+
+            if (user.Id != userId)
+            {
+                return "You are not authorized to add profile picture to this post";
+            }
+
+            if (user == null)
+            {
+                return "This user cannot be found.";
+            }
+
+            user.PictureUrl = pictureUrl;
+
+            await this.data.SaveChangesAsync();
+
+            return true;
+        }        
     }
 }

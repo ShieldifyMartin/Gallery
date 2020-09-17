@@ -2,8 +2,9 @@
   <div class="details">
     <div class="post-header">
       <div>
-        <img src="@/assets/icons/profile.png" class="profile-icon" />
-        <p>Created by: NAME Martin</p>
+        <img v-if="state.post.pictureUrl" :src="state.post.pictureUrl" class="profile-icon" />
+        <img v-else src="@/assets/icons/profile.png" class="profile-icon" />
+        <p>Created by: {{state.post.userName}}</p>
       </div>
       <div>
         <img v-if="state.isLiked" class="heart-icon" src="@/assets/icons/heart-solid.svg" @click="like" alt="liked heart" />
@@ -38,7 +39,7 @@ import { postService } from "../services";
 export default defineComponent({
   setup() {
     const state = reactive({
-      post: [],
+      post: [],      
       createdOn: null,
       isLiked: false
     });
@@ -47,6 +48,7 @@ export default defineComponent({
       const id = window.location.href.split("/")[3];
       const post = await postService.getById(id);
 
+      console.log(post);
       state.post = post;
       state.createdOn = moment(post.createdOn, "YYYYMMDD").fromNow();
     });

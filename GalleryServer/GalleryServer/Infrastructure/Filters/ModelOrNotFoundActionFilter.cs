@@ -1,4 +1,4 @@
-﻿namespace Catstagram.Server.Infrastructure.Filters
+﻿namespace GalleryServer.Infrastructure.Filters
 {
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.Mvc.Filters;
