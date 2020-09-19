@@ -47,8 +47,7 @@ export default defineComponent({
     watchEffect(async () => {
       const id = window.location.href.split("/")[3];
       const post = await postService.getById(id);
-
-      console.log(post);
+      
       state.post = post;
       state.createdOn = moment(post.createdOn, "YYYYMMDD").fromNow();
     });

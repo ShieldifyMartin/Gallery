@@ -21,10 +21,12 @@ export default defineComponent({
 </script>
 
 <style lang="scss">
-* {
-  box-sizing: border-box;
+*,
+*::after,
+*::before {
   margin: 0;
-  padding: 0;
+  padding: 0;  
+  box-sizing: inherit;
 }
 
 #app {
