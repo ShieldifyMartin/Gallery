@@ -68,6 +68,7 @@ export default defineComponent({
   .image:hover {    
     -webkit-transform: scale(1.01);
     transform: scale(1.01);
+    //transform: scale(0.99);
   }
 
   .loader {
