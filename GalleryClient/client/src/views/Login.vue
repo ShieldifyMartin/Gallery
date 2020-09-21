@@ -14,7 +14,6 @@
 
 <script lang="ts">
 import { defineComponent, reactive } from "vue";
-import router from "../router";
 import { userService } from "../services";
 
 export default defineComponent({
@@ -32,9 +31,8 @@ export default defineComponent({
 
       const status = await userService.login(email, username, password);
 
-      if (status === 200) {
-        this.$store.state.auth.dispatch("login");
-        router.push("/");
+      if (status === 200) {    
+        window.location.href = "/";        
       } else {
         state.error = "Something went wrong!";
         state.password = "";

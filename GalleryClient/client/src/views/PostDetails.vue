@@ -86,7 +86,7 @@ export default defineComponent({
   }
 
   .profile-icon {
-    width: 3em;    
+    width: 3em;
   }
 
   .heart-icon {

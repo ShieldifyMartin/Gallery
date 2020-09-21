@@ -4,6 +4,7 @@ import Login from '@/views/Login.vue'
 import Register from '@/views/Register.vue'
 import SubmitPhoto from '@/views/SubmitPhoto.vue'
 import PostDetails from '@/views/PostDetails.vue'
+import ProfileDetails from '@/views/ProfileDetails.vue'
 
 const routes = [
   {
@@ -30,6 +31,11 @@ const routes = [
     path: '/:id',
     name: 'Details',
     component: PostDetails
+  },
+  {
+    path: '/profile',
+    name: 'ProfileDetails',
+    component: ProfileDetails
   }
 ]
 
