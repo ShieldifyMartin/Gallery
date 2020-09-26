@@ -1,10 +1,12 @@
 <template>
-  <div id="nav">        
-    <div class="links">
-      <router-link v-if="state.isAuth" to="/profile" class="profile-picture">
+  <div id="nav">
+    <div class="profile-picture">
+      <router-link v-if="state.isAuth" to="/profile">
         <img v-if="pictureUrl" :src="pictureUrl" class="profile-icon" />
         <img v-else src="@/assets/icons/profile.png" class="profile-icon" />     
       </router-link>
+    </div>
+    <div class="links">      
       <router-link to="/">Home</router-link>
       <router-link to="/submit" v-if="state.isAuth">Submit a photo</router-link>
       <a href="#" @click="logout" v-if="state.isAuth">Logout</a>
@@ -44,33 +46,35 @@ export default defineComponent({
 <style lang="scss">
   #nav {    
     display: flex;
-    justify-content: space-between;
-    padding: 2em;
+    justify-content: center;
+    padding: 2em;    
 
   .links {
-    text-align: center;
-    margin: 0 auto;
-
     a {
       font-weight: bold;
       color: #2c3e50;
-      margin: 0 0.5em;      
+      margin: 0 0.5em;
 
       &.router-link-exact-active {
         color: #42b983;
       }
-    }
+    }    
+  }
+  
+  .profile-picture {
+    margin-right: auto;
 
-    .profile-picture > img {      
-      width: 2.5em;
-      margin-right: 4em;
+    img {
+      width: 4em;
+      margin-left: 5em;
+      margin-top: -1em;
     }
   }
 
-    @media only screen and (max-width: 440px) {
-      .profile-picture > img {
-        margin-left: 0;       
-      }
+  @media only screen and (max-width: 900px) {
+    .profile-picture img {
+      margin-left: 0;       
     }
   }
+}
 </style>
