@@ -31,8 +31,9 @@ export default defineComponent({
 
       const status = await userService.login(email, username, password);
 
-      if (status === 200) {    
-        window.location.href = "/";        
+      if (status === 200) {
+        this.$store.state.auth.dispatch("login");
+        window.location.href = "/";
       } else {
         state.error = "Something went wrong!";
         state.password = "";

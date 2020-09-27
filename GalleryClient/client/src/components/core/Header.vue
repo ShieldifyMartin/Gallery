@@ -1,15 +1,15 @@
 <template>
   <div id="nav">
-    <div class="profile-picture">
-      <router-link v-if="state.isAuth" to="/profile">
+    <div class="profile-picture">    
+      <router-link v-if="isAuth()" to="/profile">
         <img v-if="pictureUrl" :src="pictureUrl" class="profile-icon" />
         <img v-else src="@/assets/icons/profile.png" class="profile-icon" />     
       </router-link>
     </div>
     <div class="links">      
       <router-link to="/">Home</router-link>
-      <router-link to="/submit" v-if="state.isAuth">Submit a photo</router-link>
-      <a href="#" @click="logout" v-if="state.isAuth">Logout</a>
+      <router-link to="/submit" v-if="isAuth()">Submit a photo</router-link>
+      <a href="#" @click="logout" v-if="isAuth()">Logout</a>
       <router-link to="/login" v-else>Login</router-link>
     </div>
   </div>
@@ -23,20 +23,24 @@ export default defineComponent({
   name: "Header",
   setup() {
     const state = reactive({
-      pictureUrl: '',
-      isAuth: localStorage.getItem('token') !== ''
-    }); 
+      pictureUrl: ''      
+    });
 
-    function logout() {
+    function isAuth() {
+      return this.$store.state.auth.state.token !== "";
+    }
+
+    function logout() {      
+      this.$store.state.auth.dispatch("logout");
       localStorage.setItem('token', '');
       localStorage.setItem('username', '');
       
-      state.isAuth = false;
       router.push("/");
     }
 
     return {
-      state,      
+      state,
+      isAuth,      
       logout
     }
   }

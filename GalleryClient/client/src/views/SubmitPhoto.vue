@@ -86,13 +86,14 @@ export default defineComponent({
       } else if (response === 400) {
         state.error = "Something went wrong!";
       } else {
+        this.$store.state.auth._actions.login();
         router.push("/");
       }
     }
 
     const validate = () => {
       if (state.picture === null || state.description.length === 0) {
-        state.error = "Invalid date!";
+        state.error = "Invalid data!";
         return false;
       }
 

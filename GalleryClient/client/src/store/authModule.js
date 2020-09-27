@@ -3,13 +3,13 @@ import { createStore } from 'vuex';
 export default createStore({
   namespaced: true,
   state: {
-    token: '',
-    username: ''
+    token: localStorage.getItem('token'),
+    username: localStorage.getItem('username')
   },
   mutations: {
     login(state) {
-      state.token = localStorage.getItem('token');
-      state.username = localStorage.getItem('username');      
+      state.token = '';
+      state.username = '';
     },
     logout(state) {
       state.token = '';
@@ -17,10 +17,10 @@ export default createStore({
     }
   },
   actions: {
-    login(context) {
+    login(context) {      
       context.commit("login");
     },
-    logout(context) {
+    logout(context) {      
       context.commit("logout");
     }
   }
