@@ -47,14 +47,16 @@
             return Accepted(result);
         }
 
-        [HttpGet("{userId}")]
-        public async Task<ActionResult> UserPosts(string userId)
+        public async Task<ActionResult> UserPosts()
         {
+            var userId = this.currentUser.GetId();
             var userPosts = this.profiles.GetUserPosts(userId);
+            var likedPosts = this.profiles.GetLikedPosts(userId);
 
             var result = new UserPosts
             {
-                Posts = userPosts.Posts
+                Posts = userPosts.Posts,
+                LikedPosts = likedPosts
             };
 
             return Ok(result);
@@ -67,15 +69,6 @@
             var users = this.profiles.GetUsers(input);
 
             return Ok(users);
-        }
-
-        [Authorize]
-        public async Task<ActionResult> Liked()
-        {
-            var userId = this.currentUser.GetId();
-            var likedPosts = this.profiles.GetLikedPosts(userId);
-
-            return Accepted(likedPosts);
         }
     }
 }

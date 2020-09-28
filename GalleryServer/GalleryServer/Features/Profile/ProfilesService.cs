@@ -21,7 +21,6 @@
 
         public UserPosts GetUserPosts(string userId)
         {
-
             var posts = this.posts
                 .All()
                 .Where(p => p.UserId == userId)
@@ -67,7 +66,7 @@
             return users;
         }
 
-        public async Task<List<Post>> GetLikedPosts(string userId)
+        public List<Post> GetLikedPosts(string userId)
         {
             var likedPosts = this.data
                 .Votes

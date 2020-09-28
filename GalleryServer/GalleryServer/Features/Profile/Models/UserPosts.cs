@@ -8,5 +8,8 @@
     {
         [Required]
         public List<Post> Posts { get; set; }
+
+        [Required]
+        public List<Post> LikedPosts { get; set; }
     }
 }
