@@ -35,7 +35,8 @@
                 </router-link>
               </div>
 
-              <button @click="loadMore">Load more</button>
+            <button v-if="!state.all" @click="loadMore">Load more</button>
+            <button v-else @click="loadLess">Load less</button>
             </div>
           </div>
           <div class="tab">
@@ -62,28 +63,36 @@ export default defineComponent({
       profile: {},
       loading: true,
       userPosts: [],
-      page: 0      
+      all: false
     });    
 
     watchEffect(async () => {      
       const profile = await profileService.get();
-      const userPosts = await profileService.getUserPosts(state.page);
+      const userPosts = await profileService.getUserPosts(state.all);
       
-      state.userPosts = userPosts.posts;
-      state.page = state.page + 1;
+      state.userPosts = userPosts.posts;     
       state.profile = profile;
       state.loading = false;
     });
 
     const loadMore = async() => {
-      const userPosts = await profileService.getUserPosts(state.page);
-      state.userPosts = userPosts.posts;
-      state.page = state.page + 1;
+      state.all = true;
+
+      const userPosts = await profileService.getUserPosts(state.all);      
+      state.userPosts = userPosts.posts;             
+    }
+
+    const loadLess = async() => {
+      state.all = false;
+      
+      const userPosts = await profileService.getUserPosts(state.all);      
+      state.userPosts = userPosts.posts;             
     }
 
     return {
       state,
-      loadMore
+      loadMore,
+      loadLess
     };
   }
 });
