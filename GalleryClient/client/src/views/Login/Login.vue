@@ -14,7 +14,7 @@
 
 <script lang="ts">
 import { defineComponent, reactive } from "vue";
-import { userService } from "../services";
+import { userService } from "../../services";
 
 export default defineComponent({
   name: "Login",
@@ -48,36 +48,4 @@ export default defineComponent({
 });
 </script>
 
-<style lang="scss">
-.login {
-  * {
-    display: block;
-    margin: 1em auto;
-  }
-
-  .error {
-    color: red;
-  }
-
-  input {
-    width: 30em;
-    height: 2em;
-  }
-
-  .submit-btn {
-    border: none;
-    width: 30em;
-    background: #111111;
-    color: #ffff;
-  }
-
-  a {
-    text-decoration: none;
-    color: black;
-  }
-
-  a:hover {
-    color: rgba(0, 0, 0, 0.467);
-  }
-}
-</style>
+<styles src="./index.scss"></styles>

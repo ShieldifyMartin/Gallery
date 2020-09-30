@@ -4,7 +4,8 @@ export default createStore({
   namespaced: true,
   state: {
     token: localStorage.getItem('token'),
-    username: localStorage.getItem('username')
+    username: localStorage.getItem('username'),
+    isAuth: localStorage.getItem('token') && localStorage.getItem('token') !== ''
   },
   mutations: {
     login(state) {

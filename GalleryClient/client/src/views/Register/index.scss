@@ -1,0 +1,22 @@
+.register {
+  * {
+    display: block;
+    margin: 1em auto;
+  }
+
+  .error {
+    color: red;
+  }
+
+  input {
+    width: 30em;
+    height: 2em;
+  }
+
+  .submit-btn {
+    border: none;
+    width: 30em;
+    background: #111111;
+    color: #ffff;
+  }
+}

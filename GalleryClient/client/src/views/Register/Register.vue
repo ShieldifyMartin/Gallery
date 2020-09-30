@@ -13,7 +13,7 @@
 
 <script lang="ts">
 import { defineComponent, reactive } from "vue";
-import { userService } from "../services";
+import { userService } from "../../services";
 
 export default defineComponent({
   name: "Register",
@@ -70,27 +70,4 @@ export default defineComponent({
 });
 </script>
 
-<style lang="scss">
-.register {
-  * {
-    display: block;
-    margin: 1em auto;
-  }
-
-  .error {
-    color: red;
-  }
-
-  input {
-    width: 30em;
-    height: 2em;
-  }
-
-  .submit-btn {
-    border: none;
-    width: 30em;
-    background: #111111;
-    color: #ffff;
-  }
-}
-</style>
+<styles src="./index.scss"></styles>

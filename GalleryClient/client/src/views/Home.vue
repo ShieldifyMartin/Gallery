@@ -23,7 +23,7 @@ export default defineComponent({
     });
 
     function isAuth() {
-      return this.$store.state.auth.state.token !== "";
+      return this.$store.state.auth.state.isAuth;
     }
 
     watchEffect(async () => {
