@@ -9,6 +9,8 @@
 
     public class ProfilesController : ApiController
     {
+        private const int ItemsPerPage = 3;
+
         private readonly IProfilesService profiles;
         private readonly ICurrentUserService currentUser;
 
@@ -47,21 +49,32 @@
             return Accepted(result);
         }
 
-        public async Task<ActionResult> UserPosts()
+        [HttpGet("{all}")]
+        public async Task<ActionResult> UserPosts(bool all = false)
         {
             var userId = this.currentUser.GetId();
-            var userPosts = this.profiles.GetUserPosts(userId);
-            var likedPosts = this.profiles.GetLikedPosts(userId);
+            var userPosts = this.profiles.GetUserPosts(userId, all, ItemsPerPage);
 
             var result = new UserPosts
             {
-                Posts = userPosts.Posts,
-                LikedPosts = likedPosts
+                Posts = userPosts.Posts                
             };
 
             return Ok(result);
         }
-        
+
+        public async Task<ActionResult> LikedPosts(int page = 1)
+        {
+            var userId = this.currentUser.GetId();            
+            var likedPosts = this.profiles.GetLikedPosts(userId);
+
+            var result = new LikedPosts
+            {                
+                Posts = likedPosts
+            };
+
+            return Ok(result);
+        }
 
         [HttpGet("{input}")]
         public async Task<ActionResult> Search(string input)

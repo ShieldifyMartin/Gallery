@@ -4,9 +4,9 @@
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
 
-    public class UserPosts
-    {
+    public class LikedPosts
+    {   
         [Required]
-        public List<Post> Posts { get; set; }        
+        public List<Post> Posts { get; set; }
     }
 }

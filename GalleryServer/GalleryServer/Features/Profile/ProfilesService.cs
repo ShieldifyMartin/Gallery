@@ -19,13 +19,18 @@
             this.data = data;
         }
 
-        public UserPosts GetUserPosts(string userId)
+        public UserPosts GetUserPosts(string userId, bool all, int itemsPerPage)
         {
             var posts = this.posts
                 .All()
                 .Where(p => p.UserId == userId)
-                .OrderByDescending(p => p.CreatedOn)
+                .OrderByDescending(p => p.CreatedOn)                
                 .ToList();
+
+            if(!all)
+            {
+                posts = posts.Take(itemsPerPage).ToList();
+            }
 
             var userPosts = new UserPosts
             {
