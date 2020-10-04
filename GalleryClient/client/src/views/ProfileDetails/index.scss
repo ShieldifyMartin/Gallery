@@ -1,0 +1,120 @@
+.profile-details {
+    .loader {
+      margin: 0 auto;
+      width: 7em;
+    }
+  
+    .profile {
+      text-align: center;
+  
+      .profile-icon {
+        display: block;
+        width: 6em;
+        margin: 0 auto;
+      }
+  
+      a {
+        display: block;
+        text-decoration: none;
+        color: #a0a0a0;
+        margin-bottom: 2em;
+      }
+  
+      .wrapper {
+        width: 100%;
+        margin: 0 auto;
+  
+        .tabs {
+          display: flex;
+          position: relative;
+          margin: 3em 2em;
+          height: 14.75rem;
+        }
+        .tabs::before,
+        .tabs::after {
+          content: "";
+          display: table;
+        }
+        .tabs::after {
+          clear: both;
+        }
+  
+        .tab-switch {
+          display: none;
+        }
+        .tab-label {
+          position: relative;
+          display: block;
+          line-height: 2.75em;
+          height: 3em;
+          padding: 0 1.618em;
+          background: #fff;
+          cursor: pointer;
+          top: 0;
+          transition: all 0.25s;
+        }
+        .tab-content {
+          height: 12rem;
+          position: absolute;
+          z-index: 1;
+          top: 2.75em;
+          left: 0;
+          padding: 1.618rem;
+          background: #fff;
+          color: #2c3e50;
+          opacity: 0;
+          transition: all 0.35s;
+  
+          .posts {
+            display: grid;
+            position: relative;
+            grid-template-columns: repeat(auto-fill, minmax(17rem, 1fr));
+            grid-gap: 4em;
+            margin: 2em auto;          
+          }
+          .posts a {
+            text-decoration: none;
+            color: #000;
+          }
+          .posts img {
+            width: 100%;
+            height: 15em;
+            object-fit: cover;
+            border-radius: 0.75rem;        
+            background-size:100%;
+          }      
+  
+          .load-more, .load-less {
+            padding: 0.5em 1em;
+            border-radius: 0.75em;
+            margin-bottom: 2em;
+          }
+  
+          .load-more:hover, .load-less:hover {
+            background-color: #ffff;
+          }
+        }
+        .tab-switch:checked + .tab-label {
+          background: #1abc9c;
+          color: #ffff;        
+          transition: all 0.35s;
+          z-index: 1;        
+        }
+        .tab-switch:checked + label + .tab-content {
+          z-index: 2;
+          opacity: 1;
+          transition: all 0.35s;
+        }
+        @media only screen and (max-width: 500px) {
+          .posts img {
+            width: 10%;
+            height: 1em;
+          }
+  
+          .tabs {
+            margin: 3em 0.5em;
+          }
+        }
+      }
+    }  
+  }

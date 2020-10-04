@@ -4,7 +4,7 @@ import Login from '@/views/Login/Login.vue'
 import Register from '@/views/Register/Register.vue'
 import SubmitPhoto from '@/views/SubmitPhoto.vue'
 import PostDetails from '@/views/PostDetails.vue'
-import ProfileDetails from '@/views/ProfileDetails.vue'
+import ProfileDetails from '@/views/ProfileDetails/ProfileDetails.vue'
 
 const routes = [
   {
