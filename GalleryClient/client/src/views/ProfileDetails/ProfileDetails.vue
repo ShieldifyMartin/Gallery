@@ -34,8 +34,11 @@
                     <img :src="post.picture" class="image" :alt="post.description" />
                   </router-link>
                 </div>
-                <button v-if="!state.all" @click="loadMore" class="load-more">Load more</button>
-                <button v-else @click="loadLess" class="load-less">Load less</button>
+
+                <div v-if="state.userPosts.length >= 3">
+                  <button v-if="!state.allPosts" @click="loadMorePosts" class="load-more">Load more</button>
+                  <button v-else @click="loadLessPosts" class="load-less">Load less</button>
+                </div>
               </div>
           </div>
           </div>
@@ -43,13 +46,18 @@
             <input type="radio" name="css-tabs" id="tab-2" class="tab-switch" />
             <label for="tab-2" class="tab-label">Liked</label>
             <div class="tab-content">
-              <div class="liked-posts">
+              <div class="posts">
                 <h1 v-if="state.userLikedPosts.length === 0" class="empty-message">No liked posts</h1>
                 <router-link v-else :to="post.id" v-for="post in state.userLikedPosts" :key="post.id">
                   <div class="image">
                     <img :src="post.picture" :alt="post.description" />          
                   </div>
                   </router-link>
+              </div>
+
+              <div v-if="state.userLikedPosts.length >= 3">
+                <button v-if="!state.allLikedPosts" @click="loadMoreLikedPosts" class="load-more">Load more</button>
+                <button v-else @click="loadLessLikedPosts" class="load-less">Load less</button>
               </div>
             </div>
           </div>
@@ -70,38 +78,51 @@ export default defineComponent({
       loading: true,
       userPosts: [],
       userLikedPosts: [],
-      all: false
+      allPosts: false,
+      allLikedPosts: false
     });    
 
     watchEffect(async () => {
       const profile = await profileService.get();
-      const userPosts = await profileService.getUserPosts(state.all);
-      const userLikedPosts = await profileService.getUserLikedPosts(state.all);
+      const userPosts = await profileService.getUserPosts(state.allPosts);
+      const userLikedPosts = await profileService.getUserLikedPosts(state.allLikedPosts);
       
-      state.userPosts = userPosts.posts;
+      state.userPosts = userPosts.posts;      
       state.userLikedPosts = userLikedPosts.posts;
       state.profile = profile;
       state.loading = false;
     });
 
-    const loadMore = async() => {
-      state.all = true;
-
-      const userPosts = await profileService.getUserPosts(state.all);      
-      state.userPosts = userPosts.posts;             
+    const loadMorePosts = async() => {
+      state.allPosts = true;
+      const userPosts = await profileService.getUserPosts(state.allPosts);      
+      state.userPosts = userPosts.posts;
     }
 
-    const loadLess = async() => {
-      state.all = false;
-      
-      const userPosts = await profileService.getUserPosts(state.all);      
-      state.userPosts = userPosts.posts;             
+    const loadLessPosts = async() => {
+      state.allPosts = false;
+      const userPosts = await profileService.getUserPosts(state.allPosts);      
+      state.userPosts = userPosts.posts;
+    }
+    
+    const loadMoreLikedPosts = async() => {
+      state.allLikedPosts = true;
+      const userLikedPosts = await profileService.getUserLikedPosts(state.allLikedPosts);
+      state.userLikedPosts = userLikedPosts.posts;
+    }
+
+    const loadLessLikedPosts = async() => {
+      state.allLikedPosts = false;
+      const userLikedPosts = await profileService.getUserLikedPosts(state.allLikedPosts);      
+      state.userLikedPosts = userLikedPosts.posts;
     }
 
     return {
       state,
-      loadMore,
-      loadLess
+      loadMorePosts,
+      loadLessPosts,
+      loadMoreLikedPosts,
+      loadLessLikedPosts
     };
   }
 });

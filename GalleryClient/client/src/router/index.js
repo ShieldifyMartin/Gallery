@@ -1,9 +1,9 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import Home from '@/views/Home.vue'
+import Home from '@/views/Home/Home.vue'
 import Login from '@/views/Login/Login.vue'
 import Register from '@/views/Register/Register.vue'
-import SubmitPhoto from '@/views/SubmitPhoto.vue'
-import PostDetails from '@/views/PostDetails.vue'
+import SubmitPhoto from '@/views/SubmitPhoto/SubmitPhoto.vue'
+import PostDetails from '@/views/PostDetails/PostDetails.vue'
 import ProfileDetails from '@/views/ProfileDetails/ProfileDetails.vue'
 
 const routes = [

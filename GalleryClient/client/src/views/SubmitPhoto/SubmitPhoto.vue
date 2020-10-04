@@ -14,7 +14,7 @@
         required
       />
       <select v-model="state.categoryId" class="categories-dropdown">
-        <option disabled selected>-- select a category --</option>
+        <option value="" selected>Select category</option>
         <option
           v-for="category in state.categories"
           :key="category.id"
@@ -28,8 +28,8 @@
 
 <script lang="ts">
 import { defineComponent, reactive, watchEffect } from "vue";
-import router from "../router";
-import { postService } from "../services";
+import router from "../../router";
+import { postService } from "../../services";
 
 export default defineComponent({
   setup() {
@@ -119,58 +119,4 @@ export default defineComponent({
 });
 </script>
 
-<style lang="scss">
-.submit-photo {
-  * {
-    display: block;
-    margin: 1em auto;
-  }
-
-  .error {
-    color: red;
-  }
-
-  input {
-    width: 30em;
-    height: 2em;
-  }
-
-  .photo-upload::-webkit-file-upload-button {
-    visibility: hidden;
-  }
-
-  .photo-upload {
-    width: 25em;
-    text-align: center;
-  }
-
-  .photo-upload-label {
-    background-color: #eeeeee;
-    color: #000;
-    border: none;
-    border-radius: 5px;
-    width: 20em;
-    padding: 0.5em 1.5em;
-  }
-
-  .categories-dropdown {
-    width: 30em;
-  }
-
-  .submit-btn {
-    border: none;
-    width: 30em;
-    background: #111111;
-    color: #ffff;
-  }
-
-  a {
-    text-decoration: none;
-    color: black;
-  }
-
-  a:hover {
-    color: rgba(0, 0, 0, 0.467);
-  }
-}
-</style>
+<styles src="./index.scss"></styles>

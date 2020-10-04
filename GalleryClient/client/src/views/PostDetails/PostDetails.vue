@@ -34,7 +34,7 @@
 <script lang="ts">
 import { defineComponent, reactive, watchEffect } from "vue";
 import moment from "moment";
-import { postService } from "../services";
+import { postService } from "../../services";
 
 export default defineComponent({
   setup() {
@@ -65,47 +65,4 @@ export default defineComponent({
 });
 </script>
 
-<style lang="scss">
-.details {
-  margin-top: 1em;
-
-  .post-header {
-    display: flex;
-    margin: 0 auto;
-  }
-
-  .post-header > div {
-    width: 9%;
-    margin-left: auto;
-    margin-right: auto;
-  }
-
-  img {
-    width: 25em;
-    height: auto;
-  }
-
-  .profile-icon {
-    width: 3em;
-  }
-
-  .heart-icon {
-    width: 2em;
-  }
-
-  .location-icon {
-    width: 0.8em;
-    margin-right: 0.4em;
-  }
-
-  .post-footer {
-    margin: 0 auto;
-    width: 9em;
-    text-align: center;
-  }
-
-  .post-footer > div {
-    display: flex;
-  }
-}
-</style>
+<styles src="./index.scss"></styles>
