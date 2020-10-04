@@ -35,8 +35,8 @@
                 </router-link>
               </div>
 
-            <button v-if="!state.all" @click="loadMore">Load more</button>
-            <button v-else @click="loadLess">Load less</button>
+            <button v-if="!state.all" @click="loadMore" class="load-more">Load more</button>
+            <button v-else @click="loadLess" class="load-less">Load less</button>
             </div>
           </div>
           <div class="tab">
@@ -183,6 +183,16 @@ export default defineComponent({
           object-fit: cover;
           border-radius: 0.75rem;        
           background-size:100%;
+        }
+
+        .load-more, .load-less {
+          padding: 0.5em 1em;
+          border-radius: 0.75em;
+          margin-bottom: 2em;
+        }
+
+        .load-more:hover, .load-less:hover {
+          background-color: #ffff;
         }
       }
       .tab-switch:checked + .tab-label {
