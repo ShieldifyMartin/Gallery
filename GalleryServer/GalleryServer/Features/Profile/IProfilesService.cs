@@ -13,6 +13,6 @@
 
         Task<List<SearchUserResults>> GetUsers(string input);
 
-        List<Post> GetLikedPosts(string userId);
+        List<Post> GetLikedPosts(string userId, bool all, int itemsPerPage);
     }
 }

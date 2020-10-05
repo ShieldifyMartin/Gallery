@@ -63,10 +63,11 @@
             return Ok(result);
         }
 
-        public async Task<ActionResult> LikedPosts(int page = 1)
+        [HttpGet("{all}")]
+        public async Task<ActionResult> LikedPosts(bool all = false)
         {
             var userId = this.currentUser.GetId();            
-            var likedPosts = this.profiles.GetLikedPosts(userId);
+            var likedPosts = this.profiles.GetLikedPosts(userId, all, ItemsPerPage);
 
             var result = new LikedPosts
             {                

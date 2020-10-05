@@ -71,13 +71,18 @@
             return users;
         }
 
-        public List<Post> GetLikedPosts(string userId)
+        public List<Post> GetLikedPosts(string userId, bool all, int itemsPerPage)
         {
             var likedPosts = this.data
                 .Votes
                 .Where(v => v.UserId == userId)
                 .Select(v => v.Post)
                 .ToList();
+
+            if (!all)
+            {
+                likedPosts = likedPosts.Take(itemsPerPage).ToList();
+            }
 
             return likedPosts;
         }
