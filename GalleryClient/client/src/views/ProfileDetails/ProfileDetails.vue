@@ -8,7 +8,7 @@
         class="profile-icon"
       />
       <img v-else src="@/assets/icons/profile.png" class="profile-icon" />
-      <router-link to="/#">Change profile picture</router-link>
+      <router-link to="/profile/edit">Change profile picture</router-link>
 
       <div class="info">
         <p>Email: {{ state.profile.email }}</p>
