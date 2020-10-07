@@ -8,7 +8,8 @@
         class="profile-icon"
       />
       <img v-else src="@/assets/icons/profile.png" class="profile-icon" />
-      <router-link to="/profile/edit">Change profile picture</router-link>
+      <input id="upload" type="file" @change="uploadImage" />
+      <router-link to="#" id="upload-link" @click="clickImage">Change profile image</router-link>
 
       <div class="info">
         <p>Email: {{ state.profile.email }}</p>
@@ -80,7 +81,7 @@ export default defineComponent({
       userLikedPosts: [],
       allPosts: false,
       allLikedPosts: false
-    });    
+    });
 
     watchEffect(async () => {
       const profile = await profileService.get();
@@ -92,6 +93,14 @@ export default defineComponent({
       state.profile = profile;
       state.loading = false;
     });
+
+    const clickImage = () => {
+      document.querySelector('#upload').click();
+    }
+
+    const uploadImage = () => {
+      console.log(document.querySelector('#upload').files[0]);
+    }
 
     const loadMorePosts = async() => {
       state.allPosts = true;
@@ -119,6 +128,8 @@ export default defineComponent({
 
     return {
       state,
+      clickImage,
+      uploadImage,
       loadMorePosts,
       loadLessPosts,
       loadMoreLikedPosts,

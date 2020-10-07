@@ -5,7 +5,6 @@ import Register from '@/views/Register/Register.vue'
 import SubmitPhoto from '@/views/SubmitPhoto/SubmitPhoto.vue'
 import PostDetails from '@/views/PostDetails/PostDetails.vue'
 import ProfileDetails from '@/views/ProfileDetails/ProfileDetails.vue'
-import ChangeProfilePicture from '../views/ChangeProfilePicture/ChangeProfilePicture.vue';
 
 const routes = [
   {
@@ -37,11 +36,6 @@ const routes = [
     path: '/profile',
     name: 'ProfileDetails',
     component: ProfileDetails
-  },
-  {
-    path: '/profile/edit',
-    name: 'ChangeProfilePicture',
-    component: ChangeProfilePicture
   }
 ]
 
