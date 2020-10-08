@@ -52,8 +52,29 @@ const getUserLikedPosts = async (page) => {
         });
 };
 
+const uploadProfileImage = async(picture) => {
+    var token = localStorage.getItem('token');
+
+    axios.defaults.headers = {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + token
+    };
+
+    const formData = new FormData();
+    formData.append('picture', picture);
+
+    return await axios.get(`${config.restAPI}/identity/profilePicture`, formData)
+        .then(res => {            
+            if (res.status >= 200 && res.status < 300) {
+                var data = res.data;                
+                return data;
+            }
+        });
+}
+
 export const profileService = {
     get,
     getUserPosts,
-    getUserLikedPosts
+    getUserLikedPosts,
+    uploadProfileImage
 };
