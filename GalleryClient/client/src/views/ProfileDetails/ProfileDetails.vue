@@ -1,5 +1,6 @@
 <template>
   <div class="profile-details">
+    <p class="error">{{state.error}}</p>
     <img v-if="state.loading" class="loader" src="@/assets/loading.gif" />
     <div v-else class="profile">
       <img
@@ -39,8 +40,8 @@
                 <div v-if="state.userPosts.length >= 3">
                   <button v-if="!state.allPosts" @click="loadMorePosts" class="load-more">Load more</button>
                   <button v-else @click="loadLessPosts" class="load-less">Load less</button>
-                </div>
-              </div>
+                </div>              
+            </div>
           </div>
           </div>
           <div class="tab">
@@ -80,7 +81,10 @@ export default defineComponent({
       userPosts: [],
       userLikedPosts: [],
       allPosts: false,
-      allLikedPosts: false
+      allLikedPosts: false,
+      picture: null,
+      error: "",
+      maxSize: 15728640,
     });
 
     watchEffect(async () => {
@@ -98,8 +102,21 @@ export default defineComponent({
       document.querySelector('#upload').click();
     }
 
-    const uploadImage = () => {
-      console.log(document.querySelector('#upload').files[0]);
+    const uploadImage = (e) => {
+      // document.querySelector('#upload').files[0]
+      let file = e.target.files[0];
+
+      if (!e.target.files.length) return;
+
+      if (e.target.files.length === 1) {
+        if (file.size > state.maxSize) {
+          state.error = "Too large picture!";
+        } else {          
+          state.picture = file;
+        }
+      } else {
+        state.error = "Only one photo is allowed!";
+      }      
     }
 
     const loadMorePosts = async() => {
