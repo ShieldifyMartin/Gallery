@@ -5,7 +5,7 @@
     <div v-else class="profile">
       <img
         v-if="state.profile.picture"
-        :src="state.profile.picture"
+        :src="state.picture || state.profile.picture"
         class="profile-icon"
       />
       <img v-else src="@/assets/icons/profile.png" class="profile-icon" />
@@ -82,8 +82,8 @@ export default defineComponent({
       userLikedPosts: [],
       allPosts: false,
       allLikedPosts: false,
-      picture: null,
-      error: "",
+      picture: '',
+      error: '',
       maxSize: 15728640,
     });
 
@@ -94,7 +94,7 @@ export default defineComponent({
       
       state.userPosts = userPosts.posts;      
       state.userLikedPosts = userLikedPosts.posts;
-      state.profile = profile;
+      state.profile = profile;      
       state.loading = false;
     });
 
@@ -102,8 +102,7 @@ export default defineComponent({
       document.querySelector('#upload').click();
     }
 
-    const uploadImage = (e) => {
-      // document.querySelector('#upload').files[0]
+    const uploadImage = async(e) => {      
       let file = e.target.files[0];
 
       if (!e.target.files.length) return;
@@ -111,12 +110,17 @@ export default defineComponent({
       if (e.target.files.length === 1) {
         if (file.size > state.maxSize) {
           state.error = "Too large picture!";
-        } else {          
-          state.picture = file;
+          return;
+        } else {
+          state.picture = file; 
         }
       } else {
         state.error = "Only one photo is allowed!";
-      }      
+        return;
+      }
+
+      const data = await profileService.uploadProfileImage(state.picture);      
+      state.picture = data;
     }
 
     const loadMorePosts = async() => {

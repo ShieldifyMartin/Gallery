@@ -3,13 +3,20 @@ import auth from './authModule';
 
 export default createStore({
   state: {
-    auth  
+    auth,
+    profilePicture: ''
   },
-  getters: {
+  getters: {    
   },
-  mutations: {    
+  mutations: {
+    setProfilePicture(state, pictureUrl) {      
+      state.profilePicture = pictureUrl;
+    }
   },
   actions: {
+    setProfilePicture(context, pictureUrl) {      
+      context.commit("setProfilePicture", pictureUrl);
+    },
   },
   modules: {
   }

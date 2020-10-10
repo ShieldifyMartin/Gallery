@@ -63,12 +63,15 @@ const uploadProfileImage = async(picture) => {
     const formData = new FormData();
     formData.append('picture', picture);
 
-    return await axios.get(`${config.restAPI}/identity/profilePicture`, formData)
+    return await axios.post(`${config.restAPI}/identity/profilePicture`, formData)
         .then(res => {            
             if (res.status >= 200 && res.status < 300) {
                 var data = res.data;                
                 return data;
             }
+        })
+        .catch((res) => {
+            console.log(res);
         });
 }
 
