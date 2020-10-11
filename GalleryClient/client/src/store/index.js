@@ -10,7 +10,7 @@ export default createStore({
   },
   mutations: {
     setProfilePicture(state, pictureUrl) {      
-      state.profilePicture = pictureUrl;
+      state.profilePicture = pictureUrl;      
     }
   },
   actions: {

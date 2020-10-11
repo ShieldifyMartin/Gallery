@@ -2,7 +2,7 @@
   <div id="nav">
     <div class="profile-picture">    
       <router-link v-if="isAuth()" to="/profile">
-        <img v-if="pictureUrl" :src="pictureUrl" class="profile-icon" />
+        <img v-if="state.pictureUrl" :src="state.pictureUrl" class="profile-icon" />
         <img v-else src="@/assets/icons/profile.png" class="profile-icon" />     
       </router-link>
     </div>
@@ -16,26 +16,34 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, reactive } from "vue";
-import router from "../../router";
+import { defineComponent, reactive, watchEffect } from "vue";
+import { profileService } from "../../services";
+import store from '../../store/index.js';
 
 export default defineComponent({
   name: "Header",
-  setup() {
+  setup() { 
     const state = reactive({
-      pictureUrl: ''      
+      pictureUrl: ''
+    });
+
+    watchEffect(async () => {
+      if(isAuth()) {
+        const data = await profileService.get();
+        state.pictureUrl = data.picture;
+      }
     });
 
     function isAuth() {
-      return this.$store.state.auth.state.isAuth;
+      return store.state.auth.state.isAuth;
     }
 
     function logout() {      
-      this.$store.state.auth.dispatch("logout");
+      store.state.auth.dispatch("logout");
       localStorage.setItem('token', '');
       localStorage.setItem('username', '');
       
-      router.push("/");
+      window.location.href = "/";
     }
 
     return {
@@ -70,6 +78,8 @@ export default defineComponent({
 
     img {
       width: 4em;
+      height: 4em;
+      border-radius: 50%;
       margin-left: 5em;
       margin-top: -1em;
     }

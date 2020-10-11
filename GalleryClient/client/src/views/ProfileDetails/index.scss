@@ -1,9 +1,9 @@
-.profile-details {
+.profile-details {  
     .loader {
       margin: 0 auto;
       width: 7em;
-    }
-  
+    }      
+
     .error {
       color: red;
     }
@@ -12,16 +12,18 @@
       text-align: center;
   
       .profile-icon {
-        display: block;
-        width: 6em;
+        display: block;        
         margin: 0 auto;
+        border-radius: 50%;
+        width: 9em;
+        height: 9em;
       }
   
       a {
         display: block;
         text-decoration: none;
         color: #a0a0a0;
-        margin-bottom: 2em;
+        margin-bottom: 2em;        
       }
   
       #upload{

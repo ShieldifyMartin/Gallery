@@ -13,8 +13,10 @@
       <router-link to="#" id="upload-link" @click="clickImage">Change profile image</router-link>
 
       <div class="info">
-        <p>Email: {{ state.profile.email }}</p>
-        <p>Username: {{ state.profile.userName }}</p>
+        <b>Email:</b>
+        <p>{{ state.profile.email }}</p>
+        <b>Username:</b>
+        <p>{{ state.profile.userName }}</p>
       </div>
 
       <div class="wrapper">
@@ -72,6 +74,7 @@
 <script lang="ts">
 import { defineComponent, reactive, watchEffect } from "vue";
 import { profileService } from "../../services";
+import store from '../../store/index.js';
 
 export default defineComponent({
   setup() {
@@ -91,7 +94,7 @@ export default defineComponent({
       const profile = await profileService.get();
       const userPosts = await profileService.getUserPosts(state.allPosts);
       const userLikedPosts = await profileService.getUserLikedPosts(state.allLikedPosts);
-      
+
       state.userPosts = userPosts.posts;      
       state.userLikedPosts = userLikedPosts.posts;
       state.profile = profile;      
@@ -112,15 +115,17 @@ export default defineComponent({
           state.error = "Too large picture!";
           return;
         } else {
-          state.picture = file; 
+          state.picture = file;
         }
       } else {
         state.error = "Only one photo is allowed!";
         return;
       }
 
-      const data = await profileService.uploadProfileImage(state.picture);      
+      const data = await profileService.uploadProfileImage(state.picture);
+      store.dispatch('setProfilePicture', data);
       state.picture = data;
+      window.location.href = "/profile";
     }
 
     const loadMorePosts = async() => {
