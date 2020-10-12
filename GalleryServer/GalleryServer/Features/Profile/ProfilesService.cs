@@ -49,7 +49,8 @@
             var userInfo = new UserDetails
             {
                 UserName = user.UserName,
-                Email = user.Email
+                Email = user.Email,
+                Picture = user.PictureUrl
             };
 
             return userInfo;

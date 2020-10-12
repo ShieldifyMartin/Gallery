@@ -95,7 +95,7 @@
                 return BadRequest(result.Error);
             }
 
-            return Ok();
+            return Ok(pictureUrl);
         }
     }
 }

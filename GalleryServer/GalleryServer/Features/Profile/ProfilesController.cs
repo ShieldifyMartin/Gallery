@@ -44,6 +44,7 @@
             {
                 UserName = userInfo.UserName,
                 Email = userInfo.Email,
+                Picture = userInfo.Picture
             };
 
             return Accepted(result);
