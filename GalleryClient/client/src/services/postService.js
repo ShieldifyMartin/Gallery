@@ -1,9 +1,9 @@
 import config from '@/config';
 import axios from 'axios';
 
-const get = async () => {   
+const get = async () => {
     return await axios.get(`${config.restAPI}/posts/all`)
-        .then(res => {            
+        .then(res => {
             if (res.status >= 200 && res.status < 300) {
                 var posts = res.data;
                 return posts;
@@ -13,7 +13,7 @@ const get = async () => {
 
 const getById = async (id) => {
     return await axios.get(`${config.restAPI}/posts/byId/${id}`)
-        .then(res => {            
+        .then(res => {
             if (res.status >= 200 && res.status < 300) {
                 var post = res.data;
                 return post;
@@ -44,19 +44,32 @@ const create = async (token, picture, location, description, categoryId) => {
     formData.append('categoryId', categoryId);
 
     return await axios.post(`${config.restAPI}/posts/create`, formData)
-      .then(res => {
-        if (res.status >= 200 && res.status < 300) {                
-            var postId = res.data;
-            return postId;
-        } else if(res.status === 401) {
-            return res.status;
-        }})
-        .catch(err => console.log(err));      
+        .then(res => {
+            if (res.status >= 200 && res.status < 300) {
+                var postId = res.data;
+                return postId;
+            } else if (res.status === 401) {
+                return res.status;
+            }
+        })
+        .catch(err => console.log(err));
+}
+
+const like = async (token, postId) => {
+    axios.defaults.headers = {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + token
+    };
+
+    return await axios.post(`${config.restAPI}/posts/like/${postId}`)
+        .then(res => { return res; })
+        .catch(err => console.log(err));
 }
 
 export const postService = {
     get,
     getById,
     getCategories,
-    create  
+    create,
+    like
 };
