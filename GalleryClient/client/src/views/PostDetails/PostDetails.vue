@@ -1,5 +1,6 @@
 <template>
   <div class="details">
+    <p v-if="state.message" class="message">{{state.message}}</p>
     <div class="post-header">
       <div>
         <img v-if="state.post.pictureUrl" :src="state.post.pictureUrl" class="profile-icon" />
@@ -41,7 +42,8 @@ export default defineComponent({
     const state = reactive({
       post: [],      
       createdOn: null,
-      isLiked: false
+      isLiked: false,
+      message: ''
     });
 
     watchEffect(async () => {
@@ -52,9 +54,16 @@ export default defineComponent({
       state.createdOn = moment(post.createdOn, "YYYYMMDD").fromNow();
     });
 
-    const like = () => {
+    const like = async() => {
       state.isLiked = true;
-      console.log('like');
+
+      var status = await postService.like(localStorage.getItem('token'), state.post.id);
+      
+      if(status == 200) {
+        state.post.likes = state.post.likes + 1;
+      } else if(status == 400) {
+        state.message = "You had already liked this post.";
+      }
     }
 
     return {

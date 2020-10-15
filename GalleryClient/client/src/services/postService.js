@@ -62,8 +62,8 @@ const like = async (token, postId) => {
     };
 
     return await axios.post(`${config.restAPI}/posts/like/${postId}`)
-        .then(res => { return res; })
-        .catch(err => console.log(err));
+        .then(res => { return res.status; })
+        .catch(err => err.response.status);
 }
 
 export const postService = {

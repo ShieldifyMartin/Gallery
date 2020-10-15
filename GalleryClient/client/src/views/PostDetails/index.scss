@@ -1,6 +1,12 @@
 .details {
     margin-top: 1em;
   
+    .message {
+      color: red;
+      margin: 2em 0;
+      text-align: center;
+    }
+
     .post-header {
       display: flex;
       margin: 0 auto;
