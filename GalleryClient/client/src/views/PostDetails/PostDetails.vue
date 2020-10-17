@@ -55,12 +55,23 @@ export default defineComponent({
     });
 
     const like = async() => {
-      state.isLiked = true;
+      //is it liked
+      if(state.isLiked === true) {
+        let status = await postService.unlike(localStorage.getItem('token'), state.post.id);
+      
+        if(status == 200) {
+          state.post.likes = state.post.likes - 1;
+          state.isLiked = false;
+        } else if(status == 400) {
+          state.message = "You had not liked this post.";
+        }
+      }
 
-      var status = await postService.like(localStorage.getItem('token'), state.post.id);
+      let status = await postService.like(localStorage.getItem('token'), state.post.id);
       
       if(status == 200) {
         state.post.likes = state.post.likes + 1;
+        state.isLiked = true;
       } else if(status == 400) {
         state.message = "You had already liked this post.";
       }

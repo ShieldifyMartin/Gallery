@@ -66,10 +66,22 @@ const like = async (token, postId) => {
         .catch(err => err.response.status);
 }
 
+const unlike = async (token, postId) => {
+    axios.defaults.headers = {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + token
+    };
+
+    return await axios.post(`${config.restAPI}/posts/unlike/${postId}`)
+        .then(res => { return res.status; })
+        .catch(err => err.response.status);
+}
+
 export const postService = {
     get,
     getById,
     getCategories,
     create,
-    like
+    like,
+    unlike
 };
