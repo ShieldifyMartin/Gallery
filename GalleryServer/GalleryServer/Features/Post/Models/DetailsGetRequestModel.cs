@@ -25,6 +25,9 @@
         public int Likes { get; set; }
 
         [Required]
+        public bool? IsLiked { get; set; }
+
+        [Required]
         public int? CategoryId { get; set; }
 
         [Required]
@@ -33,6 +36,6 @@
         [Required]
         public DateTime CreatedOn { get; set; }
 
-        public virtual ICollection<Vote> Votes { get; set; }
+        //public virtual ICollection<Vote> Votes { get; set; }
     }
 }

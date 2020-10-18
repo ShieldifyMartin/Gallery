@@ -15,11 +15,16 @@
     {
         private readonly ApplicationDbContext data;
         private readonly IDeletableEntityRepository<Post> posts;
+        private readonly ICurrentUserService currentUser;
 
-        public PostsService(ApplicationDbContext data, IDeletableEntityRepository<Post> posts)
+        public PostsService(
+            ApplicationDbContext data,
+            IDeletableEntityRepository<Post> posts,
+            ICurrentUserService currentUser)
         {
             this.data = data;
             this.posts = posts;
+            this.currentUser = currentUser;
         }
 
         public List<GetAllGetRequestModel> GetAll()
@@ -79,6 +84,11 @@
 
         public DetailsGetRequestModel GetById(string id)
         {
+            var userId = this.currentUser.GetId();
+
+            var isLiked = !(this.data.Votes.FirstOrDefault(
+                v => v.PostId == id && v.UserId == userId) is null);
+
             var post = this.posts
                 .All()
                 .Select(p => new DetailsGetRequestModel
@@ -88,11 +98,11 @@
                     Description = p.Description,
                     Picture = p.Picture,
                     Likes = p.Likes,
+                    IsLiked = isLiked,
                     CategoryId = p.CategoryId,                    
                     UserName = p.User.UserName,
                     ProfilePicture = p.User.PictureUrl,
-                    CreatedOn = p.CreatedOn,
-                    Votes = p.Votes                 
+                    CreatedOn = p.CreatedOn,                    
                 })
                 .FirstOrDefault(p => p.Id == id);
 
