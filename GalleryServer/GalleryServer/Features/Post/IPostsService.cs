@@ -29,5 +29,7 @@
         Task<Result> DeletePostAdmin(string userId, string postId);
 
         Task<Result> LikePost(string userId, string postId);
+
+        Task<Result> UnLikePost(string userId, string postId);
     }
 }

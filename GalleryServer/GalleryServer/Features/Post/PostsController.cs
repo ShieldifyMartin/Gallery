@@ -77,6 +77,21 @@
             return Ok();
         }
 
+        [HttpPost("{postId}")]
+        [Authorize]
+        public async Task<ActionResult> UnLike(string postId)
+        {
+            var userId = this.currentUser.GetId();
+            var result = await this.posts.UnLikePost(userId, postId);
+
+            if (result.Failure)
+            {
+                return BadRequest(result.Error);
+            }
+
+            return Ok();
+        }
+
         [HttpPost]
         [Authorize]
         public async Task<ActionResult> Create([FromForm] CreatePostRequestModel model)

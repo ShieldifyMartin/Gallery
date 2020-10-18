@@ -263,5 +263,32 @@
             
             return true;
         }
+
+        public async Task<Result> UnLikePost(string userId, string postId)
+        {
+            var vote = this.data
+                .Votes
+                .FirstOrDefault(
+                    v => v.UserId == userId
+                    && v.PostId == postId);
+
+            if (vote is null)
+            {
+                return "This post is not liked by this user.";
+            }
+
+            this.data.Votes.Remove(vote);
+
+            var post = this.posts
+                .All()
+                .FirstOrDefault(p => p.Id == postId);
+
+            post.Likes--;
+            post.Votes.Remove(vote);
+
+            await this.data.SaveChangesAsync();
+
+            return true;
+        }
     }
 }
