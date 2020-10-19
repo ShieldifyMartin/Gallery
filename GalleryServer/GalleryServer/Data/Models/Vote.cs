@@ -1,5 +1,6 @@
 ﻿namespace GalleryServer.Data.Models
-{    
+{
+    using GalleryServer.Data.Models.Base;    
     using System.ComponentModel.DataAnnotations;
 
     public class Vote

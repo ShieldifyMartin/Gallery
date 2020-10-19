@@ -86,8 +86,8 @@
         {
             var userId = this.currentUser.GetId();
 
-            var isLiked = !(this.data.Votes.FirstOrDefault(
-                v => v.PostId == id && v.UserId == userId) is null);
+            var isLiked = this.data.Votes.Any(
+                v => v.PostId == id && v.UserId == userId);
 
             var post = this.posts
                 .All()
@@ -251,7 +251,7 @@
 
             if (userAlreadyLiked)
             { 
-                return "This post is already liked by this user.";
+                return "This post is already liked from this user.";
             }
 
             var vote = new Vote
@@ -266,7 +266,7 @@
                 .All()
                 .FirstOrDefault(p => p.Id == postId);
 
-            post.Likes++;
+            post.Likes += 1;
             post.Votes.Add(vote);
 
             await this.data.SaveChangesAsync();
@@ -284,7 +284,7 @@
 
             if (vote is null)
             {
-                return "This post is not liked by this user.";
+                return "This post is not liked from this user.";
             }
 
             this.data.Votes.Remove(vote);
@@ -293,7 +293,7 @@
                 .All()
                 .FirstOrDefault(p => p.Id == postId);
 
-            post.Likes--;
+            post.Likes = post.Likes - 1;
             post.Votes.Remove(vote);
 
             await this.data.SaveChangesAsync();

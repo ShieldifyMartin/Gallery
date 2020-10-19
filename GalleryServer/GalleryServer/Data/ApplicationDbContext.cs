@@ -9,7 +9,6 @@
     using System;
     using System.Threading.Tasks;
     using System.Threading;
-    using Microsoft.AspNetCore.Identity;
 
     public class ApplicationDbContext : IdentityDbContext<User>
     {
@@ -52,8 +51,7 @@
                 .Entity<Vote>()
                 .HasOne(v => v.User)
                 .WithMany()
-                .HasForeignKey(v => v.UserId)
-                .OnDelete(DeleteBehavior.Cascade);
+                .HasForeignKey(v => v.UserId);                
 
             builder
                 .Entity<Category>()
