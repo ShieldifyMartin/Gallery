@@ -2,23 +2,15 @@
   <div class="details">
     <p v-if="state.message" class="message">{{state.message}}</p>
     <div class="post-header">
-      <div>
-        <img v-if="state.post.pictureUrl" :src="state.post.pictureUrl" class="profile-icon" />
-        <img v-else src="@/assets/icons/profile.png" class="profile-icon" />
-        <p>Created by: {{state.post.userName}}</p>        
-      </div>
-      <div>
-        <img
-          class="calendar-icon"
-          src="@/assets/icons/calendar-alt-solid.svg"
-          alt="calendar"
-        /><br>
-        <p>{{ state.createdOn }}</p>
+      <div class="profile-image">
+        <img v-if="state.post.profilePicture" :src="state.post.profilePicture" />
+        <img v-else src="@/assets/icons/profile.png" />
+        <p>Created by: {{state.post.userName}}</p>
       </div>
       <div>
         <img v-if="state.isLiked" class="heart-icon" src="@/assets/icons/heart-solid.svg" @click="unlike" alt="liked heart" />
         <img v-else class="heart-icon" src="@/assets/icons/heart-regular.svg" @click="like" alt="like heart" />
-        <p>Likes: {{ state.likes }}</p>        
+        <p>Likes: {{ state.likes }}</p>
       </div>
     </div>
 
@@ -26,7 +18,22 @@
     <img :src="state.post.picture" :alt="state.post.description" /><br />
 
     <div class="post-footer">
-      <p>{{ state.post.description }}</p>
+      <div>
+        <img
+          class="calendar-icon"
+          src="@/assets/icons/calendar.svg"
+          alt="calendar"
+        /><br>
+        <p>{{ state.createdOn }}</p>
+      </div>
+      <div>
+        <img
+          class="info-icon"
+          src="@/assets/icons/info-solid.svg"
+          alt="calendar"
+        />
+        <p>{{ state.post.description }}</p>
+      </div>
       <div v-if="state.post.location">
         <img
           class="location-icon"
@@ -34,7 +41,7 @@
           alt="location"
         />
         <p>{{ state.post.location || "none" }}</p>
-      </div>
+      </div>      
     </div>
   </div>
 </template>
