@@ -2,11 +2,11 @@
   <div class="details">
     <p v-if="state.message" class="message">{{state.message}}</p>
     <div class="post-header">
-      <div class="profile-image">
+      <router-link :to="getProfileLink()" class="profile-image">
         <img v-if="state.post.profilePicture" :src="state.post.profilePicture" />
         <img v-else src="@/assets/icons/profile.png" />
         <p>Created by: {{state.post.userName}}</p>
-      </div>
+      </router-link>
       <div>
         <img v-if="state.isLiked" class="heart-icon" src="@/assets/icons/heart-solid.svg" @click="unlike" alt="liked heart" />
         <img v-else class="heart-icon" src="@/assets/icons/heart-regular.svg" @click="like" alt="like heart" />
@@ -61,10 +61,12 @@ export default defineComponent({
       message: ''
     });
 
+    const getProfileLink = () => "/profile/" + state.post.authorId;
+
     watchEffect(async () => {
       const id = window.location.href.split("/")[3];
       const post = await postService.getById(id);
-
+      
       state.likes = post.likes;
       state.isLiked = post.isLiked;
       state.post = post;      
@@ -94,6 +96,7 @@ export default defineComponent({
 
     return {
       state,
+      getProfileLink,
       like,
       unlike
     };

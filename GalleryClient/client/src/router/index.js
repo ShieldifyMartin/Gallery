@@ -33,7 +33,7 @@ const routes = [
     component: PostDetails
   },
   {
-    path: '/profile',
+    path: '/profile/:id?',
     name: 'ProfileDetails',
     component: ProfileDetails
   }

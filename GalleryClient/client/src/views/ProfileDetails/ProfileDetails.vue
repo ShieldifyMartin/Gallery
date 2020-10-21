@@ -90,22 +90,35 @@ export default defineComponent({
       maxSize: 15728640,
     });
 
-    watchEffect(async () => {
-      const profile = await profileService.get();
-      const userPosts = await profileService.getUserPosts(state.allPosts);
-      const userLikedPosts = await profileService.getUserLikedPosts(state.allLikedPosts);
+    watchEffect(async () => {      
+      const id = window.location.href.split("/")[4];
+      
+      if(!id) {
+        const profile = await profileService.get();
+        const userPosts = await profileService.getUserPosts(state.allPosts);
+        const userLikedPosts = await profileService.getUserLikedPosts(state.allLikedPosts);
 
-      state.userPosts = userPosts.posts;      
-      state.userLikedPosts = userLikedPosts.posts;
-      state.profile = profile;      
-      state.loading = false;
+        state.userPosts = userPosts.posts;
+        state.userLikedPosts = userLikedPosts.posts;
+        state.profile = profile;
+        state.loading = false;
+      } else {
+        const profile = await profileService.getById(id);
+        const userPosts = await profileService.getUserPostsById(state.allPosts, id);
+        const userLikedPosts = await profileService.getUserLikedPosts(state.allLikedPosts, id);
+
+        state.userPosts = userPosts.posts;
+        state.userLikedPosts = userLikedPosts.posts;
+        state.profile = profile;
+        state.loading = false;
+      }
     });
 
     const clickImage = () => {
       document.querySelector('#upload').click();
     }
 
-    const uploadImage = async(e) => {      
+    const uploadImage = async(e) => {
       let file = e.target.files[0];
 
       if (!e.target.files.length) return;
