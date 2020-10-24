@@ -64,6 +64,19 @@
             return Ok(result);
         }
 
+        [HttpGet("{all}/{id}")]
+        public async Task<ActionResult> UserPosts(string id, bool all = false)
+        {            
+            var userPosts = this.profiles.GetUserPosts(id, all, ItemsPerPage);
+
+            var result = new UserPosts
+            {
+                Posts = userPosts.Posts
+            };
+
+            return Ok(result);
+        }
+
         [HttpGet("{all}")]
         public async Task<ActionResult> LikedPosts(bool all = false)
         {
@@ -72,6 +85,19 @@
 
             var result = new LikedPosts
             {                
+                Posts = likedPosts
+            };
+
+            return Ok(result);
+        }
+
+        [HttpGet("{all}/{id}")]
+        public async Task<ActionResult> LikedPosts(string id, bool all = false)
+        {            
+            var likedPosts = this.profiles.GetLikedPosts(id, all, ItemsPerPage);
+
+            var result = new LikedPosts
+            {
                 Posts = likedPosts
             };
 

@@ -36,6 +36,7 @@
         [Required]
         public DateTime CreatedOn { get; set; }
 
-        //public virtual ICollection<Vote> Votes { get; set; }
+        [Required]
+        public string AuthorId { get; set; }        
     }
 }

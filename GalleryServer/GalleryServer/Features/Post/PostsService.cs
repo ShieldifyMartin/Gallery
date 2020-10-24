@@ -102,7 +102,8 @@
                     CategoryId = p.CategoryId,                    
                     UserName = p.User.UserName,
                     ProfilePicture = p.User.PictureUrl,
-                    CreatedOn = p.CreatedOn,                    
+                    AuthorId = p.User.Id,
+                    CreatedOn = p.CreatedOn
                 })
                 .FirstOrDefault(p => p.Id == id);
 
