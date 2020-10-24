@@ -23,12 +23,13 @@
         [HttpGet("{userId}")]
         public async Task<ActionResult> Details(string userId)
         {
-            var userInfo = this.profiles.UseGetInfoById(userId);            
+            var userInfo = this.profiles.UseGetInfoById(userId);
 
             var result = new UserDetails
             {
                 UserName = userInfo.UserName,
-                Email = userInfo.Email,                
+                Email = userInfo.Email,
+                Picture = userInfo.Picture
             };
 
             return Accepted(result);
