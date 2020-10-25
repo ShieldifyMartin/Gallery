@@ -8,9 +8,9 @@
         :src="state.picture || state.profile.picture"
         class="profile-icon"
       />
-      <img v-else src="@/assets/icons/profile.png" class="profile-icon" />
-      <input id="upload" type="file" @change="uploadImage" />
-      <router-link to="#" id="upload-link" @click="clickImage">Change profile image</router-link>
+      <img v-else src="@/assets/icons/profile.png" class="profile-icon" />      
+      <input v-if="state.isGuest" id="upload" type="file" @change="uploadImage" />
+      <router-link v-if="state.isGuest" to="#" id="upload-link" @click="clickImage">Change profile image</router-link>
 
       <div class="info">
         <b>Email:</b>
@@ -34,15 +34,15 @@
               <h1 v-if="state.userPosts.length === 0" class="empty-message">No posts</h1>
               <div v-else>
                 <div class="posts">
-                  <router-link :to="post.id" v-for="post in state.userPosts" :key="post.id"> 
-                    <img :src="post.picture" class="image" :alt="post.description" />
+                  <router-link :to="getPostLink(post.id)" v-for="post in state.userPosts" :key="post.id"> 
+                    <img :src="post.picture" class="image" :alt="post.description" />                    
                   </router-link>
                 </div>
 
                 <div v-if="state.userPosts.length >= 3">
                   <button v-if="!state.allPosts" @click="loadMorePosts" class="load-more">Load more</button>
                   <button v-else @click="loadLessPosts" class="load-less">Load less</button>
-                </div>              
+                </div>
             </div>
           </div>
           </div>
@@ -52,7 +52,7 @@
             <div class="tab-content">
               <div class="posts">
                 <h1 v-if="state.userLikedPosts.length === 0" class="empty-message">No liked posts</h1>
-                <router-link v-else :to="post.id" v-for="post in state.userLikedPosts" :key="post.id">
+                <router-link v-else :to="getPostLink(post.id)" v-for="post in state.userLikedPosts" :key="post.id">
                   <div class="image">
                     <img :src="post.picture" :alt="post.description" />          
                   </div>
@@ -88,10 +88,11 @@ export default defineComponent({
       picture: '',
       error: '',
       maxSize: 15728640,
+      isGuest: true      
     });
 
     watchEffect(async () => {      
-      const id = window.location.href.split("/")[4];
+      const id = window.location.href.split("/")[4];      
       
       if(!id) {
         const profile = await profileService.get();
@@ -101,7 +102,7 @@ export default defineComponent({
         state.userPosts = userPosts.posts;
         state.userLikedPosts = userLikedPosts.posts;
         state.profile = profile;
-        state.loading = false;
+        state.loading = false;        
       } else {
         const profile = await profileService.getById(id);
         const userPosts = await profileService.getUserPostsById(state.allPosts, id);
@@ -111,8 +112,12 @@ export default defineComponent({
         state.userLikedPosts = userLikedPosts.posts;
         state.profile = profile;
         state.loading = false;
+        state.isGuest = false;
       }
-    });
+    }, state.id);
+
+    //window.location.href = 'http://localhost:8080/'+id;    
+    const getPostLink = (id) => "/" + id;
 
     const clickImage = () => {
       document.querySelector('#upload').click();
@@ -164,8 +169,9 @@ export default defineComponent({
       const userLikedPosts = await profileService.getUserLikedPosts(state.allLikedPosts);      
       state.userLikedPosts = userLikedPosts.posts;
     }
-
+    
     return {
+      getPostLink,
       state,
       clickImage,
       uploadImage,

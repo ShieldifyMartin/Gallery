@@ -18,6 +18,23 @@ const get = async () => {
         });
 };
 
+const getById = async (id) => {
+    var token = localStorage.getItem('token');
+
+    axios.defaults.headers = {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + token
+    };
+
+    return await axios.get(`${config.restAPI}/profiles/details/${id}`)
+        .then(res => {            
+            if (res.status >= 200 && res.status < 300) {
+                var data = res.data;
+                return data;
+            }
+        });
+};
+
 const getUserPosts = async (page) => {
     var token = localStorage.getItem('token');
 
@@ -26,10 +43,27 @@ const getUserPosts = async (page) => {
         'Authorization': 'Bearer ' + token
     };
 
-    return await axios.get(`${config.restAPI}/profiles/userposts/` + page)
+    return await axios.get(`${config.restAPI}/profiles/userposts/${page}`)
         .then(res => {            
             if (res.status >= 200 && res.status < 300) {
                 var data = res.data;                
+                return data;
+            }
+        });
+};
+
+const getUserPostsById = async (page, id) => {
+    var token = localStorage.getItem('token');
+
+    axios.defaults.headers = {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + token
+    };
+
+    return await axios.get(`${config.restAPI}/profiles/userposts/${page}/${id}`)
+        .then(res => {
+            if (res.status >= 200 && res.status < 300) {
+                var data = res.data;
                 return data;
             }
         });
@@ -43,7 +77,24 @@ const getUserLikedPosts = async (page) => {
         'Authorization': 'Bearer ' + token
     };
 
-    return await axios.get(`${config.restAPI}/profiles/likedPosts/` + page)
+    return await axios.get(`${config.restAPI}/profiles/likedPosts/${page}`)
+        .then(res => {            
+            if (res.status >= 200 && res.status < 300) {
+                var data = res.data;                
+                return data;
+            }
+        });
+};
+
+const getUserLikedPostsById = async (page, id) => {
+    var token = localStorage.getItem('token');
+
+    axios.defaults.headers = {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + token
+    };
+
+    return await axios.get(`${config.restAPI}/profiles/likedPosts/${page}/${id}`)
         .then(res => {            
             if (res.status >= 200 && res.status < 300) {
                 var data = res.data;                
@@ -77,7 +128,10 @@ const uploadProfileImage = async(picture) => {
 
 export const profileService = {
     get,
+    getById,
     getUserPosts,
+    getUserPostsById,
     getUserLikedPosts,
+    getUserLikedPostsById,
     uploadProfileImage
 };
