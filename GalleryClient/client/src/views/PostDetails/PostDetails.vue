@@ -49,6 +49,7 @@
 <script lang="ts">
 import { defineComponent, reactive, watchEffect } from "vue";
 import moment from "moment";
+import router from "../../router";
 import { postService } from "../../services";
 
 export default defineComponent({
@@ -58,7 +59,8 @@ export default defineComponent({
       likes: 0,
       isLiked: false,
       createdOn: null,      
-      message: ''
+      message: '',
+      isAuthor: false
     });
 
     const getProfileLink = () => "/profile/" + state.post.authorId;
@@ -73,7 +75,7 @@ export default defineComponent({
       state.createdOn = moment(post.createdOn, "YYYYMMDD").fromNow();
     });
 
-    const like = async() => {      
+    const like = async() => {
       let status = await postService.like(localStorage.getItem('token'), state.post.id);
       
       if(status == 200) {
@@ -81,6 +83,8 @@ export default defineComponent({
         state.isLiked = true;
       } else if(status == 400) {
         state.message = "You had already liked this post.";
+      } else {
+        router.push("login");
       }
     }
     
@@ -91,6 +95,8 @@ export default defineComponent({
         state.isLiked = false;          
       } else if(status == 400) {
         state.message = "You had not liked this post.";
+      } else {
+        router.push("login");
       }
     }
 

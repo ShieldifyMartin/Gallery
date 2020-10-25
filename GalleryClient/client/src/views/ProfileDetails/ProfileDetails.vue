@@ -115,8 +115,7 @@ export default defineComponent({
         state.isGuest = false;
       }
     }, state.id);
-
-    //window.location.href = 'http://localhost:8080/'+id;    
+    
     const getPostLink = (id) => "/" + id;
 
     const clickImage = () => {
