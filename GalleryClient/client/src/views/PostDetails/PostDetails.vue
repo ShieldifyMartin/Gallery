@@ -11,6 +11,13 @@
         <img v-if="state.isLiked" class="heart-icon" src="@/assets/icons/heart-solid.svg" @click="unlike" alt="liked heart" />
         <img v-else class="heart-icon" src="@/assets/icons/heart-regular.svg" @click="like" alt="like heart" />
         <p>Likes: {{ state.likes }}</p>
+        
+        <router-link to="/edit" v-if="state.isAuthor">
+          <img class="edit-icon" src="@/assets/icons/edit.svg" @click="edit" alt="edit icon" />
+        </router-link>
+        <router-link to="/delete" v-if="state.isAuthor">
+          <img class="delete-icon" src="@/assets/icons/delete.svg" @click="deletePost" alt="delete icon" />
+        </router-link>
       </div>
     </div>
 
@@ -50,7 +57,7 @@
 import { defineComponent, reactive, watchEffect } from "vue";
 import moment from "moment";
 import router from "../../router";
-import { postService } from "../../services";
+import { postService, profileService } from "../../services";
 
 export default defineComponent({
   setup() {
@@ -68,7 +75,12 @@ export default defineComponent({
     watchEffect(async () => {
       const id = window.location.href.split("/")[3];
       const post = await postService.getById(id);
-      
+      const profile = await profileService.get();
+
+      if(profile.id === post.authorId) {
+        state.isAuthor = true;
+      }
+
       state.likes = post.likes;
       state.isLiked = post.isLiked;
       state.post = post;      
