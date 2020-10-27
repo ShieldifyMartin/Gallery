@@ -5,6 +5,7 @@ import Register from '@/views/Register/Register.vue'
 import SubmitPhoto from '@/views/SubmitPhoto/SubmitPhoto.vue'
 import PostDetails from '@/views/PostDetails/PostDetails.vue'
 import ProfileDetails from '@/views/ProfileDetails/ProfileDetails.vue'
+import EditPost from '@/views/EditPost/EditPost.vue'
 
 const routes = [
   {
@@ -36,6 +37,11 @@ const routes = [
     path: '/profile/:id?',
     name: 'ProfileDetails',
     component: ProfileDetails
+  },
+  {
+    path: '/edit',
+    name: 'EditPost',
+    component: EditPost
   }
 ]
 

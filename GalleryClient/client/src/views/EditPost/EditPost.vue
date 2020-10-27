@@ -1,6 +1,6 @@
 <template>
-  <div class="submit-photo">
-    <h1>Submit photo</h1>
+  <div class="edit-photo">
+    <h1>Edit photo</h1>
     <p class="error">{{state.error}}</p>
     <form method="post" @submit.prevent="handleSubmit">
       <label for="file" class="photo-upload-label">choose a picture</label>
@@ -21,19 +21,19 @@
           :value="category.id"
         >{{category.title}}</option>
       </select>
-      <input type="submit" value="Create" class="submit-btn" />
+      <input type="submit" value="Edit" class="submit-btn" />
     </form>
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent, reactive, watchEffect } from "vue";
-import router from "../../router";
 import { postService } from "../../services";
+import router from '../../router';
 
 export default defineComponent({
   setup() {
-    const state = reactive({
+    const state = reactive({      
       categories: [],
       picture: null,
       location: "",
@@ -41,7 +41,7 @@ export default defineComponent({
       categoryId: "",
       error: "",
       maxSize: 15728640,
-    });
+    });    
 
     watchEffect(async () => {
       const categories = await postService.getCategories();
@@ -111,11 +111,11 @@ export default defineComponent({
     };
 
     return {
-      state,
-      handleSubmit,
+      state,      
       handleFileUpload,
+      handleSubmit
     };
-  },
+  }
 });
 </script>
 
