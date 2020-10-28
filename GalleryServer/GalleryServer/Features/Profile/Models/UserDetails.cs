@@ -7,6 +7,9 @@
     public class UserDetails
     {      
         [Required]
+        public string Id { get; set; }
+
+        [Required]
         public string UserName { get; set; }
 
         [Required]

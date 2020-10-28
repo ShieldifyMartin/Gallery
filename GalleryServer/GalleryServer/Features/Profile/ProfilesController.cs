@@ -27,6 +27,7 @@
 
             var result = new UserDetails
             {
+                Id = userInfo.Id,
                 UserName = userInfo.UserName,
                 Email = userInfo.Email,
                 Picture = userInfo.Picture
@@ -43,6 +44,7 @@
 
             var result = new UserDetails
             {
+                Id = userInfo.Id,
                 UserName = userInfo.UserName,
                 Email = userInfo.Email,
                 Picture = userInfo.Picture
