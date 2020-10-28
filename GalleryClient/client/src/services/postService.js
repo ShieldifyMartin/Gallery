@@ -55,6 +55,30 @@ const create = async (token, picture, location, description, categoryId) => {
         .catch(err => console.log(err));
 }
 
+const edit = async (token, picture, location, description, categoryId) => {
+    axios.defaults.headers = {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + token
+    };
+
+    const formData = new FormData();
+    formData.append('picture', picture);
+    formData.append('location', location);
+    formData.append('description', description);
+    formData.append('categoryId', categoryId);
+
+    return await axios.edit(`${config.restAPI}/posts/edit`, formData)
+        .then(res => {
+            if (res.status >= 200 && res.status < 300) {
+                var postId = res.data;
+                return postId;
+            } else if (res.status === 401) {
+                return res.status;
+            }
+        })
+        .catch(err => console.log(err));
+}
+
 const like = async (token, postId) => {
     axios.defaults.headers = {
         'Content-Type': 'application/json',
@@ -82,6 +106,7 @@ export const postService = {
     getById,
     getCategories,
     create,
+    edit,
     like,
     unlike
 };
