@@ -5,18 +5,18 @@
     <form method="post" @submit.prevent="handleSubmit">
       <label for="file" class="photo-upload-label">choose a picture</label>
       <input type="file" id="file" class="photo-upload" ref="picture" @change="handleFileUpload" />
-      <input type="text" v-model="state.location" name="location" placeholder="Location" />
+      <input type="text" v-model="state.post.location" name="location" placeholder="Location" />
       <input
-        type="text"
-        v-model="state.description"
+        type="text"        
+        v-model="state.post.description"
         name="description"
         placeholder="Description"
         required
       />
-      <select v-model="state.categoryId" class="categories-dropdown">
+      <select v-model="state.post.categoryId" class="categories-dropdown">
         <option value="" selected>Select category</option>
         <option
-          v-for="category in state.categories"
+          v-for="category in state.categories"          
           :key="category.id"
           :value="category.id"
         >{{category.title}}</option>
@@ -30,22 +30,25 @@
 import { defineComponent, reactive, watchEffect } from "vue";
 import { postService } from "../../services";
 import router from '../../router';
+import store from '../../store';
 
 export default defineComponent({
   setup() {
     const state = reactive({      
       categories: [],
-      picture: null,
-      location: "",
-      description: "",
-      categoryId: "",
+      post: {},
+      picture: null,      
       error: "",
       maxSize: 15728640,
     });    
 
     watchEffect(async () => {
-      const categories = await postService.getCategories();
+      const id = window.location.href.split("/")[4];      
+      const post = await postService.getById(id);
+      const categories = await postService.getCategories();      
+
       state.categories = categories;
+      state.post = post;      
     });
 
     function handleFileUpload(e) {
@@ -65,7 +68,7 @@ export default defineComponent({
     }
 
     async function handleSubmit() {
-      const { picture, location, description, categoryId } = state;
+      const { id, location, description, categoryId } = state.post;
 
       const isCorrect = validate();
 
@@ -73,9 +76,10 @@ export default defineComponent({
         return;
       }
 
-      var response = await postService.create(
-        this.$store.state.auth.state.token,
-        picture,
+      var response = await postService.edit(
+        store.state.auth.state.token,
+        id,
+        state.picture,
         location,
         description,
         categoryId
@@ -83,26 +87,25 @@ export default defineComponent({
  
       if (response === 401) {
         router.push("/login");
-      } else if (response === 400) {
-        state.error = "Something went wrong!";
+      } else if(response >= 200 && response < 300) {        
+        router.push("/" + state.post.id);
       } else {
-        this.$store.state.auth._actions.login();
-        router.push("/");
+        state.error = "Something went wrong!";
       }
     }
 
     const validate = () => {
-      if (state.picture === null || state.description.length === 0) {
+      if (state.post.description.length === 0) {
         state.error = "Invalid data!";
         return false;
       }
 
-      if (state.description.length > 2000) {
+      if (state.post.description.length > 2000) {
         state.error = "Max description length is 2000!";
         return false;
       }
 
-      if (state.location.length > 40) {
+      if (state.post.location.length > 40) {
         state.error = "Max location length is 40!";
         return false;
       }

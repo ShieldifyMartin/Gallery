@@ -33,7 +33,7 @@ const getCategories = async () => {
 
 const create = async (token, picture, location, description, categoryId) => {
     axios.defaults.headers = {
-        'Content-Type': 'application/json',
+        'Content-Type': 'multipart/form-data',
         'Authorization': 'Bearer ' + token
     };
 
@@ -44,7 +44,7 @@ const create = async (token, picture, location, description, categoryId) => {
     formData.append('categoryId', categoryId);
 
     return await axios.post(`${config.restAPI}/posts/create`, formData)
-        .then(res => {
+        .then(res => {            
             if (res.status >= 200 && res.status < 300) {
                 var postId = res.data;
                 return postId;
@@ -55,9 +55,10 @@ const create = async (token, picture, location, description, categoryId) => {
         .catch(err => console.log(err));
 }
 
-const edit = async (token, picture, location, description, categoryId) => {
+const edit = async (token, id, picture, location, description, categoryId) => {
+    console.log({token, id, picture, location, description, categoryId});
     axios.defaults.headers = {
-        'Content-Type': 'application/json',
+        'Content-Type': 'multipart/form-data',
         'Authorization': 'Bearer ' + token
     };
 
@@ -67,14 +68,9 @@ const edit = async (token, picture, location, description, categoryId) => {
     formData.append('description', description);
     formData.append('categoryId', categoryId);
 
-    return await axios.edit(`${config.restAPI}/posts/edit`, formData)
-        .then(res => {
-            if (res.status >= 200 && res.status < 300) {
-                var postId = res.data;
-                return postId;
-            } else if (res.status === 401) {
-                return res.status;
-            }
+    return await axios.post(`${config.restAPI}/posts/update/${id}`, formData)
+        .then(res => {            
+            return res.status;            
         })
         .catch(err => console.log(err));
 }

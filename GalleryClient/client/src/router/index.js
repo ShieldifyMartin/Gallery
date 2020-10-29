@@ -39,7 +39,7 @@ const routes = [
     component: ProfileDetails
   },
   {
-    path: '/edit',
+    path: '/edit/:id',
     name: 'EditPost',
     component: EditPost
   }

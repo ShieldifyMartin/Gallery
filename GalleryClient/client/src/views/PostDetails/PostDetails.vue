@@ -12,7 +12,7 @@
         <img v-else class="heart-icon" src="@/assets/icons/heart-regular.svg" @click="like" alt="like heart" />
         <p>Likes: {{ state.likes }}</p>
         
-        <router-link to="/edit" v-if="state.isAuthor">
+        <router-link :to="getEditRoute()" v-if="state.isAuthor">
           <img class="edit-icon" src="@/assets/icons/edit.svg" @click="edit" alt="edit icon" />
         </router-link>
         <router-link to="/delete" v-if="state.isAuthor">
@@ -71,6 +71,7 @@ export default defineComponent({
     });
 
     const getProfileLink = () => "/profile/" + state.post.authorId;
+    const getEditRoute = () => "/edit/" + state.post.id;
 
     watchEffect(async () => {
       const id = window.location.href.split("/")[3];
@@ -115,6 +116,7 @@ export default defineComponent({
     return {
       state,
       getProfileLink,
+      getEditRoute,
       like,
       unlike
     };
