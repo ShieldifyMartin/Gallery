@@ -43,12 +43,12 @@ export default defineComponent({
     });    
 
     watchEffect(async () => {
-      const id = window.location.href.split("/")[4];      
+      const id = window.location.href.split("/")[4];
       const post = await postService.getById(id);
-      const categories = await postService.getCategories();      
+      const categories = await postService.getCategories();
 
       state.categories = categories;
-      state.post = post;      
+      state.post = post;
     });
 
     function handleFileUpload(e) {
@@ -69,7 +69,6 @@ export default defineComponent({
 
     async function handleSubmit() {
       const { id, location, description, categoryId } = state.post;
-
       const isCorrect = validate();
 
       if (!isCorrect) {

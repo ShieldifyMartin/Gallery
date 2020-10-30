@@ -55,8 +55,7 @@ const create = async (token, picture, location, description, categoryId) => {
         .catch(err => console.log(err));
 }
 
-const edit = async (token, id, picture, location, description, categoryId) => {
-    console.log({token, id, picture, location, description, categoryId});
+const edit = async (token, id, picture, location, description, categoryId) => {    
     axios.defaults.headers = {
         'Content-Type': 'multipart/form-data',
         'Authorization': 'Bearer ' + token
