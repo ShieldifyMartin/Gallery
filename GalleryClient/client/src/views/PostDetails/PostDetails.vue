@@ -1,6 +1,15 @@
 <template>
   <div class="details">
     <p v-if="state.message" class="message">{{state.message}}</p>
+    <div v-if="state.deleteAlert" class="delete-alert">
+      <h1>Delete Post</h1>
+      <p>Are you sure you want to delete your post?</p>
+    
+      <div class="clearfix">
+        <button type="button" class="cancel-btn">Cancel</button>
+        <button type="button" class="delete-btn">Delete</button>
+      </div>
+    </div>
     <div class="post-header">
       <router-link :to="getProfileLink()" class="profile-image">
         <img v-if="state.post.profilePicture" :src="state.post.profilePicture" />
@@ -15,9 +24,9 @@
         <router-link :to="getEditRoute()" v-if="state.isAuthor">
           <img class="edit-icon" src="@/assets/icons/edit.svg" @click="edit" alt="edit icon" />
         </router-link>
-        <router-link to="/delete" v-if="state.isAuthor">
-          <img class="delete-icon" src="@/assets/icons/delete.svg" @click="deletePost" alt="delete icon" />
-        </router-link>
+        <div v-if="state.isAuthor">
+          <img class="delete-icon" src="@/assets/icons/delete.svg" @click="openDeletePostAlert" alt="delete icon" />
+        </div>
       </div>
     </div>
 
@@ -57,6 +66,7 @@
 import { defineComponent, reactive, watchEffect } from "vue";
 import moment from "moment";
 import router from "../../router";
+import store from "../../store";
 import { postService, profileService } from "../../services";
 
 export default defineComponent({
@@ -65,6 +75,7 @@ export default defineComponent({
       post: [],
       likes: 0,
       isLiked: false,
+      deleteAlert: false,
       createdOn: null,      
       message: '',
       isAuthor: false
@@ -76,10 +87,12 @@ export default defineComponent({
     watchEffect(async () => {
       const id = window.location.href.split("/")[3];
       const post = await postService.getById(id);
-      const profile = await profileService.get();
 
-      if(profile.id === post.authorId) {
-        state.isAuthor = true;
+      if(store.state.auth.state.isAuth){
+        const profile = await profileService.get();
+        if(profile.id === post.authorId) {
+          state.isAuthor = true;
+        }
       }
 
       state.likes = post.likes;
@@ -113,12 +126,17 @@ export default defineComponent({
       }
     }
 
+    const openDeletePostAlert = () => {
+      state.deleteAlert = true;
+    }
+
     return {
       state,
       getProfileLink,
       getEditRoute,
       like,
-      unlike
+      unlike,
+      openDeletePostAlert
     };
   }
 });

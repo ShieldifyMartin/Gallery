@@ -8,6 +8,39 @@
     text-align: center;
   }
 
+  .delete-alert {   
+    position: fixed;
+    width: 20%;
+    height: 10em;
+    left: 40%;
+    top: 10%;
+    padding: 1em;
+    box-sizing: border-box;
+    background-color: #d33131;
+    color: #ffffff;
+  }
+
+  .clearfix {
+    display: flex;
+    justify-content: center;
+    margin-top: 2em;
+  }
+
+  .clearfix .cancel-btn {
+    margin-right: 2em;
+  }
+
+  .clearfix button {
+    border-radius: 0.7em;
+    padding: 0.3em 1em;
+    border: 0;
+  }
+
+  .clearfix button:hover {
+    color: #000000;
+    background-color: white;
+  }
+
   .post-header {
     display: flex;
     margin: 0 auto;
