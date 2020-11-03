@@ -6,7 +6,7 @@
       <p>Are you sure you want to delete your post?</p>
     
       <div class="clearfix">
-        <button type="button" class="cancel-btn">Cancel</button>
+        <button type="button" class="cancel-btn" @click="toggleDeletePostAlert">Cancel</button>
         <button type="button" class="delete-btn">Delete</button>
       </div>
     </div>
@@ -21,11 +21,13 @@
         <img v-else class="heart-icon" src="@/assets/icons/heart-regular.svg" @click="like" alt="like heart" />
         <p>Likes: {{ state.likes }}</p>
         
-        <router-link :to="getEditRoute()" v-if="state.isAuthor">
-          <img class="edit-icon" src="@/assets/icons/edit.svg" @click="edit" alt="edit icon" />
-        </router-link>
-        <div v-if="state.isAuthor">
-          <img class="delete-icon" src="@/assets/icons/delete.svg" @click="openDeletePostAlert" alt="delete icon" />
+        <div class="author-icons">
+          <router-link :to="getEditRoute()" v-if="state.isAuthor">
+            <img class="edit-icon" src="@/assets/icons/edit.svg" @click="edit" alt="edit icon" />
+          </router-link>
+          <div v-if="state.isAuthor">
+            <img class="delete-icon" src="@/assets/icons/delete.svg" @click="toggleDeletePostAlert" alt="delete icon" />
+          </div>
         </div>
       </div>
     </div>
@@ -126,8 +128,8 @@ export default defineComponent({
       }
     }
 
-    const openDeletePostAlert = () => {
-      state.deleteAlert = true;
+    const toggleDeletePostAlert = () => {
+      state.deleteAlert = !state.deleteAlert;
     }
 
     return {
@@ -136,7 +138,7 @@ export default defineComponent({
       getEditRoute,
       like,
       unlike,
-      openDeletePostAlert
+      toggleDeletePostAlert
     };
   }
 });

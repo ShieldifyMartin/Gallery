@@ -67,13 +67,18 @@
       margin-top: 1em;
     }
 
+    .author-icons {
+      display: flex;
+    }
+
     .edit-icon {
-      width: 2em;
-      margin-right: 0.5em;
+      width: 1.4em;
+      margin-right: 0.2em;
+      margin-left: -1em;
     }
 
     .delete-icon {
-      width: 1.5em;
+      width: 1.1em;
     }
   }
 
