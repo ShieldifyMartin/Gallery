@@ -7,7 +7,7 @@
     
       <div class="clearfix">
         <button type="button" class="cancel-btn" @click="toggleDeletePostAlert">Cancel</button>
-        <button type="button" class="delete-btn">Delete</button>
+        <button type="button" class="delete-btn" @click="deletePost">Delete</button>
       </div>
     </div>
     <div class="post-header">
@@ -132,13 +132,27 @@ export default defineComponent({
       state.deleteAlert = !state.deleteAlert;
     }
 
+    const deletePost = async() => {
+      let status = await postService.deletePost(localStorage.getItem('token'), state.post.id);
+      
+      if(status == 200) {
+        router.push("/");
+      } else if(status == 400) {
+        state.message = "Something went wrong.";
+        toggleDeletePostAlert();
+      } else {
+        router.push("login");
+      }      
+    }
+
     return {
       state,
       getProfileLink,
       getEditRoute,
       like,
       unlike,
-      toggleDeletePostAlert
+      toggleDeletePostAlert,
+      deletePost
     };
   }
 });

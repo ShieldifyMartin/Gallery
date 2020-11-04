@@ -74,6 +74,17 @@ const edit = async (token, id, picture, location, description, categoryId) => {
         .catch(err => console.log(err));
 }
 
+const deletePost = async (token, postId) => {
+    axios.defaults.headers = {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + token
+    };
+
+    return await axios.delete(`${config.restAPI}/posts/delete/${postId}`)
+        .then(res => { return res.status; })
+        .catch(err => err.response.status);
+}
+
 const like = async (token, postId) => {
     axios.defaults.headers = {
         'Content-Type': 'application/json',
@@ -102,6 +113,7 @@ export const postService = {
     getCategories,
     create,
     edit,
+    deletePost,
     like,
     unlike
 };

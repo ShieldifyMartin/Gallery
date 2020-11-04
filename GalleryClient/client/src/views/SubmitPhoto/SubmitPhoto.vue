@@ -80,13 +80,13 @@ export default defineComponent({
         description,
         categoryId
       );
- 
+    
       if (response === 401) {
-        router.push("/login");
-      } else if (response === 400) {
+        router.push("/login");      
+      } else if(response > 400){
         state.error = "Something went wrong!";
-      } else {
-        this.$store.state.auth._actions.login();
+      } 
+      else {
         router.push("/");
       }
     }
