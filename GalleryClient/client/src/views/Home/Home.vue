@@ -1,5 +1,9 @@
 <template>
   <div class="home">
+    <div class="search">      
+      <button class="icon"></button>
+      <input placeholder="Search free high-resolution photos" />
+    </div>
     <img v-if="state.loading" class="loader" src="@/assets/loading.gif" />
     <div class="posts">
       <router-link :to="post.id" v-for="post in state.posts" :key="post.id">

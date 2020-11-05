@@ -1,55 +1,100 @@
 .home {
+  .posts {
+    display: grid;
+    position: relative;
+    grid-template-columns: repeat(auto-fill, minmax(20rem, 1fr));
+    grid-gap: 1em;
+    margin: 2em auto;
+    padding: 0 5em;
+  }
+
+  .posts a {
+    text-decoration: none;
+    color: #000;
+  }
+
+  .posts img {
+    width: 100%;
+    height: 25em;
+    object-fit: cover;  
+    transition: .3s ease-in-out;
+    background-size:100%;
+  }
+
+  .image:hover {    
+    -webkit-transform: scale(1.01);
+    transform: scale(1.01);
+    //transform: scale(0.99);
+  }
+
+  .loader {
+    margin: 0 auto;
+    width: 10em;
+  }
+  
+  .search {
+    position: relative;
+  }
+  
+  .search input {    
+    padding: 1em 0;
+    padding-left: 2em;
+    width: 20em;
+    height: 2em;
+    outline: 0;
+    outline-width: 0;
+    border: 0;
+    border-bottom: 1px solid #000;
+    -moz-outline-style: none;
+  }
+
+  .search > input::-webkit-input-placeholder {
+    font-size: 1.3em;
+    line-height: 3;    
+  }
+  
+  .search > input:focus, .search > input:active,
+  .search > .icon:focus, .search > .icon:active {
+    outline: 0;
+    outline-width: 0;    
+    -moz-outline-style: none;
+  }
+  
+  .search > .icon {
+    background: url(../../assets/icons/search.svg);
+    position: absolute;
+    top: 10px;
+    left: 34em;
+    border: 0;
+    padding: 11px;
+    min-width: 11.1px;
+    min-height: 11.1px;
+    margin-right: 2em;
+  }  
+
+  .search > .icon:hover {
+    background: url(../../assets/icons/search-hover.svg);
+    padding: 9px;
+  }
+  
+  @media only screen and (max-width: 998px) {
     .posts {
-      display: grid;
-      position: relative;
-      grid-template-columns: repeat(auto-fill, minmax(20rem, 1fr));
-      grid-gap: 1em;
-      margin: 2em auto;
-      padding: 0 5em;
+      padding: 0 1em;
     }
-  
+  }
+
+  @media only screen and (max-width: 580px) {
+    .posts {
+      display: block;
+      padding: 0 0.5em;
+    }
+
     .posts a {
-      text-decoration: none;
-      color: #000;
+      margin-top: 2em;
     }
-  
-    .posts img {
-      width: 100%;
-      height: 25em;
-      object-fit: cover;  
-      transition: .3s ease-in-out;
-      background-size:100%;
+
+    .posts a:first-child {
+      margin-top: 0;
     }
-  
-    .image:hover {    
-      -webkit-transform: scale(1.01);
-      transform: scale(1.01);
-      //transform: scale(0.99);
-    }
-  
-    .loader {
-      margin: 0 auto;
-      width: 10em;
-    }
-  
-    @media only screen and (max-width: 998px) {
-      .posts {
-        padding: 0 1em;
-      }
-    }
-  
-    @media only screen and (max-width: 580px) {
-      .posts {
-        display: block;
-        padding: 0 0.5em;
-      }
-  
-      .posts a {
-        margin-top: 2em;
-      }
-  
-      .posts a:first-child {
-        margin-top: 0;
-      }
-    }
+  }
 }
