@@ -1,14 +1,14 @@
 <template>
   <div class="home">
-    <div class="search">      
-      <button class="icon"></button>
-      <input placeholder="Search free high-resolution photos" />
+    <div class="search">
+      <button class="icon" @click="search"></button>
+      <input type="text" v-model="state.searchInput" placeholder="Search free high-resolution photos" />
     </div>
     <img v-if="state.loading" class="loader" src="@/assets/loading.gif" />
     <div class="posts">
       <router-link :to="post.id" v-for="post in state.posts" :key="post.id">
         <div class="image">
-          <img :src="post.picture" :alt="post.description" />          
+          <img :src="post.picture" :alt="post.description" />
         </div>
       </router-link>
     </div>
@@ -23,11 +23,14 @@ export default defineComponent({
   setup() {
     const state = reactive({
       posts: [],
+      searchInput: "",
       loading: true
     });
 
-    function isAuth() {
-      return this.$store.state.auth.state.isAuth;
+    const search = async() => {      
+      const posts = await postService.search(state.searchInput);
+      const postArray = posts.posts;     
+      state.posts = postArray;
     }
 
     watchEffect(async () => {
@@ -38,7 +41,7 @@ export default defineComponent({
 
     return {
       state,
-      isAuth
+      search
     };
   }
 });

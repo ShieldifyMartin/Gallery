@@ -31,6 +31,16 @@ const getCategories = async () => {
         });
 }
 
+const search = async(input) => {
+    return await axios.get(`${config.restAPI}/posts/search/${input}`)
+        .then(res => {            
+            if (res.status >= 200 && res.status < 300) {
+                var posts = res.data;
+                return posts;
+            }
+        });
+}
+
 const create = async (token, picture, location, description, categoryId) => {
     axios.defaults.headers = {
         'Content-Type': 'multipart/form-data',
@@ -111,6 +121,7 @@ export const postService = {
     get,
     getById,
     getCategories,
+    search,
     create,
     edit,
     deletePost,
