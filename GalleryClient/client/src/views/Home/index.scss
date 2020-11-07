@@ -36,24 +36,25 @@
     position: relative;
   }
   
-  .search input {    
+  .search > .search-input {    
     padding: 1em 0;
     padding-left: 2em;
     width: 20em;
     height: 2em;
     outline: 0;
     outline-width: 0;
-    border: 0;
+    border: 0;    
+    margin-left: 3em;
     border-bottom: 1px solid #000;
     -moz-outline-style: none;
   }
 
-  .search > input::-webkit-input-placeholder {
+  .search > .search-input::-webkit-input-placeholder {
     font-size: 1.3em;
     line-height: 3;    
   }
   
-  .search > input:focus, .search > input:active,
+  .search > .search-input:focus, .search > .search-input:active,
   .search > .icon:focus, .search > .icon:active {
     outline: 0;
     outline-width: 0;    
@@ -64,7 +65,7 @@
     background: url(../../assets/icons/search.svg);
     position: absolute;
     top: 10px;
-    left: 34em;
+    margin: 0 auto;        
     border: 0;
     padding: 11px;
     min-width: 11.1px;
