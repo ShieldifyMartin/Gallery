@@ -6,9 +6,10 @@
         <img v-else src="@/assets/icons/profile.png" class="profile-icon" />     
       </router-link>
     </div>
-    <div class="links">      
+    <div class="links">
       <router-link to="/">Home</router-link>
       <router-link to="/submit" v-if="isAuth()">Submit a photo</router-link>
+      <router-link to="/users" v-if="isAuth()">Users</router-link>
       <a href="#" @click="logout" v-if="isAuth()">Logout</a>
       <router-link to="/login" v-else>Login</router-link>
     </div>
