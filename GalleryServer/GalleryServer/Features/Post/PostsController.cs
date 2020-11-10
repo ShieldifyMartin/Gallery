@@ -105,13 +105,17 @@
             return Created(nameof(this.Create), id);
         }  
 
-        [HttpPatch("{postId}")]
+        [HttpPost("{postId}")]
         [Authorize]
-        public async Task<ActionResult> Update(string postId, UpdatePatchRequestModel model)
+        public async Task<ActionResult> Update(string postId, [FromForm] UpdatePatchRequestModel model)
         {
             var userId = this.currentUser.GetId();
-            //var pictureUrl = await this.cloudinaryService.UploadAsync(this.cloudinary, model.Picture);
             var pictureUrl = "";
+
+            if (!(model.Picture is null))
+            { 
+                pictureUrl = await this.cloudinaryService.UploadAsync(this.cloudinary, model.Picture);            
+            }
 
             var result = await this.posts.UpdatePost(userId, postId, model.Location, model.Description, pictureUrl, model.CategoryId);
 

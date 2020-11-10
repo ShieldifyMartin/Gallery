@@ -154,7 +154,7 @@
             return post.Id;
         }
 
-        public async Task<Result> UpdatePost(string userId, string postId, string? location, string description, string pictureUrl, int? categoryId)
+        public async Task<Result> UpdatePost(string userId, string postId, string? location, string description, string? pictureUrl, int? categoryId)
         {
             var post = this.posts
                 .All()
@@ -172,7 +172,12 @@
 
             post.Description = description;
             post.Location = location;
-            post.Picture = pictureUrl;
+
+            if(pictureUrl != "")
+            {
+                post.Picture = pictureUrl;
+            }
+
             post.CategoryId = categoryId;          
 
             this.posts.Update(post);

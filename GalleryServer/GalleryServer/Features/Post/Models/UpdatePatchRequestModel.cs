@@ -1,15 +1,13 @@
 ﻿namespace GalleryServer.Features.Post.Models
 {
-    using Microsoft.AspNetCore.Http;
-    using System.Collections.Generic;
+    using Microsoft.AspNetCore.Http;  
     using System.ComponentModel.DataAnnotations;
 
     using static GalleryServer.Data.Validation.Post;
 
     public class UpdatePatchRequestModel
     {
-        //[Required]
-        //public IFormFile Picture { get; set; }
+        public IFormFile? Picture { get; set; }
 
         [MaxLength(MaxLocationLength)]
         public string Location { get; set; }
@@ -19,7 +17,5 @@
         public string Description { get; set; }
 
         public int? CategoryId { get; set; }
-
-        public List<string> Tags { get; set; }
     }
 }
