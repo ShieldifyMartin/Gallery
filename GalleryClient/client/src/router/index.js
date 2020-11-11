@@ -6,6 +6,7 @@ import SubmitPhoto from '@/views/SubmitPhoto/SubmitPhoto.vue'
 import PostDetails from '@/views/PostDetails/PostDetails.vue'
 import ProfileDetails from '@/views/ProfileDetails/ProfileDetails.vue'
 import EditPost from '@/views/EditPost/EditPost.vue'
+import Users from '@/views/Users/Users.vue'
 
 const routes = [
   {
@@ -42,6 +43,11 @@ const routes = [
     path: '/edit/:id',
     name: 'EditPost',
     component: EditPost
+  },
+  {
+    path: '/users',
+    name: 'Users',
+    component: Users
   }
 ]
 

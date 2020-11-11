@@ -1,42 +1,41 @@
 <template>
-  <div class="home">
+  <div class="users">
     <div class="search">
       <button type="submit" class="icon" @click="search"></button>
       <input type="text" v-model="state.searchInput" class="search-input" placeholder="Search free high-resolution photos" v-on:keyup.enter="search" />
     </div>
     <img v-if="state.loading" class="loader" src="@/assets/loading.gif" />
-    <div class="posts">
-      <router-link :to="post.id" v-for="post in state.posts" :key="post.id">
-        <div class="image">
-          <img :src="post.picture" :alt="post.description" />
-        </div>
-      </router-link>
+    <div class="users">
+      
     </div>
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent, reactive, watchEffect } from "vue";
-import { postService } from "../../services";
+import { userService } from "../../services";
 
 export default defineComponent({
   setup() {
     const state = reactive({
-      posts: [],
+      users: [],
       searchInput: "",
       loading: true
     });
 
     const search = async() => {      
-      const posts = await postService.search(state.searchInput);
-      const postsArray = posts.posts;
+      const users = await userService.search(state.searchInput);
+      const usersArray = users.users;
 
-      state.posts = postsArray;
+      state.users = usersArray;
     }
 
-    watchEffect(async () => {
-      const posts = await postService.get();
-      state.posts = posts;
+    watchEffect(async() => {
+      const users = await userService.getAllUsers();
+      const usersArray = users.users;
+
+      console.log(usersArray);
+      state.users = usersArray;
       state.loading = false;
     });
 

@@ -1,3 +1,4 @@
+import axios from 'axios';
 import config from '@/config';
 import router from "../router";
 
@@ -37,7 +38,18 @@ const register = async (email, username, password) => {
         });
 }
 
+const getAllUsers = async () => {
+    return await axios.get(`${config.restAPI}/identity/getAllUsers`)
+        .then(res => {            
+            if (res.status >= 200 && res.status < 300) {
+                var users = res.data;                
+                return users;
+            }
+        });
+}
+
 export const userService = {
     login,
-    register    
+    register,
+    getAllUsers
 };
