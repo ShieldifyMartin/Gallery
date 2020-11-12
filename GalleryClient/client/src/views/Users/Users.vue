@@ -6,7 +6,10 @@
     </div>
     <img v-if="state.loading" class="loader" src="@/assets/loading.gif" />
     <div class="users">
-      
+      <router-link :to="getProfileUrl(user.id)" v-for="user in state.users" class="user" :key="user.id">
+        <img :src="user.pictureUrl" alt="profile picture" />
+        <h2>{{user.userName}}</h2>        
+      </router-link>
     </div>
   </div>
 </template>
@@ -19,9 +22,13 @@ export default defineComponent({
   setup() {
     const state = reactive({
       users: [],
-      searchInput: "",
+      searchInput: "",      
       loading: true
     });
+
+    const getProfileUrl = (userId) => {
+      return `/profile/${userId}`;
+    }
 
     const search = async() => {      
       const users = await userService.search(state.searchInput);
@@ -33,14 +40,14 @@ export default defineComponent({
     watchEffect(async() => {
       const users = await userService.getAllUsers();
       const usersArray = users.users;
-
-      console.log(usersArray);
-      state.users = usersArray;
+      
+      state.users = usersArray;      
       state.loading = false;
-    });
+    });    
 
     return {
       state,
+      getProfileUrl,
       search
     };
   }
