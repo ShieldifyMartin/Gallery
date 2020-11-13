@@ -1,6 +1,16 @@
 .users {
     img {
-        width: 7em;
+        width: 10em;
         height: auto;
+        margin-top: 2em;
+    }
+
+    .user {
+        text-decoration: none;
+        color: #000;
+    }
+    
+    .user:hover {
+        color: #42b983;        
     }
 }

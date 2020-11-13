@@ -2,13 +2,24 @@
   <div class="users">
     <div class="search">
       <button type="submit" class="icon" @click="search"></button>
-      <input type="text" v-model="state.searchInput" class="search-input" placeholder="Search free high-resolution photos" v-on:keyup.enter="search" />
+      <input
+        type="text"
+        v-model="state.searchInput"
+        class="search-input"
+        placeholder="Search free high-resolution photos"
+        v-on:keyup.enter="search"
+      />
     </div>
     <img v-if="state.loading" class="loader" src="@/assets/loading.gif" />
     <div class="users">
-      <router-link :to="getProfileUrl(user.id)" v-for="user in state.users" class="user" :key="user.id">
+      <router-link
+        :to="getProfileUrl(user.id)"
+        v-for="user in state.users"
+        class="user"
+        :key="user.id"
+      >
         <img :src="user.pictureUrl" alt="profile picture" />
-        <h2>{{user.userName}}</h2>        
+        <h2>{{ user.userName }}</h2>
       </router-link>
     </div>
   </div>
@@ -22,28 +33,28 @@ export default defineComponent({
   setup() {
     const state = reactive({
       users: [],
-      searchInput: "",      
+      searchInput: "",
       loading: true
     });
 
-    const getProfileUrl = (userId) => {
+    const getProfileUrl = userId => {
       return `/profile/${userId}`;
-    }
+    };
 
-    const search = async() => {      
+    const search = async () => {
       const users = await userService.search(state.searchInput);
+      const usersArray = users.users;
+  
+      state.users = usersArray;
+    };
+
+    watchEffect(async () => {
+      const users = await userService.getAllUsers();
       const usersArray = users.users;
 
       state.users = usersArray;
-    }
-
-    watchEffect(async() => {
-      const users = await userService.getAllUsers();
-      const usersArray = users.users;
-      
-      state.users = usersArray;      
       state.loading = false;
-    });    
+    });
 
     return {
       state,
