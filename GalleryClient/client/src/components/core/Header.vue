@@ -1,9 +1,13 @@
 <template>
   <div id="nav">
-    <div class="profile-picture">    
+    <div class="profile-picture">
       <router-link v-if="isAuth()" to="/profile">
-        <img v-if="state.pictureUrl" :src="state.pictureUrl" class="profile-icon" />
-        <img v-else src="@/assets/icons/profile.png" class="profile-icon" />     
+        <img
+          v-if="state.pictureUrl"
+          :src="state.pictureUrl"
+          class="profile-icon"
+        />
+        <img v-else src="@/assets/icons/profile.png" class="profile-icon" />
       </router-link>
     </div>
     <div class="links">
@@ -18,18 +22,18 @@
 
 <script lang="ts">
 import { defineComponent, reactive, watchEffect } from "vue";
+import store from "../../store";
 import { profileService } from "../../services";
-import store from '../../store/index.js';
 
 export default defineComponent({
   name: "Header",
-  setup() { 
+  setup() {
     const state = reactive({
-      pictureUrl: ''
+      pictureUrl: "",
     });
 
     watchEffect(async () => {
-      if(isAuth()) {
+      if (isAuth()) {
         const data = await profileService.get();
         state.pictureUrl = data.picture;
       }
@@ -39,28 +43,28 @@ export default defineComponent({
       return store.state.auth.state.isAuth;
     }
 
-    function logout() {      
+    function logout() {
       store.state.auth.dispatch("logout");
-      localStorage.setItem('token', '');
-      localStorage.setItem('username', '');
-      
+      localStorage.setItem("token", "");
+      localStorage.setItem("username", "");
+
       window.location.href = "/";
     }
 
     return {
       state,
-      isAuth,      
-      logout
-    }
-  }
+      isAuth,
+      logout,
+    };
+  },
 });
 </script>
 
 <style lang="scss">
-  #nav {    
-    display: flex;
-    justify-content: center;
-    padding: 2em;    
+#nav {
+  display: flex;
+  justify-content: center;
+  padding: 2em;
 
   .links {
     a {
@@ -71,9 +75,9 @@ export default defineComponent({
       &.router-link-exact-active {
         color: #42b983;
       }
-    }    
+    }
   }
-  
+
   .profile-picture {
     margin-right: auto;
 
@@ -88,7 +92,7 @@ export default defineComponent({
 
   @media only screen and (max-width: 900px) {
     .profile-picture img {
-      margin-left: 0;       
+      margin-left: 0;
     }
   }
 }

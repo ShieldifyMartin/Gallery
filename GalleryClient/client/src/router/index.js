@@ -1,59 +1,59 @@
-import { createRouter, createWebHistory } from 'vue-router'
-import Home from '@/views/Home/Home.vue'
-import Login from '@/views/Login/Login.vue'
-import Register from '@/views/Register/Register.vue'
-import SubmitPhoto from '@/views/SubmitPhoto/SubmitPhoto.vue'
-import PostDetails from '@/views/PostDetails/PostDetails.vue'
-import ProfileDetails from '@/views/ProfileDetails/ProfileDetails.vue'
-import EditPost from '@/views/EditPost/EditPost.vue'
-import Users from '@/views/Users/Users.vue'
+import { createRouter, createWebHistory } from "vue-router";
+import Home from "@/views/Home/Home.vue";
+import Login from "@/views/Login/Login.vue";
+import Register from "@/views/Register/Register.vue";
+import SubmitPhoto from "@/views/SubmitPhoto/SubmitPhoto.vue";
+import PostDetails from "@/views/PostDetails/PostDetails.vue";
+import ProfileDetails from "@/views/ProfileDetails/ProfileDetails.vue";
+import EditPost from "@/views/EditPost/EditPost.vue";
+import Users from "@/views/Users/Users.vue";
 
 const routes = [
   {
-    path: '/',
-    name: 'Home',
-    component: Home
+    path: "/",
+    name: "Home",
+    component: Home,
   },
   {
-    path: '/login',
-    name: 'Login',
-    component: Login
+    path: "/login",
+    name: "Login",
+    component: Login,
   },
   {
-    path: '/register',
-    name: 'Register',
-    component: Register
+    path: "/register",
+    name: "Register",
+    component: Register,
   },
   {
-    path: '/submit',
-    name: 'Submit',
-    component: SubmitPhoto
+    path: "/submit",
+    name: "Submit",
+    component: SubmitPhoto,
   },
   {
-    path: '/:id',
-    name: 'Details',
-    component: PostDetails
+    path: "/:id",
+    name: "Details",
+    component: PostDetails,
   },
   {
-    path: '/profile/:id?',
-    name: 'ProfileDetails',
-    component: ProfileDetails
+    path: "/profile/:id?",
+    name: "ProfileDetails",
+    component: ProfileDetails,
   },
   {
-    path: '/edit/:id',
-    name: 'EditPost',
-    component: EditPost
+    path: "/edit/:id",
+    name: "EditPost",
+    component: EditPost,
   },
   {
-    path: '/users',
-    name: 'Users',
-    component: Users
-  }
-]
+    path: "/users",
+    name: "Users",
+    component: Users,
+  },
+];
 
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
-  routes
-})
+  routes,
+});
 
-export default router
+export default router;

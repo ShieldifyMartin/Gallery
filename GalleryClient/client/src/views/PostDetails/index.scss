@@ -8,7 +8,7 @@
     text-align: center;
   }
 
-  .delete-alert {   
+  .delete-alert {
     position: fixed;
     width: 20%;
     height: 10em;
@@ -44,8 +44,9 @@
   .post-header {
     display: flex;
     margin: 0 auto;
-    
-    div, .profile-image {
+
+    div,
+    .profile-image {
       width: 9%;
       margin-left: auto;
       margin-right: auto;
@@ -55,13 +56,13 @@
       color: #000000;
       text-decoration: none;
     }
-  
+
     .profile-image > img {
       width: 4em;
       height: 4em;
       border-radius: 50%;
     }
-    
+
     .heart-icon {
       width: 2em;
       margin-top: 1em;
@@ -86,22 +87,22 @@
     width: 25em;
     height: auto;
   }
-  
+
   .calendar-icon {
     width: 1em;
-    margin-right: 0.3em;      
+    margin-right: 0.3em;
   }
 
   .info-icon {
     width: 0.5em;
-    margin-right: 0.3em; 
-  }        
+    margin-right: 0.3em;
+  }
 
   .location-icon {
     width: 0.8em;
     margin-right: 0.4em;
   }
-  
+
   .post-footer {
     margin: 0 auto;
     width: 9em;

@@ -1,55 +1,57 @@
-import axios from 'axios';
-import config from '@/config';
+import axios from "axios";
+import config from "@/config";
 import router from "../router";
 
-const login = async (email, username, password) => {
-    const requestOptions = {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, username, password })
-    };
+const login = async (token, email, username, password) => {
+  axios.defaults.headers = {
+    "Content-Type": "application/json",
+    "Authorization": "Bearer " + token,
+  };
+  var body = JSON.stringify({ email, username, password });
 
-    return await fetch(`${config.restAPI}/identity/login`, requestOptions)
-        .then(res => res.json())
-        .then(res => {
-            if (res.token) {
-                localStorage.setItem("token", res.token);
-                localStorage.setItem("username", username);
-            }
+  return await axios
+    .post(`${config.restAPI}/identity/login`, body)
+    .then((res) => {      
+      if (res.data.token) {
+        localStorage.setItem("token", res.data.token);
+        localStorage.setItem("username", res.data.username);
+      }
 
-            return res.status || 200;
-        });
-}
+      return res.status || 200;
+    });
+};
 
-const register = async (email, username, password) => {
-    const requestOptions = {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, username, password })
-    };
+const register = async (token, email, username, password) => {
+  axios.defaults.headers = {
+    "Content-Type": "application/json",
+    Authorization: "Bearer " + token,
+  };
+  var body = JSON.stringify({ email, username, password });
 
-    return await fetch(`${config.restAPI}/identity/register`, requestOptions)        
-        .then(res => {
-            if(res.status >= 300) {                            
-                return "Invalid data!";
-            } else {
-                router.push("/login");                
-            }
-        });
-}
+  return await axios
+    .post(`${config.restAPI}/identity/register`, body)
+    .then((res) => {
+      if (res.status >= 300) {
+        return "Invalid data!";
+      } else {
+        router.push("/login");
+      }
+    });
+};
 
 const getAllUsers = async () => {
-    return await axios.get(`${config.restAPI}/identity/getAllUsers`)
-        .then(res => {            
-            if (res.status >= 200 && res.status < 300) {
-                var users = res.data;                
-                return users;
-            }
-        });
-}
+  return await axios
+    .get(`${config.restAPI}/identity/getAllUsers`)
+    .then((res) => {
+      if (res.status >= 200 && res.status < 300) {
+        var users = res.data;
+        return users;
+      }
+    });
+};
 
 export const userService = {
-    login,
-    register,
-    getAllUsers
+  login,
+  register,
+  getAllUsers,
 };

@@ -1,53 +1,53 @@
 .edit-photo {
-    * {
-      display: block;
-      margin: 1em auto;
-    }
-  
-    .error {
-      color: red;
-    }
-  
-    input {
-      width: 30em;
-      height: 2em;
-    }
-  
-    .photo-upload::-webkit-file-upload-button {
-      visibility: hidden;
-    }
-  
-    .photo-upload {
-      width: 25em;
-      text-align: center;
-    }
-  
-    .photo-upload-label {
-      background-color: #eeeeee;
-      color: #000;
-      border: none;
-      border-radius: 5px;
-      width: 20em;
-      padding: 0.5em 1.5em;
-    }
-  
-    .categories-dropdown {
-      width: 30em;
-    }
-  
-    .submit-btn {
-      border: none;
-      width: 30em;
-      background: #111111;
-      color: #ffff;
-    }
-  
-    a {
-      text-decoration: none;
-      color: black;
-    }
-  
-    a:hover {
-      color: rgba(0, 0, 0, 0.467);
-    }
+  * {
+    display: block;
+    margin: 1em auto;
+  }
+
+  .error {
+    color: red;
+  }
+
+  input {
+    width: 30em;
+    height: 2em;
+  }
+
+  .photo-upload::-webkit-file-upload-button {
+    visibility: hidden;
+  }
+
+  .photo-upload {
+    width: 25em;
+    text-align: center;
+  }
+
+  .photo-upload-label {
+    background-color: #eeeeee;
+    color: #000;
+    border: none;
+    border-radius: 5px;
+    width: 20em;
+    padding: 0.5em 1.5em;
+  }
+
+  .categories-dropdown {
+    width: 30em;
+  }
+
+  .submit-btn {
+    border: none;
+    width: 30em;
+    background: #111111;
+    color: #ffff;
+  }
+
+  a {
+    text-decoration: none;
+    color: black;
+  }
+
+  a:hover {
+    color: rgba(0, 0, 0, 0.467);
+  }
 }

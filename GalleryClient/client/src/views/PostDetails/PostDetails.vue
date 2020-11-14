@@ -1,32 +1,61 @@
 <template>
   <div class="details">
-    <p v-if="state.message" class="message">{{state.message}}</p>
+    <p v-if="state.message" class="message">{{ state.message }}</p>
     <div v-if="state.deleteAlert" class="delete-alert">
       <h1>Delete Post</h1>
       <p>Are you sure you want to delete your post?</p>
-    
+
       <div class="clearfix">
-        <button type="button" class="cancel-btn" @click="toggleDeletePostAlert">Cancel</button>
-        <button type="button" class="delete-btn" @click="deletePost">Delete</button>
+        <button type="button" class="cancel-btn" @click="toggleDeletePostAlert">
+          Cancel
+        </button>
+        <button type="button" class="delete-btn" @click="deletePost">
+          Delete
+        </button>
       </div>
     </div>
     <div class="post-header">
       <router-link :to="getProfileLink()" class="profile-image">
-        <img v-if="state.post.profilePicture" :src="state.post.profilePicture" />
+        <img
+          v-if="state.post.profilePicture"
+          :src="state.post.profilePicture"
+        />
         <img v-else src="@/assets/icons/profile.png" />
-        <p>Created by: {{state.post.userName}}</p>
+        <p>Created by: {{ state.post.userName }}</p>
       </router-link>
       <div>
-        <img v-if="state.isLiked" class="heart-icon" src="@/assets/icons/heart-solid.svg" @click="unlike" alt="liked heart" />
-        <img v-else class="heart-icon" src="@/assets/icons/heart-regular.svg" @click="like" alt="like heart" />
+        <img
+          v-if="state.isLiked"
+          class="heart-icon"
+          src="@/assets/icons/heart-solid.svg"
+          @click="unlike"
+          alt="liked heart"
+        />
+        <img
+          v-else
+          class="heart-icon"
+          src="@/assets/icons/heart-regular.svg"
+          @click="like"
+          alt="like heart"
+        />
         <p>Likes: {{ state.likes }}</p>
-        
+
         <div class="author-icons">
           <router-link :to="getEditRoute()" v-if="state.isAuthor">
-            <img class="edit-icon" src="@/assets/icons/edit.svg" @click="edit" alt="edit icon" />
+            <img
+              class="edit-icon"
+              src="@/assets/icons/edit.svg"
+              @click="edit"
+              alt="edit icon"
+            />
           </router-link>
           <div v-if="state.isAuthor">
-            <img class="delete-icon" src="@/assets/icons/delete.svg" @click="toggleDeletePostAlert" alt="delete icon" />
+            <img
+              class="delete-icon"
+              src="@/assets/icons/delete.svg"
+              @click="toggleDeletePostAlert"
+              alt="delete icon"
+            />
           </div>
         </div>
       </div>
@@ -41,7 +70,7 @@
           class="calendar-icon"
           src="@/assets/icons/calendar.svg"
           alt="calendar"
-        /><br>
+        /><br />
         <p>{{ state.createdOn }}</p>
       </div>
       <div>
@@ -59,7 +88,7 @@
           alt="location"
         />
         <p>{{ state.post.location || "none" }}</p>
-      </div>      
+      </div>
     </div>
   </div>
 </template>
@@ -78,9 +107,9 @@ export default defineComponent({
       likes: 0,
       isLiked: false,
       deleteAlert: false,
-      createdOn: null,      
-      message: '',
-      isAuthor: false
+      createdOn: null,
+      message: "",
+      isAuthor: false,
     });
 
     const getProfileLink = () => "/profile/" + state.post.authorId;
@@ -90,60 +119,69 @@ export default defineComponent({
       const id = window.location.href.split("/")[3];
       const post = await postService.getById(id);
 
-      if(store.state.auth.state.isAuth){
+      if (store.state.auth.state.isAuth) {
         const profile = await profileService.get();
-        if(profile.id === post.authorId) {
+        if (profile.id === post.authorId) {
           state.isAuthor = true;
         }
       }
 
       state.likes = post.likes;
       state.isLiked = post.isLiked;
-      state.post = post;      
+      state.post = post;
       state.createdOn = moment(post.createdOn, "YYYYMMDD").fromNow();
     });
 
-    const like = async() => {
-      let status = await postService.like(localStorage.getItem('token'), state.post.id);
-      
-      if(status == 200) {
+    const like = async () => {
+      let status = await postService.like(
+        store.state.auth.state.token,
+        state.post.id
+      );
+
+      if (status == 200) {
         state.likes = state.post.likes + 1;
         state.isLiked = true;
-      } else if(status == 400) {
+      } else if (status == 400) {
         state.message = "You had already liked this post.";
       } else {
         router.push("login");
       }
-    }
-    
-    const unlike = async() => {
-      let status = await postService.unlike(localStorage.getItem('token'), state.post.id);      
-      if(status == 200) {
-        state.likes = state.likes - 1;          
-        state.isLiked = false;          
-      } else if(status == 400) {
+    };
+
+    const unlike = async () => {
+      let status = await postService.unlike(
+        store.state.auth.state.token,
+        state.post.id
+      );
+      if (status == 200) {
+        state.likes = state.likes - 1;
+        state.isLiked = false;
+      } else if (status == 400) {
         state.message = "You had not liked this post.";
       } else {
         router.push("login");
       }
-    }
+    };
 
     const toggleDeletePostAlert = () => {
       state.deleteAlert = !state.deleteAlert;
-    }
+    };
 
-    const deletePost = async() => {
-      let status = await postService.deletePost(localStorage.getItem('token'), state.post.id);
-      
-      if(status == 200) {
+    const deletePost = async () => {
+      let status = await postService.deletePost(
+        store.state.auth.state.token,
+        state.post.id
+      );
+
+      if (status == 200) {
         router.push("/");
-      } else if(status == 400) {
+      } else if (status == 400) {
         state.message = "Something went wrong.";
         toggleDeletePostAlert();
       } else {
         router.push("login");
-      }      
-    }
+      }
+    };
 
     return {
       state,
@@ -152,9 +190,9 @@ export default defineComponent({
       like,
       unlike,
       toggleDeletePostAlert,
-      deletePost
+      deletePost,
     };
-  }
+  },
 });
 </script>
 

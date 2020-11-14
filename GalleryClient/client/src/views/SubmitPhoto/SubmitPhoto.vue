@@ -1,11 +1,22 @@
 <template>
   <div class="submit-photo">
     <h1>Submit photo</h1>
-    <p class="error">{{state.error}}</p>
+    <p class="error">{{ state.error }}</p>
     <form method="post" @submit.prevent="handleSubmit">
       <label for="file" class="photo-upload-label">choose a picture</label>
-      <input type="file" id="file" class="photo-upload" ref="picture" @change="handleFileUpload" />
-      <input type="text" v-model="state.location" name="location" placeholder="Location" />
+      <input
+        type="file"
+        id="file"
+        class="photo-upload"
+        ref="picture"
+        @change="handleFileUpload"
+      />
+      <input
+        type="text"
+        v-model="state.location"
+        name="location"
+        placeholder="Location"
+      />
       <input
         type="text"
         v-model="state.description"
@@ -19,7 +30,8 @@
           v-for="category in state.categories"
           :key="category.id"
           :value="category.id"
-        >{{category.title}}</option>
+          >{{ category.title }}</option
+        >
       </select>
       <input type="submit" value="Create" class="submit-btn" />
     </form>
@@ -29,6 +41,7 @@
 <script lang="ts">
 import { defineComponent, reactive, watchEffect } from "vue";
 import router from "../../router";
+import store from "../../store";
 import { postService } from "../../services";
 
 export default defineComponent({
@@ -40,7 +53,7 @@ export default defineComponent({
       description: "",
       categoryId: "",
       error: "",
-      maxSize: 15728640,
+      maxSize: 15728640
     });
 
     watchEffect(async () => {
@@ -56,7 +69,7 @@ export default defineComponent({
       if (e.target.files.length === 1) {
         if (file.size > state.maxSize) {
           state.error = "Too large picture!";
-        } else {          
+        } else {
           state.picture = file;
         }
       } else {
@@ -74,19 +87,18 @@ export default defineComponent({
       }
 
       var response = await postService.create(
-        this.$store.state.auth.state.token,
+        store.state.auth.state.token,
         picture,
         location,
         description,
         categoryId
       );
-    
+
       if (response === 401) {
-        router.push("/login");      
-      } else if(response > 400){
+        router.push("/login");
+      } else if (response > 400) {
         state.error = "Something went wrong!";
-      } 
-      else {
+      } else {
         router.push("/");
       }
     }
@@ -113,9 +125,9 @@ export default defineComponent({
     return {
       state,
       handleSubmit,
-      handleFileUpload,
+      handleFileUpload
     };
-  },
+  }
 });
 </script>
 

@@ -1,13 +1,24 @@
 <template>
   <div class="edit-photo">
     <h1>Edit photo</h1>
-    <p class="error">{{state.error}}</p>
+    <p class="error">{{ state.error }}</p>
     <form method="post" @submit.prevent="handleSubmit">
       <label for="file" class="photo-upload-label">choose a picture</label>
-      <input type="file" id="file" class="photo-upload" ref="picture" @change="handleFileUpload" />
-      <input type="text" v-model="state.post.location" name="location" placeholder="Location" />
       <input
-        type="text"        
+        type="file"
+        id="file"
+        class="photo-upload"
+        ref="picture"
+        @change="handleFileUpload"
+      />
+      <input
+        type="text"
+        v-model="state.post.location"
+        name="location"
+        placeholder="Location"
+      />
+      <input
+        type="text"
         v-model="state.post.description"
         name="description"
         placeholder="Description"
@@ -16,10 +27,11 @@
       <select v-model="state.post.categoryId" class="categories-dropdown">
         <option value="" selected>Select category</option>
         <option
-          v-for="category in state.categories"          
+          v-for="category in state.categories"
           :key="category.id"
           :value="category.id"
-        >{{category.title}}</option>
+          >{{ category.title }}</option
+        >
       </select>
       <input type="submit" value="Edit" class="submit-btn" />
     </form>
@@ -29,18 +41,18 @@
 <script lang="ts">
 import { defineComponent, reactive, watchEffect } from "vue";
 import { postService } from "../../services";
-import router from '../../router';
-import store from '../../store';
+import router from "../../router";
+import store from "../../store";
 
 export default defineComponent({
   setup() {
-    const state = reactive({      
+    const state = reactive({
       categories: [],
       post: {},
-      picture: null,      
+      picture: null,
       error: "",
       maxSize: 15728640,
-    });    
+    });
 
     watchEffect(async () => {
       const id = window.location.href.split("/")[4];
@@ -59,7 +71,7 @@ export default defineComponent({
       if (e.target.files.length === 1) {
         if (file.size > state.maxSize) {
           state.error = "Too large picture!";
-        } else {          
+        } else {
           state.picture = file;
         }
       } else {
@@ -83,10 +95,10 @@ export default defineComponent({
         description,
         categoryId
       );
- 
+
       if (response === 401) {
         router.push("/login");
-      } else if(response >= 200 && response < 300) {        
+      } else if (response >= 200 && response < 300) {
         router.push("/" + state.post.id);
       } else {
         state.error = "Something went wrong!";
@@ -113,11 +125,11 @@ export default defineComponent({
     };
 
     return {
-      state,      
+      state,
       handleFileUpload,
-      handleSubmit
+      handleSubmit,
     };
-  }
+  },
 });
 </script>
 
