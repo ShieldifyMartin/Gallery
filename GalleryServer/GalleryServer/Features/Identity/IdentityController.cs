@@ -10,7 +10,7 @@
     using GalleryServer.Features.Identity;
     using CloudinaryDotNet;
     using GalleryServer.Infrastructure.Services;
-    using GalleryServer.Features.Cloudinary;
+    using GalleryServer.Features.Cloudinary;    
 
     public class IdentityController : ApiController
     {
@@ -96,6 +96,13 @@
             }
 
             return Ok(pictureUrl);
+        }
+
+        public async Task<ActionResult> GetAllUsers()
+        {
+            var users = await this.identity.GetAllUsers();
+
+            return Accepted(nameof(this.GetAllUsers), users);
         }
     }
 }

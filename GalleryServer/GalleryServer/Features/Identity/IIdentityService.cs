@@ -1,5 +1,6 @@
 ﻿namespace GalleryServer.Features.Identity
 {
+    using GalleryServer.Features.Identity.Models;
     using GalleryServer.Infrastructure.Services;    
     using System.Threading.Tasks;
 
@@ -8,5 +9,7 @@
         string GenerateJwtToken(string userId, string userName, string secret);
 
         Task<Result> AddProfilePicture(string userId, string pictureUrl);
+
+        Task<GetAllUsersResponseModel> GetAllUsers();
     }
 }

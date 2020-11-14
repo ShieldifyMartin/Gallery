@@ -6,11 +6,9 @@
     using System.Security.Claims;
     using System.Text;
     using System.Threading.Tasks;
-    using GalleryServer.Data;
-    using GalleryServer.Features.Identity;
+    using GalleryServer.Data;    
+    using GalleryServer.Features.Identity.Models;
     using GalleryServer.Infrastructure.Services;
-    using GalleryServer.Models.Identity;
-    using Microsoft.AspNetCore.Mvc;
     using Microsoft.IdentityModel.Tokens;
 
     public class IdentityService : IIdentityService
@@ -64,6 +62,28 @@
             await this.data.SaveChangesAsync();
 
             return true;
-        }        
+        }
+
+        public async Task<GetAllUsersResponseModel> GetAllUsers()
+        {
+            var users = this.data
+                    .Users
+                    .Select(u => new UserRequestModel
+                        {
+                            Id = u.Id,
+                            UserName = u.UserName,
+                            PictureUrl = u.PictureUrl,
+                            CreatedOn = u.CreatedOn                            
+                        })
+                    .OrderByDescending(u => u.CreatedOn)
+                    .ToList();
+
+            var response = new GetAllUsersResponseModel
+            {
+                Users = users
+            };
+
+            return response;
+        }
     }
 }
