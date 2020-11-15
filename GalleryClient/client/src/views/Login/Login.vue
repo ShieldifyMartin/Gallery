@@ -33,6 +33,7 @@
 <script lang="ts">
 import { defineComponent, reactive } from "vue";
 import store from "../../store";
+import router from "../../router";
 import { userService } from "../../services";
 
 export default defineComponent({
@@ -57,8 +58,7 @@ export default defineComponent({
 
       if (status === 200) {
         store.state.auth.dispatch("login");
-        console.log(store.state.auth.state);
-        // window.location.href = "/";
+        router.push("/");
       } else {
         state.error = "Something went wrong!";
         state.password = "";

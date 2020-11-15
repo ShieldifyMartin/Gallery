@@ -5,16 +5,15 @@ import router from "../router";
 const login = async (token, email, username, password) => {
   axios.defaults.headers = {
     "Content-Type": "application/json",
-    "Authorization": "Bearer " + token,
+    Authorization: "Bearer " + token,
   };
   var body = JSON.stringify({ email, username, password });
 
   return await axios
     .post(`${config.restAPI}/identity/login`, body)
-    .then((res) => {      
+    .then((res) => {
       if (res.data.token) {
-        localStorage.setItem("token", res.data.token);
-        localStorage.setItem("username", res.data.username);
+        localStorage.setItem("token", res.data.token);        
       }
 
       return res.status || 200;

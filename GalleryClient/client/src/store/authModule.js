@@ -1,28 +1,27 @@
-import { createStore } from 'vuex';
+import { createStore } from "vuex";
 
 export default createStore({
   namespaced: true,
   state: {
-    token: localStorage.getItem('token'),
-    username: localStorage.getItem('username'),
-    isAuth: localStorage.getItem('token') && localStorage.getItem('token') !== ''
+    token: "",    
+    isAuth: false,
   },
   mutations: {
     login(state) {
-      state.token = '';
-      state.username = '';
+      state.token = localStorage.getItem("token");      
+      state.isAuth = localStorage.getItem("token") !== "";
     },
     logout(state) {
-      state.token = '';
-      state.username = '';
-    }
+      state.token = "";      
+      state.isAuth = false;
+    },
   },
   actions: {
-    login(context) {      
+    login(context) {
       context.commit("login");
     },
-    logout(context) {      
+    logout(context) {
       context.commit("logout");
-    }
-  }
+    },
+  },
 });

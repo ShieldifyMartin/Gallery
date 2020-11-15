@@ -23,6 +23,7 @@
 <script lang="ts">
 import { defineComponent, reactive, watchEffect } from "vue";
 import store from "../../store";
+import router from "../../router";
 import { profileService } from "../../services";
 
 export default defineComponent({
@@ -46,9 +47,8 @@ export default defineComponent({
     function logout() {
       store.state.auth.dispatch("logout");
       localStorage.setItem("token", "");
-      localStorage.setItem("username", "");
 
-      window.location.href = "/";
+      router.push('/');
     }
 
     return {
