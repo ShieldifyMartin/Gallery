@@ -1,15 +1,6 @@
 <template>
   <div class="home">
-    <div class="search">
-      <button type="submit" class="icon" @click="search"></button>
-      <input
-        type="text"
-        v-model="state.searchInput"
-        class="search-input"
-        placeholder="Search free high-resolution photos"
-        v-on:keyup.enter="search"
-      />
-    </div>
+    <app-search />
     <img v-if="state.loading" class="loader" src="@/assets/loading.gif" />
     <div class="posts">
       <router-link :to="post.id" v-for="post in state.posts" :key="post.id">
@@ -24,21 +15,17 @@
 <script lang="ts">
 import { defineComponent, reactive, watchEffect } from "vue";
 import { postService } from "../../services";
+import AppSearch from "../../components/Search/Search.vue";
 
 export default defineComponent({
+  components: {
+    AppSearch,
+  },
   setup() {
     const state = reactive({
       posts: [],
-      searchInput: "",
       loading: true,
     });
-
-    const search = async () => {
-      const posts = await postService.search(state.searchInput);
-      const postsArray = posts.posts;
-
-      state.posts = postsArray;
-    };
 
     watchEffect(async () => {
       const posts = await postService.get();
@@ -48,7 +35,6 @@ export default defineComponent({
 
     return {
       state,
-      search,
     };
   },
 });
