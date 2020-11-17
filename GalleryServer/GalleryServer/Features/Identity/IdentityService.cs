@@ -72,10 +72,9 @@
                         {
                             Id = u.Id,
                             UserName = u.UserName,
-                            PictureUrl = u.PictureUrl,
-                            CreatedOn = u.CreatedOn                            
+                            PictureUrl = u.PictureUrl                            
                         })
-                    .OrderByDescending(u => u.CreatedOn)
+                    .OrderBy(u => u.UserName)
                     .ToList();
 
             var response = new GetAllUsersResponseModel
