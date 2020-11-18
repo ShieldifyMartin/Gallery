@@ -1,16 +1,64 @@
 .users {
-    img {
-        width: 10em;
-        height: auto;
-        margin-top: 2em;
+  img {
+    width: 10em;
+    height: auto;
+    margin-top: 2em;
+  }
+
+  .user {
+    text-decoration: none;
+    color: #000;
+  }
+
+  .user:hover {
+    color: #42b983;
+  }
+
+  .search {
+    position: relative;
+
+    .search-input {
+      padding: 1em 0;
+      padding-left: 2em;
+      width: 20em;
+      height: 2em;
+      outline: 0;
+      outline-width: 0;
+      border: 0;
+      margin-left: 3em;
+      border-bottom: 1px solid #000;
+      -moz-outline-style: none;
     }
 
-    .user {
-        text-decoration: none;
-        color: #000;
+    .search-input::-webkit-input-placeholder {
+      font-size: 1.3em;
+      line-height: 3;
     }
-    
-    .user:hover {
-        color: #42b983;        
+
+    .search-input:focus,
+    .search-input:active,
+    .icon:focus,
+    .icon:active {
+      outline: 0;
+      outline-width: 0;
+      -moz-outline-style: none;
     }
+
+    .icon {
+      background: url(../../assets/icons/search.svg);
+      position: absolute;
+      top: 10px;
+      margin: 0 auto;
+      border: 0;
+      padding: 11px;
+      min-width: 11.1px;
+      min-height: 11.1px;
+      margin-right: 2em;
+    }
+
+    .icon:hover {
+      background: url(../../assets/icons/search-hover.svg);
+      padding: 9px;
+    }
+  }
 }

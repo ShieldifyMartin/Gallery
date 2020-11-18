@@ -49,8 +49,20 @@ const getAllUsers = async () => {
     });
 };
 
+const search = async (input) => {
+  return await axios
+    .get(`${config.restAPI}/identity/search/${input}`)
+    .then((res) => {
+      if (res.status >= 200 && res.status < 300) {
+        var posts = res.data;
+        return posts;
+      }
+    });
+};
+
 export const userService = {
   login,
   register,
   getAllUsers,
+  search
 };

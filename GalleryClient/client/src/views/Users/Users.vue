@@ -1,6 +1,15 @@
 <template>
   <div class="users">
-    <app-search />
+    <div class="search">
+      <button type="submit" class="icon" @click="search"></button>
+      <input
+        type="text"
+        v-model="state.searchInput"
+        class="search-input"
+        placeholder="Search free high-resolution photos"
+        v-on:keyup.enter="search"
+      />
+    </div>
     <img v-if="state.loading" class="loader" src="@/assets/loading.gif" />
     <div class="users">
       <router-link
@@ -19,12 +28,8 @@
 <script lang="ts">
 import { defineComponent, reactive, watchEffect } from "vue";
 import { userService } from "../../services";
-import AppSearch from "../../components/Search/Search.vue";
 
 export default defineComponent({
-  components: {
-    AppSearch,
-  },
   setup() {
     const state = reactive({
       users: [],
@@ -39,6 +44,7 @@ export default defineComponent({
     const search = async () => {
       const users = await userService.search(state.searchInput);
       const usersArray = users.users;
+      console.log(usersArray)
 
       state.users = usersArray;
     };

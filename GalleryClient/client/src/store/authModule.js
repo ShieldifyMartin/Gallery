@@ -4,7 +4,7 @@ export default createStore({
   namespaced: true,
   state: {
     token: "",    
-    isAuth: false,
+    isAuth: localStorage.getItem("token") !== "",
   },
   mutations: {
     login(state) {

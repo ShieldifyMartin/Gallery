@@ -4,8 +4,7 @@ import axios from "axios";
 const get = async () => {
   return await axios.get(`${config.restAPI}/posts/all`).then((res) => {
     if (res.status >= 200 && res.status < 300) {
-      var posts = res.data;
-      return posts;
+      return res.data;
     }
   });
 };
@@ -29,14 +28,19 @@ const getCategories = async () => {
 };
 
 const search = async (input) => {
-  return await axios
-    .get(`${config.restAPI}/posts/search/${input}`)
-    .then((res) => {
-      if (res.status >= 200 && res.status < 300) {
-        var posts = res.data;
-        return posts;
-      }
-    });
+  if (!input.length) {
+    const posts = await get();
+    return posts;
+  } else {
+    return await axios
+      .get(`${config.restAPI}/posts/search/${input}`)
+      .then((res) => {
+        if (res.status >= 200 && res.status < 300) {
+          var posts = res.data.posts;
+          return posts;
+        }
+      });
+  }
 };
 
 const create = async (token, picture, location, description, categoryId) => {
