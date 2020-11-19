@@ -82,8 +82,8 @@ export default defineComponent({
     margin-right: auto;
 
     img {
-      width: 4em;
-      height: 4em;
+      width: 5em;
+      height: 5em;
       border-radius: 50%;
       margin-left: 5em;
       margin-top: -1em;

@@ -58,14 +58,13 @@ const create = async (token, picture, location, description, categoryId) => {
   return await axios
     .post(`${config.restAPI}/posts/create`, formData)
     .then((res) => {
+      console.log("status " + res.status)
       if (res.status >= 200 && res.status < 300) {
         var postId = res.data;
         return postId;
-      } else if (res.status === 401) {
-        return res.status;
       }
     })
-    .catch((err) => console.log(err));
+    .catch((err) => err.response.status);
 };
 
 const edit = async (token, id, picture, location, description, categoryId) => {

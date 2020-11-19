@@ -15,11 +15,14 @@
       <router-link
         :to="getProfileUrl(user.id)"
         v-for="user in state.users"
-        class="user"
         :key="user.id"
+        class="user"
       >
         <img :src="user.pictureUrl" alt="profile picture" />
-        <h2>{{ user.userName }}</h2>
+        <div class="info">
+          <h2>{{ user.userName }}</h2>
+          <h3>@{{user.userName.toLowerCase()}}</h3>
+        </div>
       </router-link>
     </div>
   </div>
@@ -44,7 +47,7 @@ export default defineComponent({
     const search = async () => {
       const users = await userService.search(state.searchInput);
       const usersArray = users.users;
-      console.log(usersArray)
+      console.log(usersArray);
 
       state.users = usersArray;
     };

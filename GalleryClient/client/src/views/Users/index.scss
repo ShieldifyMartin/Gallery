@@ -1,19 +1,4 @@
-.users {
-  img {
-    width: 10em;
-    height: auto;
-    margin-top: 2em;
-  }
-
-  .user {
-    text-decoration: none;
-    color: #000;
-  }
-
-  .user:hover {
-    color: #42b983;
-  }
-
+.users {  
   .search {
     position: relative;
 
@@ -60,5 +45,39 @@
       background: url(../../assets/icons/search-hover.svg);
       padding: 9px;
     }
+  }
+
+  img {
+    width: 8em;
+    height: auto;  
+  }  
+  
+  a {
+    display: flex;
+    justify-content: space-around;    
+    width: 20em;
+    padding: 1em 2em;
+    margin: 2em auto;
+    text-decoration: none;
+    color: #000;
+    border: 1px solid #000;
+  }
+  
+  a:hover {
+    color: #42b983;
+  }
+
+  a > .info {
+    margin: auto;
+  }
+
+  a:hover {
+    color: #42b983;
+  }
+
+
+  .loader {
+    margin: 1em auto;
+    width: 7em;
   }
 }

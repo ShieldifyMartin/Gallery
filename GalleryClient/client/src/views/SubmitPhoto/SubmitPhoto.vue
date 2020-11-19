@@ -93,8 +93,8 @@ export default defineComponent({
         description,
         categoryId
       );
-
-      if (response === 401) {
+      
+      if (response == 401) {
         router.push("/login");
       } else if (response > 400) {
         state.error = "Something went wrong!";
