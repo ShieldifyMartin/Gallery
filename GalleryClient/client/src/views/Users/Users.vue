@@ -11,7 +11,7 @@
       />
     </div>
     <img v-if="state.loading" class="loader" src="@/assets/loading.gif" />
-    <div class="users">
+    <div v-if="state.users && state.users.length" class="users">
       <router-link
         :to="getProfileUrl(user.id)"
         v-for="user in state.users"
@@ -21,9 +21,12 @@
         <img :src="user.pictureUrl" alt="profile picture" />
         <div class="info">
           <h2>{{ user.userName }}</h2>
-          <h3>@{{user.userName.toLowerCase()}}</h3>
+          <h3>@{{ user.userName.toLowerCase() }}</h3>
         </div>
       </router-link>
+    </div>
+    <div v-else class="not-content">
+      <img src="@/assets/not-found.png" alt="no-content" />
     </div>
   </div>
 </template>
@@ -46,17 +49,14 @@ export default defineComponent({
 
     const search = async () => {
       const users = await userService.search(state.searchInput);
-      const usersArray = users.users;
-      console.log(usersArray);
 
-      state.users = usersArray;
+      state.users = users;
     };
 
     watchEffect(async () => {
       const users = await userService.getAllUsers();
-      const usersArray = users.users;
 
-      state.users = usersArray;
+      state.users = users;
       state.loading = false;
     });
 

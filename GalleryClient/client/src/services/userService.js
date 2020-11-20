@@ -13,7 +13,7 @@ const login = async (token, email, username, password) => {
     .post(`${config.restAPI}/identity/login`, body)
     .then((res) => {
       if (res.data.token) {
-        localStorage.setItem("token", res.data.token);        
+        localStorage.setItem("token", res.data.token);
       }
 
       return res.status || 200;
@@ -43,26 +43,33 @@ const getAllUsers = async () => {
     .get(`${config.restAPI}/identity/getAllUsers`)
     .then((res) => {
       if (res.status >= 200 && res.status < 300) {
-        var users = res.data;
+        var users = res.data.users;
         return users;
       }
     });
 };
 
-const search = async (input) => {
-  return await axios
-    .get(`${config.restAPI}/identity/search/${input}`)
-    .then((res) => {
-      if (res.status >= 200 && res.status < 300) {
-        var posts = res.data;
-        return posts;
-      }
-    });
+const search = async (input) => {  
+  let users = [];
+   
+  if (!input.length) {
+    users = await getAllUsers();    
+  } else {
+    return await axios
+      .get(`${config.restAPI}/identity/search/${input}`)
+      .then((res) => {
+        if (res.status >= 200 && res.status < 300) {          
+          return res.data.users;
+        }
+      });
+    }
+        
+    return users;
 };
 
 export const userService = {
   login,
   register,
   getAllUsers,
-  search
+  search,
 };

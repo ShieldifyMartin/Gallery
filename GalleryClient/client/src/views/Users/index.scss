@@ -1,4 +1,9 @@
 .users {  
+  .loader {
+    margin: 1em auto;
+    width: 7em;
+  }
+
   .search {
     position: relative;
 
@@ -75,9 +80,12 @@
     color: #42b983;
   }
 
+  .not-content {
+    margin-top: 1em;    
 
-  .loader {
-    margin: 1em auto;
-    width: 7em;
+    img {
+      width: 15em;
+      height: auto;
+    }
   }
 }
