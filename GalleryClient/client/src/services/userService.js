@@ -53,7 +53,7 @@ const search = async (input) => {
   let users = [];
    
   if (!input.length) {
-    users = await getAllUsers();    
+    users = await getAllUsers();
   } else {
     return await axios
       .get(`${config.restAPI}/identity/search/${input}`)

@@ -11,12 +11,15 @@
       />
     </div>
     <img v-if="state.loading" class="loader" src="@/assets/loading.gif" />
-    <div class="posts">
+    <div v-else-if="state.posts && state.posts.length" class="posts">
       <router-link :to="post.id" v-for="post in state.posts" :key="post.id">
         <div class="image">
           <img :src="post.picture" :alt="post.description" />
         </div>
       </router-link>
+    </div>
+    <div v-else class="no-content">
+      <img src="@/assets/not-found.png" alt="no-content" />
     </div>
   </div>
 </template>

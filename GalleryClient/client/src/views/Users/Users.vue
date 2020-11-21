@@ -11,7 +11,7 @@
       />
     </div>
     <img v-if="state.loading" class="loader" src="@/assets/loading.gif" />
-    <div v-if="state.users && state.users.length" class="users">
+    <div v-else-if="state.users && state.users.length" class="users">
       <router-link
         :to="getProfileUrl(user.id)"
         v-for="user in state.users"
@@ -25,7 +25,7 @@
         </div>
       </router-link>
     </div>
-    <div v-else class="not-content">
+    <div v-else class="no-content">
       <img src="@/assets/not-found.png" alt="no-content" />
     </div>
   </div>
