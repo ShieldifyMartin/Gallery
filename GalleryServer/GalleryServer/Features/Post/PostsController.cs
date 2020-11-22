@@ -37,7 +37,7 @@
             var posts = this.posts.GetAll();
 
             return Accepted(nameof(this.All), posts);
-        }
+        }        
 
         public async Task<ActionResult> Top5()
         {

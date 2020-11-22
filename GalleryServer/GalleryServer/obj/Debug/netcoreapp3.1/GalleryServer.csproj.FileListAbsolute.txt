@@ -5,8 +5,6 @@ E:\Git\Gallery\GalleryServer\GalleryServer\bin\Debug\netcoreapp3.1\Properties\se
 E:\Git\Gallery\GalleryServer\GalleryServer\bin\Debug\netcoreapp3.1\Properties\serviceDependencies.local.json
 E:\Git\Gallery\GalleryServer\GalleryServer\bin\Debug\netcoreapp3.1\GalleryServer.StaticWebAssets.xml
 E:\Git\Gallery\GalleryServer\GalleryServer\bin\Debug\netcoreapp3.1\GalleryServer.exe
-E:\Git\Gallery\GalleryServer\GalleryServer\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Cryptography.Internal.dll
-E:\Git\Gallery\GalleryServer\GalleryServer\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Cryptography.KeyDerivation.dll
 E:\Git\Gallery\GalleryServer\GalleryServer\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore.dll
 E:\Git\Gallery\GalleryServer\GalleryServer\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll
 E:\Git\Gallery\GalleryServer\GalleryServer\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Identity.UI.Views.V3.dll
@@ -20,28 +18,11 @@ E:\Git\Gallery\GalleryServer\GalleryServer\bin\Debug\netcoreapp3.1\Microsoft.Ent
 E:\Git\Gallery\GalleryServer\GalleryServer\bin\Debug\netcoreapp3.1\Microsoft.EntityFrameworkCore.Design.dll
 E:\Git\Gallery\GalleryServer\GalleryServer\bin\Debug\netcoreapp3.1\Microsoft.EntityFrameworkCore.Relational.dll
 E:\Git\Gallery\GalleryServer\GalleryServer\bin\Debug\netcoreapp3.1\Microsoft.EntityFrameworkCore.SqlServer.dll
-E:\Git\Gallery\GalleryServer\GalleryServer\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Caching.Abstractions.dll
-E:\Git\Gallery\GalleryServer\GalleryServer\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Caching.Memory.dll
-E:\Git\Gallery\GalleryServer\GalleryServer\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Configuration.dll
-E:\Git\Gallery\GalleryServer\GalleryServer\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Configuration.Abstractions.dll
-E:\Git\Gallery\GalleryServer\GalleryServer\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Configuration.Binder.dll
-E:\Git\Gallery\GalleryServer\GalleryServer\bin\Debug\netcoreapp3.1\Microsoft.Extensions.DependencyInjection.dll
-E:\Git\Gallery\GalleryServer\GalleryServer\bin\Debug\netcoreapp3.1\Microsoft.Extensions.DependencyInjection.Abstractions.dll
-E:\Git\Gallery\GalleryServer\GalleryServer\bin\Debug\netcoreapp3.1\Microsoft.Extensions.FileProviders.Abstractions.dll
-E:\Git\Gallery\GalleryServer\GalleryServer\bin\Debug\netcoreapp3.1\Microsoft.Extensions.FileProviders.Embedded.dll
-E:\Git\Gallery\GalleryServer\GalleryServer\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Identity.Core.dll
-E:\Git\Gallery\GalleryServer\GalleryServer\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Identity.Stores.dll
-E:\Git\Gallery\GalleryServer\GalleryServer\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Logging.dll
-E:\Git\Gallery\GalleryServer\GalleryServer\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Logging.Abstractions.dll
-E:\Git\Gallery\GalleryServer\GalleryServer\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Options.dll
-E:\Git\Gallery\GalleryServer\GalleryServer\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Primitives.dll
 E:\Git\Gallery\GalleryServer\GalleryServer\bin\Debug\netcoreapp3.1\Microsoft.Identity.Client.dll
 E:\Git\Gallery\GalleryServer\GalleryServer\bin\Debug\netcoreapp3.1\Newtonsoft.Json.dll
 E:\Git\Gallery\GalleryServer\GalleryServer\bin\Debug\netcoreapp3.1\System.Collections.Concurrent (1).dll
-E:\Git\Gallery\GalleryServer\GalleryServer\bin\Debug\netcoreapp3.1\System.Collections.Immutable.dll
 E:\Git\Gallery\GalleryServer\GalleryServer\bin\Debug\netcoreapp3.1\System.ComponentModel (1).dll
 E:\Git\Gallery\GalleryServer\GalleryServer\bin\Debug\netcoreapp3.1\System.Configuration.ConfigurationManager.dll
-E:\Git\Gallery\GalleryServer\GalleryServer\bin\Debug\netcoreapp3.1\System.Diagnostics.DiagnosticSource.dll
 E:\Git\Gallery\GalleryServer\GalleryServer\bin\Debug\netcoreapp3.1\System.IO.FileSystem.Primitives (1).dll
 E:\Git\Gallery\GalleryServer\GalleryServer\bin\Debug\netcoreapp3.1\System.Linq (1).dll
 E:\Git\Gallery\GalleryServer\GalleryServer\bin\Debug\netcoreapp3.1\System.Reflection.Emit (1).dll
@@ -89,6 +70,11 @@ E:\Git\Gallery\GalleryServer\GalleryServer\bin\Debug\netcoreapp3.1\GalleryServer
 E:\Git\Gallery\GalleryServer\GalleryServer\bin\Debug\netcoreapp3.1\GalleryServer.pdb
 E:\Git\Gallery\GalleryServer\GalleryServer\bin\Debug\netcoreapp3.1\GalleryServer.Views.dll
 E:\Git\Gallery\GalleryServer\GalleryServer\bin\Debug\netcoreapp3.1\GalleryServer.Views.pdb
+E:\Git\Gallery\GalleryServer\GalleryServer\obj\Debug\netcoreapp3.1\GalleryServer.Views.pdb
+E:\Git\Gallery\GalleryServer\GalleryServer\obj\Debug\netcoreapp3.1\GalleryServer.dll
+E:\Git\Gallery\GalleryServer\GalleryServer\obj\Debug\netcoreapp3.1\GalleryServer.pdb
+E:\Git\Gallery\GalleryServer\GalleryServer\obj\Debug\netcoreapp3.1\GalleryServer.genruntimeconfig.cache
+E:\Git\Gallery\GalleryServer\GalleryServer\bin\Debug\netcoreapp3.1\CloudinaryDotNet.dll
 E:\Git\Gallery\GalleryServer\GalleryServer\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Authentication.JwtBearer.dll
 E:\Git\Gallery\GalleryServer\GalleryServer\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.JsonWebTokens.dll
 E:\Git\Gallery\GalleryServer\GalleryServer\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.Logging.dll
@@ -96,11 +82,25 @@ E:\Git\Gallery\GalleryServer\GalleryServer\bin\Debug\netcoreapp3.1\Microsoft.Ide
 E:\Git\Gallery\GalleryServer\GalleryServer\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
 E:\Git\Gallery\GalleryServer\GalleryServer\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.Tokens.dll
 E:\Git\Gallery\GalleryServer\GalleryServer\bin\Debug\netcoreapp3.1\System.IdentityModel.Tokens.Jwt.dll
-E:\Git\Gallery\GalleryServer\GalleryServer\obj\Debug\netcoreapp3.1\GalleryServer.Views.pdb
-E:\Git\Gallery\GalleryServer\GalleryServer\obj\Debug\netcoreapp3.1\GalleryServer.dll
-E:\Git\Gallery\GalleryServer\GalleryServer\obj\Debug\netcoreapp3.1\GalleryServer.pdb
-E:\Git\Gallery\GalleryServer\GalleryServer\obj\Debug\netcoreapp3.1\GalleryServer.genruntimeconfig.cache
-E:\Git\Gallery\GalleryServer\GalleryServer\bin\Debug\netcoreapp3.1\CloudinaryDotNet.dll
 E:\Git\Gallery\GalleryServer\GalleryServer\obj\Debug\netcoreapp3.1\GalleryServer.csproj.CoreCompileInputs.cache
 E:\Git\Gallery\GalleryServer\GalleryServer\obj\Debug\netcoreapp3.1\GalleryServer.MvcApplicationPartsAssemblyInfo.cs
 E:\Git\Gallery\GalleryServer\GalleryServer\obj\Debug\netcoreapp3.1\GalleryServer.MvcApplicationPartsAssemblyInfo.cache
+E:\Git\Gallery\GalleryServer\GalleryServer\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Cryptography.Internal.dll
+E:\Git\Gallery\GalleryServer\GalleryServer\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Cryptography.KeyDerivation.dll
+E:\Git\Gallery\GalleryServer\GalleryServer\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Caching.Abstractions.dll
+E:\Git\Gallery\GalleryServer\GalleryServer\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Caching.Memory.dll
+E:\Git\Gallery\GalleryServer\GalleryServer\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Configuration.dll
+E:\Git\Gallery\GalleryServer\GalleryServer\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Configuration.Abstractions.dll
+E:\Git\Gallery\GalleryServer\GalleryServer\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Configuration.Binder.dll
+E:\Git\Gallery\GalleryServer\GalleryServer\bin\Debug\netcoreapp3.1\Microsoft.Extensions.DependencyInjection.dll
+E:\Git\Gallery\GalleryServer\GalleryServer\bin\Debug\netcoreapp3.1\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+E:\Git\Gallery\GalleryServer\GalleryServer\bin\Debug\netcoreapp3.1\Microsoft.Extensions.FileProviders.Abstractions.dll
+E:\Git\Gallery\GalleryServer\GalleryServer\bin\Debug\netcoreapp3.1\Microsoft.Extensions.FileProviders.Embedded.dll
+E:\Git\Gallery\GalleryServer\GalleryServer\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Identity.Core.dll
+E:\Git\Gallery\GalleryServer\GalleryServer\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Identity.Stores.dll
+E:\Git\Gallery\GalleryServer\GalleryServer\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Logging.dll
+E:\Git\Gallery\GalleryServer\GalleryServer\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Logging.Abstractions.dll
+E:\Git\Gallery\GalleryServer\GalleryServer\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Options.dll
+E:\Git\Gallery\GalleryServer\GalleryServer\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Primitives.dll
+E:\Git\Gallery\GalleryServer\GalleryServer\bin\Debug\netcoreapp3.1\System.Collections.Immutable.dll
+E:\Git\Gallery\GalleryServer\GalleryServer\bin\Debug\netcoreapp3.1\System.Diagnostics.DiagnosticSource.dll

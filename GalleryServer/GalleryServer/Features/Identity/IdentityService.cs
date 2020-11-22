@@ -6,8 +6,9 @@
     using System.Security.Claims;
     using System.Text;
     using System.Threading.Tasks;
-    using GalleryServer.Data;    
+    using GalleryServer.Data;
     using GalleryServer.Features.Identity.Models;
+    using GalleryServer.Features.Post.Models;
     using GalleryServer.Infrastructure.Services;
     using Microsoft.IdentityModel.Tokens;
 
@@ -32,7 +33,7 @@
                     new Claim(ClaimTypes.NameIdentifier, userId),
                     new Claim(ClaimTypes.Name, userName)
                 }),
-                Expires = DateTime.UtcNow.AddDays(7),
+                Expires = DateTime.UtcNow.AddDays(17),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
             };
             var token = tokenHandler.CreateToken(tokenDescriptor);
@@ -67,17 +68,39 @@
         public async Task<GetAllUsersResponseModel> GetAllUsers()
         {
             var users = this.data
-                    .Users
-                    .Select(u => new UserRequestModel
-                        {
-                            Id = u.Id,
-                            UserName = u.UserName,
-                            PictureUrl = u.PictureUrl                            
-                        })
-                    .OrderBy(u => u.UserName)
-                    .ToList();
+                .Users
+                .Select(u => new UserRequestModel
+                {
+                    Id = u.Id,
+                    UserName = u.UserName,
+                    PictureUrl = u.PictureUrl
+                })
+                .OrderBy(u => u.UserName)
+                .ToList();
 
             var response = new GetAllUsersResponseModel
+            {
+                Users = users
+            };
+
+            return response;
+        }
+
+        public SearchUserResponseViewModel Search(string input)
+        {
+            var users = this.data
+                .Users
+                .Where(u => u.UserName.ToUpper().Contains(input.ToUpper()))
+                .Select(u => new SearchUserRequestViewModel
+                {
+                    Id = u.Id,
+                    UserName = u.UserName,
+                    PictureUrl = u.PictureUrl
+                })
+                .OrderBy(u => u.UserName)
+                .ToList();
+
+            var response = new SearchUserResponseViewModel
             {
                 Users = users
             };

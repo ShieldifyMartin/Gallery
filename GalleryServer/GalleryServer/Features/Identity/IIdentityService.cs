@@ -1,6 +1,7 @@
 ﻿namespace GalleryServer.Features.Identity
 {
     using GalleryServer.Features.Identity.Models;
+    using GalleryServer.Features.Post.Models;
     using GalleryServer.Infrastructure.Services;    
     using System.Threading.Tasks;
 
@@ -11,5 +12,7 @@
         Task<Result> AddProfilePicture(string userId, string pictureUrl);
 
         Task<GetAllUsersResponseModel> GetAllUsers();
+
+        SearchUserResponseViewModel Search(string input);
     }
 }

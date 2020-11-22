@@ -110,14 +110,14 @@
             return post;
         }
 
-        public SearchResultModel Search(string input)
+        public SearchPostResponseViewModel Search(string input)
         {
             var inputToUpper = input.ToUpper();
             var posts = this.posts
                 .All()
                 .Where(p => p.Location.ToUpper().Contains(inputToUpper)
                             || p.Description.ToUpper().Contains(inputToUpper))
-                .Select(p => new SearchModel
+                .Select(p => new SearchPostRequestViewModel
                     {
                         Id = p.Id,
                         Likes = p.Likes,
@@ -128,7 +128,7 @@
                     })
                 .ToList();
 
-            var result = new SearchResultModel
+            var result = new SearchPostResponseViewModel
             {
                 Posts = posts
             };

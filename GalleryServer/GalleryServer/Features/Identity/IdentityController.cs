@@ -104,5 +104,13 @@
 
             return Accepted(nameof(this.GetAllUsers), users);
         }
+
+        [HttpGet("{input}")]
+        public async Task<ActionResult> Search(string input)
+        {
+            var posts = this.identity.Search(input);
+
+            return Accepted(nameof(this.Search), posts);
+        }
     }
 }

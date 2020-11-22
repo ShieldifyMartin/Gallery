@@ -3,7 +3,7 @@
     using System;
     using System.ComponentModel.DataAnnotations;
 
-    public class SearchModel
+    public class SearchPostRequestViewModel
     {
         [Required]
         public string Id { get; set; }

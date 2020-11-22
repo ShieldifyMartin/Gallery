@@ -1,6 +1,6 @@
 ﻿namespace GalleryServer.Features.Identity.Models
 {
-    public class UserRequestModel
+    public class SearchUserRequestViewModel
     {
         public string Id { get; set; }
 
