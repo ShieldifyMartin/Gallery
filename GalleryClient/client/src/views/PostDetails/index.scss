@@ -88,29 +88,31 @@
     height: auto;
   }
 
-  .calendar-icon {
-    width: 1em;
-    margin-right: 0.3em;
-  }
-
-  .info-icon {
-    width: 0.5em;
-    margin-right: 0.3em;
-  }
-
+  .calendar-icon,
+  .info-icon,
   .location-icon {
-    width: 0.8em;
-    margin-right: 0.4em;
-  }
+    width: 1.5em;
+    height: 1.5em;
+    margin-right: 0.3em;
+  }  
 
   .post-footer {
     margin: 0 auto;
-    width: 9em;
+    width: 15em;
     text-align: center;
-  }
 
-  .post-footer > div {
-    display: flex;
-    margin-top: 1em;
+    p {
+      width: 7em;      
+      text-align: left;
+    }
+
+    img {
+      padding: 0 2em;
+    }
+
+    div {
+      display: flex;
+      margin-top: 1em;
+    }
   }
 }
