@@ -10,6 +10,12 @@
         v-on:keyup.enter="search"
       />
     </div>
+    <ul class="categories">      
+      <router-link :to="getCategoriesLink(category.title)" v-for="category in state.categories" :key="category.id">
+      
+        {{ category.title }}({{ category.posts.length }})</router-link
+      >
+    </ul>
     <img v-if="state.loading" class="loader" src="@/assets/loading.gif" />
     <div v-else-if="state.posts && state.posts.length" class="posts">
       <router-link :to="post.id" v-for="post in state.posts" :key="post.id">
@@ -26,20 +32,27 @@
 
 <script lang="ts">
 import { defineComponent, reactive, watchEffect } from "vue";
-import { postService } from "../../services";
+import { postService, categoryService } from "../../services";
 
 export default defineComponent({
   setup() {
     const state = reactive({
       posts: [],
+      categories: [],
       searchInput: "",
       loading: true,
     });
 
+    const getCategoriesLink = (title) => {
+      return `/categories/${title.toLowerCase()}`;
+    }
+
     watchEffect(async () => {
       const posts = await postService.get();
+      const categories = await categoryService.get();
 
       state.posts = posts;
+      state.categories = categories;
       state.loading = false;
     });
 
@@ -51,6 +64,7 @@ export default defineComponent({
 
     return {
       state,
+      getCategoriesLink,
       search,
     };
   },

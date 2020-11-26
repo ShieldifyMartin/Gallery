@@ -1,17 +1,17 @@
 import axios from "axios";
 import config from "@/config";
 
-const getAllCategories = async () => {
+const get = async () => {
     return await axios
       .get(`${config.restAPI}/categories/all`)
-      .then((res) => {
+      .then((res) => {        
         if (res.status >= 200 && res.status < 300) {
-          var users = res.data.categories;
-          return users;
+          var categories = res.data;
+          return categories;
         }
       });
 };
 
 export const categoryService = {
-    getAllCategories
+  get
 };

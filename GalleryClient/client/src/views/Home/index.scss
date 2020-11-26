@@ -47,6 +47,28 @@
     }
   }
 
+  .categories {
+    display: flex;
+    width: 35em;
+    justify-content: space-between;
+    margin: 2em auto;
+
+    a {
+      width: 5em;
+      margin: 0 auto;
+      text-align: center;
+      padding: 1em 1.3em;
+      background-color: lightgray;
+      text-decoration: none;
+      color: #000;
+      border-radius: 0.7em;
+    }
+  
+    a:hover {
+      color: #fff;
+    }
+  }
+
   .posts {
     display: grid;
     position: relative;
@@ -74,12 +96,12 @@
       //transform: scale(0.99);
     }
   }  
-
+  
   .loader {
     margin: 1em auto;
     width: 7em;
   }
-
+  
   .no-content {
     margin-top: 1em;    
 
