@@ -47,8 +47,8 @@
                 .ToList();
             
             return posts;
-        }
-        
+        }        
+
         public List<Post> GetAllAdmin()
         {
             var posts = this.posts

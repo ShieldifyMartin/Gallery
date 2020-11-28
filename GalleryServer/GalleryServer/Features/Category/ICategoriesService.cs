@@ -6,9 +6,9 @@
 
     public interface ICategoriesService
     {
-        Task<List<Category>> GetAll();
+        List<Category> GetAll();
 
-        Task<List<Post>> GetPostsByCategory(int id);
+        List<Post> GetPostsByCategory(int id);
 
         Task<Category> Add(string title);
     }

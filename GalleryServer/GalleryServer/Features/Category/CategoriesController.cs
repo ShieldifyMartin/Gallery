@@ -15,7 +15,7 @@
 
         public async Task<ActionResult> All()
         {
-            var categories = await this.categories.GetAll();
+            var categories = this.categories.GetAll();
 
             return Accepted(nameof(this.All), categories);
         }
@@ -23,7 +23,7 @@
         [HttpGet("{categoryId}")]
         public async Task<ActionResult> Posts(int categoryId)
         {
-            var posts = await this.categories.GetPostsByCategory(categoryId);
+            var posts = this.categories.GetPostsByCategory(categoryId);
 
             return Accepted(nameof(this.Posts), posts);
         }

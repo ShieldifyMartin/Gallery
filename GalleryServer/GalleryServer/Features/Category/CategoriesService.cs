@@ -18,7 +18,7 @@
             this.posts = posts;
         }
 
-        public async Task<List<Category>> GetAll()
+        public List<Category> GetAll()
         {
             var categories = this.data
                 .Categories                
@@ -27,7 +27,7 @@
             return categories;
         }
 
-        public async Task<List<Post>> GetPostsByCategory(int id)
+        public List<Post> GetPostsByCategory(int id)
         {
             var posts = this.posts
                 .All()
