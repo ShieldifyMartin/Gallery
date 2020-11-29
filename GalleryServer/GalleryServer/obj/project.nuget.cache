@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "U9YIEyJvVko0O6VnuRpX9iCdVG+Z2HLcFf0Qvt+pXCeHCW+9fA+no1VMHnA9ws0yxd546XtAy+0TqlKqb6Mw+Q==",
+  "dgSpecHash": "oLQY7x29zHWW2oPLHug0FbrWInfpZlNiOnc150zyz3gqV8bIw8Ej9ODamxIFU8Wc8a47Rc1dcUJlLyMlJTJBkg==",
   "success": true,
   "projectFilePath": "E:\\Git\\Gallery\\GalleryServer\\GalleryServer\\GalleryServer.csproj",
   "expectedPackageFiles": [
@@ -11,6 +11,8 @@
     "C:\\Users\\Martin-Petrov\\.nuget\\packages\\microsoft.aspnetcore.diagnostics.entityframeworkcore\\3.1.10\\microsoft.aspnetcore.diagnostics.entityframeworkcore.3.1.10.nupkg.sha512",
     "C:\\Users\\Martin-Petrov\\.nuget\\packages\\microsoft.aspnetcore.identity.entityframeworkcore\\3.1.10\\microsoft.aspnetcore.identity.entityframeworkcore.3.1.10.nupkg.sha512",
     "C:\\Users\\Martin-Petrov\\.nuget\\packages\\microsoft.aspnetcore.identity.ui\\3.1.10\\microsoft.aspnetcore.identity.ui.3.1.10.nupkg.sha512",
+    "C:\\Users\\Martin-Petrov\\.nuget\\packages\\microsoft.aspnetcore.jsonpatch\\3.1.10\\microsoft.aspnetcore.jsonpatch.3.1.10.nupkg.sha512",
+    "C:\\Users\\Martin-Petrov\\.nuget\\packages\\microsoft.aspnetcore.mvc.newtonsoftjson\\3.1.10\\microsoft.aspnetcore.mvc.newtonsoftjson.3.1.10.nupkg.sha512",
     "C:\\Users\\Martin-Petrov\\.nuget\\packages\\microsoft.bcl.asyncinterfaces\\1.1.1\\microsoft.bcl.asyncinterfaces.1.1.1.nupkg.sha512",
     "C:\\Users\\Martin-Petrov\\.nuget\\packages\\microsoft.bcl.hashcode\\1.1.0\\microsoft.bcl.hashcode.1.1.0.nupkg.sha512",
     "C:\\Users\\Martin-Petrov\\.nuget\\packages\\microsoft.csharp\\4.7.0\\microsoft.csharp.4.7.0.nupkg.sha512",
@@ -47,6 +49,7 @@
     "C:\\Users\\Martin-Petrov\\.nuget\\packages\\microsoft.netcore.targets\\1.1.0\\microsoft.netcore.targets.1.1.0.nupkg.sha512",
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\microsoft.win32.registry\\4.5.0\\microsoft.win32.registry.4.5.0.nupkg.sha512",
     "C:\\Users\\Martin-Petrov\\.nuget\\packages\\newtonsoft.json\\12.0.2\\newtonsoft.json.12.0.2.nupkg.sha512",
+    "C:\\Users\\Martin-Petrov\\.nuget\\packages\\newtonsoft.json.bson\\1.0.2\\newtonsoft.json.bson.1.0.2.nupkg.sha512",
     "C:\\Users\\Martin-Petrov\\.nuget\\packages\\runtime.native.system\\4.3.0\\runtime.native.system.4.3.0.nupkg.sha512",
     "C:\\Users\\Martin-Petrov\\.nuget\\packages\\runtime.native.system.data.sqlclient.sni\\4.4.0\\runtime.native.system.data.sqlclient.sni.4.4.0.nupkg.sha512",
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\runtime.win-arm64.runtime.native.system.data.sqlclient.sni\\4.4.0\\runtime.win-arm64.runtime.native.system.data.sqlclient.sni.4.4.0.nupkg.sha512",

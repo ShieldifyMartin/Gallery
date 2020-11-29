@@ -6,7 +6,7 @@
 
     public interface ICategoriesService
     {
-        List<Category> GetAll();
+        CategoryResponseViewModel GetAll();
 
         List<Post> GetPostsByCategory(int id);
 

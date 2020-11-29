@@ -2,7 +2,7 @@
 {
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
-
+    using System.Text.Json.Serialization;
     using static Validation.Category;
 
     public class Category
@@ -19,6 +19,7 @@
         [MaxLength(MaxTitleLength)]        
         public string Title { get; set; }
 
+        [JsonIgnore]
         public virtual ICollection<Post> Posts { get; set; }
     }
 }

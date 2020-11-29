@@ -1,7 +1,6 @@
 ﻿namespace GalleryServer.Infrastructure.Extensions
 {
     using GalleryServer.Infrastructure.Filters;
-    using CloudinaryDotNet;
     using GalleryServer.Data;
     using GalleryServer.Data.Models;
     using GalleryServer.Data.Models.Repositories;
@@ -17,7 +16,9 @@
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.IdentityModel.Tokens;
-    using System.Text;    
+    using CloudinaryDotNet;
+    using Microsoft.AspNetCore.Mvc.NewtonsoftJson;
+    using System.Text;
 
     public static class ServiceCollectionExtensions
     {
@@ -49,7 +50,7 @@
                     options.Password.RequireUppercase = false;
                 })
                 .AddRoles<IdentityRole>()
-                .AddEntityFrameworkStores<ApplicationDbContext>();            
+                .AddEntityFrameworkStores<ApplicationDbContext>();
             return services;
         }
 
@@ -84,7 +85,7 @@
         public static IServiceCollection AddApplicationServices(this IServiceCollection services)
             => services
                 .AddScoped(typeof(IDeletableEntityRepository<>), typeof(DeletableEntityRepository<>))
-                .AddScoped(typeof(BaseRepository<>), typeof(BaseRepository<>))                
+                .AddScoped(typeof(BaseRepository<>), typeof(BaseRepository<>))
                 .AddTransient<ICurrentUserService, CurrentUserService>()
                 .AddTransient<ICloudinaryService, CloudinaryService>()
                 .AddTransient<ICategoriesService, CategoriesService>()
@@ -92,7 +93,7 @@
                 .AddTransient<IProfilesService, ProfilesService>()
                 .AddTransient<IIdentityService, IdentityService>()
                 .AddTransient<ApplicationDbInitializer>();
-        
+
         public static IServiceCollection AddCloudinaryService(this IServiceCollection services, AppSettings appSettings)
         {
             Account account = new Account(
@@ -103,18 +104,21 @@
 
             Cloudinary cloudinary = new Cloudinary(account);
             services.AddSingleton(cloudinary);
-            
+
             return services;
         }
 
         public static void AddApiControllers(this IServiceCollection services)
-            => services                
+            => services
                 .AddAntiforgery(options =>
                 {
                     options.HeaderName = "X-CSRF-TOKEN";
                 })
                 .AddControllers(options => options
                     .Filters
-                    .Add<ModelOrNotFoundActionFilter>());
+                    .Add<ModelOrNotFoundActionFilter>())
+                .AddNewtonsoftJson(
+                    options =>
+                        options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
     }
 }

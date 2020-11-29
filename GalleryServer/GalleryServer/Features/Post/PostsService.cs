@@ -82,6 +82,17 @@
             return posts;
         }
 
+        public ICollection<Post> GetByCategoryId(int categoryId)
+        {
+            var posts = this.posts
+                .All()
+                .OrderByDescending(p => p.Likes)
+                .Where(p => p.CategoryId == categoryId)                
+                .ToList();
+
+            return posts;
+        }
+
         public DetailsGetRequestModel GetById(string id)
         {
             var userId = this.currentUser.GetId();

@@ -1,11 +1,10 @@
 ﻿namespace GalleryServer.Features.Category
 {
     using GalleryServer.Data.Models;
+    using System.Collections.Generic;
 
     public class CategoryResponseViewModel
     {
-        public Category category { get; set; }
-
-        public Post posts { get; set; }
+        public List<Category> Categories { get; set; }
     }
 }

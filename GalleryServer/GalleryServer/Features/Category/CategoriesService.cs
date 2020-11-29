@@ -2,7 +2,8 @@
 {
     using GalleryServer.Data;
     using GalleryServer.Data.Models;
-    using GalleryServer.Data.Models.Repositories;    
+    using GalleryServer.Data.Models.Repositories;
+    using GalleryServer.Features.Cats;
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
@@ -10,26 +11,43 @@
     public class CategoriesService : ICategoriesService
     {
         private readonly ApplicationDbContext data;
-        private readonly IDeletableEntityRepository<Post> posts;
+        private readonly IPostsService posts;
+        private readonly IDeletableEntityRepository<Post> postsRepo;
 
-        public CategoriesService(ApplicationDbContext data, IDeletableEntityRepository<Post> posts)
+        public CategoriesService(ApplicationDbContext data, IPostsService posts, IDeletableEntityRepository<Post> postsRepo)
         {
             this.data = data;
             this.posts = posts;
+            this.postsRepo = postsRepo;
         }
 
-        public List<Category> GetAll()
+        public CategoryResponseViewModel GetAll()
         {
             var categories = this.data
                 .Categories                
                 .ToList();
 
-            return categories;
+            var categoriesWithPosts = new List<Category>();
+
+            foreach (var category in categories)            
+            {
+                var posts = this.posts.GetByCategoryId(category.Id);
+
+                category.Posts = posts;
+                categoriesWithPosts.Add(category);
+            }
+
+            var result = new CategoryResponseViewModel
+            {
+                Categories = categoriesWithPosts
+            };
+            
+            return result;
         }
 
         public List<Post> GetPostsByCategory(int id)
         {
-            var posts = this.posts
+            var posts = this.postsRepo
                 .All()
                 .Where(p => p.CategoryId == id)                
                 .ToList();

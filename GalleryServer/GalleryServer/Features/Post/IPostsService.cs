@@ -14,6 +14,8 @@
 
         List<GetAllGetRequestModel> GetTop5();
 
+        ICollection<Post> GetByCategoryId(int categoryId);
+
         DetailsGetRequestModel GetById(string id);
 
         SearchPostResponseViewModel Search(string input);
