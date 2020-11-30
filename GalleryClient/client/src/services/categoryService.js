@@ -6,7 +6,7 @@ const get = async () => {
       .get(`${config.restAPI}/categories/all`)
       .then((res) => {        
         if (res.status >= 200 && res.status < 300) {
-          var categories = res.data;
+          var categories = res.data.categories;
           return categories;
         }
       });

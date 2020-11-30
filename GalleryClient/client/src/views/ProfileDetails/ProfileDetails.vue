@@ -159,9 +159,7 @@ export default defineComponent({
           id
         );
         const userLikedPosts = await profileService.getUserLikedPosts(
-          state.allLikedPosts,
-          id
-        );
+          state.allLikedPosts);
 
         state.userPosts = userPosts.posts;
         state.userLikedPosts = userLikedPosts.posts;
@@ -169,7 +167,7 @@ export default defineComponent({
         state.loading = false;
         state.isGuest = false;
       }
-    }, state.id);
+    });
 
     const getPostLink = id => "/" + id;
 

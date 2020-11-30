@@ -10,11 +10,18 @@
         v-on:keyup.enter="search"
       />
     </div>
-    <ul class="categories">      
-      <router-link :to="getCategoriesLink(category.title)" v-for="category in state.categories" :key="category.id">
-      
-        {{ category.title }}({{ category.posts.length }})</router-link
-      >
+    <ul class="categories">
+      <li v-for="category in state.categories" :key="category.id">
+        <input
+          type="button"
+          :id="category.id"
+          class="tab-switch"
+          @click="setCategory(category.title)"
+        />
+        <label :for="category.id">
+          {{ category.title }}({{ category.posts && category.posts.length || 0 }})
+        </label>        
+      </li>
     </ul>
     <img v-if="state.loading" class="loader" src="@/assets/loading.gif" />
     <div v-else-if="state.posts && state.posts.length" class="posts">
@@ -41,19 +48,25 @@ export default defineComponent({
       categories: [],
       searchInput: "",
       loading: true,
+      category: "",
     });
 
     const getCategoriesLink = (title) => {
       return `/categories/${title.toLowerCase()}`;
-    }
+    };
 
     watchEffect(async () => {
-      const posts = await postService.get();
-      const categories = await categoryService.get();
-
-      state.posts = posts;
-      state.categories = categories;
-      state.loading = false;
+      if (state.category) {
+        console.log("categoryyy : " + state.category);
+        state.posts = [];
+      } else {
+        const posts = await postService.get();
+        const categories = await categoryService.get();
+        
+        state.posts = posts;
+        state.categories = categories;
+        state.loading = false;
+      }
     });
 
     const search = async () => {
@@ -62,10 +75,15 @@ export default defineComponent({
       state.posts = posts;
     };
 
+    const setCategory = (title) => {
+      state.category = title;
+    };
+
     return {
       state,
       getCategoriesLink,
       search,
+      setCategory,
     };
   },
 });

@@ -52,8 +52,12 @@
     width: 35em;
     justify-content: space-between;
     margin: 2em auto;
+    
+    .tab-switch {
+      display: none;
+    }
 
-    a {
+    li {
       width: 5em;
       margin: 0 auto;
       text-align: center;
@@ -62,11 +66,14 @@
       text-decoration: none;
       color: #000;
       border-radius: 0.7em;
+      list-style: none;      
     }
   
-    a:hover {
+    li:hover {
       color: #fff;
+      cursor: pointer;
     }
+    
   }
 
   .posts {
