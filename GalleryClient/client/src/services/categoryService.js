@@ -2,14 +2,18 @@ import axios from "axios";
 import config from "@/config";
 
 const get = async () => {
-    return await axios
-      .get(`${config.restAPI}/categories/all`)
-      .then((res) => {        
-        if (res.status >= 200 && res.status < 300) {
-          var categories = res.data.categories;
-          return categories;
-        }
-      });
+  try {
+    const response = await axios
+      .get(`${config.restAPI}/categories/all`);
+      
+    if (response.status >= 200 && response.status < 300) {
+      var categories = response.data.categories;
+      return categories;
+    }
+  }
+  catch(err) {    
+    return [];
+  }
 };
 
 export const categoryService = {
