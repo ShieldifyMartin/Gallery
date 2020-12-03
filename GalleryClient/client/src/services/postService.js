@@ -2,29 +2,38 @@ import config from "@/config";
 import axios from "axios";
 
 const get = async () => {
-  return await axios.get(`${config.restAPI}/posts/all`).then((res) => {
-    if (res.status >= 200 && res.status < 300) {
-      return res.data;
+  try {
+    const response = await axios.get(`${config.restAPI}/posts/all`);
+    if (response.status >= 200 && response.status < 300) {
+      return response.data;
     }
-  });
+  } catch (err) {
+    return [];
+  }
 };
 
 const getById = async (id) => {
-  return await axios.get(`${config.restAPI}/posts/byId/${id}`).then((res) => {
-    if (res.status >= 200 && res.status < 300) {
-      var post = res.data;
+  try {
+    const response = await axios.get(`${config.restAPI}/posts/byId/${id}`);
+    if (response.status >= 200 && response.status < 300) {
+      var post = response.data;
       return post;
     }
-  });
+  } catch (err) {
+    return {};
+  }
 };
 
 const getCategories = async () => {
-  return await axios.get(`${config.restAPI}/categories/all`).then((res) => {
-    if (res.status >= 200 && res.status < 300) {
-      var categories = res.data;
+  try {
+    const response = await axios.get(`${config.restAPI}/categories/all`);
+    if (response.status >= 200 && response.status < 300) {
+      var categories = response.data;
       return categories;
     }
-  });
+  } catch (err) {
+    return [];
+  }
 };
 
 const search = async (input) => {
@@ -32,14 +41,17 @@ const search = async (input) => {
     const posts = await get();
     return posts;
   } else {
-    return await axios
-      .get(`${config.restAPI}/posts/search/${input}`)
-      .then((res) => {
-        if (res.status >= 200 && res.status < 300) {
-          var posts = res.data.posts;
-          return posts;
-        }
-      });
+    try {
+      const response = await axios.get(
+        `${config.restAPI}/posts/search/${input}`
+      );
+      if (response.status >= 200 && response.status < 300) {
+        var posts = response.data.posts;
+        return posts;
+      }
+    } catch (err) {
+      return [];
+    }
   }
 };
 
@@ -55,16 +67,19 @@ const create = async (token, picture, location, description, categoryId) => {
   formData.append("description", description);
   formData.append("categoryId", categoryId);
 
-  return await axios
-    .post(`${config.restAPI}/posts/create`, formData)
-    .then((res) => {
-      console.log("status " + res.status)
-      if (res.status >= 200 && res.status < 300) {
-        var postId = res.data;
-        return postId;
-      }
-    })
-    .catch((err) => err.response.status);
+  try {
+    const response = await axios.post(
+      `${config.restAPI}/posts/create`,
+      formData
+    );
+
+    if (response.status >= 200 && response.status < 300) {
+      var postId = response.data;
+      return postId;
+    }
+  } catch (err) {
+    return err.response.status;
+  }
 };
 
 const edit = async (token, id, picture, location, description, categoryId) => {
@@ -79,12 +94,15 @@ const edit = async (token, id, picture, location, description, categoryId) => {
   formData.append("description", description);
   formData.append("categoryId", categoryId);
 
-  return await axios
-    .post(`${config.restAPI}/posts/update/${id}`, formData)
-    .then((res) => {
-      return res.status;
-    })
-    .catch((err) => console.log(err));
+  try {
+    const response = await axios.post(
+      `${config.restAPI}/posts/update/${id}`,
+      formData
+    );
+    return response.status;
+  } catch (err) {
+    return err.response.status;
+  }
 };
 
 const deletePost = async (token, postId) => {
@@ -93,12 +111,14 @@ const deletePost = async (token, postId) => {
     Authorization: "Bearer " + token,
   };
 
-  return await axios
-    .delete(`${config.restAPI}/posts/delete/${postId}`)
-    .then((res) => {
-      return res.status;
-    })
-    .catch((err) => err.response.status);
+  try {
+    const response = await axios.delete(
+      `${config.restAPI}/posts/delete/${postId}`
+    );
+    return response.status;
+  } catch (err) {
+    return err.response.status;
+  }
 };
 
 const like = async (token, postId) => {
@@ -107,12 +127,12 @@ const like = async (token, postId) => {
     Authorization: "Bearer " + token,
   };
 
-  return await axios
-    .post(`${config.restAPI}/posts/like/${postId}`)
-    .then((res) => {
-      return res.status;
-    })
-    .catch((err) => err.response.status);
+  try {
+    const response = await axios.post(`${config.restAPI}/posts/like/${postId}`);
+    return response.status;
+  } catch (err) {
+    return err.response.status;
+  }
 };
 
 const unlike = async (token, postId) => {
@@ -121,12 +141,14 @@ const unlike = async (token, postId) => {
     Authorization: "Bearer " + token,
   };
 
-  return await axios
-    .post(`${config.restAPI}/posts/unlike/${postId}`)
-    .then((res) => {
-      return res.status;
-    })
-    .catch((err) => err.response.status);
+  try {
+    const response = await axios.post(
+      `${config.restAPI}/posts/unlike/${postId}`
+    );
+    return response.status;
+  } catch (err) {
+    return err.response.status;
+  }
 };
 
 export const postService = {
