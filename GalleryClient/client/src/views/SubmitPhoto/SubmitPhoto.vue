@@ -42,7 +42,7 @@
 import { defineComponent, reactive, watchEffect } from "vue";
 import router from "../../router";
 import store from "../../store";
-import { postService } from "../../services";
+import { postService, categoryService } from "../../services";
 
 export default defineComponent({
   setup() {
@@ -57,7 +57,8 @@ export default defineComponent({
     });
 
     watchEffect(async () => {
-      const categories = await postService.getCategories();
+      const categories = await categoryService.get();
+
       state.categories = categories;
     });
 

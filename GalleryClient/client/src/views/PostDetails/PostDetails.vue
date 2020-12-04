@@ -45,7 +45,7 @@
             <img
               class="edit-icon"
               src="@/assets/icons/edit.svg"
-              @click="edit"
+              @click="edit()"
               alt="edit icon"
             />
           </router-link>
@@ -53,7 +53,7 @@
             <img
               class="delete-icon"
               src="@/assets/icons/delete.svg"
-              @click="toggleDeletePostAlert"
+              @click="toggleDeletePostAlert()"
               alt="delete icon"
             />
           </div>

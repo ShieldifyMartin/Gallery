@@ -13,18 +13,18 @@
       />
       <input
         type="text"
-        v-model="state.post.location"
+        v-model="state.location"
         name="location"
         placeholder="Location"
       />
       <input
         type="text"
-        v-model="state.post.description"
+        v-model="state.description"
         name="description"
         placeholder="Description"
         required
       />
-      <select v-model="state.post.categoryId" class="categories-dropdown">
+      <select v-model="state.categoryId" class="categories-dropdown">
         <option value="" selected>Select category</option>
         <option
           v-for="category in state.categories"
@@ -40,7 +40,7 @@
 
 <script lang="ts">
 import { defineComponent, reactive, watchEffect } from "vue";
-import { postService } from "../../services";
+import { postService, categoryService } from "../../services";
 import router from "../../router";
 import store from "../../store";
 
@@ -48,7 +48,10 @@ export default defineComponent({
   setup() {
     const state = reactive({
       categories: [],
-      post: {},
+      id: null,
+      location: "",
+      description: "",
+      categoryId: "",
       picture: null,
       error: "",
       maxSize: 15728640,
@@ -57,10 +60,13 @@ export default defineComponent({
     watchEffect(async () => {
       const id = window.location.href.split("/")[4];
       const post = await postService.getById(id);
-      const categories = await postService.getCategories();
+      const categories = await categoryService.get();
 
       state.categories = categories;
-      state.post = post;
+      state.id = post.id;
+      state.description = post.description;
+      state.location = post.location;
+      state.categoryId = post.categoryId;
     });
 
     function handleFileUpload(e) {
@@ -80,7 +86,7 @@ export default defineComponent({
     }
 
     async function handleSubmit() {
-      const { id, location, description, categoryId } = state.post;
+      const { id, location, description, categoryId } = state;
       const isCorrect = validate();
 
       if (!isCorrect) {
@@ -99,24 +105,22 @@ export default defineComponent({
       if (response === 401) {
         router.push("/login");
       } else if (response >= 200 && response < 300) {
-        router.push("/" + state.post.id);
+        router.push("/" + state.id);
       } else {
         state.error = "Something went wrong!";
       }
     }
 
     const validate = () => {
-      if (state.post.description.length === 0) {
+      if (state.description && state.description.length === 0) {
         state.error = "Invalid data!";
         return false;
-      }
-
-      if (state.post.description.length > 2000) {
+      } else if (state.description && state.description.length > 2000) {
         state.error = "Max description length is 2000!";
         return false;
       }
 
-      if (state.post.location.length > 40) {
+      if (state.location && state.location.length > 40) {
         state.error = "Max location length is 40!";
         return false;
       }
