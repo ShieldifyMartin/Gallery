@@ -2,113 +2,133 @@ import config from "@/config";
 import axios from "axios";
 
 const get = async () => {
-  var token = localStorage.getItem("token");
+  const token = localStorage.getItem("token");
 
   axios.defaults.headers = {
     "Content-Type": "application/json",
     Authorization: "Bearer " + token,
   };
 
-  return await axios.get(`${config.restAPI}/profiles/details`).then((res) => {
-    if (res.status >= 200 && res.status < 300) {
-      var data = res.data;
+  try {
+    const response = await axios
+      .get(`${config.restAPI}/profiles/details`);
+    if (response.status >= 200 && response.status < 300) {
+      const data = response.data;
       return data;
     }
-  });
+  }
+  catch (err) {
+    return [];
+  }
 };
 
 const getById = async (id) => {
-  var token = localStorage.getItem("token");
+  const token = localStorage.getItem("token");
 
   axios.defaults.headers = {
     "Content-Type": "application/json",
     Authorization: "Bearer " + token,
   };
 
-  return await axios
-    .get(`${config.restAPI}/profiles/details/${id}`)
-    .then((res) => {
-      if (res.status >= 200 && res.status < 300) {
-        var data = res.data;
-        return data;
-      }
-    });
+  try {
+    const response = await axios
+      .get(`${config.restAPI}/profiles/details/${id}`);
+    if (response.status >= 200 && response.status < 300) {
+      const data = response.data;
+      return data;
+    }
+  }
+  catch (err) {
+    return {};
+  }
 };
 
 const getUserPosts = async (page) => {
-  var token = localStorage.getItem("token");
+  const token = localStorage.getItem("token");
 
   axios.defaults.headers = {
     "Content-Type": "application/json",
     Authorization: "Bearer " + token,
   };
 
-  return await axios
-    .get(`${config.restAPI}/profiles/userposts/${page}`)
-    .then((res) => {
-      if (res.status >= 200 && res.status < 300) {
-        var data = res.data;
-        return data;
-      }
-    });
+  try {
+    const response = await axios
+      .get(`${config.restAPI}/profiles/userposts/${page}`);
+    if (response.status >= 200 && response.status < 300) {
+      const data = response.data;
+      return data;
+    }
+  }
+  catch (err) {
+    return [];
+  }
 };
 
 const getUserPostsById = async (page, id) => {
-  var token = localStorage.getItem("token");
+  const token = localStorage.getItem("token");
 
   axios.defaults.headers = {
     "Content-Type": "application/json",
     Authorization: "Bearer " + token,
   };
 
-  return await axios
-    .get(`${config.restAPI}/profiles/userposts/${page}/${id}`)
-    .then((res) => {
-      if (res.status >= 200 && res.status < 300) {
-        var data = res.data;
-        return data;
-      }
-    });
+  try {
+    const response = await axios
+      .get(`${config.restAPI}/profiles/userposts/${page}/${id}`);
+    if (response.status >= 200 && response.status < 300) {
+      const data = response.data;
+      return data;
+    }
+  }
+  catch (err) {
+    return [];
+  }
 };
 
 const getUserLikedPosts = async (page) => {
-  var token = localStorage.getItem("token");
+  const token = localStorage.getItem("token");
 
   axios.defaults.headers = {
     "Content-Type": "application/json",
     Authorization: "Bearer " + token,
   };
 
-  return await axios
-    .get(`${config.restAPI}/profiles/likedPosts/${page}`)
-    .then((res) => {
-      if (res.status >= 200 && res.status < 300) {
-        var data = res.data;
-        return data;
-      }
-    });
+  try {
+    const response = await axios
+      .get(`${config.restAPI}/profiles/likedPosts/${page}`);
+    if (response.status >= 200 && response.status < 300) {
+      const data = response.data;
+      return data;
+    }
+  }
+  catch (err) {
+    return [];
+  }
 };
 
 const getUserLikedPostsById = async (page, id) => {
-  var token = localStorage.getItem("token");
+  const token = localStorage.getItem("token");
 
   axios.defaults.headers = {
     "Content-Type": "application/json",
     Authorization: "Bearer " + token,
   };
 
-  return await axios
-    .get(`${config.restAPI}/profiles/likedPosts/${page}/${id}`)
-    .then((res) => {
-      if (res.status >= 200 && res.status < 300) {
-        var data = res.data;
-        return data;
-      }
-    });
+  try {
+    const response = await axios
+      .get(`${config.restAPI}/profiles/likedPosts/${page}/${id}`);
+    if (response.status >= 200 && response.status < 300) {
+      const data = response.data;
+      return data;
+    }
+  }
+  catch (err) {
+    return [];
+  }
 };
 
 const uploadProfileImage = async (picture) => {
-  var token = localStorage.getItem("token");
+  const token = localStorage.getItem("token");
 
   axios.defaults.headers = {
     "Content-Type": "application/json",
@@ -118,17 +138,16 @@ const uploadProfileImage = async (picture) => {
   const formData = new FormData();
   formData.append("picture", picture);
 
-  return await axios
-    .post(`${config.restAPI}/identity/profilePicture`, formData)
-    .then((res) => {
-      if (res.status >= 200 && res.status < 300) {
-        var data = res.data;
-        return data;
-      }
-    })
-    .catch((res) => {
-      console.log(res);
-    });
+  try {
+    const response = await axios
+      .post(`${config.restAPI}/identity/profilePicture`, formData)
+    if (response.status >= 200 && response.status < 300) {
+      const data = response.data;
+      return data;
+    }
+  } catch (err) {
+    return [];
+  }
 };
 
 export const profileService = {
