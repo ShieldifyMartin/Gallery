@@ -52,16 +52,14 @@ export default defineComponent({
         return;
       }
       
-      var description = await userService.register(
+      var message = await userService.register(
         store.state.auth.state.token,
         email,
         username,
         password
       );
 
-      if (description !== null) {
-        state.error = description;
-      }
+      state.error = message;
     };
 
     const validate = () => {

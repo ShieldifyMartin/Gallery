@@ -7,17 +7,19 @@ const login = async (token, email, username, password) => {
     "Content-Type": "application/json",
     Authorization: "Bearer " + token,
   };
-  var body = JSON.stringify({ email, username, password });
+  const body = JSON.stringify({ email, username, password });
 
-  return await axios
-    .post(`${config.restAPI}/identity/login`, body)
-    .then((res) => {
-      if (res.data.token) {
-        localStorage.setItem("token", res.data.token);
-      }
-
-      return res.status || 200;
-    });
+  try {
+    const response = await axios
+      .post(`${config.restAPI}/identity/login`, body);
+    if (response.data.token) {
+      localStorage.setItem("token", response.data.token);
+    }
+    return response.status;
+  }
+  catch (err) {
+    return 400;
+  }
 };
 
 const register = async (token, email, username, password) => {
@@ -25,46 +27,50 @@ const register = async (token, email, username, password) => {
     "Content-Type": "application/json",
     Authorization: "Bearer " + token,
   };
-  var body = JSON.stringify({ email, username, password });
+  const body = JSON.stringify({ email, username, password });
 
-  return await axios
-    .post(`${config.restAPI}/identity/register`, body)
-    .then((res) => {
-      if (res.status >= 300) {
-        return "Invalid data!";
-      } else {
-        router.push("/login");
-      }
-    });
+  try {
+    await axios
+      .post(`${config.restAPI}/identity/register`, body);
+    router.push("/login");
+  }
+  catch (err) {
+    return "Invalid data!";
+  }
 };
 
 const getAllUsers = async () => {
-  return await axios
-    .get(`${config.restAPI}/identity/getAllUsers`)
-    .then((res) => {
-      if (res.status >= 200 && res.status < 300) {
-        var users = res.data.users;
-        return users;
-      }
-    });
+  try {
+    const response = await axios
+      .get(`${config.restAPI}/identity/getAllUsers`)
+    if (response.status >= 200 && response.status < 300) {
+      var users = response.data.users;
+      return users;
+    }
+  }
+  catch (err) {
+    return [];
+  }
 };
 
-const search = async (input) => {  
+const search = async (input) => {
   let users = [];
-   
-  if (!input.length) {
-    users = await getAllUsers();
-  } else {
-    return await axios
-      .get(`${config.restAPI}/identity/search/${input}`)
-      .then((res) => {
-        if (res.status >= 200 && res.status < 300) {          
-          return res.data.users;
-        }
-      });
+
+  try {
+    if (!input.length) {
+      users = await getAllUsers();
+    } else {
+      const response = await axios
+        .get(`${config.restAPI}/identity/search/${input}`)
+      if (response.status >= 200 && response.status <= 300) {
+        return response.data.users;
+      }
     }
-        
+  }
+  catch (err) {        
     return users;
+  }
+  return users;
 };
 
 export const userService = {
