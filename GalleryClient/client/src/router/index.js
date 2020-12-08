@@ -1,53 +1,45 @@
 import { createRouter, createWebHistory } from "vue-router";
-import Home from "@/views/Home/Home.vue";
-import Login from "@/views/Login/Login.vue";
-import Register from "@/views/Register/Register.vue";
-import SubmitPhoto from "@/views/SubmitPhoto/SubmitPhoto.vue";
-import PostDetails from "@/views/PostDetails/PostDetails.vue";
-import ProfileDetails from "@/views/ProfileDetails/ProfileDetails.vue";
-import EditPost from "@/views/EditPost/EditPost.vue";
-import Users from "@/views/Users/Users.vue";
 
 const routes = [
   {
     path: "/",
     name: "Home",
-    component: Home,
+    component: () => import("@/views/Home/Home.vue")
   },
   {
     path: "/login",
     name: "Login",
-    component: Login,
+    component: () => import("@/views/Login/Login.vue")
   },
   {
     path: "/register",
     name: "Register",
-    component: Register,
+    component: () => import("@/views/Register/Register.vue")
   },
   {
     path: "/submit",
     name: "Submit",
-    component: SubmitPhoto,
+    component: () => import("@/views/SubmitPhoto/SubmitPhoto.vue")
   },
   {
     path: "/:id",
     name: "Details",
-    component: PostDetails,
+    component: () => import("@/views/PostDetails/PostDetails.vue")
   },
   {
     path: "/profile/:id?",
     name: "ProfileDetails",
-    component: ProfileDetails,
+    component: () => import("@/views/ProfileDetails/ProfileDetails.vue")
   },
   {
     path: "/edit/:id",
     name: "EditPost",
-    component: EditPost,
+    component: () => import("@/views/EditPost/EditPost.vue")
   },
   {
     path: "/users",
     name: "Users",
-    component: Users,
+    component: () => import("@/views/Users/Users.vue")
   }
 ];
 
