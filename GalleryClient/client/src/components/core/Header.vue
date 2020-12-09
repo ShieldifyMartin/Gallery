@@ -46,7 +46,6 @@ export default defineComponent({
 
     function logout() {
       store.state.auth.dispatch("logout");
-      localStorage.setItem("token", "");
 
       router.push('/');
     }

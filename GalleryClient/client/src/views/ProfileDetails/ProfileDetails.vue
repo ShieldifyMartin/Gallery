@@ -142,7 +142,7 @@ export default defineComponent({
       const id = window.location.href.split("/")[4];
 
       if (!id) {
-        const profile = await profileService.get();
+        const profile = await profileService.get();        
         const userPosts = await profileService.getUserPosts(state.allPosts);
         const userLikedPosts = await profileService.getUserLikedPosts(
           state.allLikedPosts

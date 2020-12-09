@@ -1,8 +1,9 @@
-import config from "@/config";
 import axios from "axios";
+import Cookies from "js-cookie";
+import config from "@/config";
 
 const get = async () => {
-  const token = localStorage.getItem("token");
+  const token = Cookies.get("token");
 
   axios.defaults.headers = {
     "Content-Type": "application/json",
@@ -23,7 +24,7 @@ const get = async () => {
 };
 
 const getById = async (id) => {
-  const token = localStorage.getItem("token");
+  const token = Cookies.get("token");
 
   axios.defaults.headers = {
     "Content-Type": "application/json",
@@ -44,7 +45,7 @@ const getById = async (id) => {
 };
 
 const getUserPosts = async (page) => {
-  const token = localStorage.getItem("token");
+  const token = Cookies.get("token");
 
   axios.defaults.headers = {
     "Content-Type": "application/json",
@@ -65,7 +66,7 @@ const getUserPosts = async (page) => {
 };
 
 const getUserPostsById = async (page, id) => {
-  const token = localStorage.getItem("token");
+  const token = Cookies.get("token");
 
   axios.defaults.headers = {
     "Content-Type": "application/json",
@@ -86,7 +87,7 @@ const getUserPostsById = async (page, id) => {
 };
 
 const getUserLikedPosts = async (page) => {
-  const token = localStorage.getItem("token");
+  const token = Cookies.get("token");
 
   axios.defaults.headers = {
     "Content-Type": "application/json",
@@ -107,7 +108,7 @@ const getUserLikedPosts = async (page) => {
 };
 
 const getUserLikedPostsById = async (page, id) => {
-  const token = localStorage.getItem("token");
+  const token = Cookies.get("token");
 
   axios.defaults.headers = {
     "Content-Type": "application/json",
@@ -128,7 +129,7 @@ const getUserLikedPostsById = async (page, id) => {
 };
 
 const uploadProfileImage = async (picture) => {
-  const token = localStorage.getItem("token");
+  const token = Cookies.get("token");
 
   axios.defaults.headers = {
     "Content-Type": "application/json",

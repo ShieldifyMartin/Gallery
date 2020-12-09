@@ -1,4 +1,5 @@
 import axios from "axios";
+import Cookies from "js-cookie";
 import config from "@/config";
 import router from "../router";
 
@@ -13,7 +14,7 @@ const login = async (token, email, username, password) => {
     const response = await axios
       .post(`${config.restAPI}/identity/login`, body);
     if (response.data.token) {
-      localStorage.setItem("token", response.data.token);
+      Cookies.set("token", response.data.token, { expires: 27 });
     }
     return response.status;
   }

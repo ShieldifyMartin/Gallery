@@ -1,19 +1,21 @@
 import { createStore } from "vuex";
+import Cookies from "js-cookie";
 
 export default createStore({
   namespaced: true,
   state: {
-    token: "",    
-    isAuth: localStorage.getItem("token") !== "",
+    token: Cookies.get("token"),    
+    isAuth: Cookies.get("token") !== "",
   },
   mutations: {
     login(state) {
-      state.token = localStorage.getItem("token");      
-      state.isAuth = localStorage.getItem("token") !== "";
+      state.token = Cookies.get("token");
+      state.isAuth = Cookies.get("token") !== "";
     },
     logout(state) {
-      state.token = "";      
+      state.token = "";
       state.isAuth = false;
+      Cookies.set("token", "");
     },
   },
   actions: {
