@@ -10,13 +10,14 @@
         class="photo-upload"
         ref="picture"
         @change="handleFileUpload"
-      />
+      />      
       <input
         type="text"
         v-model="state.location"
         name="location"
+        id="location"
         placeholder="Location"
-      />
+      />      
       <input
         type="text"
         v-model="state.description"
