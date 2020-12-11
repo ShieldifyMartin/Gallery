@@ -58,6 +58,7 @@ export default defineComponent({
     watchEffect(async () => {
       if (state.category) {
         console.log("categoryyy : " + state.category);
+        
         state.posts = [];
       } else {
         const posts = await postService.get();
