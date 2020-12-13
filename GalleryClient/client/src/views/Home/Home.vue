@@ -16,11 +16,13 @@
           type="button"
           :id="category.id"
           class="tab-switch"
-          @click="setCategory(category.title)"
+          @click="setCategoryId(category.id)"
         />
         <label :for="category.id">
-          {{ category.title }}({{ category.posts && category.posts.length || 0 }})
-        </label>        
+          {{ category.title }}({{
+            (category.posts && category.posts.length) || 0
+          }})
+        </label>
       </li>
     </ul>
     <img v-if="state.loading" class="loader" src="@/assets/loading.gif" />
@@ -57,17 +59,16 @@ export default defineComponent({
 
     watchEffect(async () => {
       if (state.category) {
-        console.log("categoryyy : " + state.category);
-        
-        state.posts = [];
-      } else {
-        const posts = await postService.get();
-        const categories = await categoryService.get();
+        const posts = await categoryService.getPostsByCategory(state.category);
         
         state.posts = posts;
-        state.categories = categories;
+      } else {
+        const posts = await postService.get();
+        state.posts = posts;
         state.loading = false;
       }
+      const categories = await categoryService.get();
+      state.categories = categories;
     });
 
     const search = async () => {
@@ -76,15 +77,15 @@ export default defineComponent({
       state.posts = posts;
     };
 
-    const setCategory = (title) => {
-      state.category = title;
+    const setCategoryId = (id) => {
+      state.category = id;
     };
 
     return {
       state,
       getCategoriesLink,
       search,
-      setCategory,
+      setCategoryId,
     };
   },
 });
