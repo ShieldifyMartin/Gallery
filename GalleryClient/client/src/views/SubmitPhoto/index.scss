@@ -6,7 +6,7 @@
 
   .error {
     color: red;
-  }    
+  }
 
   input {
     width: 30em;
@@ -18,8 +18,8 @@
   }
 
   .photo-upload {
-    width: 25em;
-    text-align: center;
+    width: 20em;
+    margin: 1em auto;
   }
 
   .photo-upload-label {
@@ -30,6 +30,7 @@
     width: 20em;
     padding: 0.5em 1.5em;
     margin: 0 auto;
+    text-align: center;
   }
 
   .categories-dropdown {

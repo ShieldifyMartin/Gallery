@@ -19,9 +19,16 @@
           @click="setCategoryId(category.id)"
         />
         <label :for="category.id">
-          {{ category.title }}({{
-            (category.posts && category.posts.length) || 0
-          }})
+          <div v-if="state.category == category.id" class="clicked">
+            {{ category.title }}({{
+              (category.posts && category.posts.length) || 0
+            }})          
+          </div>
+          <div v-else>
+            {{ category.title }}({{
+              (category.posts && category.posts.length) || 0
+            }})
+          </div>
         </label>
       </li>
     </ul>
@@ -50,7 +57,7 @@ export default defineComponent({
       categories: [],
       searchInput: "",
       loading: true,
-      category: "",
+      category: ""      
     });
 
     const getCategoriesLink = (title) => {
