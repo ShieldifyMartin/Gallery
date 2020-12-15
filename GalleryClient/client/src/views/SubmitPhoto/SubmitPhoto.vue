@@ -3,21 +3,16 @@
     <h1>Submit photo</h1>
     <p class="error">{{ state.error }}</p>
     <form method="post" @submit.prevent="handleSubmit">
-      <label for="file" class="photo-upload-label">choose a picture</label>
-      <input
-        type="file"
-        id="file"
-        class="photo-upload"
-        ref="picture"
-        @change="handleFileUpload"
-      />      
+      <label for="file" class="upload-label">choose a picture</label>
+      <input type="file" id="file" class="file" size="80" ref="picture" @change="handleFileUpload" />
+      <img v-if="state.pictureBase64" :src="state.pictureBase64" class="uploaded-image" alt="upload"/>
       <input
         type="text"
         v-model="state.location"
         name="location"
         id="location"
         placeholder="Location"
-      />      
+      />
       <input
         type="text"
         v-model="state.description"
@@ -35,7 +30,7 @@
         >
       </select>
       <input type="submit" value="Create" class="submit-btn" />
-    </form>
+    </form>    
   </div>
 </template>
 
@@ -50,11 +45,12 @@ export default defineComponent({
     const state = reactive({
       categories: [],
       picture: null,
+      pictureBase64: null,
       location: "",
       description: "",
       categoryId: "",
       error: "",
-      maxSize: 15728640
+      maxSize: 15728640,
     });
 
     watchEffect(async () => {
@@ -73,6 +69,11 @@ export default defineComponent({
           state.error = "Too large picture!";
         } else {
           state.picture = file;
+            var fr = new FileReader();            
+            fr.readAsDataURL(file);
+            fr.onload = () => {
+              state.pictureBase64 = fr.result;              
+            }
         }
       } else {
         state.error = "Only one photo is allowed!";
@@ -95,7 +96,7 @@ export default defineComponent({
         description,
         categoryId
       );
-      
+
       if (response == 401) {
         router.push("/login");
       } else if (response > 400) {
@@ -127,9 +128,9 @@ export default defineComponent({
     return {
       state,
       handleSubmit,
-      handleFileUpload
+      handleFileUpload      
     };
-  }
+  },
 });
 </script>
 
