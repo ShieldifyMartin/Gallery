@@ -87,7 +87,7 @@
             var posts = this.posts
                 .All()
                 .OrderByDescending(p => p.Likes)
-                .Where(p => p.CategoryId == categoryId)                
+                .Where(p => p.CategoryId == categoryId)
                 .ToList();
 
             return posts;
