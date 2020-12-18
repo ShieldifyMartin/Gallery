@@ -1,4 +1,4 @@
-.home {
+.home {  
   .search {
     position: relative;
 
@@ -48,9 +48,11 @@
   }
 
   .categories {
-    display: flex;
+    display: grid;
+    position: relative;
+    grid-template-columns: repeat(auto-fill, minmax(8rem, 4fr));
     width: 35em;
-    justify-content: space-between;
+    grid-gap: 1em;
     margin: 2em auto;
 
     .tab-switch {
@@ -58,10 +60,11 @@
     }
 
     li {
+      margin: 0 auto;
       width: 5em;
       margin: 0 auto;
       text-align: center;
-      padding: 1em 1.3em;
+      padding: 0.9em 1.3em;
       background-color: lightgray;
       text-decoration: none;
       color: #000;
@@ -129,6 +132,25 @@
   }
 
   @media only screen and (max-width: 580px) {
+    .categories {
+      width: 18em;
+      grid-gap: 1em;    
+
+      li {
+        padding: 0.5em 1em;
+      }
+    }
+
+    .search {
+      position: relative;
+  
+      .search-input {
+        width: 10em;
+      }
+    }
+  }
+
+  @media only screen and (max-width: 580px) {
     .posts {
       display: block;
       padding: 0 0.5em;
@@ -140,6 +162,17 @@
 
     .posts a:first-child {
       margin-top: 0;
+    }
+  }
+
+  @media only screen and (max-width: 300px) {
+    .categories {
+      width: 10em;
+      grid-gap: 1em;    
+
+      li {
+        padding: 0.5em 1em;
+      }
     }
   }
 }
