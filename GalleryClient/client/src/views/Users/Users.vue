@@ -6,7 +6,7 @@
         type="text"
         v-model="state.searchInput"
         class="search-input"
-        placeholder="Search free high-resolution photos"
+        placeholder="Search photo"
         v-on:keyup.enter="search"
       />
     </div>
