@@ -1,6 +1,5 @@
-.details {
-  margin-top: 1em;
-  margin-bottom: 2em;
+.details {  
+  margin: 1em auto 2em auto;
 
   .message {
     color: red;
@@ -43,11 +42,11 @@
 
   .post-header {
     display: flex;
-    margin: 0 auto;
+    margin: 2em auto;
 
     div,
     .profile-image {
-      width: 9%;
+      width: 3.5em;
       margin-left: auto;
       margin-right: auto;
     }
@@ -70,16 +69,15 @@
 
     .author-icons {
       display: flex;
+      margin-top: 0.3em;
     }
 
-    .edit-icon {
-      width: 1.4em;
-      margin-right: 0.2em;
-      margin-left: -1em;
+    .edit-icon {      
+      width: 1.8em;      
     }
 
     .delete-icon {
-      width: 1.1em;
+      width: 1.4em;
     }
   }
 
@@ -87,19 +85,19 @@
     width: 25em;
     height: auto;
   }
-
-  .calendar-icon,
-  .info-icon,
-  .location-icon {
-    width: 1.5em;
-    height: 1.5em;
-    margin-right: 0.3em;
-  }  
-
+  
   .post-footer {
     margin: 0 auto;
     width: 15em;
     text-align: center;
+    
+    .calendar-icon,
+    .info-icon,
+    .location-icon {
+      width: 1.5em;
+      height: 1.5em;
+      margin-right: 0.3em;
+    } 
 
     p {
       width: 7em;      
@@ -113,6 +111,24 @@
     div {
       display: flex;
       margin-top: 1em;
+    }
+  }
+
+  @media only screen and (max-width: 500px) {   
+    .post-image {
+      width: 15em;
+      height: auto;      
+    }
+    
+    .post-header {
+      .profile-image {        
+        margin: 0;
+      }
+      
+      div,
+      .profile-image {        
+        margin: 0 auto;        
+      }
     }
   }
 }
