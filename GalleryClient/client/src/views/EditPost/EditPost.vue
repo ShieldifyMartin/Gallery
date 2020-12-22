@@ -3,11 +3,18 @@
     <h1>Edit photo</h1>
     <p class="error">{{ state.error }}</p>
     <form method="post" @submit.prevent="handleSubmit">
-      <label for="file" class="photo-upload-label">choose a picture</label>
+      <img
+        v-if="state.pictureBase64"
+        :src="state.pictureBase64"
+        class="uploaded-image"
+        alt="upload"
+      />
+      <label for="file" class="upload-label">choose a picture</label>
       <input
         type="file"
         id="file"
-        class="photo-upload"
+        class="file"
+        size="80"
         ref="picture"
         @change="handleFileUpload"
       />
@@ -48,11 +55,11 @@ export default defineComponent({
   setup() {
     const state = reactive({
       categories: [],
+      picture: null,
+      pictureBase64: null,
       id: null,
       location: "",
-      description: "",
-      categoryId: "",
-      picture: null,
+      description: "",      
       error: "",
       maxSize: 15728640,
     });
@@ -79,6 +86,11 @@ export default defineComponent({
           state.error = "Too large picture!";
         } else {
           state.picture = file;
+          var fr = new FileReader();
+          fr.readAsDataURL(file);
+          fr.onload = () => {
+            state.pictureBase64 = fr.result;
+          };
         }
       } else {
         state.error = "Only one photo is allowed!";

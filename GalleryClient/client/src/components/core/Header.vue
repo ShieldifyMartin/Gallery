@@ -90,9 +90,11 @@ export default defineComponent({
   }
 
   @media only screen and (max-width: 900px) {
-    .profile-picture img {
-      margin-left: 0;
+    .profile-picture {
+      img {
+        margin-left: 0;
+      }
     }
-  }
+  }  
 }
 </style>
