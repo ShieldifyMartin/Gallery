@@ -86,7 +86,7 @@
   .posts {
     display: grid;
     position: relative;
-    grid-template-columns: repeat(auto-fill, minmax(20rem, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(20rem, 2fr));
     grid-gap: 1em;
     margin: 2em auto;
     padding: 0 5em;
@@ -98,6 +98,7 @@
 
     img {
       width: 100%;
+      max-width: 30em;
       height: 25em;
       object-fit: cover;
       transition: 0.3s ease-in-out;
