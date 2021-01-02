@@ -135,14 +135,14 @@ export default defineComponent({
       picture: "",
       error: "",
       maxSize: 15728640,
-      isGuest: true
+      isGuest: true,
     });
 
     watchEffect(async () => {
       const id = window.location.href.split("/")[4];
 
       if (!id) {
-        const profile = await profileService.get();        
+        const profile = await profileService.get();
         const userPosts = await profileService.getUserPosts(state.allPosts);
         const userLikedPosts = await profileService.getUserLikedPosts(
           state.allLikedPosts
@@ -158,8 +158,10 @@ export default defineComponent({
           state.allPosts,
           id
         );
-        const userLikedPosts = await profileService.getUserLikedPosts(
-          state.allLikedPosts);
+        const userLikedPosts = await profileService.getUserLikedPostsById(
+          state.allLikedPosts,
+          id
+        );
 
         state.userPosts = userPosts.posts;
         state.userLikedPosts = userLikedPosts.posts;
@@ -169,13 +171,13 @@ export default defineComponent({
       }
     });
 
-    const getPostLink = id => "/" + id;
+    const getPostLink = (id) => "/" + id;
 
     const clickImage = () => {
       document.querySelector("#upload").click();
     };
 
-    const uploadImage = async e => {
+    const uploadImage = async (e) => {
       let file = e.target.files[0];
 
       if (!e.target.files.length) return;
@@ -234,9 +236,9 @@ export default defineComponent({
       loadMorePosts,
       loadLessPosts,
       loadMoreLikedPosts,
-      loadLessLikedPosts
+      loadLessLikedPosts,
     };
-  }
+  },
 });
 </script>
 

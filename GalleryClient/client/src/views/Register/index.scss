@@ -20,3 +20,17 @@
     color: #ffff;
   }
 }
+
+@media only screen and (max-width: 700px) {
+  .register {
+    input {
+      width: 15em;
+      border: 1px solid #000;
+    }
+
+    .submit-btn {
+      width: 15em;
+      border: 1px solid #000;
+    }
+  }
+}
