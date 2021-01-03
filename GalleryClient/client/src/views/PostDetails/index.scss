@@ -131,4 +131,20 @@
       }
     }
   }
+
+  @media only screen and (max-width: 1200px) {
+    .delete-alert {
+      position: static;
+      width: 20em;
+      margin: 0 auto;
+    }
+  }
+
+  @media only screen and (max-width: 600px) {   
+    .delete-alert {
+      position: static;
+      width: 15em;
+      margin: 0 auto;
+    }
+  }
 }
