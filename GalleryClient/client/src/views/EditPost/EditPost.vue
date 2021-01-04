@@ -59,7 +59,8 @@ export default defineComponent({
       pictureBase64: null,
       id: null,
       location: "",
-      description: "",      
+      description: "",
+      categoryId: null,
       error: "",
       maxSize: 15728640,
     });
@@ -67,13 +68,24 @@ export default defineComponent({
     watchEffect(async () => {
       const id = window.location.href.split("/")[4];
       const post = await postService.getById(id);
+      console.log(post);
       const categories = await categoryService.get();
 
       state.categories = categories;
       state.id = post.id;
-      state.description = post.description;
-      state.location = post.location;
-      state.categoryId = post.categoryId;
+      state.description = post.description;      
+
+      if (post.location == "null") {
+        state.location = "";
+      } else {
+        state.location = post.location;
+      }
+
+      if(post.categoryId == null) {
+        state.categoryId = "";
+      } else {
+        state.categoryId = post.categoryId;
+      }
     });
 
     function handleFileUpload(e) {

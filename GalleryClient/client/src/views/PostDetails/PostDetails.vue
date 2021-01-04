@@ -86,8 +86,8 @@
           class="location-icon"
           src="@/assets/icons/map-marker-solid.svg"
           alt="location"
-        />
-        <p>{{ state.post.location != "null" || "none" }}</p>
+        />        
+        <p>{{ state.post.location !== "null" ? state.post.location : "none" }}</p>
       </div>
     </div>
   </div>
