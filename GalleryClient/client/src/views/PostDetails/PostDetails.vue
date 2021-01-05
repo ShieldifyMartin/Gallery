@@ -79,14 +79,14 @@
           src="@/assets/icons/info-solid.svg"
           alt="calendar"
         />
-        <p>{{ state.post.description }}</p>
+        <p>{{ state.post.description }}</p>        
       </div>
       <div v-if="state.post.location">
         <img
           class="location-icon"
           src="@/assets/icons/map-marker-solid.svg"
           alt="location"
-        />        
+        />
         <p>{{ state.post.location !== "null" ? state.post.location : "none" }}</p>
       </div>
     </div>

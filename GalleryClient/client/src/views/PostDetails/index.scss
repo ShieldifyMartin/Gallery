@@ -1,4 +1,4 @@
-.details {  
+.details {
   margin: 1em auto 2em auto;
 
   .message {
@@ -72,8 +72,8 @@
       margin-top: 0.3em;
     }
 
-    .edit-icon {      
-      width: 1.8em;      
+    .edit-icon {
+      width: 1.8em;
     }
 
     .delete-icon {
@@ -85,23 +85,24 @@
     width: 25em;
     height: auto;
   }
-  
+
   .post-footer {
     margin: 0 auto;
     width: 15em;
     text-align: center;
-    
+
     .calendar-icon,
     .info-icon,
     .location-icon {
       width: 1.5em;
       height: 1.5em;
       margin-right: 0.3em;
-    } 
+    }
 
     p {
-      width: 7em;      
-      text-align: left;
+      width: 9em;      
+      overflow-wrap: break-word;
+      word-wrap: break-word;
     }
 
     img {
@@ -114,20 +115,20 @@
     }
   }
 
-  @media only screen and (max-width: 500px) {   
+  @media only screen and (max-width: 500px) {
     .post-image {
       width: 15em;
-      height: auto;      
+      height: auto;
     }
-    
+
     .post-header {
-      .profile-image {        
+      .profile-image {
         margin: 0;
       }
-      
+
       div,
-      .profile-image {        
-        margin: 0 auto;        
+      .profile-image {
+        margin: 0 auto;
       }
     }
   }
@@ -140,7 +141,7 @@
     }
   }
 
-  @media only screen and (max-width: 600px) {   
+  @media only screen and (max-width: 600px) {
     .delete-alert {
       position: static;
       width: 15em;
