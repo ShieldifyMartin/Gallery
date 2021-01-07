@@ -4,7 +4,7 @@
     {
         public class Post
         {
-            public const int MaxDescriptionLength = 2000;
+            public const int MaxDescriptionLength = 100;
             public const int MaxLocationLength = 40;
         }
 
@@ -16,7 +16,7 @@
 
         public class Category
         {
-            public const int MaxTitleLength = 25;
+            public const int MaxTitleLength = 12;
         }
     }
 }

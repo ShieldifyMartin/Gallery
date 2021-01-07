@@ -14,6 +14,10 @@
     <Compile Remove="Data\Migrations\20200816101419_AddVoting.Designer.cs" />
     <Compile Remove="Data\Migrations\20200816102628_AddVoting.cs" />
     <Compile Remove="Data\Migrations\20200816102628_AddVoting.Designer.cs" />
+    <Compile Remove="Data\Migrations\20210105134319_FixConstraints.cs" />
+    <Compile Remove="Data\Migrations\20210105134319_FixConstraints.Designer.cs" />
+    <Compile Remove="Data\Migrations\20210105134719_ModifyConstraints.cs" />
+    <Compile Remove="Data\Migrations\20210105134719_ModifyConstraints.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>
