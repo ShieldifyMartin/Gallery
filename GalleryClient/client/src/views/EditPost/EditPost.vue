@@ -1,7 +1,6 @@
 <template>
   <div class="edit-photo">
-    <h1>Edit photo</h1>
-    <p class="error">{{ state.error }}</p>
+    <h1>Edit photo</h1>    
     <form method="post" @submit.prevent="handleSubmit">
       <img
         v-if="state.pictureBase64"
@@ -47,9 +46,11 @@
 
 <script lang="ts">
 import { defineComponent, reactive, watchEffect } from "vue";
+import Swal from 'sweetalert2';
 import { postService, categoryService } from "../../services";
 import router from "../../router";
 import store from "../../store";
+import validate from './validator';
 
 export default defineComponent({
   setup() {
@@ -60,8 +61,7 @@ export default defineComponent({
       id: null,
       location: "",
       description: "",
-      categoryId: null,
-      error: "",
+      categoryId: null,      
       maxSize: 15728640,
     });
 
@@ -88,14 +88,21 @@ export default defineComponent({
       }
     });
 
-    function handleFileUpload(e) {
+   function handleFileUpload(e) {
       let file = e.target.files[0];
 
       if (!e.target.files.length) return;
 
       if (e.target.files.length === 1) {
         if (file.size > state.maxSize) {
-          state.error = "Too large picture!";
+          Swal.fire({
+            position: 'top-end',
+            icon: 'error',
+            title: 'Too large picture!',
+            showConfirmButton: false,
+            timer: 1500,
+            width: 300
+          });          
         } else {
           state.picture = file;
           var fr = new FileReader();
@@ -105,13 +112,20 @@ export default defineComponent({
           };
         }
       } else {
-        state.error = "Only one photo is allowed!";
+        Swal.fire({
+          position: 'top-end',
+          icon: 'error',
+          title: 'Only one photo is allowed!',
+          showConfirmButton: false,
+          timer: 1500,
+          width: 300
+        });        
       }
     }
 
     async function handleSubmit() {
       const { id, location, description, categoryId } = state;
-      const isCorrect = validate();
+      const isCorrect = validate(state);
 
       if (!isCorrect) {
         return;
@@ -129,33 +143,31 @@ export default defineComponent({
       if (response === 401) {
         router.push("/login");
       } else if (response >= 200 && response < 300) {
+        Swal.fire({
+          position: 'top-end',
+          icon: 'success',
+          title: 'Successful!',
+          showConfirmButton: false,
+          timer: 1500,
+          width: 300
+        });
         router.push("/" + state.id);
       } else {
-        state.error = "Something went wrong!";
+        Swal.fire({
+          position: 'top-end',
+          icon: 'error',
+          title: 'Something went wrong!',
+          showConfirmButton: false,
+          timer: 1500,
+          width: 300
+        });
       }
     }
-
-    const validate = () => {
-      if (state.description && state.description.length === 0) {
-        state.error = "Invalid data!";
-        return false;
-      } else if (state.description && state.description.length > 2000) {
-        state.error = "Max description length is 2000!";
-        return false;
-      }
-
-      if (state.location && state.location.length > 40) {
-        state.error = "Max location length is 40!";
-        return false;
-      }
-
-      return true;
-    };
 
     return {
       state,
       handleFileUpload,
-      handleSubmit,
+      handleSubmit
     };
   },
 });

@@ -95,7 +95,14 @@ export default defineComponent({
           };
         }
       } else {
-        state.error = "Only one photo is allowed!";
+        Swal.fire({
+          position: 'top-end',
+          icon: 'error',
+          title: 'Only one photo is allowed!',
+          showConfirmButton: false,
+          timer: 1500,
+          width: 300
+        });        
       }
     }
 
