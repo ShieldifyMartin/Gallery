@@ -1,6 +1,6 @@
 <template>
   <div class="submit-photo">
-    <h1>Submit photo</h1>    
+    <h1>Submit photo</h1>
     <form method="post" @submit.prevent="handleSubmit">
       <img
         v-if="state.pictureBase64"
@@ -47,11 +47,11 @@
 
 <script lang="ts">
 import { defineComponent, reactive, watchEffect } from "vue";
-import Swal from 'sweetalert2';
+import Swal from "sweetalert2";
 import router from "../../router";
 import store from "../../store";
 import { postService, categoryService } from "../../services";
-import validate from './validator';
+import validate from "./validator";
 
 export default defineComponent({
   setup() {
@@ -61,7 +61,7 @@ export default defineComponent({
       pictureBase64: null,
       location: "",
       description: "",
-      categoryId: "",      
+      categoryId: "",
       maxSize: 15728640,
     });
 
@@ -79,13 +79,13 @@ export default defineComponent({
       if (e.target.files.length === 1) {
         if (file.size > state.maxSize) {
           Swal.fire({
-            position: 'top-end',
-            icon: 'error',
-            title: 'Too large picture!',
+            position: "top-end",
+            icon: "error",
+            title: "Too large picture!",
             showConfirmButton: false,
             timer: 1500,
-            width: 300
-          });          
+            width: 300,
+          });
         } else {
           state.picture = file;
           var fr = new FileReader();
@@ -96,13 +96,13 @@ export default defineComponent({
         }
       } else {
         Swal.fire({
-          position: 'top-end',
-          icon: 'error',
-          title: 'Only one photo is allowed!',
+          position: "top-end",
+          icon: "error",
+          title: "Only one photo is allowed!",
           showConfirmButton: false,
           timer: 1500,
-          width: 300
-        });        
+          width: 300,
+        });
       }
     }
 
@@ -125,23 +125,23 @@ export default defineComponent({
 
       if (response == 401) {
         router.push("/login");
-      } else if (response > 400) {        
+      } else if (response > 400) {
         Swal.fire({
-            position: 'top-end',
-            icon: 'error',
-            title: 'Something went wrong!',
-            showConfirmButton: false,
-            timer: 1500,
-            width: 300
+          position: "top-end",
+          icon: "error",
+          title: "Something went wrong!",
+          showConfirmButton: false,
+          timer: 1500,
+          width: 300,
         });
       } else {
         Swal.fire({
-            position: 'top-end',
-            icon: 'success',
-            title: 'Successful!',
-            showConfirmButton: false,
-            timer: 1500,
-            width: 300
+          position: "top-end",
+          icon: "success",
+          title: "Successful!",
+          showConfirmButton: false,
+          timer: 1500,
+          width: 300,
         });
         router.push("/");
       }
@@ -150,7 +150,7 @@ export default defineComponent({
     return {
       state,
       handleSubmit,
-      handleFileUpload,
+      handleFileUpload
     };
   },
 });

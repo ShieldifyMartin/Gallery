@@ -1,19 +1,5 @@
 <template>
-  <div class="details">
-    <p v-if="state.message" class="message">{{ state.message }}</p>
-    <div v-if="state.deleteAlert" class="delete-alert">
-      <h1>Delete Post</h1>
-      <p>Are you sure you want to delete your post?</p>
-
-      <div class="clearfix">
-        <button type="button" class="cancel-btn" @click="toggleDeletePostAlert">
-          Cancel
-        </button>
-        <button type="button" class="delete-btn" @click="deletePost">
-          Delete
-        </button>
-      </div>
-    </div>
+  <div class="details">    
     <div class="post-header">
       <router-link :to="getProfileLink()" class="profile-image">
         <img
@@ -96,6 +82,7 @@
 <script lang="ts">
 import { defineComponent, reactive, watchEffect } from "vue";
 import moment from "moment";
+import Swal from 'sweetalert2';
 import router from "../../router";
 import store from "../../store";
 import { postService, profileService } from "../../services";
@@ -105,11 +92,9 @@ export default defineComponent({
     const state = reactive({
       post: [],
       likes: 0,
-      isLiked: false,
-      deleteAlert: false,
+      isLiked: false,      
       createdOn: null,
-      message: "",
-      isAuthor: false,
+      isAuthor: false
     });
 
     const getProfileLink = () => "/profile/" + state.post.authorId;
@@ -141,8 +126,15 @@ export default defineComponent({
       if (status == 200) {
         state.likes = state.post.likes + 1;
         state.isLiked = true;
-      } else if (status == 400) {
-        state.message = "You had already liked this post.";
+      } else if (status == 400) {        
+        Swal.fire({
+          position: 'top-end',
+          icon: 'error',
+          title: 'You had already liked this post!',
+          showConfirmButton: false,
+          timer: 1500,
+          width: 300
+        });
       } else {
         router.push("login");
       }
@@ -157,14 +149,32 @@ export default defineComponent({
         state.likes = state.likes - 1;
         state.isLiked = false;
       } else if (status == 400) {
-        state.message = "You had not liked this post.";
+        Swal.fire({
+          position: 'top-end',
+          icon: 'error',
+          title: 'You did not like this post!',
+          showConfirmButton: false,
+          timer: 1500,
+          width: 300
+        });
       } else {
         router.push("login");
       }
     };
 
     const toggleDeletePostAlert = () => {
-      state.deleteAlert = !state.deleteAlert;
+      Swal.fire({
+        position: "center",
+        icon: "error",
+        title: "Do you want to delete the post!",
+        showConfirmButton: true,
+        showCancelButton: true,
+        width: 500,
+      }).then((result) => {        
+        if (result.isConfirmed) {
+          deletePost();          
+        }
+      })
     };
 
     const deletePost = async () => {
@@ -174,10 +184,24 @@ export default defineComponent({
       );
 
       if (status == 200) {
+        Swal.fire({
+          position: "top-end",
+          icon: "success",
+          title: "Successful deleted!",
+          showConfirmButton: false,
+          timer: 1500,
+          width: 300
+        });
         router.push("/");
       } else if (status == 400) {
-        state.message = "Something went wrong.";
-        toggleDeletePostAlert();
+        Swal.fire({
+          position: 'top-end',
+          icon: 'error',
+          title: 'Something went wrong!',
+          showConfirmButton: false,
+          timer: 1500,
+          width: 300
+        });
       } else {
         router.push("login");
       }
@@ -190,7 +214,7 @@ export default defineComponent({
       like,
       unlike,
       toggleDeletePostAlert,
-      deletePost,
+      deletePost
     };
   },
 });
