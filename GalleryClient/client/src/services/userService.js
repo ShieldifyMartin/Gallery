@@ -3,12 +3,12 @@ import Cookies from "js-cookie";
 import config from "@/config";
 import router from "../router";
 
-const login = async (token, email, username, password) => {
+const login = async (token, username, password) => {
   axios.defaults.headers = {
     "Content-Type": "application/json",
     Authorization: "Bearer " + token,
   };
-  const body = JSON.stringify({ email, username, password });
+  const body = JSON.stringify({ username, password });
 
   try {
     const response = await axios

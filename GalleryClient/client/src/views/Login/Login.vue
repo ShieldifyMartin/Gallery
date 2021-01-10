@@ -2,14 +2,7 @@
   <div class="login">
     <h1>Login</h1>
     <p class="error">{{ state.error }}</p>
-    <form method="post" @submit.prevent="handleSubmit">
-      <input
-        type="email"
-        v-model="state.email"
-        name="email"
-        placeholder="Email"
-        required
-      />
+    <form method="post" @submit.prevent="handleSubmit">     
       <input
         type="text"
         v-model="state.username"
@@ -39,19 +32,17 @@ import { userService } from "../../services";
 export default defineComponent({
   name: "Login",
   setup() {
-    const state = reactive({
-      email: "",
+    const state = reactive({      
       username: "",
       password: "",
       error: "",
     });
 
     async function handleSubmit() {
-      const { email, username, password } = state;
+      const { username, password } = state;
 
       const status = await userService.login(
-        store.state.auth.state.token,
-        email,
+        store.state.auth.state.token,        
         username,
         password
       );
