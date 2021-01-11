@@ -1,8 +1,7 @@
 <template>
   <div class="login">
     <h1>Login</h1>
-    <p class="error">{{ state.error }}</p>
-    <form method="post" @submit.prevent="handleSubmit">     
+    <form method="post" @submit.prevent="handleSubmit">
       <input
         type="text"
         v-model="state.username"
@@ -25,6 +24,7 @@
 
 <script lang="ts">
 import { defineComponent, reactive } from "vue";
+import Swal from "sweetalert2";
 import store from "../../store";
 import router from "../../router";
 import { userService } from "../../services";
@@ -32,17 +32,16 @@ import { userService } from "../../services";
 export default defineComponent({
   name: "Login",
   setup() {
-    const state = reactive({      
+    const state = reactive({
       username: "",
       password: "",
-      error: "",
     });
 
     async function handleSubmit() {
       const { username, password } = state;
 
       const status = await userService.login(
-        store.state.auth.state.token,        
+        store.state.auth.state.token,
         username,
         password
       );
@@ -51,7 +50,14 @@ export default defineComponent({
         store.state.auth.dispatch("login");
         router.push("/");
       } else {
-        state.error = "Something went wrong!";
+        Swal.fire({
+          position: "top-end",
+          icon: "error",
+          title: "Something went wrong!",
+          showConfirmButton: false,
+          timer: 1500,
+          width: 300,
+        });
         state.password = "";
       }
     }
