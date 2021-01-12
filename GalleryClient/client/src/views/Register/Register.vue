@@ -31,7 +31,9 @@
 
 <script lang="ts">
 import { defineComponent, reactive } from "vue";
-import store from '../../store';
+import Swal from "sweetalert2";
+import store from "../../store";
+import validate from "./validator";
 import { userService } from "../../services";
 
 export default defineComponent({
@@ -41,17 +43,16 @@ export default defineComponent({
       email: "",
       username: "",
       password: "",
-      error: ""
     });
 
     const handleSubmit = async () => {
       const { email, username, password } = state;
-      const isCorrect = validate();
+      const isCorrect = validate(state);
 
       if (!isCorrect) {
         return;
       }
-      
+
       var message = await userService.register(
         store.state.auth.state.token,
         email,
@@ -59,37 +60,21 @@ export default defineComponent({
         password
       );
 
-      state.error = message;
-    };
-
-    const validate = () => {
-      if (
-        state.email.length === 0 ||
-        state.username.length === 0 ||
-        state.password.length === 0
-      ) {
-        state.error = "Invalid date!";
-        return false;
-      }
-
-      if (state.email.length < 4) {
-        state.error = "Invalid email!";
-        return false;
-      }
-
-      if (state.password.length < 6) {
-        state.error = "Invalid password!";
-        return false;
-      }
-
-      return true;
+      Swal.fire({
+        position: "top-end",
+        icon: "error",
+        title: message,
+        showConfirmButton: false,
+        timer: 1500,
+        width: 300,
+      });
     };
 
     return {
       state,
-      handleSubmit
+      handleSubmit,
     };
-  }
+  },
 });
 </script>
 
