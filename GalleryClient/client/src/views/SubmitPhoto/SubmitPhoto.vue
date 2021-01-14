@@ -63,7 +63,7 @@ export default defineComponent({
       description: "",
       categoryId: "",
       maxSize: 15728640,
-      isMobile: screen.width <= 700,
+      isMobile: screen.width <= 700
     });
 
     watchEffect(async () => {
@@ -125,8 +125,8 @@ export default defineComponent({
 
       if (response == 401) {
         router.push("/login");
-      } else if (response >= 400) {
-        Swal.fire({
+      } else if (response >= 400) {       
+       Swal.fire({
           position: state.isMobile ? "top" : "top-end",
           icon: "error",
           title: "Something went wrong!",
@@ -134,7 +134,7 @@ export default defineComponent({
           timer: 1500,
           width: state.isMobile ? 250 : 300,
         });
-      } else {
+      } else {        
         Swal.fire({
           position: state.isMobile ? "top" : "top-end",
           icon: "success",
@@ -150,7 +150,7 @@ export default defineComponent({
     return {
       state,
       handleSubmit,
-      handleFileUpload,
+      handleFileUpload
     };
   },
 });
