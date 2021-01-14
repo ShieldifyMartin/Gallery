@@ -66,9 +66,9 @@ export default defineComponent({
     }
 
     function logout() {
-      store.state.auth.dispatch("logout");
-
       router.push("/");
+      toggleMenu();
+      store.state.auth.dispatch("logout");
     }
 
     return {

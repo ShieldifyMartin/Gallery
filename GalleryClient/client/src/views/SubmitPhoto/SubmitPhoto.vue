@@ -63,6 +63,7 @@ export default defineComponent({
       description: "",
       categoryId: "",
       maxSize: 15728640,
+      isMobile: screen.width <= 700,
     });
 
     watchEffect(async () => {
@@ -79,12 +80,12 @@ export default defineComponent({
       if (e.target.files.length === 1) {
         if (file.size > state.maxSize) {
           Swal.fire({
-            position: "top-end",
+            position: state.isMobile ? "top" : "top-end",
             icon: "error",
             title: "Too large picture!",
             showConfirmButton: false,
             timer: 1500,
-            width: 300,
+            width: state.isMobile ? 250 : 300,
           });
         } else {
           state.picture = file;
@@ -96,19 +97,18 @@ export default defineComponent({
         }
       } else {
         Swal.fire({
-          position: "top-end",
+          position: state.isMobile ? "top" : "top-end",
           icon: "error",
           title: "Only one photo is allowed!",
           showConfirmButton: false,
           timer: 1500,
-          width: 300,
+          width: state.isMobile ? 250 : 300,
         });
       }
     }
 
     async function handleSubmit() {
       const { picture, location, description, categoryId } = state;
-
       const isCorrect = validate(state);
 
       if (!isCorrect) {
@@ -125,23 +125,23 @@ export default defineComponent({
 
       if (response == 401) {
         router.push("/login");
-      } else if (response > 400) {
+      } else if (response >= 400) {
         Swal.fire({
-          position: "top-end",
+          position: state.isMobile ? "top" : "top-end",
           icon: "error",
           title: "Something went wrong!",
           showConfirmButton: false,
           timer: 1500,
-          width: 300,
+          width: state.isMobile ? 250 : 300,
         });
       } else {
         Swal.fire({
-          position: "top-end",
+          position: state.isMobile ? "top" : "top-end",
           icon: "success",
           title: "Successful!",
           showConfirmButton: false,
           timer: 1500,
-          width: 300,
+          width: state.isMobile ? 250 : 300,
         });
         router.push("/");
       }
@@ -150,7 +150,7 @@ export default defineComponent({
     return {
       state,
       handleSubmit,
-      handleFileUpload
+      handleFileUpload,
     };
   },
 });
