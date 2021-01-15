@@ -35,7 +35,7 @@ export default defineComponent({
     const state = reactive({
       username: "",
       password: "",
-      isMobile: screen.width <= 700
+      isMobile: screen.width <= 700,
     });
 
     async function handleSubmit() {
@@ -56,6 +56,7 @@ export default defineComponent({
           icon: "error",
           title: "Something went wrong!",
           showConfirmButton: false,
+          timer: 1500,
           width: state.isMobile ? 250 : 300,
         });
         state.password = "";

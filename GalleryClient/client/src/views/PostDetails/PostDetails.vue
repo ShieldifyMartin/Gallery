@@ -1,5 +1,5 @@
 <template>
-  <div class="details">    
+  <div class="details">
     <div class="post-header">
       <router-link :to="getProfileLink()" class="profile-image">
         <img
@@ -48,7 +48,11 @@
     </div>
 
     <img v-if="state.loading" class="loader" src="@/assets/loading.gif" />
-    <img :src="state.post.picture" class="post-image" :alt="state.post.description" /><br />
+    <img
+      :src="state.post.picture"
+      class="post-image"
+      :alt="state.post.description"
+    /><br />
 
     <div class="post-footer">
       <div>
@@ -65,7 +69,7 @@
           src="@/assets/icons/info-solid.svg"
           alt="calendar"
         />
-        <p>{{ state.post.description }}</p>        
+        <p>{{ state.post.description }}</p>
       </div>
       <div v-if="state.post.location">
         <img
@@ -73,7 +77,9 @@
           src="@/assets/icons/map-marker-solid.svg"
           alt="location"
         />
-        <p>{{ state.post.location !== "null" ? state.post.location : "none" }}</p>
+        <p>
+          {{ state.post.location !== "null" ? state.post.location : "none" }}
+        </p>
       </div>
     </div>
   </div>
@@ -82,7 +88,7 @@
 <script lang="ts">
 import { defineComponent, reactive, watchEffect } from "vue";
 import moment from "moment";
-import Swal from 'sweetalert2';
+import Swal from "sweetalert2";
 import router from "../../router";
 import store from "../../store";
 import { postService, profileService } from "../../services";
@@ -92,9 +98,10 @@ export default defineComponent({
     const state = reactive({
       post: [],
       likes: 0,
-      isLiked: false,      
+      isLiked: false,
       createdOn: null,
-      isAuthor: false
+      isAuthor: false,
+      isMobile: screen.width <= 700,
     });
 
     const getProfileLink = () => "/profile/" + state.post.authorId;
@@ -123,20 +130,29 @@ export default defineComponent({
         state.post.id
       );
 
-      if (status == 200) {
+      if (status === 200) {
         state.likes = state.post.likes + 1;
         state.isLiked = true;
-      } else if (status == 400) {        
+      } else if (status === 401) {
+        router.push("login");
+      } else if (status === 400) {
         Swal.fire({
-          position: 'top-end',
-          icon: 'error',
-          title: 'You had already liked this post!',
+          position: state.isMobile ? "top" : "top-end",
+          icon: "error",
+          title: "You had already liked this post!",
           showConfirmButton: false,
           timer: 1500,
-          width: 300
+          width: state.isMobile ? 250 : 300,
         });
       } else {
-        router.push("login");
+        Swal.fire({
+          position: state.isMobile ? "top" : "top-end",
+          icon: "error",
+          title: "Something went wrong!",
+          showConfirmButton: false,
+          timer: 1500,
+          width: state.isMobile ? 250 : 300,
+        });
       }
     };
 
@@ -145,20 +161,29 @@ export default defineComponent({
         store.state.auth.state.token,
         state.post.id
       );
-      if (status == 200) {
+      if (status === 200) {
         state.likes = state.likes - 1;
         state.isLiked = false;
-      } else if (status == 400) {
+      } else if (status === 400) {
         Swal.fire({
-          position: 'top-end',
-          icon: 'error',
-          title: 'You did not like this post!',
+          position: state.isMobile ? "top" : "top-end",
+          icon: "error",
+          title: "You did not like this post!",
           showConfirmButton: false,
           timer: 1500,
-          width: 300
+          width: state.isMobile ? 250 : 300,
         });
-      } else {
+      } else if (status === 401) {
         router.push("login");
+      } else {
+        Swal.fire({
+          position: state.isMobile ? "top" : "top-end",
+          icon: "error",
+          title: "Something went wrong!",
+          showConfirmButton: false,
+          timer: 1500,
+          width: state.isMobile ? 250 : 300,
+        });
       }
     };
 
@@ -170,11 +195,11 @@ export default defineComponent({
         showConfirmButton: true,
         showCancelButton: true,
         width: 500,
-      }).then((result) => {        
+      }).then((result) => {
         if (result.isConfirmed) {
-          deletePost();          
+          deletePost();
         }
-      })
+      });
     };
 
     const deletePost = async () => {
@@ -185,25 +210,25 @@ export default defineComponent({
 
       if (status == 200) {
         Swal.fire({
-          position: "top-end",
+          position: state.isMobile ? "top" : "top-end",
           icon: "success",
           title: "Successful deleted!",
           showConfirmButton: false,
           timer: 1500,
-          width: 300
+          width: state.isMobile ? 250 : 300,
         });
         router.push("/");
-      } else if (status == 400) {
+      } else if (status === 401) {
+        router.push("login");
+      } else {
         Swal.fire({
-          position: 'top-end',
-          icon: 'error',
-          title: 'Something went wrong!',
+          position: state.isMobile ? "top" : "top-end",
+          icon: "error",
+          title: "Something went wrong!",
           showConfirmButton: false,
           timer: 1500,
-          width: 300
+          width: state.isMobile ? 250 : 300,
         });
-      } else {
-        router.push("login");
       }
     };
 
@@ -214,7 +239,7 @@ export default defineComponent({
       like,
       unlike,
       toggleDeletePostAlert,
-      deletePost
+      deletePost,
     };
   },
 });
