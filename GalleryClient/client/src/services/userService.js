@@ -1,7 +1,6 @@
 import axios from "axios";
 import Cookies from "js-cookie";
 import config from "@/config";
-import router from "../router";
 
 const login = async (token, username, password) => {
   axios.defaults.headers = {
@@ -19,7 +18,7 @@ const login = async (token, username, password) => {
     return response.status;
   }
   catch (err) {
-    return 400;
+    return err.response.status;
   }
 };
 
@@ -32,11 +31,14 @@ const register = async (token, email, username, password) => {
 
   try {
     await axios
-      .post(`${config.restAPI}/identity/register`, body);
-    router.push("/login");
+      .post(`${config.restAPI}/identity/register`, body);    
   }
   catch (err) {
-    return "Invalid data!";
+    if(err.response.status === 400) {
+      return err.response.data;
+    }
+
+    return "Something went wrong!";
   }
 };
 

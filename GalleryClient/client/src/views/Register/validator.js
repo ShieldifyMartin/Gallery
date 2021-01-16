@@ -7,36 +7,36 @@ const validate = (state) => {
         state.password.length === 0
     ) {
         Swal.fire({
-            position: "top-end",
+            position: state.isMobile ? "top" : "top-end",
             icon: "error",
             title: "Invalid date!",
             showConfirmButton: false,
             timer: 1500,
-            width: 300,
+            width: state.isMobile ? 250 : 300,
         });
         return false;
     }
 
     if (state.email.length < 4) {
         Swal.fire({
-            position: "top-end",
+            position: state.isMobile ? "top" : "top-end",
             icon: "error",
             title: "Invalid email!",
             showConfirmButton: false,
             timer: 1500,
-            width: 300,
+            width: state.isMobile ? 250 : 300,
         });
         return false;
     }
 
     if (state.password.length < 6) {
         Swal.fire({
-            position: "top-end",
+            position: state.isMobile ? "top" : "top-end",
             icon: "error",
             title: "Invalid password!",
             showConfirmButton: false,
             timer: 1500,
-            width: 300,
+            width: state.isMobile ? 250 : 300,
         });
         return false;
     }
