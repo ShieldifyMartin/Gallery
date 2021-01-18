@@ -1,6 +1,6 @@
 <template>
   <div class="edit-photo">
-    <h1>Edit photo</h1>    
+    <h1>Edit photo</h1>
     <form method="post" @submit.prevent="handleSubmit">
       <img
         v-if="state.pictureBase64"
@@ -46,11 +46,11 @@
 
 <script lang="ts">
 import { defineComponent, reactive, watchEffect } from "vue";
-import Swal from 'sweetalert2';
+import Swal from "sweetalert2";
 import { postService, categoryService } from "../../services";
 import router from "../../router";
 import store from "../../store";
-import validate from './validator';
+import validate from "./validator";
 
 export default defineComponent({
   setup() {
@@ -61,19 +61,19 @@ export default defineComponent({
       id: null,
       location: "",
       description: "",
-      categoryId: null,      
+      categoryId: null,
       maxSize: 15728640,
+      isMobile: screen.width <= 700,
     });
 
     watchEffect(async () => {
       const id = window.location.href.split("/")[4];
       const post = await postService.getById(id);
-      console.log(post);
       const categories = await categoryService.get();
 
       state.categories = categories;
       state.id = post.id;
-      state.description = post.description;      
+      state.description = post.description;
 
       if (post.location == "null") {
         state.location = "";
@@ -81,14 +81,14 @@ export default defineComponent({
         state.location = post.location;
       }
 
-      if(post.categoryId == null) {
+      if (post.categoryId == null) {
         state.categoryId = "";
       } else {
         state.categoryId = post.categoryId;
       }
     });
 
-   function handleFileUpload(e) {
+    function handleFileUpload(e) {
       let file = e.target.files[0];
 
       if (!e.target.files.length) return;
@@ -96,13 +96,13 @@ export default defineComponent({
       if (e.target.files.length === 1) {
         if (file.size > state.maxSize) {
           Swal.fire({
-            position: 'top-end',
-            icon: 'error',
-            title: 'Too large picture!',
+            position: state.isMobile ? "top" : "top-end",
+            icon: "error",
+            title: "Too large picture!",
             showConfirmButton: false,
             timer: 1500,
-            width: 300
-          });          
+            width: state.isMobile ? 250 : 300,
+          });
         } else {
           state.picture = file;
           var fr = new FileReader();
@@ -113,13 +113,13 @@ export default defineComponent({
         }
       } else {
         Swal.fire({
-          position: 'top-end',
-          icon: 'error',
-          title: 'Only one photo is allowed!',
+          position: state.isMobile ? "top" : "top-end",
+          icon: "error",
+          title: "Only one photo is allowed!",
           showConfirmButton: false,
           timer: 1500,
-          width: 300
-        });        
+          width: state.isMobile ? 250 : 300,
+        });
       }
     }
 
@@ -140,26 +140,26 @@ export default defineComponent({
         categoryId
       );
 
-      if (response === 401) {
+      if (response == 401) {
         router.push("/login");
       } else if (response >= 200 && response < 300) {
         Swal.fire({
-          position: 'top-end',
-          icon: 'success',
-          title: 'Successful!',
+          position: state.isMobile ? "top" : "top-end",
+          icon: "success",
+          title: "Successful!",
           showConfirmButton: false,
           timer: 1500,
-          width: 300
+          width: state.isMobile ? 250 : 300,
         });
         router.push("/" + state.id);
       } else {
         Swal.fire({
-          position: 'top-end',
-          icon: 'error',
-          title: 'Something went wrong!',
+          position: state.isMobile ? "top" : "top-end",
+          icon: "error",
+          title: "Something went wrong!",
           showConfirmButton: false,
           timer: 1500,
-          width: 300
+          width: state.isMobile ? 250 : 300,
         });
       }
     }
@@ -167,7 +167,7 @@ export default defineComponent({
     return {
       state,
       handleFileUpload,
-      handleSubmit
+      handleSubmit,
     };
   },
 });
