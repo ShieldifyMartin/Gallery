@@ -24,10 +24,10 @@
 
 <script lang="ts">
 import { defineComponent, reactive } from "vue";
-import Swal from "sweetalert2";
 import store from "../../store";
 import router from "../../router";
 import { userService } from "../../services";
+import useAlert from "../../components/Alert/UseAlert";
 
 export default defineComponent({
   name: "Login",
@@ -51,14 +51,7 @@ export default defineComponent({
         store.state.auth.dispatch("login");
         router.push("/");
       } else {
-        Swal.fire({
-          position: state.isMobile ? "top" : "top-end",
-          icon: "error",
-          title: "Something went wrong!",
-          showConfirmButton: false,
-          timer: 1500,
-          width: state.isMobile ? 250 : 300,
-        });
+        useAlert("Somehing went wrong!");
         state.password = "";
       }
     }
