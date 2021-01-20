@@ -22,7 +22,7 @@
           <div v-if="state.category == category.id" class="clicked">
             {{ category.title }}({{
               (category.posts && category.posts.length) || 0
-            }})          
+            }})
           </div>
           <div v-else>
             {{ category.title }}({{
@@ -57,7 +57,7 @@ export default defineComponent({
       categories: [],
       searchInput: "",
       loading: true,
-      category: ""      
+      category: "",
     });
 
     const getCategoriesLink = (title) => {
@@ -67,7 +67,7 @@ export default defineComponent({
     watchEffect(async () => {
       if (state.category) {
         const posts = await categoryService.getPostsByCategory(state.category);
-        
+
         state.posts = posts;
       } else {
         const posts = await postService.get();

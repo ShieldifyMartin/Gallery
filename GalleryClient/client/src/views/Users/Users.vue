@@ -47,18 +47,18 @@ export default defineComponent({
       return `/profile/${userId}`;
     };
 
-    const search = async () => {
-      const users = await userService.search(state.searchInput);
-
-      state.users = users;
-    };
-
     watchEffect(async () => {
       const users = await userService.getAllUsers();
 
       state.users = users;
       state.loading = false;
     });
+
+    const search = async () => {
+      const users = await userService.search(state.searchInput);
+
+      state.users = users;
+    };
 
     return {
       state,

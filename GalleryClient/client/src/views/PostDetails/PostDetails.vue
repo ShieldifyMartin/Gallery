@@ -89,6 +89,7 @@
 import { defineComponent, reactive, watchEffect } from "vue";
 import moment from "moment";
 import Swal from "sweetalert2";
+import useAlert from "../../components/Alert/UseAlert";
 import router from "../../router";
 import store from "../../store";
 import { postService, profileService } from "../../services";
@@ -101,7 +102,6 @@ export default defineComponent({
       isLiked: false,
       createdOn: null,
       isAuthor: false,
-      isMobile: screen.width <= 700,
     });
 
     const getProfileLink = () => "/profile/" + state.post.authorId;
@@ -136,23 +136,9 @@ export default defineComponent({
       } else if (status === 401) {
         router.push("login");
       } else if (status === 400) {
-        Swal.fire({
-          position: state.isMobile ? "top" : "top-end",
-          icon: "error",
-          title: "You had already liked this post!",
-          showConfirmButton: false,
-          timer: 1500,
-          width: state.isMobile ? 250 : 300,
-        });
+        useAlert("You had already liked this post!");
       } else {
-        Swal.fire({
-          position: state.isMobile ? "top" : "top-end",
-          icon: "error",
-          title: "Something went wrong!",
-          showConfirmButton: false,
-          timer: 1500,
-          width: state.isMobile ? 250 : 300,
-        });
+        useAlert("Something went wrong!");
       }
     };
 
@@ -165,25 +151,11 @@ export default defineComponent({
         state.likes = state.likes - 1;
         state.isLiked = false;
       } else if (status === 400) {
-        Swal.fire({
-          position: state.isMobile ? "top" : "top-end",
-          icon: "error",
-          title: "You did not like this post!",
-          showConfirmButton: false,
-          timer: 1500,
-          width: state.isMobile ? 250 : 300,
-        });
+        useAlert("You did not like this post!");
       } else if (status === 401) {
         router.push("login");
       } else {
-        Swal.fire({
-          position: state.isMobile ? "top" : "top-end",
-          icon: "error",
-          title: "Something went wrong!",
-          showConfirmButton: false,
-          timer: 1500,
-          width: state.isMobile ? 250 : 300,
-        });
+        useAlert("Something went wrong!");
       }
     };
 
@@ -209,26 +181,12 @@ export default defineComponent({
       );
 
       if (status == 200) {
-        Swal.fire({
-          position: state.isMobile ? "top" : "top-end",
-          icon: "success",
-          title: "Successful deleted!",
-          showConfirmButton: false,
-          timer: 1500,
-          width: state.isMobile ? 250 : 300,
-        });
+        useAlert("Successful deleted!");
         router.push("/");
       } else if (status === 401) {
         router.push("login");
       } else {
-        Swal.fire({
-          position: state.isMobile ? "top" : "top-end",
-          icon: "error",
-          title: "Something went wrong!",
-          showConfirmButton: false,
-          timer: 1500,
-          width: state.isMobile ? 250 : 300,
-        });
+        useAlert("Something went wrong!");
       }
     };
 

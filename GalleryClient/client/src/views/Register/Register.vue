@@ -31,7 +31,7 @@
 
 <script lang="ts">
 import { defineComponent, reactive } from "vue";
-import Swal from "sweetalert2";
+import useAlert from "../../components/Alert/UseAlert";
 import store from "../../store";
 import router from "../../router";
 import validate from "./validator";
@@ -44,7 +44,6 @@ export default defineComponent({
       email: "",
       username: "",
       password: "",
-      isMobile: screen.width <= 700,
     });
 
     const handleSubmit = async () => {
@@ -61,26 +60,11 @@ export default defineComponent({
         username,
         password
       );
-            
+
       if (message !== null) {
-        Swal.fire({
-          position: state.isMobile ? "top" : "top-end",
-          icon: "error",
-          title: message,
-          showConfirmButton: false,
-          timer: 1500,
-          width: state.isMobile ? 250 : 300,
-        });
+        useAlert(message);
       } else {
-        Swal.fire({
-          position: state.isMobile ? "top" : "top-end",
-          icon: "success",
-          title: "Successful registration!",
-          showConfirmButton: false,
-          timer: 1500,
-          width: state.isMobile ? 250 : 300,
-        });
-  
+        useAlert("Successful registration!");
         router.push("/login");
       }
     };

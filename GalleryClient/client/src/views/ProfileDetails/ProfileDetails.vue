@@ -120,7 +120,7 @@
 
 <script lang="ts">
 import { defineComponent, reactive, watchEffect } from "vue";
-import Swal from "sweetalert2";
+import useAlert from "../../components/Alert/UseAlert";
 import { profileService } from "../../services";
 import store from "../../store/index.js";
 
@@ -136,7 +136,6 @@ export default defineComponent({
       picture: "",
       maxSize: 15728640,
       isGuest: true,
-      isMobile: screen.width,
     });
 
     watchEffect(async () => {
@@ -185,27 +184,13 @@ export default defineComponent({
 
       if (e.target.files.length === 1) {
         if (file.size > state.maxSize) {
-          Swal.fire({
-            position: state.isMobile ? "top" : "top-end",
-            icon: "error",
-            title: "Too large picture!",
-            showConfirmButton: false,
-            timer: 1500,
-            width: state.isMobile ? 250 : 300,
-          });
+          useAlert("Too large picture!");
           return;
         } else {
           state.picture = file;
         }
       } else {
-        Swal.fire({
-          position: state.isMobile ? "top" : "top-end",
-          icon: "error",
-          title: "Only one photo is allowed!",
-          showConfirmButton: false,
-          timer: 1500,
-          width: state.isMobile ? 250 : 300,
-        });        
+        useAlert("Only one photo is allowed!");
         return;
       }
 
