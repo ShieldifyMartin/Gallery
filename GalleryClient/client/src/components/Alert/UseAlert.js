@@ -1,11 +1,11 @@
 import Swal from "sweetalert2";
 
-function useAlert(message) {
+function useAlert(message, isSuccessful) {    
   const isMobile = screen.width <= 700;
 
   Swal.fire({
     position: isMobile ? "top" : "top-end",
-    icon: "error",
+    icon: isSuccessful ? "success" : "error",
     title: message,
     showConfirmButton: false,
     timer: 1500,

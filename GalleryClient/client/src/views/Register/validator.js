@@ -6,17 +6,17 @@ const validate = (state) => {
         state.username.length === 0 ||
         state.password.length === 0
     ) {
-        useAlert("Invalid date!");
+        useAlert("Invalid date!", false);
         return false;
     }
 
     if (state.email.length < 4) {
-        useAlert("Invalid email!");
+        useAlert("Invalid email!", false);
         return false;
     }
 
     if (state.password.length < 6) {
-        useAlert("Invalid password!");
+        useAlert("Invalid password!", false);
         return false;
     }
 

@@ -138,6 +138,8 @@ export default defineComponent({
       isGuest: true,
     });
 
+    const getPostLink = (id) => "/" + id;
+
     watchEffect(async () => {
       const id = window.location.href.split("/")[4];
 
@@ -169,9 +171,7 @@ export default defineComponent({
         state.loading = false;
         state.isGuest = false;
       }
-    });
-
-    const getPostLink = (id) => "/" + id;
+    });    
 
     const clickImage = () => {
       document.querySelector("#upload").click();
@@ -184,13 +184,13 @@ export default defineComponent({
 
       if (e.target.files.length === 1) {
         if (file.size > state.maxSize) {
-          useAlert("Too large picture!");
+          useAlert("Too large picture!", false);
           return;
         } else {
           state.picture = file;
         }
       } else {
-        useAlert("Only one photo is allowed!");
+        useAlert("Only one photo is allowed!", false);
         return;
       }
 

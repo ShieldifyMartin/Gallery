@@ -78,7 +78,7 @@ export default defineComponent({
 
       if (e.target.files.length === 1) {
         if (file.size > state.maxSize) {
-          useAlert("Too large picture!");
+          useAlert("Too large picture!", false);
         } else {
           state.picture = file;
           var fr = new FileReader();
@@ -88,7 +88,7 @@ export default defineComponent({
           };
         }
       } else {
-        useAlert("Only one photo is allowed!");
+        useAlert("Only one photo is allowed!", false);
       }
     }
 
@@ -111,9 +111,9 @@ export default defineComponent({
       if (response == 401) {
         router.push("/login");
       } else if (response >= 400) {
-        useAlert("Something went wrong!");
+        useAlert("Something went wrong!", false);
       } else {
-        useAlert("Successful!");
+        useAlert("Successful!", true);
         router.push("/");
       }
     }

@@ -64,7 +64,7 @@ export default defineComponent({
       if (message !== null) {
         useAlert(message);
       } else {
-        useAlert("Successful registration!");
+        useAlert("Successful registration!", true);
         router.push("/login");
       }
     };

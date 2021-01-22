@@ -84,9 +84,7 @@ export default defineComponent({
       state.posts = posts;
     };
 
-    const setCategoryId = (id) => {
-      state.category = id;
-    };
+    const setCategoryId = (id) => (state.category = id);
 
     return {
       state,

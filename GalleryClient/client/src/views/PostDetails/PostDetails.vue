@@ -136,9 +136,9 @@ export default defineComponent({
       } else if (status === 401) {
         router.push("login");
       } else if (status === 400) {
-        useAlert("You had already liked this post!");
+        useAlert("You had already liked this post!", false);
       } else {
-        useAlert("Something went wrong!");
+        useAlert("Something went wrong!", false);
       }
     };
 
@@ -151,11 +151,11 @@ export default defineComponent({
         state.likes = state.likes - 1;
         state.isLiked = false;
       } else if (status === 400) {
-        useAlert("You did not like this post!");
+        useAlert("You did not like this post!", false);
       } else if (status === 401) {
         router.push("login");
       } else {
-        useAlert("Something went wrong!");
+        useAlert("Something went wrong!", false);
       }
     };
 
@@ -181,12 +181,12 @@ export default defineComponent({
       );
 
       if (status == 200) {
-        useAlert("Successful deleted!");
+        useAlert("Successful deleted!", true);
         router.push("/");
       } else if (status === 401) {
         router.push("login");
       } else {
-        useAlert("Something went wrong!");
+        useAlert("Something went wrong!", false);
       }
     };
 

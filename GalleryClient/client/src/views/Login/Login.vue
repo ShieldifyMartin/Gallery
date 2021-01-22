@@ -34,8 +34,7 @@ export default defineComponent({
   setup() {
     const state = reactive({
       username: "",
-      password: "",
-      isMobile: screen.width <= 700,
+      password: "",      
     });
 
     async function handleSubmit() {
@@ -51,7 +50,7 @@ export default defineComponent({
         store.state.auth.dispatch("login");
         router.push("/");
       } else {
-        useAlert("Somehing went wrong!");
+        useAlert("Somehing went wrong!", false);
         state.password = "";
       }
     }
