@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "oLQY7x29zHWW2oPLHug0FbrWInfpZlNiOnc150zyz3gqV8bIw8Ej9ODamxIFU8Wc8a47Rc1dcUJlLyMlJTJBkg==",
+  "dgSpecHash": "NR/6NhtOfnCzidFAUCXmwCDBxh9sqJcU06FqJ57HJLtnwtTDHmr++ko1WDZbZCKzSQEV41J36Uy+ooYeCx11Lw==",
   "success": true,
   "projectFilePath": "E:\\Git\\Gallery\\GalleryServer\\GalleryServer\\GalleryServer.csproj",
   "expectedPackageFiles": [
@@ -113,8 +113,7 @@
     "C:\\Users\\Martin-Petrov\\.nuget\\packages\\system.xml.readerwriter\\4.3.0\\system.xml.readerwriter.4.3.0.nupkg.sha512",
     "C:\\Users\\Martin-Petrov\\.nuget\\packages\\system.xml.xdocument\\4.3.0\\system.xml.xdocument.4.3.0.nupkg.sha512",
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\system.xml.xmldocument\\4.3.0\\system.xml.xmldocument.4.3.0.nupkg.sha512",
-    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\system.xml.xmlserializer\\4.3.0\\system.xml.xmlserializer.4.3.0.nupkg.sha512",
-    "C:\\Users\\Martin-Petrov\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\3.1.2\\microsoft.aspnetcore.app.ref.3.1.2.nupkg.sha512"
+    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\system.xml.xmlserializer\\4.3.0\\system.xml.xmlserializer.4.3.0.nupkg.sha512"
   ],
   "logs": []
 }

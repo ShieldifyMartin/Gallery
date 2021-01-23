@@ -47,10 +47,18 @@
                 UserName = model.UserName
             };
 
+            var otherUser = await this.userManager
+                .FindByNameAsync(user.UserName);
+
+            if (otherUser.UserName == user.UserName)
+            {
+                return BadRequest("User with this username already exist!");
+            }
+
             var result = await this.userManager.CreateAsync(user, model.Password);
             if (!result.Succeeded)
             {
-                return BadRequest(result.Errors);
+                return BadRequest("Something went wrong!");
             }
 
             return Ok();

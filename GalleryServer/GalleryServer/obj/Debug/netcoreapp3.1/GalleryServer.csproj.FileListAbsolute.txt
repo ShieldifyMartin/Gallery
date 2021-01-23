@@ -1,8 +1,5 @@
 E:\Git\Gallery\GalleryServer\GalleryServer\bin\Debug\netcoreapp3.1\appsettings.Development.json
 E:\Git\Gallery\GalleryServer\GalleryServer\bin\Debug\netcoreapp3.1\appsettings.json
-E:\Git\Gallery\GalleryServer\GalleryServer\bin\Debug\netcoreapp3.1\Properties\launchSettings.json
-E:\Git\Gallery\GalleryServer\GalleryServer\bin\Debug\netcoreapp3.1\Properties\serviceDependencies.json
-E:\Git\Gallery\GalleryServer\GalleryServer\bin\Debug\netcoreapp3.1\Properties\serviceDependencies.local.json
 E:\Git\Gallery\GalleryServer\GalleryServer\bin\Debug\netcoreapp3.1\GalleryServer.StaticWebAssets.xml
 E:\Git\Gallery\GalleryServer\GalleryServer\bin\Debug\netcoreapp3.1\GalleryServer.exe
 E:\Git\Gallery\GalleryServer\GalleryServer\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore.dll
@@ -107,3 +104,4 @@ E:\Git\Gallery\GalleryServer\GalleryServer\bin\Debug\netcoreapp3.1\System.Diagno
 E:\Git\Gallery\GalleryServer\GalleryServer\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.JsonPatch.dll
 E:\Git\Gallery\GalleryServer\GalleryServer\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll
 E:\Git\Gallery\GalleryServer\GalleryServer\bin\Debug\netcoreapp3.1\Newtonsoft.Json.Bson.dll
+E:\Git\Gallery\GalleryServer\GalleryServer\obj\Debug\netcoreapp3.1\scopedcss\bundle\GalleryServer.styles.css
