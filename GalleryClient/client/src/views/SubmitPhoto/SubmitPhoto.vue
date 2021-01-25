@@ -15,7 +15,7 @@
         class="file"
         size="80"
         ref="picture"
-        @change="handleFileUpload"
+        @change="uploadImage"
       />
       <input
         type="text"
@@ -50,7 +50,11 @@ import { defineComponent, reactive, watchEffect } from "vue";
 import useAlert from "../../components/Alert/UseAlert";
 import router from "../../router";
 import store from "../../store";
-import { postService, categoryService } from "../../services";
+import {
+  postService,
+  categoryService,
+  fileService,
+} from "../../services/index";
 import validate from "./validator";
 
 export default defineComponent({
@@ -70,27 +74,6 @@ export default defineComponent({
 
       state.categories = categories;
     });
-
-    function handleFileUpload(e) {
-      let file = e.target.files[0];
-
-      if (!e.target.files.length) return;
-
-      if (e.target.files.length === 1) {
-        if (file.size > state.maxSize) {
-          useAlert("Too large picture!", false);
-        } else {
-          state.picture = file;
-          var fr = new FileReader();
-          fr.readAsDataURL(file);
-          fr.onload = () => {
-            state.pictureBase64 = fr.result;
-          };
-        }
-      } else {
-        useAlert("Only one photo is allowed!", false);
-      }
-    }
 
     async function handleSubmit() {
       const { picture, location, description, categoryId } = state;
@@ -118,10 +101,22 @@ export default defineComponent({
       }
     }
 
+    function uploadImage(e) {
+      const file = fileService.handleFileUpload(e, state.maxSize);
+      if (file) {
+        state.picture = file;
+        var fr = new FileReader();
+        fr.readAsDataURL(file);
+        fr.onload = () => {
+          state.pictureBase64 = fr.result;
+        };
+      }
+    }
+
     return {
       state,
       handleSubmit,
-      handleFileUpload,
+      uploadImage,
     };
   },
 });

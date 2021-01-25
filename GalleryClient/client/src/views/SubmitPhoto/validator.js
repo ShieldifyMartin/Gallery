@@ -11,7 +11,7 @@ const validate = (state) => {
         return false;
     }
 
-    if (state.location.length && state.location.length > 40) {
+    if (state.location && state.location.length > 40) {
         useAlert("Max location length is 40!", false);
         return false;
     }
