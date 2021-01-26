@@ -61,8 +61,7 @@ export default defineComponent({
       id: null,
       location: "",
       description: "",
-      categoryId: null,
-      maxSize: 15728640,
+      categoryId: null,      
     });
 
     watchEffect(async () => {
@@ -115,7 +114,7 @@ export default defineComponent({
     }
 
     function uploadImage(e) {
-      const file = fileService.handleFileUpload(e, state.maxSize);
+      const file = fileService.handleFileUpload(e);
       if (file) {
         state.picture = file;
         var fr = new FileReader();

@@ -1,3 +1,4 @@
+import config from "@/config";
 import useAlert from "../../components/Alert/UseAlert";
 
 const validate = (state) => {
@@ -6,13 +7,13 @@ const validate = (state) => {
         return false;
     }
 
-    if (state.description.length > 100) {
-        useAlert("Max description length is 100!", false);
+    if (state.description.length > config.maxDescriptionLength) {
+        useAlert(`Max description length is ${config.maxDescriptionLength}!`, false);
         return false;
     }
 
-    if (state.location && state.location.length > 40) {
-        useAlert("Max location length is 40!", false);
+    if (state.location && state.location.length > config.maxLocationLength) {
+        useAlert(`Max location length is ${config.maxLocationLength}!`, false);
         return false;
     }
 
