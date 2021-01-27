@@ -30,7 +30,7 @@
           <router-link :to="getEditRoute()" v-if="state.isAuthor">
             <img
               class="edit-icon"
-              src="@/assets/icons/edit.svg"             
+              src="@/assets/icons/edit.svg"
               alt="edit icon"
             />
           </router-link>

@@ -14,9 +14,9 @@ import AppHeader from "./components/core/Header.vue";
 export default defineComponent({
   name: "Home",
   components: {
-    AppHeader
+    AppHeader,
     // AppFooter
-  }
+  },
 });
 </script>
 

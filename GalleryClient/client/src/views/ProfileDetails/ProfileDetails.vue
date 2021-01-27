@@ -171,7 +171,7 @@ export default defineComponent({
         state.loading = false;
         state.isGuest = false;
       }
-    });    
+    });
 
     const clickImage = () => {
       document.querySelector("#upload").click();

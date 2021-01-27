@@ -65,7 +65,7 @@ export default defineComponent({
       pictureBase64: null,
       location: "",
       description: "",
-      categoryId: "",      
+      categoryId: "",
     });
 
     watchEffect(async () => {
@@ -74,7 +74,7 @@ export default defineComponent({
       state.categories = categories;
     });
 
-    async function handleSubmit() {
+    const handleSubmit = async () => {
       const { picture, location, description, categoryId } = state;
       const isCorrect = validate(state);
 
@@ -98,9 +98,9 @@ export default defineComponent({
         useAlert("Successful!", true);
         router.push("/");
       }
-    }
+    };
 
-    function uploadImage(e) {
+    const uploadImage = (e) => {
       const file = fileService.handleFileUpload(e);
       if (file) {
         state.picture = file;
@@ -110,7 +110,7 @@ export default defineComponent({
           state.pictureBase64 = fr.result;
         };
       }
-    }
+    };
 
     return {
       state,

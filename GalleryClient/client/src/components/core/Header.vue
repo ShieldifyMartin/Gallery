@@ -21,16 +21,34 @@
     <div v-if="state.showMenu" class="dropdown">
       <li><router-link to="/" @click="toggleMenu">Home</router-link></li>
       <li>
-        <router-link to="/submit" v-if="isAuth()" @click="toggleMenu">Submit a photo</router-link>
+        <router-link to="/submit" v-if="isAuth()" @click="toggleMenu"
+          >Submit a photo</router-link
+        >
       </li>
-      <li><router-link to="/users" v-if="isAuth()" @click="toggleMenu">Users</router-link></li>
-      <li><router-link to="/login" v-if="!isAuth()" @click="toggleMenu">Login</router-link></li>
+      <li>
+        <router-link to="/users" v-if="isAuth()" @click="toggleMenu"
+          >Users</router-link
+        >
+      </li>
+      <li>
+        <router-link to="/login" v-if="!isAuth()" @click="toggleMenu"
+          >Login</router-link
+        >
+      </li>
       <li><a href="#" @click="logout" v-if="isAuth()">Logout</a></li>
     </div>
     <img
+      v-if="state.showMenu"
+      src="@/assets/icons/times-solid.svg"
+      class="menu-icon"
+      alt="close menu icon"
+      @click="toggleMenu"
+    />
+    <img
+      v-else
       src="@/assets/icons/bars-solid.svg"
       alt="menu"
-      class="menu-icon"
+      class="menu-icon"      
       @click="toggleMenu"
     />
   </div>
@@ -57,19 +75,19 @@ export default defineComponent({
       }
     });
 
-    function toggleMenu() {
-      state.showMenu = !state.showMenu;
-    }
+    const toggleMenu = () => {
+      state.showMenu = !state.showMenu;      
+    };
 
     function isAuth() {
       return store.state.auth.state.isAuth;
     }
 
-    function logout() {
+    const logout = () => {
       router.push("/");
       toggleMenu();
       store.state.auth.dispatch("logout");
-    }
+    };
 
     return {
       state,
@@ -82,7 +100,7 @@ export default defineComponent({
 </script>
 
 <style lang="scss">
-#nav {  
+#nav {
   display: flex;
   justify-content: center;
   padding: 2em;
@@ -161,11 +179,13 @@ export default defineComponent({
       a {
         color: #fff;
         text-decoration: none;
-        font-size: 1.2em;        
+        font-size: 1.2em;
         margin: 2em 0;
       }
 
-      a:hover {color:#666;}
+      a:hover {
+        color: #666;
+      }
     }
 
     .menu-icon {

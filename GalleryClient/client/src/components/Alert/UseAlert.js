@@ -1,6 +1,6 @@
 import Swal from "sweetalert2";
 
-function useAlert(message, isSuccessful) {    
+const useAlert = (message, isSuccessful) => {    
   const isMobile = screen.width <= 700;
 
   Swal.fire({

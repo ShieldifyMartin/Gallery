@@ -34,10 +34,10 @@ export default defineComponent({
   setup() {
     const state = reactive({
       username: "",
-      password: "",      
+      password: "",
     });
 
-    async function handleSubmit() {
+    const handleSubmit = async () => {
       const { username, password } = state;
 
       const status = await userService.login(
@@ -53,7 +53,7 @@ export default defineComponent({
         useAlert("Somehing went wrong!", false);
         state.password = "";
       }
-    }
+    };
 
     return {
       state,

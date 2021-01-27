@@ -61,7 +61,7 @@ export default defineComponent({
       id: null,
       location: "",
       description: "",
-      categoryId: null,      
+      categoryId: null,
     });
 
     watchEffect(async () => {
@@ -84,9 +84,9 @@ export default defineComponent({
       } else {
         state.categoryId = post.categoryId;
       }
-    });        
+    });
 
-    async function handleSubmit() {
+    const handleSubmit = async () => {
       const { id, location, description, categoryId } = state;
       const isCorrect = validate(state);
 
@@ -111,9 +111,9 @@ export default defineComponent({
       } else {
         useAlert("Something went wrong!", false);
       }
-    }
+    };
 
-    function uploadImage(e) {
+    const uploadImage = (e) => {
       const file = fileService.handleFileUpload(e);
       if (file) {
         state.picture = file;
@@ -123,7 +123,7 @@ export default defineComponent({
           state.pictureBase64 = fr.result;
         };
       }
-    }
+    };
 
     return {
       state,
