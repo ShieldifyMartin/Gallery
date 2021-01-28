@@ -11,31 +11,45 @@
       </router-link>
     </div>
     <div class="links">
-      <router-link to="/">Home</router-link>
-      <router-link to="/submit" v-if="isAuth()">Submit a photo</router-link>
-      <router-link to="/users" v-if="isAuth()">Users</router-link>
-      <router-link to="/login" v-if="!isAuth()">Login</router-link>
-      <a href="#" @click="logout" v-if="isAuth()">Logout</a>
+      <div v-if="isAuth()">
+        <router-link to="/">Home</router-link>
+        <router-link to="/submit">Submit a photo</router-link>
+        <router-link to="/users">Users</router-link>
+        <a href="#" @click="logout">Logout</a>
+      </div>
+      <div v-else>
+        <router-link to="/">Home</router-link>
+        <router-link to="/login">Login</router-link>
+      </div>
     </div>
 
     <div v-if="state.showMenu" class="dropdown">
-      <li><router-link to="/" @click="toggleMenu">Home</router-link></li>
-      <li>
-        <router-link to="/submit" v-if="isAuth()" @click="toggleMenu"
-          >Submit a photo</router-link
-        >
-      </li>
-      <li>
-        <router-link to="/users" v-if="isAuth()" @click="toggleMenu"
-          >Users</router-link
-        >
-      </li>
-      <li>
-        <router-link to="/login" v-if="!isAuth()" @click="toggleMenu"
-          >Login</router-link
-        >
-      </li>
-      <li><a href="#" @click="logout" v-if="isAuth()">Logout</a></li>
+      <div v-if="isAuth()">
+        <li>
+          <router-link to="/" @click="toggleMenu">Home</router-link>
+        </li>
+        <li>
+          <router-link to="/submit" @click="toggleMenu">
+            Submit a photo
+          </router-link>
+        </li>
+        <li>
+          <router-link to="/users" @click="toggleMenu">
+            Users
+          </router-link>
+        </li>
+        <li>
+          <a href="#" @click="logout">Logout</a>
+        </li>
+      </div>
+      <div v-else>
+        <li><router-link to="/">Home</router-link></li>
+        <li>
+          <router-link to="/login" @click="toggleMenu">
+            Login
+          </router-link>
+        </li>
+      </div>
     </div>
     <img
       v-if="state.showMenu"
@@ -48,7 +62,7 @@
       v-else
       src="@/assets/icons/bars-solid.svg"
       alt="menu"
-      class="menu-icon"      
+      class="menu-icon"
       @click="toggleMenu"
     />
   </div>
@@ -76,7 +90,7 @@ export default defineComponent({
     });
 
     const toggleMenu = () => {
-      state.showMenu = !state.showMenu;      
+      state.showMenu = !state.showMenu;
     };
 
     function isAuth() {
@@ -115,10 +129,14 @@ export default defineComponent({
         color: #42b983;
       }
     }
+
+    .unauthorized-links {
+      font-size: 2em;
+    }
   }
 
   .dropdown {
-    display: none;
+    display: none;    
   }
 
   .menu-icon {
@@ -165,10 +183,9 @@ export default defineComponent({
       position: absolute;
       top: 2em;
       right: 2em;
-      margin: 3em 0;
-      width: 7em;
-      height: 6em;
-      padding: 2em;
+      margin: 3.5em 0;
+      width: 7em;      
+      padding: 1em 1.5em;
       list-style: none;
       background-color: #111111;
       min-width: 160px;
@@ -176,15 +193,28 @@ export default defineComponent({
       z-index: 1;
       border-radius: 10%;
 
+      li {
+        margin: 0.5em 0;
+      }
+
       a {
         color: #fff;
         text-decoration: none;
-        font-size: 1.2em;
-        margin: 2em 0;
+        font-size: 1.2em;        
       }
 
-      a:hover {
-        color: #666;
+      a:after {
+        display: block;
+        content: "";
+        border-bottom: solid 3px #fff;
+        transform: scaleX(0);
+        transition: transform 250ms ease-in-out;
+      }
+      a:hover:after {
+        transform: scaleX(1);
+      }
+      a:after {
+        transform-origin: 0% 100%;
       }
     }
 
