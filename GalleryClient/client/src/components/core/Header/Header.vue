@@ -26,15 +26,15 @@
     <div v-if="state.showMenu" class="dropdown">
       <div v-if="isAuth()">
         <li>
-          <router-link to="/" @click="toggleMenu">Home</router-link>
+          <router-link to="/">Home</router-link>
         </li>
         <li>
-          <router-link to="/submit" @click="toggleMenu">
+          <router-link to="/submit">
             Submit a photo
           </router-link>
         </li>
         <li>
-          <router-link to="/users" @click="toggleMenu">
+          <router-link to="/users">
             Users
           </router-link>
         </li>
@@ -89,9 +89,9 @@ export default defineComponent({
       }
     });
 
-    const toggleMenu = () => {
+    function toggleMenu () {
       state.showMenu = !state.showMenu;
-    };
+    }
 
     function isAuth() {
       return store.state.auth.state.isAuth;
