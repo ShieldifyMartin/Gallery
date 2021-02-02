@@ -24,7 +24,8 @@
         public CategoryResponseViewModel GetAll()
         {
             var categories = this.data
-                .Categories                
+                .Categories
+                .OrderBy(c => c.Posts.Count)
                 .ToList();
 
             var categoriesWithPosts = new List<Category>();
@@ -48,8 +49,9 @@
         public List<Post> GetPostsByCategory(int id)
         {
             var posts = this.postsRepo
-                .All()
-                .Where(p => p.CategoryId == id)                
+                .All()                
+                .Where(p => p.CategoryId == id)
+                .OrderByDescending(p => p.Likes)
                 .ToList();
 
             return posts;

@@ -24,7 +24,7 @@
             var posts = this.posts
                 .All()
                 .Where(p => p.UserId == userId)
-                .OrderByDescending(p => p.CreatedOn)
+                .OrderByDescending(p => p.Likes)
                 .ToList();
 
             if(!all)
@@ -80,7 +80,7 @@
                 .Where(v => v.UserId == userId)                            
                 .Select(v => v.Post)
                 .Where(p => !p.IsDeleted)
-                .OrderByDescending(p => p.CreatedOn)
+                .OrderByDescending(p => p.Likes)
                 .ToList();
 
             if (!all)

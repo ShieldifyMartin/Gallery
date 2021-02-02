@@ -30,8 +30,7 @@
         public List<GetAllGetRequestModel> GetAll()
         {
             var posts = this.posts
-                .All()
-                .OrderByDescending(p => p.CreatedOn)
+                .All()                
                 .Select(p => new GetAllGetRequestModel
                 {
                     Id = p.Id,
@@ -44,6 +43,7 @@
                     CreatedOn = p.CreatedOn,
                     CreatedBy = p.CreatedBy
                 })
+                .OrderByDescending(p => p.Likes)
                 .ToList();
             
             return posts;
@@ -53,7 +53,7 @@
         {
             var posts = this.posts
                 .AllWithDeleted()
-                .OrderByDescending(p => p.CreatedOn)
+                .OrderByDescending(p => p.Likes)
                 .ToList();
 
             return posts;
