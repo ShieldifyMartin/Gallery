@@ -1,6 +1,7 @@
 ﻿namespace GalleryServer.Features.Identity
 {
     using System;
+    using System.Collections.Generic;
     using System.IdentityModel.Tokens.Jwt;
     using System.Linq;
     using System.Security.Claims;
@@ -65,9 +66,8 @@
             return true;
         }
 
-        public async Task<GetAllUsersResponseModel> GetAllUsers()
-        {
-            var users = this.data
+        public List<UserRequestModel> GetAllUsers()
+            => this.data
                 .Users
                 .Select(u => new UserRequestModel
                 {
@@ -78,17 +78,8 @@
                 .OrderBy(u => u.UserName)
                 .ToList();
 
-            var response = new GetAllUsersResponseModel
-            {
-                Users = users
-            };
-
-            return response;
-        }
-
-        public SearchUserResponseViewModel Search(string input)
-        {
-            var users = this.data
+        public List<SearchUserRequestViewModel> Search(string input)
+            => this.data
                 .Users
                 .Where(u => u.UserName.ToUpper().Contains(input.ToUpper()))
                 .Select(u => new SearchUserRequestViewModel
@@ -99,13 +90,5 @@
                 })
                 .OrderBy(u => u.UserName)
                 .ToList();
-
-            var response = new SearchUserResponseViewModel
-            {
-                Users = users
-            };
-
-            return response;
-        }
     }
 }

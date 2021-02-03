@@ -1,0 +1,100 @@
+E:\Git\Gallery\GalleryServer\GalleryServer\bin\Debug\net5.0\appsettings.Development.json
+E:\Git\Gallery\GalleryServer\GalleryServer\bin\Debug\net5.0\appsettings.json
+E:\Git\Gallery\GalleryServer\GalleryServer\bin\Debug\net5.0\GalleryServer.StaticWebAssets.xml
+E:\Git\Gallery\GalleryServer\GalleryServer\bin\Debug\net5.0\GalleryServer.exe
+E:\Git\Gallery\GalleryServer\GalleryServer\bin\Debug\net5.0\GalleryServer.deps.json
+E:\Git\Gallery\GalleryServer\GalleryServer\bin\Debug\net5.0\GalleryServer.runtimeconfig.json
+E:\Git\Gallery\GalleryServer\GalleryServer\bin\Debug\net5.0\GalleryServer.runtimeconfig.dev.json
+E:\Git\Gallery\GalleryServer\GalleryServer\bin\Debug\net5.0\GalleryServer.dll
+E:\Git\Gallery\GalleryServer\GalleryServer\bin\Debug\net5.0\ref\GalleryServer.dll
+E:\Git\Gallery\GalleryServer\GalleryServer\bin\Debug\net5.0\GalleryServer.pdb
+E:\Git\Gallery\GalleryServer\GalleryServer\bin\Debug\net5.0\GalleryServer.Views.dll
+E:\Git\Gallery\GalleryServer\GalleryServer\bin\Debug\net5.0\GalleryServer.Views.pdb
+E:\Git\Gallery\GalleryServer\GalleryServer\bin\Debug\net5.0\CloudinaryDotNet.dll
+E:\Git\Gallery\GalleryServer\GalleryServer\bin\Debug\net5.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+E:\Git\Gallery\GalleryServer\GalleryServer\bin\Debug\net5.0\Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore.dll
+E:\Git\Gallery\GalleryServer\GalleryServer\bin\Debug\net5.0\Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll
+E:\Git\Gallery\GalleryServer\GalleryServer\bin\Debug\net5.0\Microsoft.AspNetCore.Identity.UI.Views.V4.dll
+E:\Git\Gallery\GalleryServer\GalleryServer\bin\Debug\net5.0\Microsoft.AspNetCore.Identity.UI.dll
+E:\Git\Gallery\GalleryServer\GalleryServer\bin\Debug\net5.0\Microsoft.AspNetCore.JsonPatch.dll
+E:\Git\Gallery\GalleryServer\GalleryServer\bin\Debug\net5.0\Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll
+E:\Git\Gallery\GalleryServer\GalleryServer\bin\Debug\net5.0\Microsoft.Data.SqlClient.dll
+E:\Git\Gallery\GalleryServer\GalleryServer\bin\Debug\net5.0\Microsoft.EntityFrameworkCore.dll
+E:\Git\Gallery\GalleryServer\GalleryServer\bin\Debug\net5.0\Microsoft.EntityFrameworkCore.Abstractions.dll
+E:\Git\Gallery\GalleryServer\GalleryServer\bin\Debug\net5.0\Microsoft.EntityFrameworkCore.Design.dll
+E:\Git\Gallery\GalleryServer\GalleryServer\bin\Debug\net5.0\Microsoft.EntityFrameworkCore.Relational.dll
+E:\Git\Gallery\GalleryServer\GalleryServer\bin\Debug\net5.0\Microsoft.EntityFrameworkCore.SqlServer.dll
+E:\Git\Gallery\GalleryServer\GalleryServer\bin\Debug\net5.0\Microsoft.Identity.Client.dll
+E:\Git\Gallery\GalleryServer\GalleryServer\bin\Debug\net5.0\Microsoft.IdentityModel.JsonWebTokens.dll
+E:\Git\Gallery\GalleryServer\GalleryServer\bin\Debug\net5.0\Microsoft.IdentityModel.Logging.dll
+E:\Git\Gallery\GalleryServer\GalleryServer\bin\Debug\net5.0\Microsoft.IdentityModel.Protocols.dll
+E:\Git\Gallery\GalleryServer\GalleryServer\bin\Debug\net5.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+E:\Git\Gallery\GalleryServer\GalleryServer\bin\Debug\net5.0\Microsoft.IdentityModel.Tokens.dll
+E:\Git\Gallery\GalleryServer\GalleryServer\bin\Debug\net5.0\Newtonsoft.Json.dll
+E:\Git\Gallery\GalleryServer\GalleryServer\bin\Debug\net5.0\Newtonsoft.Json.Bson.dll
+E:\Git\Gallery\GalleryServer\GalleryServer\bin\Debug\net5.0\System.Collections.Concurrent (1).dll
+E:\Git\Gallery\GalleryServer\GalleryServer\bin\Debug\net5.0\System.ComponentModel (1).dll
+E:\Git\Gallery\GalleryServer\GalleryServer\bin\Debug\net5.0\System.Configuration.ConfigurationManager.dll
+E:\Git\Gallery\GalleryServer\GalleryServer\bin\Debug\net5.0\System.IdentityModel.Tokens.Jwt.dll
+E:\Git\Gallery\GalleryServer\GalleryServer\bin\Debug\net5.0\System.IO.FileSystem.Primitives (1).dll
+E:\Git\Gallery\GalleryServer\GalleryServer\bin\Debug\net5.0\System.Linq (1).dll
+E:\Git\Gallery\GalleryServer\GalleryServer\bin\Debug\net5.0\System.Reflection.Emit (1).dll
+E:\Git\Gallery\GalleryServer\GalleryServer\bin\Debug\net5.0\System.Reflection.Emit.ILGeneration (1).dll
+E:\Git\Gallery\GalleryServer\GalleryServer\bin\Debug\net5.0\System.Reflection.Emit.Lightweight (1).dll
+E:\Git\Gallery\GalleryServer\GalleryServer\bin\Debug\net5.0\System.Reflection.TypeExtensions (1).dll
+E:\Git\Gallery\GalleryServer\GalleryServer\bin\Debug\net5.0\System.Runtime.Caching.dll
+E:\Git\Gallery\GalleryServer\GalleryServer\bin\Debug\net5.0\System.Security.Cryptography.Primitives (1).dll
+E:\Git\Gallery\GalleryServer\GalleryServer\bin\Debug\net5.0\System.Security.Cryptography.ProtectedData.dll
+E:\Git\Gallery\GalleryServer\GalleryServer\bin\Debug\net5.0\System.Text.RegularExpressions (1).dll
+E:\Git\Gallery\GalleryServer\GalleryServer\bin\Debug\net5.0\System.Threading (1).dll
+E:\Git\Gallery\GalleryServer\GalleryServer\bin\Debug\net5.0\System.Threading.Tasks.Extensions (1).dll
+E:\Git\Gallery\GalleryServer\GalleryServer\bin\Debug\net5.0\System.Xml.ReaderWriter (1).dll
+E:\Git\Gallery\GalleryServer\GalleryServer\bin\Debug\net5.0\System.Xml.XDocument (1).dll
+E:\Git\Gallery\GalleryServer\GalleryServer\bin\Debug\net5.0\runtimes\unix\lib\netstandard1.3\System.Globalization.Extensions (1).dll
+E:\Git\Gallery\GalleryServer\GalleryServer\bin\Debug\net5.0\runtimes\win\lib\netstandard1.3\System.Globalization.Extensions (1).dll
+E:\Git\Gallery\GalleryServer\GalleryServer\bin\Debug\net5.0\runtimes\unix\lib\netstandard1.3\System.Net.NameResolution (1).dll
+E:\Git\Gallery\GalleryServer\GalleryServer\bin\Debug\net5.0\runtimes\win\lib\netstandard1.3\System.Net.NameResolution (1).dll
+E:\Git\Gallery\GalleryServer\GalleryServer\bin\Debug\net5.0\runtimes\win\lib\netstandard2.0\System.Security.Cryptography.ProtectedData.dll
+E:\Git\Gallery\GalleryServer\GalleryServer\obj\Debug\net5.0\GalleryServer.csprojAssemblyReference.cache
+E:\Git\Gallery\GalleryServer\GalleryServer\obj\Debug\net5.0\GalleryServer.GeneratedMSBuildEditorConfig.editorconfig
+E:\Git\Gallery\GalleryServer\GalleryServer\obj\Debug\net5.0\GalleryServer.AssemblyInfoInputs.cache
+E:\Git\Gallery\GalleryServer\GalleryServer\obj\Debug\net5.0\GalleryServer.AssemblyInfo.cs
+E:\Git\Gallery\GalleryServer\GalleryServer\obj\Debug\net5.0\GalleryServer.csproj.CoreCompileInputs.cache
+E:\Git\Gallery\GalleryServer\GalleryServer\obj\Debug\net5.0\GalleryServer.MvcApplicationPartsAssemblyInfo.cs
+E:\Git\Gallery\GalleryServer\GalleryServer\obj\Debug\net5.0\GalleryServer.MvcApplicationPartsAssemblyInfo.cache
+E:\Git\Gallery\GalleryServer\GalleryServer\obj\Debug\net5.0\GalleryServer.RazorAssemblyInfo.cache
+E:\Git\Gallery\GalleryServer\GalleryServer\obj\Debug\net5.0\GalleryServer.RazorAssemblyInfo.cs
+E:\Git\Gallery\GalleryServer\GalleryServer\obj\Debug\net5.0\staticwebassets\GalleryServer.StaticWebAssets.Manifest.cache
+E:\Git\Gallery\GalleryServer\GalleryServer\obj\Debug\net5.0\staticwebassets\GalleryServer.StaticWebAssets.xml
+E:\Git\Gallery\GalleryServer\GalleryServer\obj\Debug\net5.0\scopedcss\bundle\GalleryServer.styles.css
+E:\Git\Gallery\GalleryServer\GalleryServer\obj\Debug\net5.0\GalleryServer.TagHelpers.input.cache
+E:\Git\Gallery\GalleryServer\GalleryServer\obj\Debug\net5.0\GalleryServer.TagHelpers.output.cache
+E:\Git\Gallery\GalleryServer\GalleryServer\obj\Debug\net5.0\GalleryServer.RazorCoreGenerate.cache
+E:\Git\Gallery\GalleryServer\GalleryServer\obj\Debug\net5.0\Razor\Areas\Identity\Pages\_ViewStart.cshtml.g.cs
+E:\Git\Gallery\GalleryServer\GalleryServer\obj\Debug\net5.0\GalleryServer.RazorTargetAssemblyInfo.cache
+E:\Git\Gallery\GalleryServer\GalleryServer\obj\Debug\net5.0\GalleryServer.RazorTargetAssemblyInfo.cs
+E:\Git\Gallery\GalleryServer\GalleryServer\obj\Debug\net5.0\GalleryServer.Views.pdb
+E:\Git\Gallery\GalleryServer\GalleryServer\obj\Debug\net5.0\GalleryServer.csproj.CopyComplete
+E:\Git\Gallery\GalleryServer\GalleryServer\obj\Debug\net5.0\GalleryServer.dll
+E:\Git\Gallery\GalleryServer\GalleryServer\obj\Debug\net5.0\ref\GalleryServer.dll
+E:\Git\Gallery\GalleryServer\GalleryServer\obj\Debug\net5.0\GalleryServer.pdb
+E:\Git\Gallery\GalleryServer\GalleryServer\obj\Debug\net5.0\GalleryServer.genruntimeconfig.cache
+E:\Git\Gallery\GalleryServer\GalleryServer\bin\Debug\net5.0\Humanizer.dll
+E:\Git\Gallery\GalleryServer\GalleryServer\bin\Debug\net5.0\Microsoft.AspNetCore.Cryptography.Internal.dll
+E:\Git\Gallery\GalleryServer\GalleryServer\bin\Debug\net5.0\Microsoft.AspNetCore.Cryptography.KeyDerivation.dll
+E:\Git\Gallery\GalleryServer\GalleryServer\bin\Debug\net5.0\Microsoft.Extensions.DependencyInjection.dll
+E:\Git\Gallery\GalleryServer\GalleryServer\bin\Debug\net5.0\Microsoft.Extensions.FileProviders.Embedded.dll
+E:\Git\Gallery\GalleryServer\GalleryServer\bin\Debug\net5.0\Microsoft.Extensions.Identity.Core.dll
+E:\Git\Gallery\GalleryServer\GalleryServer\bin\Debug\net5.0\Microsoft.Extensions.Identity.Stores.dll
+E:\Git\Gallery\GalleryServer\GalleryServer\bin\Debug\net5.0\System.Diagnostics.DiagnosticSource.dll
+E:\Git\Gallery\GalleryServer\GalleryServer\bin\Debug\net5.0\runtimes\unix\lib\netcoreapp3.1\Microsoft.Data.SqlClient.dll
+E:\Git\Gallery\GalleryServer\GalleryServer\bin\Debug\net5.0\runtimes\win\lib\netcoreapp3.1\Microsoft.Data.SqlClient.dll
+E:\Git\Gallery\GalleryServer\GalleryServer\bin\Debug\net5.0\runtimes\win-arm\native\Microsoft.Data.SqlClient.SNI.dll
+E:\Git\Gallery\GalleryServer\GalleryServer\bin\Debug\net5.0\runtimes\win-arm\native\Microsoft.Data.SqlClient.SNI.pdb
+E:\Git\Gallery\GalleryServer\GalleryServer\bin\Debug\net5.0\runtimes\win-arm64\native\Microsoft.Data.SqlClient.SNI.dll
+E:\Git\Gallery\GalleryServer\GalleryServer\bin\Debug\net5.0\runtimes\win-arm64\native\Microsoft.Data.SqlClient.SNI.pdb
+E:\Git\Gallery\GalleryServer\GalleryServer\bin\Debug\net5.0\runtimes\win-x64\native\Microsoft.Data.SqlClient.SNI.dll
+E:\Git\Gallery\GalleryServer\GalleryServer\bin\Debug\net5.0\runtimes\win-x64\native\Microsoft.Data.SqlClient.SNI.pdb
+E:\Git\Gallery\GalleryServer\GalleryServer\bin\Debug\net5.0\runtimes\win-x86\native\Microsoft.Data.SqlClient.SNI.dll
+E:\Git\Gallery\GalleryServer\GalleryServer\bin\Debug\net5.0\runtimes\win-x86\native\Microsoft.Data.SqlClient.SNI.pdb
+E:\Git\Gallery\GalleryServer\GalleryServer\bin\Debug\net5.0\runtimes\win\lib\netstandard2.0\System.Runtime.Caching.dll

@@ -28,8 +28,7 @@
         }
 
         public List<GetAllGetRequestModel> GetAll()
-        {
-            var posts = this.posts
+            => this.posts
                 .All()                
                 .Select(p => new GetAllGetRequestModel
                 {
@@ -44,24 +43,16 @@
                     CreatedBy = p.CreatedBy
                 })
                 .OrderByDescending(p => p.Likes)
-                .ToList();
-            
-            return posts;
-        }        
+                .ToList();                 
 
         public List<Post> GetAllAdmin()
-        {
-            var posts = this.posts
+            => this.posts
                 .AllWithDeleted()
                 .OrderByDescending(p => p.Likes)
                 .ToList();
 
-            return posts;
-        }
-
         public List<GetAllGetRequestModel> GetTop5()
-        {
-            var posts = this.posts
+            => this.posts
                 .All()
                 .OrderByDescending(p => p.Likes)
                 .Take(5)
@@ -78,20 +69,13 @@
                     CreatedBy = p.CreatedBy
                 })
                 .ToList();
-
-            return posts;
-        }
-
+       
         public ICollection<Post> GetByCategoryId(int categoryId)
-        {
-            var posts = this.posts
+            => this.posts
                 .All()
                 .OrderByDescending(p => p.Likes)
                 .Where(p => p.CategoryId == categoryId)
-                .ToList();
-
-            return posts;
-        }
+                .ToList();    
 
         public DetailsGetRequestModel GetById(string id)
         {
@@ -121,7 +105,7 @@
             return post;
         }
 
-        public SearchPostResponseViewModel Search(string input)
+        public List<SearchPostRequestViewModel> Search(string input)
         {
             var inputToUpper = input.ToUpper();
             var posts = this.posts
@@ -129,22 +113,17 @@
                 .Where(p => p.Location.ToUpper().Contains(inputToUpper)
                             || p.Description.ToUpper().Contains(inputToUpper))
                 .Select(p => new SearchPostRequestViewModel
-                    {
-                        Id = p.Id,
-                        Likes = p.Likes,
-                        Location = p.Location,
-                        Picture = p.Picture,
-                        CreatedOn = p.CreatedOn,
-                        CreatedBy = p.CreatedBy
-                    })
+                {
+                    Id = p.Id,
+                    Likes = p.Likes,
+                    Location = p.Location,
+                    Picture = p.Picture,
+                    CreatedOn = p.CreatedOn,
+                    CreatedBy = p.CreatedBy
+                })
                 .ToList();
 
-            var result = new SearchPostResponseViewModel
-            {
-                Posts = posts
-            };
-
-            return result;
+            return posts;
         }
 
         public async Task<string> Create(string? location, string description, string pictureUrl, string userId, int? categoryId)

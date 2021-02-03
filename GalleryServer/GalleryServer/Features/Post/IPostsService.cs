@@ -18,7 +18,7 @@
 
         DetailsGetRequestModel GetById(string id);
 
-        SearchPostResponseViewModel Search(string input);
+        List<SearchPostRequestViewModel> Search(string input);
 
         Task<string> Create(string? location, string description, string pictureUrl, string userId, int? categoryId);
         

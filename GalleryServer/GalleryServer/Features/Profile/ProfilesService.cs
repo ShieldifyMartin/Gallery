@@ -58,8 +58,7 @@
         }
 
         public async Task<List<SearchUserResults>> GetUsers(string input)
-        {
-            var users = this.data
+            => this.data
                 .Users
                 .Where(u => u.UserName.ToUpper().Contains(input.ToUpper()))
                 .Select(u => new SearchUserResults
@@ -69,9 +68,6 @@
                         UserName = u.UserName
                     })
                 .ToList();
-
-            return users;
-        }
 
         public List<Post> GetLikedPosts(string userId, bool all, int itemsPerPage)
         {

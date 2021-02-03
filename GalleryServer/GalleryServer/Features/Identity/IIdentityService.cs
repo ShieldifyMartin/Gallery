@@ -2,7 +2,8 @@
 {
     using GalleryServer.Features.Identity.Models;
     using GalleryServer.Features.Post.Models;
-    using GalleryServer.Infrastructure.Services;    
+    using GalleryServer.Infrastructure.Services;
+    using System.Collections.Generic;
     using System.Threading.Tasks;
 
     public interface IIdentityService
@@ -11,8 +12,8 @@
 
         Task<Result> AddProfilePicture(string userId, string pictureUrl);
 
-        Task<GetAllUsersResponseModel> GetAllUsers();
+        List<UserRequestModel> GetAllUsers();
 
-        SearchUserResponseViewModel Search(string input);
+        List<SearchUserRequestViewModel> Search(string input);
     }
 }
