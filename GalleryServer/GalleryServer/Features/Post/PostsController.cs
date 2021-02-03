@@ -32,14 +32,14 @@
             this.currentUser = currentUser;
         }
         
-        public async Task<ActionResult> All()
+        public ActionResult All()
         {
             var posts = this.posts.GetAll();
 
             return Accepted(nameof(this.All), posts);
         }        
 
-        public async Task<ActionResult> Top5()
+        public ActionResult Top5()
         {
             var posts = this.posts.GetTop5();
 
@@ -47,7 +47,7 @@
         }
 
         [HttpGet("{postId}")]
-        public async Task<ActionResult> ById(string postId)
+        public ActionResult ById(string postId)
         {
             var post = this.posts.GetById(postId);                      
 
@@ -55,7 +55,7 @@
         }
 
         [HttpGet("{input}")]
-        public async Task<ActionResult> Search(string input)
+        public ActionResult Search(string input)
         {
             var posts = this.posts.Search(input);
 

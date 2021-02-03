@@ -108,13 +108,13 @@
 
         public async Task<ActionResult> GetAllUsers()
         {
-            var users = await this.identity.GetAllUsers();
-
+            var users = this.identity.GetAllUsers();      
+         
             return Accepted(nameof(this.GetAllUsers), users);
         }
 
         [HttpGet("{input}")]
-        public async Task<ActionResult> Search(string input)
+        public ActionResult Search(string input)
         {
             var posts = this.identity.Search(input);
 
