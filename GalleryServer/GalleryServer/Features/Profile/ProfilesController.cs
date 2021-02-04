@@ -54,57 +54,37 @@
         }
 
         [HttpGet("{all}")]
-        public async Task<ActionResult> UserPosts(bool all = false)
+        public ActionResult UserPosts(bool all = false)
         {
             var userId = this.currentUser.GetId();
             var userPosts = this.profiles.GetUserPosts(userId, all, ItemsPerPage);
-
-            var result = new UserPosts
-            {
-                Posts = userPosts.Posts
-            };
-
-            return Ok(result);
+            
+            return Ok(userPosts);
         }
 
         [HttpGet("{all}/{id}")]
-        public async Task<ActionResult> UserPosts(string id, bool all = false)
+        public ActionResult UserPosts(string id, bool all = false)
         {
-            var userPosts = this.profiles.GetUserPosts(id, all, ItemsPerPage);
+            var userPosts = this.profiles.GetUserPosts(id, all, ItemsPerPage);          
 
-            var result = new UserPosts
-            {
-                Posts = userPosts.Posts
-            };
-
-            return Ok(result);
+            return Ok(userPosts);
         }
 
         [HttpGet("{all}")]
-        public async Task<ActionResult> LikedPosts(bool all = false)
+        public ActionResult LikedPosts(bool all = false)
         {
             var userId = this.currentUser.GetId();
-            var likedPosts = this.profiles.GetLikedPosts(userId, all, ItemsPerPage);
+            var likedPosts = this.profiles.GetLikedPosts(userId, all, ItemsPerPage);           
 
-            var result = new LikedPosts
-            {
-                Posts = likedPosts
-            };
-
-            return Ok(result);
+            return Ok(likedPosts);
         }
 
         [HttpGet("{all}/{id}")]
-        public async Task<ActionResult> LikedPosts(string id, bool all = false)
+        public ActionResult LikedPosts(string id, bool all = false)
         {
             var likedPosts = this.profiles.GetLikedPosts(id, all, ItemsPerPage);
 
-            var result = new LikedPosts
-            {
-                Posts = likedPosts
-            };
-
-            return Ok(result);
+            return Ok(likedPosts);
         }
 
         [HttpGet("{input}")]

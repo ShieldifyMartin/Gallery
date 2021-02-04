@@ -7,7 +7,7 @@
 
     public interface IProfilesService
     {
-        UserPosts GetUserPosts(string userId, bool all, int itemsPerPage);
+        List<Post> GetUserPosts(string userId, bool all, int itemsPerPage);
 
         UserDetails UseGetInfoById(string userId);
 

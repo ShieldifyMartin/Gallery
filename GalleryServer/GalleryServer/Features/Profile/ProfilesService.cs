@@ -19,7 +19,7 @@
             this.data = data;
         }
 
-        public UserPosts GetUserPosts(string userId, bool all, int itemsPerPage)
+        public List<Post> GetUserPosts(string userId, bool all, int itemsPerPage)
         {
             var posts = this.posts
                 .All()
@@ -32,12 +32,7 @@
                 posts = posts.Take(itemsPerPage).ToList();
             }
 
-            var userPosts = new UserPosts
-            {
-                Posts = posts
-            };
-
-            return userPosts;
+            return posts;
         }
 
         public UserDetails UseGetInfoById(string userId)
