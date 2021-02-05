@@ -35,7 +35,7 @@ const getById = async (id) => {
     const response = await axios
       .get(`${config.restAPI}/profiles/details/${id}`);
     if (response.status >= 200 && response.status < 300) {
-      const data = response.data;
+      const data = response.data;      
       return data;
     }
   }
@@ -55,8 +55,8 @@ const getUserPosts = async (page) => {
   try {
     const response = await axios
       .get(`${config.restAPI}/profiles/userposts/${page}`);
-    if (response.status >= 200 && response.status < 300) {
-      const data = response.data;
+    if (response.status >= 200 && response.status < 300) {      
+      const data = response.data;      
       return data;
     }
   }

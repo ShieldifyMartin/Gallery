@@ -47,7 +47,7 @@ const getAllUsers = async () => {
     const response = await axios
       .get(`${config.restAPI}/identity/getAllUsers`)
     if (response.status >= 200 && response.status < 300) {
-      var users = response.data.users;
+      var users = response.data;
       return users;
     }
   }

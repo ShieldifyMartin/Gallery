@@ -60,7 +60,7 @@
                   </router-link>
                 </div>
 
-                <div v-if="state.userPosts.length >= 3">
+                <div v-if="state.userPosts && state.userPosts.length >= 3">
                   <button
                     v-if="!state.allPosts"
                     @click="loadMorePosts"
@@ -150,8 +150,8 @@ export default defineComponent({
           state.allLikedPosts
         );
 
-        state.userPosts = userPosts.posts;
-        state.userLikedPosts = userLikedPosts.posts;
+        state.userPosts = userPosts;
+        state.userLikedPosts = userLikedPosts;
         state.profile = profile;
         state.loading = false;
       } else {
@@ -165,8 +165,8 @@ export default defineComponent({
           id
         );
 
-        state.userPosts = userPosts.posts;
-        state.userLikedPosts = userLikedPosts.posts;
+        state.userPosts = userPosts;
+        state.userLikedPosts = userLikedPosts;
         state.profile = profile;
         state.loading = false;
         state.isGuest = false;
