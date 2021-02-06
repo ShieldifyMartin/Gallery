@@ -10,6 +10,7 @@ namespace GalleryServer
     using System.Threading.Tasks;
     using Microsoft.AspNetCore.Identity;
     using GalleryServer.Data.Models;
+    using GalleryServer.Infrastructure.Services;
 
     public class Startup
     {
@@ -18,13 +19,16 @@ namespace GalleryServer
         public IConfiguration Configuration { get; }
 
         public void ConfigureServices(IServiceCollection services)
-            => services
+        { 
+            services
                 .AddDatabase(this.Configuration)
                 .AddIdentity()
                 .AddJwtAuthentication(services.GetApplicationSettings(this.Configuration))
                 .AddApplicationServices()
                 .AddCloudinaryService(services.GetApplicationSettings(this.Configuration))
-                .AddApiControllers();                
+                .AddApiControllers();
+            services.AddSignalR();
+        }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, UserManager<User> userManager, RoleManager<IdentityRole> roleManager)
         {
@@ -47,6 +51,7 @@ namespace GalleryServer
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+                endpoints.MapHub<SignalRService>("/chathub");
             });
 
             ApplicationDbInitializer.SeedUsers(userManager, roleManager);

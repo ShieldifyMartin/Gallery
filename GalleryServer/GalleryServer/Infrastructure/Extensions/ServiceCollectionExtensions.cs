@@ -92,7 +92,8 @@
                 .AddTransient<IPostsService, PostsService>()
                 .AddTransient<IProfilesService, ProfilesService>()
                 .AddTransient<IIdentityService, IdentityService>()
-                .AddTransient<ApplicationDbInitializer>();
+                .AddTransient<ApplicationDbInitializer>()
+                .AddTransient<SignalRService>();
 
         public static IServiceCollection AddCloudinaryService(this IServiceCollection services, AppSettings appSettings)
         {
