@@ -1,4 +1,9 @@
 <template>
+<div>
+  <p>User: {{state.info.user}}</p>
+  <p>Message: {{state.info.message}}</p>
+</div>
+<button @click="submit">SignalR</button>
   <div class="home">
     <div class="search">
       <button type="submit" class="icon" @click="search"></button>
@@ -43,12 +48,15 @@
     <div v-else class="no-content">
       <img src="@/assets/not-found.png" alt="no-content" />
     </div>
-  </div>
+  </div>  
 </template>
 
 <script lang="ts">
 import { defineComponent, reactive, watchEffect } from "vue";
+import { LogLevel, HubConnectionBuilder } from "@aspnet/signalr";
 import { postService, categoryService } from "../../services";
+import store from "../../store";
+import config from '../../config.js';
 
 export default defineComponent({
   setup() {
@@ -57,7 +65,9 @@ export default defineComponent({
       categories: [],
       searchInput: "",
       loading: true,
-      category: "",
+      category: "",   
+      messages: [],
+      info: {user: "", message: ""}
     });
 
     const getCategoriesLink = (title) => {
@@ -67,16 +77,44 @@ export default defineComponent({
     watchEffect(async () => {
       if (state.category) {
         const posts = await categoryService.getPostsByCategory(state.category);
-
         state.posts = posts;
       } else {
         const posts = await postService.get();
         state.posts = posts;
         state.loading = false;
       }
-      const categories = await categoryService.get();
+
+      const categories = await categoryService.get();      
       state.categories = categories;
+    
+      const connection = new HubConnectionBuilder()
+        .withUrl(config.restAPI + '/chatHub')
+        .configureLogging(LogLevel.Information)
+        .build();
+
+      connection.on("ReceiveMessage", function(user, message) {
+        state.info.user = user;
+        state.info.message = message;
+        console.log({ user, message });
+      });
+      connection.on("ReceivePosts", function(posts) {        
+        state.posts = posts;
+      });
+
+      connection.start().catch(function(err) {
+        return console.error(err);
+      });
+
+      store.state.connection = connection;
     });
+
+    const submit = () => {
+      store.state.connection
+        .invoke("SendMessage", "Pesho", "Misho")
+        .catch(function(err) {
+          return console.error(err);
+        });
+    }
 
     const search = async () => {
       const posts = await postService.search(state.searchInput);
@@ -84,13 +122,20 @@ export default defineComponent({
       state.posts = posts;
     };
 
-    const setCategoryId = (id) => (state.category = id);
+    const setCategoryId = (id) => {
+      if(state.category == id) {
+        state.category = "";
+      }else {
+        state.category = id
+      }
+    }
 
     return {
       state,
       getCategoriesLink,
       search,
       setCategoryId,
+      submit
     };
   },
 });

@@ -6,7 +6,7 @@ const get = async () => {
     const response = await axios.get(`${config.restAPI}/categories/all`);
 
     if (response.status >= 200 && response.status < 300) {
-      var categories = response.data.categories;
+      var categories = response.data;
       return categories;
     }
   } catch (err) {

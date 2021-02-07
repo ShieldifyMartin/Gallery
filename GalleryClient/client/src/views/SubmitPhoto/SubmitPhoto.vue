@@ -96,6 +96,13 @@ export default defineComponent({
         useAlert("Something went wrong!", false);
       } else {
         useAlert("Successful!", true);
+
+        store.state.connection
+          .invoke("ReturnAllPosts")
+          .catch(function(err) {
+            return console.error(err);
+          });
+
         router.push("/");
       }
     };
