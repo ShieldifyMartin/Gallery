@@ -53,10 +53,8 @@
 
 <script lang="ts">
 import { defineComponent, reactive, watchEffect } from "vue";
-import { LogLevel, HubConnectionBuilder } from "@aspnet/signalr";
-import { postService, categoryService } from "../../services";
+import { postService, categoryService, signalRService } from "../../services";
 import store from "../../store";
-import config from '../../config.js';
 
 export default defineComponent({
   setup() {
@@ -87,10 +85,7 @@ export default defineComponent({
       const categories = await categoryService.get();      
       state.categories = categories;
     
-      const connection = new HubConnectionBuilder()
-        .withUrl(config.restAPI + '/chatHub')
-        .configureLogging(LogLevel.Information)
-        .build();
+      const connection = signalRService.buildConnection();
 
       connection.on("ReceiveMessage", function(user, message) {
         state.info.user = user;
@@ -101,11 +96,7 @@ export default defineComponent({
         state.posts = posts;
       });
 
-      connection.start().catch(function(err) {
-        return console.error(err);
-      });
-
-      store.state.connection = connection;
+      signalRService.startAndStoreConnection(connection);      
     });
 
     const submit = () => {

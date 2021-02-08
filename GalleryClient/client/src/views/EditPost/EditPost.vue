@@ -46,7 +46,12 @@
 
 <script lang="ts">
 import { defineComponent, reactive, watchEffect } from "vue";
-import { postService, categoryService, fileService } from "../../services";
+import {
+  postService,
+  categoryService,
+  fileService,
+  signalRService,
+} from "../../services";
 import router from "../../router";
 import store from "../../store";
 import useAlert from "../../components/Alert/UseAlert";
@@ -107,6 +112,7 @@ export default defineComponent({
         router.push("/login");
       } else if (response >= 200 && response < 300) {
         useAlert("Successful!", true);
+        signalRService.returnPosts();
         router.push("/" + state.id);
       } else {
         useAlert("Something went wrong!", false);

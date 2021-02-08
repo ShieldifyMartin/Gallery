@@ -54,6 +54,7 @@ import {
   postService,
   categoryService,
   fileService,
+  signalRService,
 } from "../../services/index";
 import validate from "./validator";
 
@@ -96,14 +97,8 @@ export default defineComponent({
         useAlert("Something went wrong!", false);
       } else {
         useAlert("Successful!", true);
-
-        store.state.connection
-          .invoke("ReturnAllPosts")
-          .catch(function(err) {
-            return console.error(err);
-          });
-
-        router.push("/");
+        signalRService.returnPosts();
+        router.push("/" + response);
       }
     };
 

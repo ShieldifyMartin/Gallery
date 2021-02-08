@@ -91,7 +91,7 @@ import Swal from "sweetalert2";
 import useAlert from "../../components/Alert/UseAlert";
 import router from "../../router";
 import store from "../../store";
-import { postService, profileService } from "../../services";
+import { postService, profileService, signalRService } from "../../services";
 
 export default defineComponent({
   setup() {
@@ -181,6 +181,7 @@ export default defineComponent({
 
       if (status == 200) {
         useAlert("Successful deleted!", true);
+        signalRService.returnPosts();
         router.push("/");
       } else if (status === 401) {
         router.push("login");

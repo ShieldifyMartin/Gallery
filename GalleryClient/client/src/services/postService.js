@@ -46,7 +46,7 @@ const search = async (input) => {
         `${config.restAPI}/posts/search/${input}`
       );
       if (response.status >= 200 && response.status < 300) {
-        var posts = response.data.posts;
+        var posts = response.data;
         return posts;
       }
     } catch (err) {
