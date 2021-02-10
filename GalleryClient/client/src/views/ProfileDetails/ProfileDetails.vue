@@ -203,13 +203,13 @@ export default defineComponent({
     const loadMorePosts = async () => {
       state.allPosts = true;
       const userPosts = await profileService.getUserPosts(state.allPosts);
-      state.userPosts = userPosts.posts;
+      state.userPosts = userPosts;
     };
 
     const loadLessPosts = async () => {
       state.allPosts = false;
       const userPosts = await profileService.getUserPosts(state.allPosts);
-      state.userPosts = userPosts.posts;
+      state.userPosts = userPosts;
     };
 
     const loadMoreLikedPosts = async () => {
@@ -217,7 +217,7 @@ export default defineComponent({
       const userLikedPosts = await profileService.getUserLikedPosts(
         state.allLikedPosts
       );
-      state.userLikedPosts = userLikedPosts.posts;
+      state.userLikedPosts = userLikedPosts;
     };
 
     const loadLessLikedPosts = async () => {
@@ -225,7 +225,7 @@ export default defineComponent({
       const userLikedPosts = await profileService.getUserLikedPosts(
         state.allLikedPosts
       );
-      state.userLikedPosts = userLikedPosts.posts;
+      state.userLikedPosts = userLikedPosts;
     };
 
     return {
