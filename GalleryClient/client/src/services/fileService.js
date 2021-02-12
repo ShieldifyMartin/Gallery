@@ -1,7 +1,7 @@
 import config from "@/config";
 import useAlert from "../components/Alert/UseAlert";
 
-function handleFileUpload(e) {
+const handleFileUpload = (e) => {
     let file = e.target.files[0];
     if (!e.target.files.length) return;
     if (e.target.files.length === 1) {
@@ -15,6 +15,20 @@ function handleFileUpload(e) {
     }
 }
 
+const returnFileFromUrl = async (pictureUrl) => {
+    const url = pictureUrl;
+    const fileName = "file.jpg";
+
+    const response = await fetch(url);
+    const contentType = response.headers.get("content-type");      
+    const blob = await response.blob();
+
+    const file = new File([blob], fileName, { type: contentType });
+
+    return file;
+}
+
 export const fileService = {
-    handleFileUpload
+    handleFileUpload,
+    returnFileFromUrl
 };

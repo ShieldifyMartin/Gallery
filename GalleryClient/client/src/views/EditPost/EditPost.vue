@@ -3,8 +3,8 @@
     <h1>Edit photo</h1>
     <form method="post" @submit.prevent="handleSubmit">
       <img
-        v-if="state.pictureBase64"
-        :src="state.pictureBase64"
+        v-if="state.pictureBase64 || state.pictureUrl"
+        :src="state.pictureBase64 || state.pictureUrl"
         class="uploaded-image"
         alt="upload"
       />
@@ -64,9 +64,10 @@ export default defineComponent({
       picture: null,
       pictureBase64: null,
       id: null,
+      pictureUrl: "",
       location: "",
       description: "",
-      categoryId: null,
+      categoryId: "",
     });
 
     watchEffect(async () => {
@@ -77,6 +78,7 @@ export default defineComponent({
       state.categories = categories;
       state.id = post.id;
       state.description = post.description;
+      state.pictureUrl = post.picture;
 
       if (post.location == "null") {
         state.location = "";
@@ -84,9 +86,7 @@ export default defineComponent({
         state.location = post.location;
       }
 
-      if (post.categoryId == null) {
-        state.categoryId = "";
-      } else {
+      if (post.categoryId !== null) {
         state.categoryId = post.categoryId;
       }
     });
@@ -99,7 +99,12 @@ export default defineComponent({
         return;
       }
 
-      var response = await postService.edit(
+      if(!state.pictureBase64) {
+        const file = await fileService.returnFileFromUrl(state.pictureUrl);
+        state.picture = file;
+      }
+
+      var editResponse = await postService.edit(
         store.state.auth.state.token,
         id,
         state.picture,
@@ -108,11 +113,16 @@ export default defineComponent({
         categoryId
       );
 
-      if (response == 401) {
+      if (editResponse == 401) {
         router.push("/login");
-      } else if (response >= 200 && response < 300) {
+      } else if (editResponse >= 200 && editResponse < 300) {
         useAlert("Successful!", true);
-        signalRService.returnPosts();
+        try {
+          signalRService.returnPosts();
+        }
+        catch{
+          router.push("/" + state.id);
+        }
         router.push("/" + state.id);
       } else {
         useAlert("Something went wrong!", false);

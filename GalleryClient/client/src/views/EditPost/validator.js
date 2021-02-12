@@ -2,7 +2,7 @@ import config from "@/config";
 import useAlert from "../../components/Alert/UseAlert";
 
 const validate = (state) => {
-    if (state.picture === null || state.description.length === 0) {
+    if ((state.picture === null && state.pictureUrl === null) || state.description.length === 0) {
         useAlert("Invalid data!", false);
         return false;
     }
