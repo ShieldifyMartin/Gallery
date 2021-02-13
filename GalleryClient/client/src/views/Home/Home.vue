@@ -1,12 +1,12 @@
 <template>
-<div>
-  <p>User: {{state.info.user}}</p>
-  <p>Message: {{state.info.message}}</p>
-</div>
-<button @click="submit">SignalR</button>
-  <div class="home">
+  <div>
+    <p>User: {{ state.info.user }}</p>
+    <p>Message: {{ state.info.message }}</p>
+  </div>
+  <button @click="submit">SignalR</button>
+  <div class="home">         
     <div class="search">
-      <button type="submit" class="icon" @click="search"></button>
+      <button type="submit" class="search-icon" @click="search"></button>
       <input
         type="text"
         v-model="state.searchInput"
@@ -14,6 +14,7 @@
         placeholder="Search photo"
         v-on:keyup.enter="search"
       />
+      <button type="submit" class="filter-icon" @click="filter"></button>      
     </div>
     <ul class="categories">
       <li v-for="category in state.categories" :key="category.id">
@@ -48,7 +49,7 @@
     <div v-else class="no-content">
       <img src="@/assets/not-found.png" alt="no-content" />
     </div>
-  </div>  
+  </div>
 </template>
 
 <script lang="ts">
@@ -63,9 +64,9 @@ export default defineComponent({
       categories: [],
       searchInput: "",
       loading: true,
-      category: "",   
+      category: "",
       messages: [],
-      info: {user: "", message: ""}
+      info: { user: "", message: "" },
     });
 
     const getCategoriesLink = (title) => {
@@ -82,9 +83,9 @@ export default defineComponent({
         state.loading = false;
       }
 
-      const categories = await categoryService.get();      
+      const categories = await categoryService.get();
       state.categories = categories;
-    
+
       const connection = signalRService.buildConnection();
 
       connection.on("ReceiveMessage", function(user, message) {
@@ -92,11 +93,11 @@ export default defineComponent({
         state.info.message = message;
         console.log({ user, message });
       });
-      connection.on("ReceivePosts", function(posts) {        
+      connection.on("ReceivePosts", function(posts) {
         state.posts = posts;
       });
 
-      signalRService.startAndStoreConnection(connection);      
+      signalRService.startAndStoreConnection(connection);
     });
 
     const submit = () => {
@@ -105,7 +106,7 @@ export default defineComponent({
         .catch(function(err) {
           return console.error(err);
         });
-    }
+    };
 
     const search = async () => {
       const posts = await postService.search(state.searchInput);
@@ -114,19 +115,19 @@ export default defineComponent({
     };
 
     const setCategoryId = (id) => {
-      if(state.category == id) {
+      if (state.category == id) {
         state.category = "";
-      }else {
-        state.category = id
+      } else {
+        state.category = id;
       }
-    }
+    };
 
     return {
       state,
       getCategoriesLink,
       search,
       setCategoryId,
-      submit
+      submit,
     };
   },
 });

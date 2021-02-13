@@ -7,17 +7,17 @@
     a {
       font-weight: bold;
       color: #2c3e50;
-      margin: 0 0.5em;    
+      margin: 0 0.5em;
       padding: 1em 0;
       text-shadow: none;
       text-decoration: none;
-      
+
       &.router-link-exact-active {
         color: #42b983;
       }
     }
-    
-    a:hover {      
+
+    a:hover {
       border-bottom: 1.5px solid gray;
     }
   }
@@ -107,6 +107,21 @@
 
     .menu-icon {
       display: block;
+    }    
+
+    .menu-icon {
+      display: block;     
+      animation: rotation 0.5s;
+    }
+      
+    @keyframes rotation {      
+      from {
+        transform: rotate(0deg);
+      }
+      to {
+        // transform: rotate(359deg);
+        transform: rotate(180deg) translateY(5.5px);
+      }
     }
   }
 }

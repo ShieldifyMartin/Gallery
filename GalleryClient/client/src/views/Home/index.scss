@@ -1,16 +1,16 @@
-.home {  
+.home {
   .search {
     position: relative;
+    margin-left: -2.4em;    
 
     .search-input {
-      padding: 1em 0;
-      padding-left: 2em;
+      margin-left: 3em;
+      padding: 1em;
       width: 20em;
       height: 2em;
       outline: 0;
       outline-width: 0;
       border: 0;
-      margin-left: 3em;
       border-bottom: 1px solid #000;
       -moz-outline-style: none;
     }
@@ -18,32 +18,33 @@
     .search-input::-webkit-input-placeholder {
       font-size: 1.3em;
       line-height: 3;
-    }
+    }    
 
-    .search-input:focus,
-    .search-input:active,
-    .icon:focus,
-    .icon:active {
-      outline: 0;
-      outline-width: 0;
-      -moz-outline-style: none;
-    }
-
-    .icon {
-      background: url(../../assets/icons/search.svg);
+    .search-icon,
+    .filter-icon {
       position: absolute;
       top: 10px;
-      margin: 0 auto;
       border: 0;
       padding: 11px;
+      margin: 0.5em 0;
       min-width: 11.1px;
       min-height: 11.1px;
-      margin-right: 2em;
     }
 
-    .icon:hover {
+    .filter-icon {
+      background: url(../../assets/icons/filter-solid.svg);
+    }
+
+    .filter-icon:hover {
+      background: url(../../assets/icons/filter-solid-orange.svg);
+    }
+
+    .search-icon {
+      background: url(../../assets/icons/search-solid.svg);      
+    }
+
+    .search-icon:hover {
       background: url(../../assets/icons/search-hover.svg);
-      padding: 9px;
     }
   }
 
@@ -77,9 +78,10 @@
       color: #fff;
       cursor: pointer;
     }
-
+    
     .clicked {
       color: #fff;
+      font-weight: 800;
     }
   }
 
@@ -135,7 +137,7 @@
   @media only screen and (max-width: 580px) {
     .categories {
       width: 18em;
-      grid-gap: 1em;    
+      grid-gap: 1em;
 
       li {
         padding: 0.5em 1em;
@@ -144,7 +146,7 @@
 
     .search {
       position: relative;
-  
+
       .search-input {
         width: 10em;
       }
@@ -169,7 +171,7 @@
   @media only screen and (max-width: 300px) {
     .categories {
       width: 10em;
-      grid-gap: 1em;    
+      grid-gap: 1em;
 
       li {
         padding: 0.5em 1em;

@@ -92,11 +92,11 @@ export default defineComponent({
     function toggleMenu () {
       state.showMenu = !state.showMenu;
 
-      if(state.showMenu) {
-        setTimeout(() => {
-            state.showMenu = !state.showMenu;
-        }, 2000)
-      }
+      // if(state.showMenu) {
+      //   setTimeout(() => {
+      //     state.showMenu = !state.showMenu;
+      //   }, 4000)
+      // }
     }
 
     function isAuth() {

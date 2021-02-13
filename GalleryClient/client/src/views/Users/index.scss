@@ -35,7 +35,7 @@
     }
 
     .icon {
-      background: url(../../assets/icons/search.svg);
+      background: url(../../assets/icons/search-solid.svg);
       position: absolute;
       top: 10px;
       margin: 0 auto;
@@ -47,8 +47,7 @@
     }
 
     .icon:hover {
-      background: url(../../assets/icons/search-hover.svg);
-      padding: 9px;
+      background: url(../../assets/icons/search-hover.svg);      
     }
   }
 
