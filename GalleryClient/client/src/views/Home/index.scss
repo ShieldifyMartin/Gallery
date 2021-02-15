@@ -1,7 +1,7 @@
 .home {
   .search {
-    position: relative;
-    margin-left: -2.4em;    
+    position: relative;    
+    margin-left: -2.5em;
 
     .search-input {
       margin-left: 3em;
@@ -18,11 +18,12 @@
     .search-input::-webkit-input-placeholder {
       font-size: 1.3em;
       line-height: 3;
-    }    
+    }
 
     .search-icon,
     .filter-icon {
       position: absolute;
+      outline: none;
       top: 10px;
       border: 0;
       padding: 11px;
@@ -32,7 +33,7 @@
     }
 
     .filter-icon {
-      background: url(../../assets/icons/filter-solid.svg);
+      background: url(../../assets/icons/filter-solid.svg);      
     }
 
     .filter-icon:hover {
@@ -40,11 +41,28 @@
     }
 
     .search-icon {
-      background: url(../../assets/icons/search-solid.svg);      
+      background: url(../../assets/icons/search-solid.svg);
     }
 
     .search-icon:hover {
       background: url(../../assets/icons/search-hover.svg);
+    }
+  }
+  
+  .filters-menu {
+    display: block;
+    margin: 1em auto;
+    width: 8em;
+    background-color: #6aac79;    
+    border-radius: 1em;
+    
+    li {
+      list-style: none;
+      padding-top: 0.7em;
+    }
+    
+    li:hover {        
+      color: #fff;
     }
   }
 
@@ -78,7 +96,7 @@
       color: #fff;
       cursor: pointer;
     }
-    
+
     .clicked {
       color: #fff;
       font-weight: 800;

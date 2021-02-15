@@ -4,7 +4,7 @@
     <p>Message: {{ state.info.message }}</p>
   </div>
   <button @click="submit">SignalR</button>
-  <div class="home">         
+  <div class="home">
     <div class="search">
       <button type="submit" class="search-icon" @click="search"></button>
       <input
@@ -14,8 +14,14 @@
         placeholder="Search photo"
         v-on:keyup.enter="search"
       />
-      <button type="submit" class="filter-icon" @click="filter"></button>      
+      <button type="submit" class="filter-icon" @click="filter"></button>
     </div>
+    <ul v-if="state.openFiltersMenu" class="filters-menu">
+      <li @click="setFilter(1)">Most popular</li>
+      <li @click="setFilter(2)">Sort by date</li>
+      <li @click="setFilter(3)">Top 5</li>
+      <li></li>
+    </ul>
     <ul class="categories">
       <li v-for="category in state.categories" :key="category.id">
         <input
@@ -62,6 +68,7 @@ export default defineComponent({
     const state = reactive({
       posts: [],
       categories: [],
+      openFiltersMenu: false,
       searchInput: "",
       loading: true,
       category: "",
@@ -114,6 +121,24 @@ export default defineComponent({
       state.posts = posts;
     };
 
+    const filter = () => {
+      state.openFiltersMenu = !state.openFiltersMenu;
+    };
+
+    const setFilter = (filter) => {
+      switch (filter) {
+        case 1:
+          console.log("Most popular posts");
+          break;
+        case 2: console.log("Posts sorted by date");
+          break;
+        case 3: console.log("Top 5 posts");          
+          break;
+        default:
+          console.log(`No filter`);
+      }
+    };
+
     const setCategoryId = (id) => {
       if (state.category == id) {
         state.category = "";
@@ -128,6 +153,8 @@ export default defineComponent({
       search,
       setCategoryId,
       submit,
+      filter,
+      setFilter,
     };
   },
 });
