@@ -43,6 +43,19 @@
           </div>
         </label>
       </li>
+      <!-- dsadsad -->
+      <li>
+        <input
+          type="button"          
+          class="tab-switch"          
+        />
+        <label>          
+          <div>
+            Others(3)
+          </div>
+        </label>
+      </li>
+      <!-- dasd -->
     </ul>
     <img v-if="state.loading" class="loader" src="@/assets/loading.gif" />
     <div v-else-if="state.posts && state.posts.length" class="posts">
