@@ -1,4 +1,4 @@
-﻿namespace GalleryServer.Features.Cats
+﻿namespace GalleryServer.Features.Post
 {
     using CloudinaryDotNet;
     using GalleryServer.Controllers;

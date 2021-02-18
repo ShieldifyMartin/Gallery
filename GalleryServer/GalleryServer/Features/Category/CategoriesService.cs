@@ -3,7 +3,7 @@
     using GalleryServer.Data;
     using GalleryServer.Data.Models;
     using GalleryServer.Data.Models.Repositories;
-    using GalleryServer.Features.Cats;
+    using GalleryServer.Features.Post;
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;

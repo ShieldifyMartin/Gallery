@@ -1,4 +1,4 @@
-﻿namespace GalleryServer.Features.Cats
+﻿namespace GalleryServer.Features.Post
 {
     using GalleryServer.Data.Models;
     using GalleryServer.Features.Post.Models;

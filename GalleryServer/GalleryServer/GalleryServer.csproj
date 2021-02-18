@@ -21,6 +21,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="Infrastructure\Services\.editorconfig" />
+  </ItemGroup>
+
+  <ItemGroup>
 	  <PackageReference Include="CloudinaryDotNet" Version="1.14.0" />
 	  <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="5.0.2" />
 	  <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="5.0.2" />
@@ -33,6 +37,10 @@
 	    <PrivateAssets>all</PrivateAssets>
 	    <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 	  </PackageReference>	  
+  </ItemGroup>
+
+  <ItemGroup>
+    <EditorConfigFiles Remove="E:\Git\Gallery\GalleryServer\GalleryServer\Infrastructure\Services\.editorconfig" />
   </ItemGroup>
 
 </Project>

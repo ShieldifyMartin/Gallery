@@ -51,7 +51,7 @@ namespace GalleryServer
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
-                endpoints.MapHub<SignalRService>("/chathub");
+                endpoints.MapHub<SignalRService>("/postHub");
             });
 
             ApplicationDbInitializer.SeedUsers(userManager, roleManager);

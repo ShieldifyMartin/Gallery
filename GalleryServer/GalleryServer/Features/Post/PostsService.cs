@@ -1,10 +1,10 @@
-﻿namespace GalleryServer.Features.Cats
+﻿namespace GalleryServer.Features.Post
 {
     using GalleryServer.Data;
     using GalleryServer.Data.Models;
     using GalleryServer.Data.Models.Repositories;
     using GalleryServer.Features.Post.Models;
-    using GalleryServer.Infrastructure.Services;    
+    using GalleryServer.Infrastructure.Services;
     using Microsoft.EntityFrameworkCore;
     using System;
     using System.Collections.Generic;
@@ -15,8 +15,8 @@
     {
         private readonly ApplicationDbContext data;
         private readonly IDeletableEntityRepository<Post> posts;
-        private readonly ICurrentUserService currentUser;
-
+        private readonly ICurrentUserService currentUser;        
+        
         public PostsService(
             ApplicationDbContext data,
             IDeletableEntityRepository<Post> posts,
@@ -24,12 +24,12 @@
         {
             this.data = data;
             this.posts = posts;
-            this.currentUser = currentUser;
+            this.currentUser = currentUser;            
         }
 
         public List<GetAllGetRequestModel> GetAll()
             => this.posts
-                .All()                
+                .All()
                 .Select(p => new GetAllGetRequestModel
                 {
                     Id = p.Id,
@@ -43,7 +43,7 @@
                     CreatedBy = p.CreatedBy
                 })
                 .OrderByDescending(p => p.Likes)
-                .ToList();                 
+                .ToList();
 
         public List<Post> GetAllAdmin()
             => this.posts

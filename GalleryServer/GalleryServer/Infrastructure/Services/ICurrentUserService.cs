@@ -1,6 +1,4 @@
-﻿using System.Security.Claims;
-
-namespace GalleryServer.Infrastructure.Services
+﻿namespace GalleryServer.Infrastructure.Services
 {
     public interface ICurrentUserService
     {

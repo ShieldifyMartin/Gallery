@@ -1,6 +1,6 @@
 ﻿namespace GalleryServer.Areas.Admin.Features.Post
 {
-    using GalleryServer.Features.Cats;
+    using GalleryServer.Features.Post;
     using GalleryServer.Features.Post.Models;
     using GalleryServer.Infrastructure.Services;
     using Microsoft.AspNetCore.Mvc;
