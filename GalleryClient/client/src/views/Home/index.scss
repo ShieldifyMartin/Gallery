@@ -53,7 +53,7 @@
     display: block;
     margin: 1em auto;
     width: 8em;
-    background-color: #6aac79;    
+    background-color: #d3d3d3;    
     border-radius: 1em;
     
     li {
@@ -71,7 +71,7 @@
     position: relative;
     grid-template-columns: repeat(auto-fill, minmax(6rem, 5fr));
     width: 35em;
-    grid-gap: 1.2em;
+    grid-gap: 1.5em;
     margin: 2em auto;
     text-align: center;
 
@@ -84,7 +84,7 @@
       width: 5em;
       margin: 0 auto;
       text-align: center;
-      padding: 0.9em 1em;
+      padding: 0.9em 1.5em;
       background-color: lightgray;
       text-decoration: none;
       color: #000;
