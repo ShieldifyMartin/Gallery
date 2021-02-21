@@ -15,12 +15,7 @@
         public SignalRService(IDeletableEntityRepository<Post> posts)
         {
             this.posts = posts;
-        }
-
-        public async Task SendMessage(string user, string message)
-        {
-            await Clients.All.SendAsync("ReceiveMessage", user, message);
-        }
+        }      
 
         public async Task ReturnAllPosts()
         {
