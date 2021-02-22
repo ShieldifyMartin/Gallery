@@ -11,10 +11,9 @@
       />
       <button type="submit" class="filter-icon" @click="filter"></button>
     </div>
-    <ul v-if="state.openFiltersMenu" class="filters-menu">
-      <li @click="setFilter(1)">Most popular</li>
-      <li @click="setFilter(2)">Sort by date</li>
-      <li @click="setFilter(3)">Top 5</li>
+    <ul v-if="state.openFiltersMenu" class="filters-menu">    
+      <li @click="setFilter(1)">Sort by date</li>
+      <li @click="setFilter(2)">Top 5</li>
       <li></li>
     </ul>
     <ul class="categories">
@@ -37,7 +36,7 @@
             }})
           </div>
         </label>
-      </li>      
+      </li>
     </ul>
     <img v-if="state.loading" class="loader" src="@/assets/loading.gif" />
     <div v-else-if="state.posts && state.posts.length" class="posts">
@@ -67,8 +66,7 @@ export default defineComponent({
       searchInput: "",
       loading: true,
       category: "",
-      messages: [],
-      info: { user: "", message: "" },
+      messages: []      
     });
 
     const getCategoriesLink = (title) => {
@@ -120,18 +118,22 @@ export default defineComponent({
       state.openFiltersMenu = !state.openFiltersMenu;
     };
 
-    const setFilter = (filter) => {
-      switch (filter) {
-        case 1:
-          console.log("Most popular posts");
+    const setFilter = async(filter) => {
+      switch (filter) {        
+        case 1: {
+          console.log("Posts sorted by date");
           break;
-        case 2: console.log("Posts sorted by date");
+        }
+        case 2: {
+          const posts = await postService.getTop5();          
+          state.posts = posts;
           break;
-        case 3: console.log("Top 5 posts");          
-          break;
-        default:
+        }
+        default: {
           console.log(`No filter`);
+        }
       }
+      state.openFiltersMenu = false;
     };
 
     const setCategoryId = (id) => {

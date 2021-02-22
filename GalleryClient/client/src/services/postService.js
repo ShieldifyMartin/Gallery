@@ -36,6 +36,17 @@ const getCategories = async () => {
   }
 };
 
+const getTop5 = async () => {
+  try {
+    const response = await axios.get(`${config.restAPI}/posts/top5`);
+    if (response.status >= 200 && response.status < 300) {
+      return response.data;
+    }
+  } catch (err) {
+    return [];
+  }
+}
+
 const search = async (input) => {
   if (!input.length) {
     const posts = await get();
@@ -155,6 +166,7 @@ export const postService = {
   get,
   getById,
   getCategories,
+  getTop5,
   search,
   create,
   edit,
