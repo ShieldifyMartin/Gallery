@@ -43,12 +43,17 @@
                     CreatedBy = p.CreatedBy
                 })
                 .OrderByDescending(p => p.Likes)
-                .ToList();
+                .ToList();        
 
         public List<Post> GetAllAdmin()
             => this.posts
                 .AllWithDeleted()
                 .OrderByDescending(p => p.Likes)
+                .ToList();
+
+        public List<GetAllGetRequestModel> GetAllSortedByDate()
+            => this.GetAll()
+                .OrderByDescending(p => p.CreatedOn)
                 .ToList();
 
         public List<GetAllGetRequestModel> GetTop5()

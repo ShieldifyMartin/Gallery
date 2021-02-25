@@ -37,7 +37,14 @@
             var posts = this.posts.GetAll();
 
             return Accepted(nameof(this.All), posts);
-        }        
+        }
+
+        public ActionResult GetAllSortedByDate()
+        {
+            var posts = this.posts.GetAllSortedByDate();
+
+            return Accepted(nameof(this.GetAllSortedByDate), posts);
+        }
 
         public ActionResult Top5()
         {

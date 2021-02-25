@@ -12,6 +12,8 @@
 
         List<Post> GetAllAdmin();
 
+        List<GetAllGetRequestModel> GetAllSortedByDate();
+
         List<GetAllGetRequestModel> GetTop5();
 
         ICollection<Post> GetByCategoryId(int categoryId);
