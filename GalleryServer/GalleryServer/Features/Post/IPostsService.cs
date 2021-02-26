@@ -16,6 +16,8 @@
 
         List<GetAllGetRequestModel> GetTop5();
 
+        List<GetAllGetRequestModel> GetRandomPosts();
+
         ICollection<Post> GetByCategoryId(int categoryId);
 
         DetailsGetRequestModel GetById(string id);

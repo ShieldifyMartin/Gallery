@@ -74,7 +74,24 @@
                     CreatedBy = p.CreatedBy
                 })
                 .ToList();
-       
+
+        public List<GetAllGetRequestModel> GetRandomPosts()
+            => this.posts
+                .All()
+                .Select(p => new GetAllGetRequestModel
+                {
+                    Id = p.Id,
+                    Location = p.Location,
+                    Description = p.Description,
+                    Picture = p.Picture,
+                    Likes = p.Likes,
+                    CategoryId = p.CategoryId,
+                    UserId = p.UserId,
+                    CreatedOn = p.CreatedOn,
+                    CreatedBy = p.CreatedBy
+                })
+                .ToList();
+
         public ICollection<Post> GetByCategoryId(int categoryId)
             => this.posts
                 .All()

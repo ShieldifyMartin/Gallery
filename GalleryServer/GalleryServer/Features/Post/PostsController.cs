@@ -53,6 +53,13 @@
             return Accepted(nameof(this.Top5), posts);
         }
 
+        public ActionResult GetRandom()
+        {
+            var posts = this.posts.GetRandomPosts();
+
+            return Accepted(nameof(this.GetRandom), posts);
+        }
+
         [HttpGet("{postId}")]
         public ActionResult ById(string postId)
         {
