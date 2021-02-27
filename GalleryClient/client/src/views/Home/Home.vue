@@ -14,6 +14,7 @@
     <ul v-if="state.openFiltersMenu" class="filters-menu">    
       <li @click="setFilter(1)">Sort by date</li>
       <li @click="setFilter(2)">Top 5</li>
+      <li @click="setFilter(3)">Random order</li>
       <li></li>
     </ul>
     <ul class="categories">
@@ -126,6 +127,11 @@ export default defineComponent({
         }
         case 2: {
           const posts = await postService.getTop5();          
+          state.posts = posts;
+          break;
+        }
+        case 3: {
+          const posts = await postService.getRandomPosts();          
           state.posts = posts;
           break;
         }

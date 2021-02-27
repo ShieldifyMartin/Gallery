@@ -47,6 +47,17 @@ const getTop5 = async () => {
   }
 }
 
+const getRandomPosts = async () => {
+  try {
+    const response = await axios.get(`${config.restAPI}/posts/getRandom`);
+    if (response.status >= 200 && response.status < 300) {
+      return response.data;
+    }
+  } catch (err) {
+    return [];
+  }
+}
+
 const search = async (input) => {
   if (!input.length) {
     const posts = await get();
@@ -167,6 +178,7 @@ export const postService = {
   getById,
   getCategories,
   getTop5,
+  getRandomPosts,
   search,
   create,
   edit,
