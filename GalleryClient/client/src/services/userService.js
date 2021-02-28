@@ -3,10 +3,6 @@ import Cookies from "js-cookie";
 import config from "@/config";
 
 const login = async (token, username, password) => {
-  axios.defaults.headers = {
-    "Content-Type": "application/json",
-    Authorization: "Bearer " + token,
-  };
   const body = JSON.stringify({ username, password });
 
   try {

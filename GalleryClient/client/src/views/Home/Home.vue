@@ -12,8 +12,8 @@
       <button type="submit" class="filter-icon" @click="filter"></button>
     </div>
     <ul v-if="state.openFiltersMenu" class="filters-menu">    
-      <li @click="setFilter(1)">Sort by date</li>
-      <li @click="setFilter(2)">Top 5</li>
+      <li @click="setFilter(1)">Top 5</li>
+      <li @click="setFilter(2)">Sort by date</li>
       <li @click="setFilter(3)">Random order</li>
       <li></li>
     </ul>
@@ -56,7 +56,6 @@
 <script lang="ts">
 import { defineComponent, reactive, watchEffect } from "vue";
 import { postService, categoryService, signalRService } from "../../services";
-import store from "../../store";
 
 export default defineComponent({
   setup() {
@@ -66,8 +65,7 @@ export default defineComponent({
       openFiltersMenu: false,
       searchInput: "",
       loading: true,
-      category: "",
-      messages: []      
+      category: "",        
     });
 
     const getCategoriesLink = (title) => {
@@ -88,26 +86,13 @@ export default defineComponent({
       state.categories = categories;
 
       const connection = signalRService.buildConnection();
-
-      connection.on("ReceiveMessage", function(user, message) {
-        state.info.user = user;
-        state.info.message = message;
-        console.log({ user, message });
-      });
+      
       connection.on("ReceivePosts", function(posts) {
         state.posts = posts;
       });
 
       signalRService.startAndStoreConnection(connection);
-    });
-
-    const submit = () => {
-      store.state.connection
-        .invoke("SendMessage", "Pesho", "Misho")
-        .catch(function(err) {
-          return console.error(err);
-        });
-    };
+    });    
 
     const search = async () => {
       const posts = await postService.search(state.searchInput);
@@ -120,25 +105,30 @@ export default defineComponent({
     };
 
     const setFilter = async(filter) => {
+      let posts = [];
+
       switch (filter) {        
         case 1: {
-          console.log("Posts sorted by date");
+          const topPosts = await postService.getTop5();          
+          posts = topPosts;
           break;
         }
-        case 2: {
-          const posts = await postService.getTop5();          
-          state.posts = posts;
+        case 2: {          
+          const sortedPosts = await postService.getPostsSortedByDate();
+          posts = sortedPosts;
           break;
         }
         case 3: {
-          const posts = await postService.getRandomPosts();          
-          state.posts = posts;
+          const randomPosts = await postService.getRandomPosts();          
+          posts = randomPosts;
           break;
         }
         default: {
           console.log(`No filter`);
         }
       }
+
+      state.posts = posts;
       state.openFiltersMenu = false;
     };
 
@@ -154,8 +144,7 @@ export default defineComponent({
       state,
       getCategoriesLink,
       search,
-      setCategoryId,
-      submit,
+      setCategoryId,      
       filter,
       setFilter,
     };
