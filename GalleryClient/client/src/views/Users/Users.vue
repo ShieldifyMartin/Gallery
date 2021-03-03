@@ -12,18 +12,20 @@
     </div>
     <img v-if="state.loading" class="loader" src="@/assets/loading.gif" />
     <div v-else-if="state.users && state.users.length" class="users">
-      <router-link
-        :to="getProfileUrl(user.id)"
-        v-for="user in state.users"
-        :key="user.id"
-        class="user"
-      >
-        <img :src="user.pictureUrl" alt="profile picture" />
-        <div class="info">
-          <h2>{{ user.userName }}</h2>
-          <h3>@{{ user.userName.toLowerCase() }}</h3>
-        </div>
-      </router-link>
+      <transition-group name="fade" appear>
+        <router-link
+          :to="getProfileUrl(user.id)"
+          v-for="user in state.users"
+          :key="user.id"
+          class="user"
+        >
+          <img :src="user.pictureUrl" alt="profile picture" />
+          <div class="info">
+            <h2>{{ user.userName }}</h2>
+            <h3>@{{ user.userName.toLowerCase() }}</h3>
+          </div>
+        </router-link>
+      </transition-group>
     </div>
     <div v-else class="no-content">
       <img src="@/assets/not-found.png" alt="no-content" />

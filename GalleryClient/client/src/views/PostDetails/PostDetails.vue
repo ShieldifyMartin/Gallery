@@ -45,14 +45,12 @@
         </div>
       </div>
     </div>
-
-    <img v-if="state.loading" class="loader" src="@/assets/loading.gif" />
-    <img
-      :src="state.post.picture"
-      class="post-image"
-      :alt="state.post.description"
-    /><br />
-
+    <img v-if="state.loading" class="loader" src="@/assets/loading.gif" />    
+      <img
+        :src="state.post.picture"
+        class="post-image"
+        :alt="state.post.description"
+      /><br />
     <div class="post-footer">
       <div>
         <img

@@ -131,17 +131,17 @@
       transform: scale(1.01);
       //transform: scale(0.99);
     }
-  }
 
-  .fade-enter-from {
-    opacity: 0;  
-  }
-  .fade-enter-to {
-    opacity: 1;    
-  }
-  .fade-enter-active {
-    transition: all 1.5s ease;
-  }
+    .fade-enter-from {
+      opacity: 0;  
+    }
+    .fade-enter-to {
+      opacity: 1;    
+    }
+    .fade-enter-active {
+      transition: all 1.35s ease;
+    }
+  }  
 
   .loader {
     margin: 1em auto;

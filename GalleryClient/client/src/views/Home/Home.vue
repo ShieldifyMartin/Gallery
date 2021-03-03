@@ -42,7 +42,7 @@
     <img v-if="state.loading" class="loader" src="@/assets/loading.gif" />
     <div v-else-if="state.posts && state.posts.length" class="posts">
       <transition-group name="fade" appear>
-        <router-link :to="post.id" v-for="post in state.posts" :key="post.id">
+        <router-link :to="post.id" v-for="post in state.posts" :key="post.id">          
           <div class="image">
             <img :src="post.picture" :alt="post.description" />
           </div>
