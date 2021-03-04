@@ -45,12 +45,16 @@
         </div>
       </div>
     </div>
-    <img v-if="state.loading" class="loader" src="@/assets/loading.gif" />    
+    <img v-if="state.loading" class="loader" src="@/assets/loading.gif" />
+    
+    <transition name="fade" appear>
       <img
         :src="state.post.picture"
         class="post-image"
         :alt="state.post.description"
-      /><br />
+      />
+    </transition><br />
+    
     <div class="post-footer">
       <div>
         <img

@@ -86,6 +86,16 @@
     height: auto;
   }
 
+  .fade-enter-from {
+    opacity: 0;  
+  }
+  .fade-enter-to {
+    opacity: 1;    
+  }
+  .fade-enter-active {
+    transition: all 1.35s ease;
+  }
+
   .post-footer {
     margin: 0 auto;
     width: 15em;
