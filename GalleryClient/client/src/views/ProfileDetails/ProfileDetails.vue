@@ -47,17 +47,19 @@
               </h1>
               <div v-else>
                 <div class="posts">
-                  <router-link
-                    :to="getPostLink(post.id)"
-                    v-for="post in state.userPosts"
-                    :key="post.id"
-                  >
-                    <img
-                      :src="post.picture"
-                      class="image"
-                      :alt="post.description"
-                    />
-                  </router-link>
+                  <transition-group name="fade" appear>
+                    <router-link
+                      :to="getPostLink(post.id)"
+                      v-for="post in state.userPosts"
+                      :key="post.id"
+                    >
+                      <img
+                        :src="post.picture"
+                        class="image"
+                        :alt="post.description"
+                      />
+                    </router-link>
+                  </transition-group>
                 </div>
 
                 <div v-if="state.userPosts && state.userPosts.length >= 3">
@@ -80,22 +82,24 @@
             <label for="tab-2" class="tab-label">Liked</label>
             <div class="tab-content">
               <div class="posts">
-                <h1
-                  v-if="state.userLikedPosts.length === 0"
-                  class="empty-message"
-                >
-                  No liked posts
-                </h1>
-                <router-link
-                  v-else
-                  :to="getPostLink(post.id)"
-                  v-for="post in state.userLikedPosts"
-                  :key="post.id"
-                >
-                  <div class="image">
-                    <img :src="post.picture" :alt="post.description" />
-                  </div>
-                </router-link>
+                <transition-group name="fade" appear>
+                  <h1
+                    v-if="state.userLikedPosts.length === 0"
+                    class="empty-message"
+                  >
+                    No liked posts
+                  </h1>
+                  <router-link
+                    v-else
+                    :to="getPostLink(post.id)"
+                    v-for="post in state.userLikedPosts"
+                    :key="post.id"
+                  >
+                    <div class="image">
+                      <img :src="post.picture" :alt="post.description" />
+                    </div>
+                  </router-link>
+                </transition-group>
               </div>
 
               <div v-if="state.userLikedPosts.length >= 3">
