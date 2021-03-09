@@ -10,7 +10,9 @@
     using GalleryServer.Features.Identity;
     using CloudinaryDotNet;
     using GalleryServer.Infrastructure.Services;
-    using GalleryServer.Features.Cloudinary;    
+    using GalleryServer.Features.Cloudinary;
+    using Microsoft.AspNetCore.Http;
+    using System;
 
     public class IdentityController : ApiController
     {
@@ -84,7 +86,15 @@
                 user.Id,
                 user.UserName,
                 this.appSettings.Secret);
-        
+           
+            //Response.Cookies.Append("token", token, new CookieOptions
+            //{
+            //    Path = "/",
+            //    Domain = "localhost",
+            //    Expires = DateTime.UtcNow.AddHours(6),
+            //    HttpOnly = true,
+            //    Secure = false
+            //});
             return new LoginResponseModel
             {
                 Token = token

@@ -112,7 +112,7 @@
             => services
                 .AddAntiforgery(options =>
                 {
-                    options.HeaderName = "X-CSRF-TOKEN";
+                    options.HeaderName = "X-XSRF-TOKEN";                               
                 })
                 .AddControllers(options => options
                     .Filters

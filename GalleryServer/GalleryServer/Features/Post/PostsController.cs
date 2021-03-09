@@ -6,6 +6,7 @@
     using GalleryServer.Features.Cloudinary;
     using GalleryServer.Features.Post.Models;
     using GalleryServer.Infrastructure.Services;
+    using Microsoft.AspNetCore.Antiforgery;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
     using System.Threading.Tasks;
@@ -16,15 +17,15 @@
         private readonly IPostsService posts;
         private readonly ICurrentUserService currentUser;
         private readonly ICloudinaryService cloudinaryService;
-        private readonly Cloudinary cloudinary;
-
-        public PostsController(
+        private readonly Cloudinary cloudinary;        
+        
+        public PostsController(            
             ICategoriesService categories,
             IPostsService posts,
             ICloudinaryService cloudinaryService,
             Cloudinary cloudinary,
             ICurrentUserService currentUser)
-        {
+        {            
             this.categories = categories;
             this.posts = posts;
             this.cloudinaryService = cloudinaryService;
@@ -104,10 +105,10 @@
             }
 
             return Ok();
-        }
+        }        
 
         [HttpPost]
-        [Authorize]
+        [Authorize]        
         public async Task<ActionResult> Create([FromForm] CreatePostRequestModel model)
         {
             var categoryId = model.CategoryId;
