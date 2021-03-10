@@ -2,12 +2,14 @@
   <div class="edit-photo">
     <h1>Edit photo</h1>
     <form method="post" @submit.prevent="handleSubmit">
-      <img
-        v-if="state.pictureBase64 || state.pictureUrl"
-        :src="state.pictureBase64 || state.pictureUrl"
-        class="uploaded-image"
-        alt="upload"
-      />
+      <transition name="fade">
+        <img
+          v-if="state.pictureBase64 || state.pictureUrl"
+          :src="state.pictureBase64 || state.pictureUrl"
+          class="uploaded-image"
+          alt="upload"
+        />
+      </transition>
       <label for="file" class="upload-label">choose a picture</label>
       <input
         type="file"
