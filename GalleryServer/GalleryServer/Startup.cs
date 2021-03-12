@@ -30,7 +30,7 @@ namespace GalleryServer
             services.AddSignalR();
         }
 
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, UserManager<User> userManager, RoleManager<IdentityRole> roleManager)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
             {
@@ -54,8 +54,6 @@ namespace GalleryServer
                 endpoints.MapControllers();
                 endpoints.MapHub<SignalRService>("/postHub");
             });
-
-            ApplicationDbInitializer.SeedUsers(userManager, roleManager);
 
             app.ApplyMigrations();
         }

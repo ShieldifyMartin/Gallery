@@ -1,7 +1,6 @@
 ﻿namespace GalleryServer.Models.Identity
 {
-    using Microsoft.AspNetCore.Http;    
-    using System.ComponentModel.DataAnnotations;    
+    using System.ComponentModel.DataAnnotations;
 
     public class LoginRequestModel
     {

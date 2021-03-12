@@ -17,6 +17,7 @@
     public class IdentityController : ApiController
     {
         private readonly UserManager<User> userManager;
+        private readonly RoleManager<IdentityRole> roleManager;
         private readonly IIdentityService identity;
         private readonly ICloudinaryService cloudinaryService;
         private readonly Cloudinary cloudinary;
@@ -25,6 +26,7 @@
 
         public IdentityController(
             UserManager<User> userManager,
+            RoleManager<IdentityRole> roleManager,
             IIdentityService identity,
             Cloudinary cloudinary,
             ICloudinaryService cloudinaryService,
@@ -32,6 +34,7 @@
             IOptions<AppSettings> appSettings)
         {
             this.userManager = userManager;
+            this.roleManager = roleManager;
             this.identity = identity;
             this.cloudinaryService = cloudinaryService;
             this.cloudinary = cloudinary;
@@ -49,18 +52,11 @@
                 UserName = model.UserName
             };
 
-            var otherUser = await this.userManager
-                .FindByNameAsync(user.UserName);
-
-            if (otherUser.UserName == user.UserName)
-            {
-                return BadRequest("User with this username already exist!");
-            }
-
             var result = await this.userManager.CreateAsync(user, model.Password);
+            
             if (!result.Succeeded)
             {
-                return BadRequest("Something went wrong!");
+                return BadRequest(result.Errors);
             }
 
             return Ok();
@@ -86,7 +82,7 @@
                 user.Id,
                 user.UserName,
                 this.appSettings.Secret);
-           
+
             //Response.Cookies.Append("token", token, new CookieOptions
             //{
             //    Path = "/",

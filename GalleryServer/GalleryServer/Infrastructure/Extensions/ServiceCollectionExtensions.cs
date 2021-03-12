@@ -87,12 +87,11 @@
                 .AddScoped(typeof(IDeletableEntityRepository<>), typeof(DeletableEntityRepository<>))
                 .AddScoped(typeof(BaseRepository<>), typeof(BaseRepository<>))
                 .AddTransient<ICurrentUserService, CurrentUserService>()
-                .AddTransient<ICloudinaryService, CloudinaryService>()          
+                .AddTransient<ICloudinaryService, CloudinaryService>()
                 .AddTransient<ICategoriesService, CategoriesService>()
                 .AddTransient<IPostsService, PostsService>()
                 .AddTransient<IProfilesService, ProfilesService>()
-                .AddTransient<IIdentityService, IdentityService>()
-                .AddTransient<ApplicationDbInitializer>();
+                .AddTransient<IIdentityService, IdentityService>();                
 
         public static IServiceCollection AddCloudinaryService(this IServiceCollection services, AppSettings appSettings)
         {
