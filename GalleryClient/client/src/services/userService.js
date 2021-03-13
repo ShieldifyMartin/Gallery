@@ -2,7 +2,10 @@ import axios from "axios";
 import Cookies from "js-cookie";
 import config from "@/config";
 
-const login = async (token, username, password) => {
+const login = async (username, password) => {
+  axios.defaults.headers = {
+    "Content-Type": "application/json"
+  };
   const body = JSON.stringify({ username, password });
 
   try {

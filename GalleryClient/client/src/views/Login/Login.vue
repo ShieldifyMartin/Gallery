@@ -40,8 +40,7 @@ export default defineComponent({
     const handleSubmit = async () => {
       const { username, password } = state;
 
-      const status = await userService.login(
-        store.state.auth.state.token,
+      const status = await userService.login(        
         username,
         password
       );

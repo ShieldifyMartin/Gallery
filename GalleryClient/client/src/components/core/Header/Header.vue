@@ -99,7 +99,7 @@ export default defineComponent({
       // }
     }
 
-    function isAuth() {
+    function isAuth() {    
       return store.state.auth.state.isAuth;
     }
 

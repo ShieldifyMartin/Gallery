@@ -5,12 +5,12 @@ export default createStore({
   namespaced: true,
   state: {
     token: Cookies.get("token"),    
-    isAuth: Cookies.get("token") !== "",
+    isAuth: Cookies.get("token"),
   },
   mutations: {
     login(state) {
       state.token = Cookies.get("token");
-      state.isAuth = Cookies.get("token") !== "";
+      state.isAuth = Cookies.get("token") && Cookies.get("token").length;
     },
     logout(state) {
       state.token = "";
