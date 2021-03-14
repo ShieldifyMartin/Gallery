@@ -1,7 +1,11 @@
 <template>
   <div id="app">
     <app-header />
-    <router-view />    
+    <router-view v-slot="{ Component }">
+      <transition name="route" mode="out-in">
+        <component :is="Component"></component>
+      </transition>
+    </router-view>
   </div>
 </template>
 
@@ -33,5 +37,23 @@ export default defineComponent({
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
+
+  .route-enter-from {
+    opacity: 0;
+    transform: translateX(100px);
+  }
+
+ .route-enter-active {    
+    transition: all 0.3s ease-out;
+  }
+
+  .route-leave-to {
+    opacity: 0;
+    transform: translateX(-100px);
+  }
+
+  .route-leave-active {
+    transition: all 0.3s ease-in;
+  }
 }
 </style>
