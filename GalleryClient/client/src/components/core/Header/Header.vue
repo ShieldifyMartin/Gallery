@@ -41,6 +41,9 @@
         <li>
           <a href="#" @click="logout">Logout</a>
         </li>
+        <li v-if="isAdmin()">
+          <a href="#">Admin route</a>        
+        </li>
       </div>
       <div v-else>
         <li><router-link to="/">Home</router-link></li>
@@ -103,6 +106,10 @@ export default defineComponent({
       return store.state.auth.state.isAuth;
     }
 
+    function isAdmin() {    
+      return store.state.auth.state.isAdmin;
+    }
+
     const logout = () => {
       router.push("/");
       toggleMenu();
@@ -113,6 +120,7 @@ export default defineComponent({
       state,
       toggleMenu,
       isAuth,
+      isAdmin,
       logout,
     };
   },

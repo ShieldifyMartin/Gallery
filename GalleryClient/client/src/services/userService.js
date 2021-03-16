@@ -1,6 +1,7 @@
 import axios from "axios";
 import Cookies from "js-cookie";
 import config from "@/config";
+import store from "@/store";
 
 const login = async (username, password) => {
   axios.defaults.headers = {
@@ -14,6 +15,10 @@ const login = async (username, password) => {
     if (response.data.token) {
       Cookies.set("token", response.data.token, { expires: 27 });
     }
+    if(response.data.isAdmin === true) {
+      store.state.auth.dispatch("setAdmin");    
+    }
+
     return response.status;
   }
   catch (err) {
