@@ -4,14 +4,14 @@ import Cookies from "js-cookie";
 export default createStore({
   namespaced: true,
   state: {
-    token: null,    
-    isAuth: null,
-    isAdmin: null
+    token: Cookies.get("token"),
+    isAuth: Cookies.get("token") !== "",
+    isAdmin:  Cookies.get("admin") !== ""
   },
   mutations: {
     login(state) {
       state.token = Cookies.get("token");
-      state.isAuth = Cookies.get("token") && Cookies.get("token").length;
+      state.isAuth = Cookies.get("token") !== "";
     },
     setAdmin(state) {
       state.isAdmin = true;

@@ -1,5 +1,5 @@
 <template>
-  <div id="nav">
+  <div id="nav">    
     <div class="profile-picture">
       <router-link v-if="isAuth()" to="/profile">
         <img
@@ -10,11 +10,12 @@
         <img v-else src="@/assets/icons/profile.png" class="profile-icon" />
       </router-link>
     </div>
-    <div class="links">
+    <div class="links">      
       <div v-if="isAuth()">
         <router-link to="/">Home</router-link>
         <router-link to="/submit">Submit a photo</router-link>
         <router-link to="/users">Users</router-link>
+        <router-link to="/admin" v-if="isAdmin()">Admin route</router-link>
         <a href="#" @click="logout">Logout</a>
       </div>
       <div v-else>
@@ -38,12 +39,14 @@
             Users
           </router-link>
         </li>
+        <li v-if="isAdmin()">
+          <router-link to="/admin">
+            Admin route
+          </router-link>
+        </li>
         <li>
           <a href="#" @click="logout">Logout</a>
-        </li>
-        <li v-if="isAdmin()">
-          <a href="#">Admin route</a>        
-        </li>
+        </li>        
       </div>
       <div v-else>
         <li><router-link to="/">Home</router-link></li>
@@ -102,7 +105,7 @@ export default defineComponent({
       // }
     }
 
-    function isAuth() {    
+    function isAuth() {
       return store.state.auth.state.isAuth;
     }
 

@@ -18,12 +18,11 @@
       <li></li>
     </ul>
     <ul class="categories">
-      <li v-for="category in state.categories" :key="category.id">
+      <li v-for="category in state.categories" :key="category.id"  @click="setCategoryId(category.id)">
         <input
           type="button"
           :id="category.id"
-          class="tab-switch"
-          @click="setCategoryId(category.id)"
+          class="tab-switch"         
         />
         <label :for="category.id">
           <div v-if="state.category == category.id" class="clicked">
@@ -42,7 +41,7 @@
     <img v-if="state.loading" class="loader" src="@/assets/loading.gif" />
     <div v-else-if="state.posts && state.posts.length" class="posts">
       <transition-group name="fade" appear>
-        <router-link :to="post.id" v-for="post in state.posts" :key="post.id">          
+        <router-link :to="post.id" v-for="post in state.posts" :key="post.id">
           <div class="image">
             <img :src="post.picture" :alt="post.description" />
           </div>

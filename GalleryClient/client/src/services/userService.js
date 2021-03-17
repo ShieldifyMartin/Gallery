@@ -16,7 +16,8 @@ const login = async (username, password) => {
       Cookies.set("token", response.data.token, { expires: 27 });
     }
     if(response.data.isAdmin === true) {
-      store.state.auth.dispatch("setAdmin");    
+      store.state.auth.dispatch("setAdmin");
+      Cookies.set("admin", response.data.isAdmin, { expires: 27 });
     }
 
     return response.status;
