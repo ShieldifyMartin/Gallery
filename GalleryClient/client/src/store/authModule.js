@@ -20,6 +20,7 @@ export default createStore({
       state.token = "";
       state.isAuth = false;
       Cookies.set("token", "");
+      Cookies.set("admin", "");
     },
   },
   actions: {

@@ -1,4 +1,5 @@
 import { createRouter, createWebHistory } from "vue-router";
+import store from "@/store";
 
 const routes = [
   {
@@ -44,9 +45,20 @@ const routes = [
   {
     path: "/dashboard",
     name: "AdminDashboard",
-    component: () => import("@/views/AdminDashboard/AdminDashboard.vue")
+    component: () => import("@/views/AdminDashboard/AdminDashboard.vue"),
+    beforeEnter: (to, from, next) => {      
+      if (!isAdmin() || !isAuth()) next({ name: 'Login' })
+      else next()
+    }
   }
 ];
+
+function isAuth() {
+  return store.state.auth.state.isAuth;
+}
+function isAdmin() {
+  return store.state.auth.state.isAdmin;
+}
 
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),

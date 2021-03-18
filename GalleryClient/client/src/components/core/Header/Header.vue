@@ -15,7 +15,7 @@
         <router-link to="/">Home</router-link>
         <router-link to="/submit">Submit a photo</router-link>
         <router-link to="/users">Users</router-link>
-        <router-link to="/admin" v-if="isAdmin()">Admin route</router-link>
+        <router-link to="/dashboard" v-if="isAdmin()">Admin route</router-link>
         <a href="#" @click="logout">Logout</a>
       </div>
       <div v-else>
