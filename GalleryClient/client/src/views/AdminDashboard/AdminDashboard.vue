@@ -1,13 +1,27 @@
 <template>
   <div class="dashboard">
-    <ul>
-      <li>All Posts</li>
-      <li>All Users</li>
-      <li></li>
-      <li></li>
-      <li></li>
+    <ul class="routes">
+      <li><router-link to="/posts/all">All Posts</router-link></li>
+      <li><router-link to="/users/all">All Users</router-link></li>
     </ul>
-    Admin dashboard
+    <div class="main">
+      <div class="couters">
+        <div>
+          <h2>3123</h2>
+          <span>posts count</span>
+        </div>
+        <div>
+          <h2>11</h2>
+          <span>users count</span>
+        </div>
+      </div>
+      <div class="stats">
+        <img
+          src="https://www.statisticshowto.com/wp-content/uploads/2015/08/difference.png"
+          alt="statistic"
+        />
+      </div>
+    </div>
   </div>
 </template>
 
@@ -16,12 +30,9 @@ import { defineComponent, reactive, watchEffect } from "vue";
 
 export default defineComponent({
   setup() {
-    const state = reactive({
-    });
+    const state = reactive({});
 
-    watchEffect(async () => {
-
-    });
+    watchEffect(async () => {});
 
     return {
       state,
