@@ -89,7 +89,7 @@ export default defineComponent({
     });
 
     watchEffect(async () => {
-      if (isAuth()) {
+      if (isAuth() || isAdmin()) {
         const data = await profileService.get();
         state.pictureUrl = data.picture;
       }
@@ -109,7 +109,7 @@ export default defineComponent({
       return store.state.auth.state.isAuth;
     }
 
-    function isAdmin() {    
+    function isAdmin() {
       return store.state.auth.state.isAdmin;
     }
 

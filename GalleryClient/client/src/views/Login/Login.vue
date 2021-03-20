@@ -25,7 +25,6 @@
 <script lang="ts">
 import { defineComponent, reactive } from "vue";
 import store from "../../store";
-import router from "../../router";
 import { userService } from "../../services";
 import useAlert from "../../components/Alert/UseAlert";
 
@@ -47,7 +46,7 @@ export default defineComponent({
 
       if (status === 200) {
         store.state.auth.dispatch("login");
-        router.push("/");
+        window.location.href = "/";
       } else {
         useAlert("Somehing went wrong!", false);
         state.password = "";

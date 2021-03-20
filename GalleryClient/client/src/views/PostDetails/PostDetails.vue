@@ -27,14 +27,14 @@
         <p>Likes: {{ state.likes }}</p>
 
         <div class="author-icons">
-          <router-link :to="getEditRoute()" v-if="state.isAuthor">
+          <router-link :to="getEditRoute()" v-if="state.isAuthor || isAdmin()">
             <img
               class="edit-icon"
               src="@/assets/icons/edit.svg"
               alt="edit icon"
             />
           </router-link>
-          <div v-if="state.isAuthor">
+          <div v-if="state.isAuthor || isAdmin()">
             <img
               class="delete-icon"
               src="@/assets/icons/delete.svg"
@@ -125,6 +125,10 @@ export default defineComponent({
       state.createdOn = moment(post.createdOn, "YYYYMMDD").fromNow();
     });
 
+    function isAdmin() {
+      return store.state.auth.state.isAdmin;
+    }
+
     const like = async () => {
       let status = await postService.like(
         store.state.auth.state.token,
@@ -196,6 +200,7 @@ export default defineComponent({
       state,
       getProfileLink,
       getEditRoute,
+      isAdmin,
       like,
       unlike,
       toggleDeletePostAlert,

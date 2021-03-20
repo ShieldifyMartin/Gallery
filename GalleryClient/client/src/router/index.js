@@ -56,6 +56,7 @@ const routes = [
 function isAuth() {
   return store.state.auth.state.isAuth;
 }
+
 function isAdmin() {
   return store.state.auth.state.isAdmin;
 }
