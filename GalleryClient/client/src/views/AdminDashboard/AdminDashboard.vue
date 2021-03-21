@@ -1,7 +1,7 @@
 <template>
   <div class="dashboard">
     <ul class="routes">
-      <li><router-link to="/posts/all">All Posts</router-link></li>
+      <li><router-link to="/">All Posts</router-link></li>
       <li><router-link to="/users/all">All Users</router-link></li>
     </ul>
     <div class="main">

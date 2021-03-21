@@ -12,6 +12,17 @@ const get = async () => {
   }
 };
 
+const getAllWithDeleted = async () => {
+  try {
+    const response = await axios.get(`${config.restAPI}/admin/posts/all`);
+    if (response.status >= 200 && response.status < 300) {
+      return response.data;
+    }
+  } catch (err) {
+    return [];
+  }
+}
+
 const getById = async (id) => {
   try {
     const response = await axios.get(`${config.restAPI}/posts/byId/${id}`);
@@ -187,6 +198,7 @@ const unlike = async (token, postId) => {
 
 export const postService = {
   get,
+  getAllWithDeleted,
   getById,
   getCategories,
   getTop5,

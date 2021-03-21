@@ -57,6 +57,7 @@
 <script lang="ts">
 import { defineComponent, reactive, watchEffect } from "vue";
 import { postService, categoryService, signalRService } from "../../services";
+import store from "../../store";
 
 export default defineComponent({
   setup() {
@@ -78,7 +79,15 @@ export default defineComponent({
         const posts = await categoryService.getPostsByCategory(state.category);
         state.posts = posts;
       } else {
-        const posts = await postService.get();
+        let posts = [];
+        
+        if(store.state.auth.state.isAdmin) {
+          posts = await postService.getAllWithDeleted();
+          console.log(posts);
+        } else {
+          posts = await postService.get();
+        }
+
         state.posts = posts;
         state.loading = false;
       }
@@ -90,7 +99,7 @@ export default defineComponent({
       
       connection.on("ReceivePosts", function(posts) {
         state.posts = posts;
-      });
+      });      
 
       signalRService.startAndStoreConnection(connection);
     });    
