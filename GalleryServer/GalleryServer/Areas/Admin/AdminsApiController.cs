@@ -4,7 +4,7 @@
     using Microsoft.AspNetCore.Mvc;
 
     [ApiController]
-    //[Authorize(Roles = "Administrator")]
+    //[Authorize(Roles = "Admin")]
     [Area("Admin")]
     [Route("admin/[controller]/[action]")]
     public class AdminsApiController : ControllerBase

@@ -17,15 +17,15 @@
         private readonly IPostsService posts;
         private readonly ICurrentUserService currentUser;
         private readonly ICloudinaryService cloudinaryService;
-        private readonly Cloudinary cloudinary;        
-        
-        public PostsController(            
+        private readonly Cloudinary cloudinary;
+
+        public PostsController(
             ICategoriesService categories,
             IPostsService posts,
             ICloudinaryService cloudinaryService,
             Cloudinary cloudinary,
             ICurrentUserService currentUser)
-        {            
+        {
             this.categories = categories;
             this.posts = posts;
             this.cloudinaryService = cloudinaryService;
@@ -114,7 +114,7 @@
             var categoryId = model.CategoryId;
             var userId = this.currentUser.GetId();
             var pictureUrl = await this.cloudinaryService.UploadAsync(this.cloudinary, model.Picture);
-            
+
             var id = await this.posts.Create(model.Location, model.Description, pictureUrl, userId, categoryId);
 
             return Created(nameof(this.Create), id);
@@ -128,8 +128,8 @@
             var pictureUrl = "";
 
             if (!(model.Picture is null))
-            { 
-                pictureUrl = await this.cloudinaryService.UploadAsync(this.cloudinary, model.Picture);            
+            {
+                pictureUrl = await this.cloudinaryService.UploadAsync(cloudinary, model.Picture);
             }
 
             var result = await this.posts.UpdatePost(userId, postId, model.Location, model.Description, pictureUrl, model.CategoryId);

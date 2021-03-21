@@ -83,6 +83,9 @@
                 user.UserName,
                 this.appSettings.Secret);
 
+            var roles = await this.userManager.GetRolesAsync(user);
+            bool isAdmin = roles.Contains("Admin");
+
             //Response.Cookies.Append("token", token, new CookieOptions
             //{
             //    Path = "/",
@@ -93,7 +96,8 @@
             //});
             return new LoginResponseModel
             {
-                Token = token
+                Token = token,
+                isAdmin = isAdmin
             };
         }
 
