@@ -106,14 +106,26 @@ export default defineComponent({
         state.picture = file;
       }
 
-      var editResponse = await postService.edit(
-        store.state.auth.state.token,
-        id,
-        state.picture,
-        location,
-        description,
-        categoryId
-      );
+      let editResponse;
+      if(store.state.auth.state.isAdmin) {
+        editResponse = await postService.editAdmin(
+          store.state.auth.state.token,
+          id,
+          state.picture,
+          location,
+          description,
+          categoryId
+        );
+      } else {
+        editResponse = await postService.edit(
+          store.state.auth.state.token,
+          id,
+          state.picture,
+          location,
+          description,
+          categoryId
+        );
+      }
 
       if (editResponse == 401) {
         router.push("/login");

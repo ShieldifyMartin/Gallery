@@ -150,6 +150,29 @@ const edit = async (token, id, picture, location, description, categoryId) => {
   }
 };
 
+const editAdmin = async (token, id, picture, location, description, categoryId) => {
+  axios.defaults.headers = {
+    "Content-Type": "multipart/form-data",
+    Authorization: "Bearer " + token,
+  };
+
+  const formData = new FormData();
+  formData.append("picture", picture);
+  formData.append("location", location);
+  formData.append("description", description);
+  formData.append("categoryId", categoryId);
+
+  try {    
+    const response = await axios.post(
+      `${config.restAPI}/admin/posts/update/${id}`,
+      formData
+    );
+    return response.status;
+  } catch (err) {
+    return err.response.status;
+  }
+}
+
 const deletePost = async (token, postId) => {
   axios.defaults.headers = {
     "Content-Type": "application/json",
@@ -207,6 +230,7 @@ export const postService = {
   search,
   create,
   edit,
+  editAdmin,
   deletePost,
   like,
   unlike,

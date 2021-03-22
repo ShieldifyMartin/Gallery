@@ -40,7 +40,7 @@
           </router-link>
         </li>
         <li v-if="isAdmin()">
-          <router-link to="/admin">
+          <router-link to="/dashboard">
             Admin route
           </router-link>
         </li>
