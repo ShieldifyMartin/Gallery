@@ -180,12 +180,21 @@ export default defineComponent({
     };
 
     const deletePost = async () => {
-      let status = await postService.deletePost(
-        store.state.auth.state.token,
-        state.post.id
-      );
+      let status;
+      
+      if(store.state.auth.state.isAdmin) {
+        status = await postService.deletePostAdmin(
+          store.state.auth.state.token,
+          state.post.id
+        );
+      } else {
+        status = await postService.deletePost(
+          store.state.auth.state.token,
+          state.post.id
+        );
+      }
 
-      if (status == 200) {
+      if (status >= 200 && status < 300) {
         useAlert("Successful deleted!", true);
         signalRService.returnPosts();
         router.push("/");

@@ -189,6 +189,22 @@ const deletePost = async (token, postId) => {
   }
 };
 
+const deletePostAdmin = async (token, postId) => {
+  axios.defaults.headers = {
+    "Content-Type": "application/json",
+    Authorization: "Bearer " + token,
+  };
+
+  try {
+    const response = await axios.delete(
+      `${config.restAPI}/admin/posts/delete/${postId}`
+    );
+    return response.status;
+  } catch (err) {
+    return err.response.status;
+  }
+};
+
 const like = async (token, postId) => {
   axios.defaults.headers = {
     "Content-Type": "application/json",
@@ -232,6 +248,7 @@ export const postService = {
   edit,
   editAdmin,
   deletePost,
+  deletePostAdmin,
   like,
   unlike,
 };
