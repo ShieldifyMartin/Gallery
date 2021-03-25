@@ -14,6 +14,8 @@
 
         List<UserRequestModel> GetAllUsers();
 
+        List<UserRequestModel> GetAllUsersAdmin();
+        
         List<SearchUserRequestViewModel> Search(string input);
     }
 }

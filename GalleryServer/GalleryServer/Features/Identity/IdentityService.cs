@@ -69,6 +69,19 @@
         public List<UserRequestModel> GetAllUsers()
             => this.data
                 .Users
+                .Where(u => !u.IsDeleted)
+                .Select(u => new UserRequestModel
+                {
+                    Id = u.Id,
+                    UserName = u.UserName,
+                    PictureUrl = u.PictureUrl
+                })
+                .OrderBy(u => u.UserName)
+                .ToList();
+
+        public List<UserRequestModel> GetAllUsersAdmin()
+            => this.data
+                .Users
                 .Select(u => new UserRequestModel
                 {
                     Id = u.Id,

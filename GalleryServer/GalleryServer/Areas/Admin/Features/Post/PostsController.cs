@@ -32,7 +32,7 @@
             var posts = this.posts.GetAllAdmin();
 
             return Accepted(nameof(this.All), posts);
-        }
+        }        
 
         [HttpPost("{postId}")]
         public async Task<ActionResult> Update(string postId, [FromForm] UpdatePatchRequestModel model)

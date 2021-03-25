@@ -10,9 +10,7 @@
     using GalleryServer.Features.Identity;
     using CloudinaryDotNet;
     using GalleryServer.Infrastructure.Services;
-    using GalleryServer.Features.Cloudinary;
-    using Microsoft.AspNetCore.Http;
-    using System;
+    using GalleryServer.Features.Cloudinary;    
 
     public class IdentityController : ApiController
     {
