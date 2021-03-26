@@ -14,8 +14,7 @@
     <ul v-if="state.openFiltersMenu" class="filters-menu">    
       <li @click="setFilter(1)">Top 5</li>
       <li @click="setFilter(2)">Sort by date</li>
-      <li @click="setFilter(3)">Random order</li>
-      <li></li>
+      <li @click="setFilter(3)">Random order</li>            
     </ul>
     <ul class="categories">
       <li v-for="category in state.categories" :key="category.id"  @click="setCategoryId(category.id)">
@@ -57,6 +56,7 @@
 <script lang="ts">
 import { defineComponent, reactive, watchEffect } from "vue";
 import { postService, categoryService, signalRService } from "../../services";
+import getFilteredPosts from "./filters";
 import store from "../../store";
 
 export default defineComponent({
@@ -67,7 +67,8 @@ export default defineComponent({
       openFiltersMenu: false,
       searchInput: "",
       loading: true,
-      category: "",        
+      category: "",
+      settedFilter: null
     });
 
     const getCategoriesLink = (title) => {
@@ -82,8 +83,7 @@ export default defineComponent({
         let posts = [];
         
         if(store.state.auth.state.isAdmin) {
-          posts = await postService.getAllWithDeleted();
-          console.log(posts);
+          posts = await postService.getAllWithDeleted();       
         } else {
           posts = await postService.get();
         }
@@ -114,31 +114,10 @@ export default defineComponent({
       state.openFiltersMenu = !state.openFiltersMenu;
     };
 
-    const setFilter = async(filter) => {
-      let posts = [];
-
-      switch (filter) {        
-        case 1: {
-          const topPosts = await postService.getTop5();          
-          posts = topPosts;
-          break;
-        }
-        case 2: {          
-          const sortedPosts = await postService.getPostsSortedByDate();
-          posts = sortedPosts;
-          break;
-        }
-        case 3: {
-          const randomPosts = await postService.getRandomPosts();          
-          posts = randomPosts;
-          break;
-        }
-        default: {
-          console.log(`No filter`);
-        }
-      }
-
-      state.posts = posts;
+    const setFilter = async (filter) => {
+      const filteredPosts = await getFilteredPosts(filter);
+      
+      state.posts = filteredPosts;
       state.openFiltersMenu = false;
     };
 

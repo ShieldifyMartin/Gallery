@@ -55,15 +55,16 @@
     width: 8em;
     background-color: #d3d3d3;    
     border-radius: 1em;
-    
+    padding: 0 2em 1em 2em;
+
     li {
       list-style: none;
-      padding-top: 0.7em;
+      padding-top: 0.5em;
     }
-    
-    li:hover {        
+
+    li:hover {
       color: #fff;
-    }
+    }        
   }
 
   .categories {
@@ -86,9 +87,9 @@
       text-align: center;
       padding: 0.9em 1.5em;
       background-color: lightgray;
+      border-radius: 0.7em;
       text-decoration: none;
       color: #000;
-      border-radius: 0.7em;
       list-style: none;
     }
 
