@@ -27,12 +27,15 @@
 
 <script lang="ts">
 import { defineComponent, reactive, watchEffect } from "vue";
+import { dashboardService } from "../../services";
 
 export default defineComponent({
   setup() {
     const state = reactive({});
 
-    watchEffect(async () => {});
+    watchEffect(async () => {
+      await dashboardService.getDashboardData();
+    });
 
     return {
       state,
