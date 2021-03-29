@@ -2,16 +2,16 @@
   <div class="dashboard">
     <ul class="routes">
       <li><router-link to="/">All Posts</router-link></li>
-      <li><router-link to="/users/all">All Users</router-link></li>
+      <li><router-link to="/users">All Users</router-link></li>
     </ul>
     <div class="main">
       <div class="couters">
         <div>
-          <h2>3123</h2>
+          <h2>{{state.postsCount}}</h2>
           <span>posts count</span>
         </div>
         <div>
-          <h2>11</h2>
+          <h2>{{state.usersCount}}</h2>
           <span>users count</span>
         </div>
       </div>
@@ -31,10 +31,16 @@ import { dashboardService } from "../../services";
 
 export default defineComponent({
   setup() {
-    const state = reactive({});
+    const state = reactive({
+      postsCount: 0,
+      usersCount: 0
+    });
 
     watchEffect(async () => {
-      await dashboardService.getDashboardData();
+      const data = await dashboardService.getDashboardData();
+      state.postsCount = data.postsCount;
+      state.usersCount = data.usersCount;
+      console.log(state);
     });
 
     return {
