@@ -51,6 +51,11 @@
                 .OrderByDescending(p => p.Likes)
                 .ToList();
 
+        public int GetAllPostsCount()
+            => this.posts
+                .AllWithDeleted()
+                .ToList()
+                .Count;
         public List<GetAllGetRequestModel> GetAllSortedByDate()
             => this.GetAll()
                 .OrderByDescending(p => p.CreatedOn)

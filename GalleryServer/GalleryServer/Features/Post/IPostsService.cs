@@ -12,6 +12,8 @@
 
         List<Post> GetAllAdmin();
 
+        int GetAllPostsCount();
+
         List<GetAllGetRequestModel> GetAllSortedByDate();
 
         List<GetAllGetRequestModel> GetTop5();

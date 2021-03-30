@@ -91,6 +91,12 @@
                 .OrderBy(u => u.UserName)
                 .ToList();
 
+        public int GetAllUsersCount()
+            => this.data
+                .Users
+                .ToList()
+                .Count;
+
         public List<SearchUserRequestViewModel> Search(string input)
             => this.data
                 .Users

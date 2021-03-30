@@ -15,7 +15,9 @@
         List<UserRequestModel> GetAllUsers();
 
         List<UserRequestModel> GetAllUsersAdmin();
-        
+
+        int GetAllUsersCount();
+
         List<SearchUserRequestViewModel> Search(string input);
     }
 }
