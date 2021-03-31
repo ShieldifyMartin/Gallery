@@ -14,7 +14,7 @@
         }
 
         public async Task<ActionResult> GetAllUsers()
-        {
+        {            
             var users = this.identity.GetAllUsersAdmin();
 
             return Accepted(nameof(this.GetAllUsers), users);

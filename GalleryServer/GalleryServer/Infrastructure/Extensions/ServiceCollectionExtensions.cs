@@ -19,6 +19,7 @@
     using Microsoft.AspNetCore.Mvc.NewtonsoftJson;
     using System.Text;
     using GalleryServer.Features.Post;
+    using GalleryServer.Areas.Admin.Features.Dashboard;
 
     public static class ServiceCollectionExtensions
     {
@@ -91,7 +92,8 @@
                 .AddTransient<ICategoriesService, CategoriesService>()
                 .AddTransient<IPostsService, PostsService>()
                 .AddTransient<IProfilesService, ProfilesService>()
-                .AddTransient<IIdentityService, IdentityService>();                
+                .AddTransient<IIdentityService, IdentityService>()
+                .AddTransient<IAdminService, AdminService>();
 
         public static IServiceCollection AddCloudinaryService(this IServiceCollection services, AppSettings appSettings)
         {

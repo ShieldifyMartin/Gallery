@@ -44,10 +44,11 @@ namespace GalleryServer
                 .AllowCredentials()
                 .AllowAnyHeader()
                 .AllowAnyMethod());
-
+            
             app.UseAuthentication();
             app.UseAuthorization();
-            app.UseCookiePolicy();            
+
+            app.UseCookiePolicy();
 
             app.UseEndpoints(endpoints =>
             {

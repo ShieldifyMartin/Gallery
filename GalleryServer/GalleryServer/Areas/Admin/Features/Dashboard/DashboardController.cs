@@ -1,8 +1,12 @@
 ﻿namespace GalleryServer.Areas.Admin.Features.Dashboard
 {
     using GalleryServer.Areas.Admin.Features.Dashboard.Models;
+    using GalleryServer.Data.Models;
     using GalleryServer.Features.Identity;
     using GalleryServer.Features.Post;
+    using GalleryServer.Infrastructure.Services;
+    using Microsoft.AspNetCore.Authorization;
+    using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
     using System.Threading.Tasks;
 
@@ -10,15 +14,22 @@
     {
         private readonly IPostsService posts;
         private readonly IIdentityService identity;
+        private readonly IAdminService adminService;
 
-        public DashboardController(IPostsService posts, IIdentityService identity)
+        public DashboardController(IPostsService posts, IIdentityService identity, IAdminService adminService)
         {
             this.posts = posts;
             this.identity = identity;
-        }
-
-        public ActionResult GetDashboardInfo()
+            this.adminService = adminService;
+        }        
+        
+        public async Task<ActionResult> GetDashboardInfo()
         {
+            if(!await this.adminService.IsUserAdminAuthorized())
+            {
+                return BadRequest();
+            }
+
             var postsCount = this.posts.GetAllPostsCount();
             var usersCount = this.identity.GetAllUsersCount();
 
