@@ -41,23 +41,19 @@
         public ChartDataModel GetChartData()
         {
             Dictionary<int, double> data = new Dictionary<int, double>();
-
+            //|| DateTimeOffset.Parse(p.DeletedOn).UtcDateTime.Month == month)
             for (int i = 0; i < 3; i++)
             {
+                var month = DateTime.UtcNow.Month - i;
                 var postsCreatedDuringLastIMonth = this.posts
                     .All()
                     .Where(p =>
-                        DateTimeOffset.Parse(p.CreatedBy).UtcDateTime.Month
-                        == DateTime.UtcNow.Month - i)
-                    .ToList();
-                var month = DateTime.UtcNow.Month - i;
+                        p.CreatedOn.Month == month
+                        || p.ModifiedOn.Value.Date.Month == month
+                        || p.IsDeleted && p.DeletedOn.Value.Date.Month == month)
+                    .ToList();                
 
                 int activitiesCount = postsCreatedDuringLastIMonth.Count;
-                if (activitiesCount > 0)
-                {
-                    //search for additional activities like modification or delete
-                }
-
                 data.Add(month, activitiesCount);
             }
 
