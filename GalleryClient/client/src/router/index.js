@@ -5,6 +5,7 @@ const routes = [
   {
     path: "/",
     name: "Home",
+    props: true,
     component: () => import("@/views/Home/Home.vue")
   },
   {

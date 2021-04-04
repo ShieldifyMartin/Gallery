@@ -54,13 +54,15 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, reactive, watchEffect } from "vue";
+import { defineComponent, reactive, watchEffect, toRef } from "vue";
 import { postService, categoryService, signalRService } from "../../services";
 import getFilteredPosts from "./filters";
-import store from "../../store";
 
 export default defineComponent({
-  setup() {
+  props: {
+    isAdminRoute: Boolean
+  },
+  setup(props) {
     const state = reactive({
       posts: [],
       categories: [],
@@ -81,9 +83,10 @@ export default defineComponent({
         state.posts = posts;
       } else {
         let posts = [];
+        const isAdminRoute = toRef(props, 'isAdminRoute');
         
-        if(store.state.auth.state.isAdmin) {
-          posts = await postService.getAllWithDeleted();       
+        if(isAdminRoute.value) {
+          posts = await postService.getAllWithDeleted();
         } else {
           posts = await postService.get();
         }

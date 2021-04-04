@@ -1,7 +1,7 @@
 <template>
   <div class="dashboard">
     <ul class="routes">
-      <li><router-link to="/">All Posts</router-link></li>
+      <li><router-link :to="{ name: 'Home', params: { isAdminRoute: true }}">All Posts</router-link></li>
       <li><router-link to="/users">All Users</router-link></li>
     </ul>
     <div class="main">
@@ -39,8 +39,7 @@ export default defineComponent({
     watchEffect(async () => {
       const data = await dashboardService.getDashboardData();
       state.postsCount = data.postsCount;
-      state.usersCount = data.usersCount;
-      console.log(state);
+      state.usersCount = data.usersCount;     
     });
 
     return {
