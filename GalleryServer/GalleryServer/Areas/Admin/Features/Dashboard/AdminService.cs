@@ -40,7 +40,7 @@
 
         public ChartDataModel GetChartData()
         {
-            Dictionary<int, double> data = new Dictionary<int, double>();
+            Dictionary<int, int> data = new Dictionary<int, int>();
             //|| DateTimeOffset.Parse(p.DeletedOn).UtcDateTime.Month == month)
             for (int i = 0; i < 3; i++)
             {

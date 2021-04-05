@@ -4,6 +4,6 @@
 
     public class ChartDataModel
     {
-        public Dictionary<int, double> Activities;
+        public Dictionary<int, int> Activities;
     }
 }

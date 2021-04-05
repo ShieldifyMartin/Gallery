@@ -32,11 +32,13 @@
 
             var postsCount = this.posts.GetAllPostsCount();
             var usersCount = this.identity.GetAllUsersCount();
+            var chartData = this.adminService.GetChartData().Activities;
 
             var result = new DashboardResponseModel
             {
                 PostsCount = postsCount,
-                UsersCount = usersCount
+                UsersCount = usersCount,
+                ChartData = chartData
             };
 
             return Accepted(nameof(this.GetDashboardInfo), result);
