@@ -1,25 +1,43 @@
 <template>
   <div class="dashboard">
     <ul class="routes">
-      <li><router-link :to="{ name: 'Home', params: { isAdminRoute: true }}">All Posts</router-link></li>
+      <li>
+        <router-link :to="{ name: 'Home', params: { isAdminRoute: true } }"
+          >All Posts</router-link
+        >
+      </li>
       <li><router-link to="/users">All Users</router-link></li>
     </ul>
     <div class="main">
       <div class="couters">
         <div>
-          <h2>{{state.postsCount}}</h2>
+          <h2>{{ state.postsCount }}</h2>
           <span>posts count</span>
         </div>
         <div>
-          <h2>{{state.usersCount}}</h2>
+          <h2>{{ state.usersCount }}</h2>
           <span>users count</span>
         </div>
       </div>
       <div class="stats">
-        <img
-          src="https://www.statisticshowto.com/wp-content/uploads/2015/08/difference.png"
-          alt="statistic"
-        />
+        <dl>
+          <dt>A title of the graph</dt>
+          <dd class="percentage percentage-7">
+            <span class="text">
+              IE 11: 7%
+            </span>
+          </dd>
+          <dd class="percentage percentage-20">
+            <span class="text">
+              Chrome: 20%
+            </span>
+          </dd>
+          <dd class="percentage percentage-2">
+            <span class="text">
+              Android 4.4: 2%
+            </span>
+          </dd>
+        </dl>        
       </div>
     </div>
   </div>
@@ -33,13 +51,16 @@ export default defineComponent({
   setup() {
     const state = reactive({
       postsCount: 0,
-      usersCount: 0
+      usersCount: 0,
+      activities: {},
     });
 
     watchEffect(async () => {
       const data = await dashboardService.getDashboardData();
+
       state.postsCount = data.postsCount;
-      state.usersCount = data.usersCount;     
+      state.usersCount = data.usersCount;
+      state.activities = data.activities;
     });
 
     return {

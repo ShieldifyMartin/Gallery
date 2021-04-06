@@ -29,6 +29,86 @@
   }
 
   .stats {
-    margin-top: 3em;    
+    margin-top: 3em;
+    margin-left: 13em;
+  }
+
+  dl {
+    display: flex;
+    background-color: white;
+    flex-direction: column;
+    width: 100%;
+    max-width: 700px;
+    position: relative;
+    padding: 20px;
+  }
+
+  dt {
+    align-self: flex-start;
+    width: 100%;
+    font-weight: 700;
+    display: block;
+    text-align: center;
+    font-size: 1.2em;
+    font-weight: 700;
+    margin-bottom: 20px;
+    margin-left: 130px;
+  }
+
+  .text {
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    height: 3em;
+    width: 13em;
+    background-color: white;
+    position: absolute;
+    left: 0;
+    justify-content: flex-end;
+  }
+
+  .percentage {
+    font-size: 0.8em;
+    line-height: 1;
+    text-transform: uppercase;
+    width: 75%;
+    height: 40px;
+    margin-left: auto;
+    background: repeating-linear-gradient(
+      to right,
+      #ddd,
+      #ddd 1px,
+      #fff 1px,
+      #fff 5%
+    );
+
+    &:after {
+      content: "";
+      display: block;
+      background-color: #3d9970;
+      width: 50px;
+      margin-bottom: 10px;
+      height: 80%;
+      position: relative;
+      top: 50%;
+      transform: translateY(-50%);
+      transition: background-color 0.3s ease;
+      cursor: pointer;
+    }
+    &:hover,
+    &:focus {
+      &:after {
+        background-color: #aaa;
+      }
+    }
+  }
+
+  @for $i from 1 through 100 {
+    .percentage-#{$i} {
+      &:after {
+        $value: ($i * 1%);
+        width: $value;
+      }
+    }
   }
 }
