@@ -11,18 +11,18 @@
       />
       <button type="submit" class="filter-icon" @click="filter"></button>
     </div>
-    <ul v-if="state.openFiltersMenu" class="filters-menu">    
+    <ul v-if="state.openFiltersMenu" class="filters-menu">
       <li @click="setFilter(1)">Top 5</li>
       <li @click="setFilter(2)">Sort by date</li>
-      <li @click="setFilter(3)">Random order</li>            
+      <li @click="setFilter(3)">Random order</li>
     </ul>
     <ul class="categories">
-      <li v-for="category in state.categories" :key="category.id"  @click="setCategoryId(category.id)">
-        <input
-          type="button"
-          :id="category.id"
-          class="tab-switch"         
-        />
+      <li
+        v-for="category in state.categories"
+        :key="category.id"
+        @click="setCategoryId(category.id)"
+      >
+        <input type="button" :id="category.id" class="tab-switch" />
         <label :for="category.id">
           <div v-if="state.category == category.id" class="clicked">
             {{ category.title }}({{
@@ -60,7 +60,7 @@ import getFilteredPosts from "./filters";
 
 export default defineComponent({
   props: {
-    isAdminRoute: Boolean
+    isAdminRoute: Boolean,
   },
   setup(props) {
     const state = reactive({
@@ -70,7 +70,7 @@ export default defineComponent({
       searchInput: "",
       loading: true,
       category: "",
-      settedFilter: null
+      settedFilter: null,
     });
 
     const getCategoriesLink = (title) => {
@@ -83,9 +83,9 @@ export default defineComponent({
         state.posts = posts;
       } else {
         let posts = [];
-        const isAdminRoute = toRef(props, 'isAdminRoute');
-        
-        if(isAdminRoute.value) {
+        const isAdminRoute = toRef(props, "isAdminRoute");
+
+        if (isAdminRoute.value) {
           posts = await postService.getAllWithDeleted();
         } else {
           posts = await postService.get();
@@ -99,13 +99,13 @@ export default defineComponent({
       state.categories = categories;
 
       const connection = signalRService.buildConnection();
-      
+
       connection.on("ReceivePosts", function(posts) {
         state.posts = posts;
-      });      
+      });
 
       signalRService.startAndStoreConnection(connection);
-    });    
+    });
 
     const search = async () => {
       const posts = await postService.search(state.searchInput);
@@ -119,7 +119,7 @@ export default defineComponent({
 
     const setFilter = async (filter) => {
       const filteredPosts = await getFilteredPosts(filter);
-      
+
       state.posts = filteredPosts;
       state.openFiltersMenu = false;
     };
@@ -136,7 +136,7 @@ export default defineComponent({
       state,
       getCategoriesLink,
       search,
-      setCategoryId,      
+      setCategoryId,
       filter,
       setFilter,
     };

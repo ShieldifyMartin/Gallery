@@ -22,22 +22,14 @@
       <div class="stats">
         <dl>
           <dt>A title of the graph</dt>
-          <dd class="percentage percentage-7">
-            <span class="text">
-              IE 11: 7%
-            </span>
-          </dd>
-          <dd class="percentage percentage-20">
-            <span class="text">
-              Chrome: 20%
-            </span>
-          </dd>
-          <dd class="percentage percentage-2">
-            <span class="text">
-              Android 4.4: 2%
-            </span>
-          </dd>
-        </dl>        
+          <dd
+            v-for="(activityPercentage, month) in state.activities"
+            :key="activityPercentage"
+            :class="getChartClass(activityPercentage)"
+          >
+            <span class="text"> {{ month }}: {{ activityPercentage }}% </span>
+          </dd>          
+        </dl>
       </div>
     </div>
   </div>
@@ -46,6 +38,7 @@
 <script lang="ts">
 import { defineComponent, reactive, watchEffect } from "vue";
 import { dashboardService } from "../../services";
+import { getMonthString } from "./service";
 
 export default defineComponent({
   setup() {
@@ -55,16 +48,26 @@ export default defineComponent({
       activities: {},
     });
 
+    const getChartClass = (activityPercentage) => {
+      return `percentage percentage-${activityPercentage}`;
+    };
+
     watchEffect(async () => {
       const data = await dashboardService.getDashboardData();
+      const activitiesObj = {};
+      for (const property in data.chartData) {
+        const currentMonth = getMonthString(property);
+        activitiesObj[currentMonth] = data.chartData[property];
+      }
 
       state.postsCount = data.postsCount;
       state.usersCount = data.usersCount;
-      state.activities = data.activities;
+      state.activities = activitiesObj;
     });
 
     return {
       state,
+      getChartClass,
     };
   },
 });
