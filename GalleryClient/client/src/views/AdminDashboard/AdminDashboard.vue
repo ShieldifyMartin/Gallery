@@ -21,14 +21,14 @@
       </div>
       <div class="stats">
         <dl>
-          <dt>A title of the graph</dt>
+          <dt>Months Statistics</dt>
           <dd
             v-for="(activityPercentage, month) in state.activities"
             :key="activityPercentage"
             :class="getChartClass(activityPercentage)"
           >
             <span class="text"> {{ month }}: {{ activityPercentage }}% </span>
-          </dd>          
+          </dd>
         </dl>
       </div>
     </div>
