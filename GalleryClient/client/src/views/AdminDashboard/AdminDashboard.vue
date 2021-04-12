@@ -21,7 +21,7 @@
       </div>
       <div class="stats">
         <dl>
-          <dt>Months Statistics</dt>
+          <dt>Months Activities Statistics</dt>
           <dd
             v-for="(activityPercentage, month) in state.activities"
             :key="activityPercentage"

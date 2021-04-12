@@ -107,6 +107,16 @@ export default defineComponent({
       signalRService.startAndStoreConnection(connection);
     });
 
+    const getNextPostsPage = () => {
+      window.onscroll = () => {
+        let bottomOfWindow = document.documentElement.scrollTop + window.innerHeight === document.documentElement.offsetHeight;
+        
+        if (bottomOfWindow) {
+          //get posts from next page 
+        }
+      }
+    }
+
     const search = async () => {
       const posts = await postService.search(state.searchInput);
 
@@ -135,6 +145,7 @@ export default defineComponent({
     return {
       state,
       getCategoriesLink,
+      getNextPostsPage,
       search,
       setCategoryId,
       filter,
