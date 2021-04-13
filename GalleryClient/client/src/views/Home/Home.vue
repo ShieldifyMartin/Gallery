@@ -112,6 +112,7 @@ export default defineComponent({
         let bottomOfWindow = document.documentElement.scrollTop + window.innerHeight === document.documentElement.offsetHeight;
         
         if (bottomOfWindow) {
+          console.log("here")
           //get posts from next page 
         }
       }
