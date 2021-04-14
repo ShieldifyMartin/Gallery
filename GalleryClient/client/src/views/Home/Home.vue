@@ -71,6 +71,7 @@ export default defineComponent({
       loading: true,
       category: "",
       settedFilter: null,
+      pageCount: 1
     });
 
     const getCategoriesLink = (title) => {
@@ -112,15 +113,14 @@ export default defineComponent({
         let bottomOfWindow = document.documentElement.scrollTop + window.innerHeight === document.documentElement.offsetHeight;
         
         if (bottomOfWindow) {
-          console.log("here")
-          //get posts from next page 
+          postService.get(state.pageCount);
+          state.pageCount++;
         }
       }
     }
 
     const search = async () => {
       const posts = await postService.search(state.searchInput);
-
       state.posts = posts;
     };
 

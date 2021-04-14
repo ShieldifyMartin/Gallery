@@ -1,9 +1,9 @@
 import config from "@/config";
 import axios from "axios";
 
-const get = async () => {
+const get = async (pageCount) => {
   try {
-    const response = await axios.get(`${config.restAPI}/posts/all`);
+    const response = await axios.get(`${config.restAPI}/posts/all/${pageCount}`);
     if (response.status >= 200 && response.status < 300) {
       return response.data;
     }
