@@ -71,7 +71,7 @@ export default defineComponent({
       loading: true,
       category: "",
       settedFilter: null,
-      pageCount: 1
+      pageCount: 0,
     });
 
     const getCategoriesLink = (title) => {
@@ -89,7 +89,7 @@ export default defineComponent({
         if (isAdminRoute.value) {
           posts = await postService.getAllWithDeleted();
         } else {
-          posts = await postService.get();
+          posts = await postService.get(state.pageCount);
         }
 
         state.posts = posts;
@@ -108,16 +108,18 @@ export default defineComponent({
       signalRService.startAndStoreConnection(connection);
     });
 
-    const getNextPostsPage = () => {
-      window.onscroll = () => {
-        let bottomOfWindow = document.documentElement.scrollTop + window.innerHeight === document.documentElement.offsetHeight;
-        
-        if (bottomOfWindow) {
-          postService.get(state.pageCount);
-          state.pageCount++;
-        }
+    window.onscroll = async () => {
+      let bottomOfWindow =
+        document.documentElement.scrollTop + window.innerHeight ===
+        document.documentElement.offsetHeight;
+
+      if (bottomOfWindow) {
+        state.pageCount = state.pageCount + 1;
+        const posts = await categoryService.getPostsByCategory(state.category, state.pageCount);
+        //const posts = await postService.get(state.pageCount);
+        state.posts = posts;
       }
-    }
+    };
 
     const search = async () => {
       const posts = await postService.search(state.searchInput);
@@ -135,18 +137,19 @@ export default defineComponent({
       state.openFiltersMenu = false;
     };
 
-    const setCategoryId = (id) => {
+    const setCategoryId = async(id) => {      
       if (state.category == id) {
         state.category = "";
       } else {
         state.category = id;
+        const posts = await categoryService.getPostsByCategory(state.category);
+        state.posts = posts;
       }
     };
 
     return {
       state,
       getCategoriesLink,
-      getNextPostsPage,
       search,
       setCategoryId,
       filter,
