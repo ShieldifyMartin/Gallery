@@ -34,6 +34,7 @@
                     CreatedBy = p.CreatedBy
                 })
                 .OrderByDescending(p => p.Likes)
+                .Take(9)
                 .ToList();
             await Clients.All.SendAsync("ReceivePosts", posts);
         }

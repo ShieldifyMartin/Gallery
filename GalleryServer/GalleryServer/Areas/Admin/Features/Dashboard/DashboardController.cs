@@ -1,12 +1,8 @@
 ﻿namespace GalleryServer.Areas.Admin.Features.Dashboard
 {
-    using GalleryServer.Areas.Admin.Features.Dashboard.Models;
-    using GalleryServer.Data.Models;
+    using GalleryServer.Areas.Admin.Features.Dashboard.Models;    
     using GalleryServer.Features.Identity;
     using GalleryServer.Features.Post;
-    using GalleryServer.Infrastructure.Services;
-    using Microsoft.AspNetCore.Authorization;
-    using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
     using System.Threading.Tasks;
 

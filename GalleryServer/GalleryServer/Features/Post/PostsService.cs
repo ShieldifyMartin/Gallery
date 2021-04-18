@@ -6,6 +6,7 @@
     using GalleryServer.Features.Post.Models;
     using GalleryServer.Infrastructure.Services;
     using Microsoft.EntityFrameworkCore;
+    using Microsoft.Extensions.Configuration;
     using System;
     using System.Collections.Generic;
     using System.Linq;
@@ -15,20 +16,26 @@
     {
         private readonly ApplicationDbContext data;
         private readonly IDeletableEntityRepository<Post> posts;
-        private readonly ICurrentUserService currentUser;        
-        
+        private readonly ICurrentUserService currentUser;
+        private readonly IConfiguration configuration;
+
         public PostsService(
             ApplicationDbContext data,
             IDeletableEntityRepository<Post> posts,
-            ICurrentUserService currentUser)
+            ICurrentUserService currentUser,
+            IConfiguration configuration)
         {
             this.data = data;
             this.posts = posts;
-            this.currentUser = currentUser;            
+            this.currentUser = currentUser;
+            this.configuration = configuration;
         }
 
-        public List<GetAllGetRequestModel> GetAll()
-            => this.posts
+        public List<GetAllGetRequestModel> GetAll(int currentPage)
+        {
+            string postCountOnPage = this.configuration["ApplicationSettings:PostCountOnPage"];
+            
+            var posts = this.posts
                 .All()
                 .Select(p => new GetAllGetRequestModel
                 {
@@ -43,12 +50,16 @@
                     CreatedBy = p.CreatedBy
                 })
                 .OrderByDescending(p => p.Likes)
-                .ToList();        
+                .Take((currentPage + 1) * 9)
+                .ToList();
+            return posts;
+        }
 
-        public List<Post> GetAllAdmin()
+        public List<Post> GetAllAdmin(int currentPage)
             => this.posts
                 .AllWithDeleted()
                 .OrderByDescending(p => p.Likes)
+                .Take((currentPage + 1) * 9)
                 .ToList();
 
         public int GetAllPostsCount()
@@ -56,8 +67,8 @@
                 .AllWithDeleted()
                 .ToList()
                 .Count;
-        public List<GetAllGetRequestModel> GetAllSortedByDate()
-            => this.GetAll()
+        public List<GetAllGetRequestModel> GetAllSortedByDate(int currentPage)
+            => this.GetAll(currentPage)
                 .OrderByDescending(p => p.CreatedOn)
                 .ToList();
 

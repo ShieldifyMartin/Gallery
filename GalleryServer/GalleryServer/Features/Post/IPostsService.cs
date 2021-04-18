@@ -8,13 +8,13 @@
 
     public interface IPostsService
     {
-        List<GetAllGetRequestModel> GetAll();
+        List<GetAllGetRequestModel> GetAll(int currentPage);
 
-        List<Post> GetAllAdmin();
+        List<Post> GetAllAdmin(int currentPage);
 
         int GetAllPostsCount();
 
-        List<GetAllGetRequestModel> GetAllSortedByDate();
+        List<GetAllGetRequestModel> GetAllSortedByDate(int currentPage);
 
         List<GetAllGetRequestModel> GetTop5();
 

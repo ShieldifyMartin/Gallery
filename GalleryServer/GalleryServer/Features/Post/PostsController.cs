@@ -32,17 +32,18 @@
             this.cloudinary = cloudinary;
             this.currentUser = currentUser;
         }
-        
-        public ActionResult All()
+
+        [HttpGet("{currentPage}")]
+        public ActionResult All(int currentPage)
         {
-            var posts = this.posts.GetAll();
+            var posts = this.posts.GetAll(currentPage);
 
             return Accepted(nameof(this.All), posts);
         }
 
-        public ActionResult GetAllSortedByDate()
+        public ActionResult GetAllSortedByDate(int currentPage)
         {
-            var posts = this.posts.GetAllSortedByDate();
+            var posts = this.posts.GetAllSortedByDate(currentPage);
 
             return Accepted(nameof(this.GetAllSortedByDate), posts);
         }
