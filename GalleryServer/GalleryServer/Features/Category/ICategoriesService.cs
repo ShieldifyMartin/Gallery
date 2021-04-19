@@ -8,7 +8,7 @@
     {
         List<Category> GetAll();
 
-        List<Post> GetPostsByCategory(int id);
+        List<Post> GetPostsByCategory(int id, int currentPage);
 
         Task<Category> Add(string title);
     }

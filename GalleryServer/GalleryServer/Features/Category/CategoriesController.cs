@@ -20,10 +20,10 @@
             return Accepted(nameof(this.All), categories);
         }
 
-        [HttpGet("{categoryId}")]
-        public async Task<ActionResult> Posts(int categoryId)
+        [HttpGet("{categoryId}/{currentPage}")]
+        public async Task<ActionResult> Posts(int categoryId, int currentPage)
         {
-            var posts = this.categories.GetPostsByCategory(categoryId);
+            var posts = this.categories.GetPostsByCategory(categoryId, currentPage);
 
             return Accepted(nameof(this.Posts), posts);
         }

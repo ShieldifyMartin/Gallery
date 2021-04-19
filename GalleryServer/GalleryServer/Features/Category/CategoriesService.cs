@@ -41,11 +41,12 @@
             return categoriesWithPosts;
         }
 
-        public List<Post> GetPostsByCategory(int id)
+        public List<Post> GetPostsByCategory(int id, int currentPage)
             => this.postsRepo
                 .All()                
                 .Where(p => p.CategoryId == id)
                 .OrderByDescending(p => p.Likes)
+                .Take((currentPage + 1) * 9)
                 .ToList();
 
         public async Task<Category> Add(string title)
