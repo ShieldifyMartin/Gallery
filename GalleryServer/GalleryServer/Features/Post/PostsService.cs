@@ -91,7 +91,7 @@
                 })
                 .ToList();
 
-        public List<GetAllGetRequestModel> GetRandomPosts()
+        public List<GetAllGetRequestModel> GetRandomPosts(int currentPage)
             => this.posts
                 .All()
                 .Select(p => new GetAllGetRequestModel
@@ -106,6 +106,7 @@
                     CreatedOn = p.CreatedOn,
                     CreatedBy = p.CreatedBy
                 })
+                .Take(currentPage)
                 .ToList();
 
         public ICollection<Post> GetByCategoryId(int categoryId)

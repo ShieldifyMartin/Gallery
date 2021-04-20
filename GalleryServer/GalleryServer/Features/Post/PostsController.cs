@@ -55,9 +55,10 @@
             return Accepted(nameof(this.Top5), posts);
         }
 
-        public ActionResult GetRandom()
+        [HttpGet("{currentPage}")]
+        public ActionResult GetRandom(int currentPage)
         {
-            var posts = this.posts.GetRandomPosts();
+            var posts = this.posts.GetRandomPosts(currentPage);
 
             return Accepted(nameof(this.GetRandom), posts);
         }
