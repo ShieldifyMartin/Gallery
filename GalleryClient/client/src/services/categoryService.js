@@ -14,9 +14,9 @@ const get = async () => {
   }
 };
 
-const getPostsByCategory = async (categoryId) => {
+const getPostsByCategory = async (categoryId, pageCount) => {
   try {
-    const response = await axios.get(`${config.restAPI}/categories/posts/${categoryId}`);
+    const response = await axios.get(`${config.restAPI}/categories/posts/${categoryId}/${pageCount}`);
     if (response.status >= 200 && response.status < 300) {
       var posts = response.data;      
       return posts;

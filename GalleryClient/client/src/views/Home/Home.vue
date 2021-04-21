@@ -115,8 +115,13 @@ export default defineComponent({
 
       if (bottomOfWindow) {
         state.pageCount = state.pageCount + 1;
-        const posts = await categoryService.getPostsByCategory(state.category, state.pageCount);
-        //const posts = await postService.get(state.pageCount);
+        let posts = [];
+        if(state.category) {
+          posts = await categoryService.getPostsByCategory(state.category, state.pageCount);
+        } else {
+          posts = await postService.get(state.pageCount);
+        }
+        
         state.posts = posts;
       }
     };
