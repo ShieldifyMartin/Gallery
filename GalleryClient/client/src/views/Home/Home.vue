@@ -80,7 +80,7 @@ export default defineComponent({
 
     watchEffect(async () => {
       if (state.category) {
-        const posts = await categoryService.getPostsByCategory(state.category);
+        const posts = await categoryService.getPostsByCategory(state.category, state.pageCount);
         state.posts = posts;
       } else {
         let posts = [];
@@ -147,7 +147,7 @@ export default defineComponent({
         state.category = "";
       } else {
         state.category = id;
-        const posts = await categoryService.getPostsByCategory(state.category);
+        const posts = await categoryService.getPostsByCategory(state.category, state.pageCount);
         state.posts = posts;
       }
     };
