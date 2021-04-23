@@ -16,27 +16,6 @@
       <li @click="setFilter(2)">Sort by date</li>
       <li @click="setFilter(3)">Random order</li>
     </ul>
-    <ul class="categories">
-      <li
-        v-for="category in state.categories"
-        :key="category.id"
-        @click="setCategoryId(category.id)"
-      >
-        <input type="button" :id="category.id" class="tab-switch" />
-        <label :for="category.id">
-          <div v-if="state.category == category.id" class="clicked">
-            {{ category.title }}({{
-              (category.posts && category.posts.length) || 0
-            }})
-          </div>
-          <div v-else>
-            {{ category.title }}({{
-              (category.posts && category.posts.length) || 0
-            }})
-          </div>
-        </label>
-      </li>
-    </ul>
     <img v-if="state.loading" class="loader" src="@/assets/loading.gif" />
     <div v-else-if="state.posts && state.posts.length" class="posts">
       <transition-group name="fade" appear>
@@ -55,7 +34,7 @@
 
 <script lang="ts">
 import { defineComponent, reactive, watchEffect, toRef } from "vue";
-import { postService, categoryService, signalRService } from "../../services";
+import { postService, signalRService } from "../../services";
 import getFilteredPosts from "./filters";
 
 export default defineComponent({
@@ -69,35 +48,22 @@ export default defineComponent({
       openFiltersMenu: false,
       searchInput: "",
       loading: true,
-      category: "",
       settedFilter: null,
       pageCount: 0,
     });
 
-    const getCategoriesLink = (title) => {
-      return `/categories/${title.toLowerCase()}`;
-    };
-
     watchEffect(async () => {
-      if (state.category) {
-        const posts = await categoryService.getPostsByCategory(state.category, state.pageCount);
-        state.posts = posts;
+      let posts = [];
+      const isAdminRoute = toRef(props, "isAdminRoute");
+
+      if (isAdminRoute.value) {
+        posts = await postService.getAllWithDeleted();
       } else {
-        let posts = [];
-        const isAdminRoute = toRef(props, "isAdminRoute");
-
-        if (isAdminRoute.value) {
-          posts = await postService.getAllWithDeleted();
-        } else {
-          posts = await postService.get(state.pageCount);
-        }
-
-        state.posts = posts;
-        state.loading = false;
+        posts = await postService.get(state.pageCount);
       }
 
-      const categories = await categoryService.get();
-      state.categories = categories;
+      state.posts = posts;
+      state.loading = false;
 
       const connection = signalRService.buildConnection();
 
@@ -109,19 +75,12 @@ export default defineComponent({
     });
 
     window.onscroll = async () => {
-      let bottomOfWindow =
-        document.documentElement.scrollTop + window.innerHeight ===
-        document.documentElement.offsetHeight;
+      const bottomOfWindow =
+        window.scrollY > document.body.offsetHeight - window.outerHeight;
 
-      if (bottomOfWindow) {
+      if (bottomOfWindow) {        
         state.pageCount = state.pageCount + 1;
-        let posts = [];
-        if(state.category) {
-          posts = await categoryService.getPostsByCategory(state.category, state.pageCount);
-        } else {
-          posts = await postService.get(state.pageCount);
-        }
-        
+        const posts = await postService.get(state.pageCount);        
         state.posts = posts;
       }
     };
@@ -142,21 +101,9 @@ export default defineComponent({
       state.openFiltersMenu = false;
     };
 
-    const setCategoryId = async(id) => {      
-      if (state.category == id) {
-        state.category = "";
-      } else {
-        state.category = id;
-        const posts = await categoryService.getPostsByCategory(state.category, state.pageCount);
-        state.posts = posts;
-      }
-    };
-
     return {
       state,
-      getCategoriesLink,
       search,
-      setCategoryId,
       filter,
       setFilter,
     };
