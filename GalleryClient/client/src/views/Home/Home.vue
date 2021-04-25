@@ -78,9 +78,10 @@ export default defineComponent({
       const bottomOfWindow =
         window.scrollY > document.body.offsetHeight - window.outerHeight;
 
-      if (bottomOfWindow) {        
+      //when the user reaches the bootom of the page and posts aren't only top 5
+      if (bottomOfWindow && state.settedFilter != 1) {
         state.pageCount = state.pageCount + 1;
-        const posts = await postService.get(state.pageCount);        
+        const posts = await postService.get(state.pageCount);
         state.posts = posts;
       }
     };
@@ -98,6 +99,7 @@ export default defineComponent({
       const filteredPosts = await getFilteredPosts(filter);
 
       state.posts = filteredPosts;
+      state.settedFilter = filter;
       state.openFiltersMenu = false;
     };
 
