@@ -16,6 +16,11 @@
       <li @click="setFilter(2)">Sort by date</li>
       <li @click="setFilter(3)">Random order</li>
     </ul>
+    <ul class="categories">
+      <li v-for="category in state.categories" :key="category.id">
+        {{category.title}}({{category.posts.length}})
+      </li>
+    </ul>
     <img v-if="state.loading" class="loader" src="@/assets/loading.gif" />
     <div v-else-if="state.posts && state.posts.length" class="posts">
       <transition-group name="fade" appear>
@@ -34,7 +39,7 @@
 
 <script lang="ts">
 import { defineComponent, reactive, watchEffect, toRef } from "vue";
-import { postService, signalRService } from "../../services";
+import { postService, categoryService, signalRService } from "../../services";
 import getFilteredPosts from "./filters";
 
 export default defineComponent({
@@ -53,16 +58,18 @@ export default defineComponent({
     });
 
     watchEffect(async () => {
-      let posts = [];
+      const categories = await categoryService.get();      
       const isAdminRoute = toRef(props, "isAdminRoute");
 
+      let posts = [];
       if (isAdminRoute.value) {
         posts = await postService.getAllWithDeleted();
       } else {
         posts = await postService.get(state.pageCount);
       }
-
+console.log(categories)
       state.posts = posts;
+      state.categories = categories;
       state.loading = false;
 
       const connection = signalRService.buildConnection();
