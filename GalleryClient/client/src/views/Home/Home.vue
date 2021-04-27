@@ -17,8 +17,15 @@
       <li @click="setFilter(3)">Random order</li>
     </ul>
     <ul class="categories">
-      <li v-for="category in state.categories" :key="category.id">
-        {{category.title}}({{category.posts.length}})
+      <li
+        v-for="category in state.categories"
+        :key="category.id"
+        @click="applyCategory(category.id)"
+      >
+        <span v-if="category.id == state.settedCategory" class="clicked">
+          {{ category.title }}({{ category.posts.length }})
+        </span>
+        <span v-else> {{ category.title }}({{ category.posts.length }}) </span>
       </li>
     </ul>
     <img v-if="state.loading" class="loader" src="@/assets/loading.gif" />
@@ -54,11 +61,12 @@ export default defineComponent({
       searchInput: "",
       loading: true,
       settedFilter: null,
+      settedCategory: null,
       pageCount: 0,
     });
 
     watchEffect(async () => {
-      const categories = await categoryService.get();      
+      const categories = await categoryService.get();
       const isAdminRoute = toRef(props, "isAdminRoute");
 
       let posts = [];
@@ -67,7 +75,7 @@ export default defineComponent({
       } else {
         posts = await postService.get(state.pageCount);
       }
-console.log(categories)
+
       state.posts = posts;
       state.categories = categories;
       state.loading = false;
@@ -110,11 +118,20 @@ console.log(categories)
       state.openFiltersMenu = false;
     };
 
+    const applyCategory = (id) => {
+      if(state.settedCategory === id) {
+        state.settedCategory = null;
+        return;
+      }
+      state.settedCategory = id;
+    };
+
     return {
       state,
       search,
       filter,
       setFilter,
+      applyCategory,
     };
   },
 });
