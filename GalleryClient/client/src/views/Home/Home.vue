@@ -93,8 +93,8 @@ export default defineComponent({
       const bottomOfWindow =
         window.scrollY > document.body.offsetHeight - window.outerHeight;
 
-      //when the user reaches the bootom of the page and posts aren't only top 5
-      if (bottomOfWindow && state.settedFilter != 1) {
+      //when the user reaches the bootom of the page and posts aren't only top 5 or there is a selected category
+      if (bottomOfWindow && state.settedFilter != 1 && !state.settedCategory) {
         state.pageCount = state.pageCount + 1;
         const posts = await postService.get(state.pageCount);
         state.posts = posts;
