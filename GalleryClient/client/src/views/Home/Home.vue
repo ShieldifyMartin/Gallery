@@ -118,13 +118,20 @@ export default defineComponent({
       state.openFiltersMenu = false;
     };
 
-    const applyCategory = async(id) => {
-      console.log(id)
-      if(state.settedCategory === id) {
+    const applyCategory = async (id) => {
+      console.log(id);
+      if (state.settedCategory === id) {
+        const posts = await postService.get(state.pageCount);
+
+        state.posts = posts;
         state.settedCategory = null;
         return;
       }
-      const posts = await categoryService.getPostsByCategory(id, state.pageCount);
+
+      const posts = await categoryService.getPostsByCategory(
+        id,
+        state.pageCount
+      );
       console.log(posts);
       state.posts = posts;
       state.settedCategory = id;
