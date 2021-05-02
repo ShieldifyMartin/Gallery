@@ -101,13 +101,13 @@ export default defineComponent({
         return;
       }
 
-      if(!state.pictureBase64) {
+      if (!state.pictureBase64) {
         const file = await fileService.returnFileFromUrl(state.pictureUrl);
         state.picture = file;
       }
 
       let editResponse;
-      if(store.state.auth.state.isAdmin) {
+      if (store.state.auth.state.isAdmin) {
         editResponse = await postService.editAdmin(
           store.state.auth.state.token,
           id,
@@ -133,8 +133,7 @@ export default defineComponent({
         useAlert("Successful!", true);
         try {
           signalRService.returnPosts();
-        }
-        catch{
+        } catch {
           router.push("/" + state.id);
         }
         router.push("/" + state.id);

@@ -73,7 +73,6 @@ export default defineComponent({
 
     watchEffect(async () => {
       const categories = await categoryService.get();
-
       state.categories = categories;
     });
 
@@ -81,7 +80,6 @@ export default defineComponent({
       const { picture, location, description, categoryId } = state;
       const isCorrect = validate(state);
 
-        console.log(isCorrect);
       if (!isCorrect) {
         return;
       }
@@ -92,7 +90,6 @@ export default defineComponent({
         description,
         categoryId
       );
-      console.log(response);
 
       if (response == 401) {
         router.push("/login");

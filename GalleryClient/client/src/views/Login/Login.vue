@@ -39,10 +39,7 @@ export default defineComponent({
     const handleSubmit = async () => {
       const { username, password } = state;
 
-      const status = await userService.login(        
-        username,
-        password
-      );
+      const status = await userService.login(username, password);
 
       if (status === 200) {
         store.state.auth.dispatch("login");

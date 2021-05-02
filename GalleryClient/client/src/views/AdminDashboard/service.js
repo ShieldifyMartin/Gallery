@@ -1,7 +1,7 @@
 export const getMonthString = (monthNum) => {
-    var month = [
+    var months = [
         "January", "February", "March", "April", "May", "June",
         "July", "August", "September", "October", "November", "December"
     ];
-    return month[monthNum - 1];
+    return months[monthNum - 1];
 }

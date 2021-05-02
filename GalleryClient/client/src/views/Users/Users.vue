@@ -51,14 +51,12 @@ export default defineComponent({
 
     watchEffect(async () => {
       const users = await userService.getAllUsers();
-
       state.users = users;
       state.loading = false;
     });
 
     const search = async () => {
       const users = await userService.search(state.searchInput);
-
       state.users = users;
     };
 

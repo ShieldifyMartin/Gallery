@@ -46,15 +46,15 @@
       </div>
     </div>
     <img v-if="state.loading" class="loader" src="@/assets/loading.gif" />
-    
+
     <transition name="fade" appear>
       <img
         :src="state.post.picture"
         class="post-image"
         :alt="state.post.description"
-      />
-    </transition><br />
-    
+      /> </transition
+    ><br />
+
     <div class="post-footer">
       <div>
         <img
@@ -125,10 +125,6 @@ export default defineComponent({
       state.createdOn = moment(post.createdOn, "YYYYMMDD").fromNow();
     });
 
-    function isAdmin() {
-      return store.state.auth.state.isAdmin;
-    }
-
     const like = async () => {
       let status = await postService.like(
         store.state.auth.state.token,
@@ -181,8 +177,8 @@ export default defineComponent({
 
     const deletePost = async () => {
       let status;
-      
-      if(store.state.auth.state.isAdmin) {
+
+      if (store.state.auth.state.isAdmin) {
         status = await postService.deletePostAdmin(
           store.state.auth.state.token,
           state.post.id
@@ -209,7 +205,6 @@ export default defineComponent({
       state,
       getProfileLink,
       getEditRoute,
-      isAdmin,
       like,
       unlike,
       toggleDeletePostAlert,

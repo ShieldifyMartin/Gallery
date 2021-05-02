@@ -119,7 +119,6 @@ export default defineComponent({
     };
 
     const applyCategory = async (id) => {
-      console.log(id);
       if (state.settedCategory === id) {
         const posts = await postService.get(state.pageCount);
 
@@ -132,7 +131,7 @@ export default defineComponent({
         id,
         state.pageCount
       );
-      console.log(posts);
+
       state.posts = posts;
       state.settedCategory = id;
     };
