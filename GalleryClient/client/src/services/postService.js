@@ -1,7 +1,14 @@
 import config from "@/config";
 import axios from "axios";
 
-const get = async (pageCount) => {  
+const applyDefaultHeaders = (token) => {
+  axios.defaults.headers = {
+    "Content-Type": "multipart/form-data",
+    Authorization: "Bearer " + token,
+  };
+};
+
+const get = async (pageCount) => {
   try {
     const response = await axios.get(`${config.restAPI}/posts/all/${pageCount}`);
     if (response.status >= 200 && response.status < 300) {
@@ -61,11 +68,11 @@ const getTop5 = async () => {
 const getPostsSortedByDate = async () => {
   try {
     const response = await axios.get(`${config.restAPI}/posts/getAllSortedByDate`);
-    if(response.status >= 200 && response.status < 300) {
+    if (response.status >= 200 && response.status < 300) {
       return response.data;
     }
   }
-  catch(err) {
+  catch (err) {
     return [];
   }
 }
@@ -101,10 +108,7 @@ const search = async (input) => {
 };
 
 const create = async (token, picture, location, description, categoryId) => {
-  axios.defaults.headers = {
-    "Content-Type": "multipart/form-data",
-    Authorization: "Bearer " + token,
-  };
+  applyDefaultHeaders(token);
 
   const formData = new FormData();
   formData.append("picture", picture);
@@ -128,10 +132,7 @@ const create = async (token, picture, location, description, categoryId) => {
 };
 
 const edit = async (token, id, picture, location, description, categoryId) => {
-  axios.defaults.headers = {
-    "Content-Type": "multipart/form-data",
-    Authorization: "Bearer " + token,
-  };
+  applyDefaultHeaders(token);
 
   const formData = new FormData();
   formData.append("picture", picture);
@@ -151,10 +152,7 @@ const edit = async (token, id, picture, location, description, categoryId) => {
 };
 
 const editAdmin = async (token, id, picture, location, description, categoryId) => {
-  axios.defaults.headers = {
-    "Content-Type": "multipart/form-data",
-    Authorization: "Bearer " + token,
-  };
+  applyDefaultHeaders(token);
 
   const formData = new FormData();
   formData.append("picture", picture);
@@ -162,7 +160,7 @@ const editAdmin = async (token, id, picture, location, description, categoryId) 
   formData.append("description", description);
   formData.append("categoryId", categoryId);
 
-  try {    
+  try {
     const response = await axios.post(
       `${config.restAPI}/admin/posts/update/${id}`,
       formData
@@ -174,10 +172,7 @@ const editAdmin = async (token, id, picture, location, description, categoryId) 
 }
 
 const deletePost = async (token, postId) => {
-  axios.defaults.headers = {
-    "Content-Type": "application/json",
-    Authorization: "Bearer " + token,
-  };
+  applyDefaultHeaders(token);
 
   try {
     const response = await axios.delete(
@@ -190,10 +185,7 @@ const deletePost = async (token, postId) => {
 };
 
 const deletePostAdmin = async (token, postId) => {
-  axios.defaults.headers = {
-    "Content-Type": "application/json",
-    Authorization: "Bearer " + token,
-  };
+  applyDefaultHeaders(token);
 
   try {
     const response = await axios.delete(
@@ -206,10 +198,7 @@ const deletePostAdmin = async (token, postId) => {
 };
 
 const like = async (token, postId) => {
-  axios.defaults.headers = {
-    "Content-Type": "application/json",
-    Authorization: "Bearer " + token,
-  };
+  applyDefaultHeaders(token);
 
   try {
     const response = await axios.post(`${config.restAPI}/posts/like/${postId}`);
@@ -220,10 +209,7 @@ const like = async (token, postId) => {
 };
 
 const unlike = async (token, postId) => {
-  axios.defaults.headers = {
-    "Content-Type": "application/json",
-    Authorization: "Bearer " + token,
-  };
+  applyDefaultHeaders(token);
 
   try {
     const response = await axios.post(

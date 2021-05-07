@@ -20,11 +20,9 @@ const returnFileFromUrl = async (pictureUrl) => {
     const fileName = "file.jpg";
 
     const response = await fetch(url);
-    const contentType = response.headers.get("content-type");      
+    const contentType = response.headers.get("content-type");
     const blob = await response.blob();
-
     const file = new File([blob], fileName, { type: contentType });
-
     return file;
 }
 
