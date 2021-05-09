@@ -79,7 +79,7 @@ const getPostsSortedByDate = async () => {
 
 const getRandomPosts = async () => {
   try {
-    const response = await axios.get(`${config.restAPI}/posts/getRandom`);
+    const response = await axios.get(`${config.restAPI}/posts/getRandom`);    
     if (response.status >= 200 && response.status < 300) {
       return response.data;
     }

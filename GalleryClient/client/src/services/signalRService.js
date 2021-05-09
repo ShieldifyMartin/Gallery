@@ -16,7 +16,7 @@ const startAndStoreConnection = (connection) => {
     store.state.connection = connection;
 }
 
-const returnPosts = () => {    
+const returnPosts = () => {
     store.state
         .connection
         .invoke("ReturnAllPosts")

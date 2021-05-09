@@ -2,13 +2,16 @@ import axios from "axios";
 import Cookies from "js-cookie";
 import config from "@/config";
 
-const get = async () => {
-  const token = Cookies.get("token");
-
+const applyDefaultHeaders = (token) => {
   axios.defaults.headers = {
-    "Content-Type": "application/json",
+    "Content-Type": "multipart/form-data",
     Authorization: "Bearer " + token,
   };
+};
+
+const get = async () => {
+  const token = Cookies.get("token");
+  applyDefaultHeaders(token);
 
   try {
     const response = await axios
@@ -25,17 +28,13 @@ const get = async () => {
 
 const getById = async (id) => {
   const token = Cookies.get("token");
-
-  axios.defaults.headers = {
-    "Content-Type": "application/json",
-    Authorization: "Bearer " + token,
-  };
+  applyDefaultHeaders(token);
 
   try {
     const response = await axios
       .get(`${config.restAPI}/profiles/details/${id}`);
     if (response.status >= 200 && response.status < 300) {
-      const data = response.data;      
+      const data = response.data;
       return data;
     }
   }
@@ -46,17 +45,13 @@ const getById = async (id) => {
 
 const getUserPosts = async (page) => {
   const token = Cookies.get("token");
-
-  axios.defaults.headers = {
-    "Content-Type": "application/json",
-    Authorization: "Bearer " + token,
-  };
+  applyDefaultHeaders(token);
 
   try {
     const response = await axios
       .get(`${config.restAPI}/profiles/userposts/${page}`);
-    if (response.status >= 200 && response.status < 300) {      
-      const data = response.data;      
+    if (response.status >= 200 && response.status < 300) {
+      const data = response.data;
       return data;
     }
   }
@@ -67,11 +62,7 @@ const getUserPosts = async (page) => {
 
 const getUserPostsById = async (page, id) => {
   const token = Cookies.get("token");
-
-  axios.defaults.headers = {
-    "Content-Type": "application/json",
-    Authorization: "Bearer " + token,
-  };
+  applyDefaultHeaders(token);
 
   try {
     const response = await axios
@@ -88,11 +79,7 @@ const getUserPostsById = async (page, id) => {
 
 const getUserLikedPosts = async (page) => {
   const token = Cookies.get("token");
-
-  axios.defaults.headers = {
-    "Content-Type": "application/json",
-    Authorization: "Bearer " + token,
-  };
+  applyDefaultHeaders(token);
 
   try {
     const response = await axios
@@ -109,11 +96,7 @@ const getUserLikedPosts = async (page) => {
 
 const getUserLikedPostsById = async (page, id) => {
   const token = Cookies.get("token");
-
-  axios.defaults.headers = {
-    "Content-Type": "application/json",
-    Authorization: "Bearer " + token,
-  };
+  applyDefaultHeaders(token);
 
   try {
     const response = await axios
@@ -130,11 +113,7 @@ const getUserLikedPostsById = async (page, id) => {
 
 const uploadProfileImage = async (picture) => {
   const token = Cookies.get("token");
-
-  axios.defaults.headers = {
-    "Content-Type": "application/json",
-    Authorization: "Bearer " + token,
-  };
+  applyDefaultHeaders(token);
 
   const formData = new FormData();
   formData.append("picture", picture);

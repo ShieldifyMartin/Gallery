@@ -15,7 +15,7 @@ const login = async (username, password) => {
     if (response.data.token) {
       Cookies.set("token", response.data.token, { expires: 27 });
     }
-    if(response.data.isAdmin === true) {
+    if (response.data.isAdmin === true) {
       store.state.auth.dispatch("setAdmin");
       Cookies.set("admin", response.data.isAdmin, { expires: 27 });
     }
@@ -36,10 +36,10 @@ const register = async (token, email, username, password) => {
 
   try {
     await axios
-      .post(`${config.restAPI}/identity/register`, body);    
+      .post(`${config.restAPI}/identity/register`, body);
   }
   catch (err) {
-    if(err.response.status === 400) {
+    if (err.response.status === 400) {
       return err.response.data;
     }
 
@@ -75,7 +75,7 @@ const search = async (input) => {
       }
     }
   }
-  catch (err) {        
+  catch (err) {
     return users;
   }
   return users;
