@@ -111,7 +111,7 @@ export default defineComponent({
     };
 
     const setFilter = async (filter) => {
-      const filteredPosts = await getFilteredPosts(filter);
+      const filteredPosts = await getFilteredPosts(filter, state.pageCount);
 
       state.posts = filteredPosts;
       state.settedFilter = filter;

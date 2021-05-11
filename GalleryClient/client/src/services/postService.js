@@ -65,9 +65,9 @@ const getTop5 = async () => {
   }
 }
 
-const getPostsSortedByDate = async () => {
+const getPostsSortedByDate = async (pageCount) => {
   try {
-    const response = await axios.get(`${config.restAPI}/posts/getAllSortedByDate`);
+    const response = await axios.get(`${config.restAPI}/posts/getAllSortedByDate/${pageCount}`);
     if (response.status >= 200 && response.status < 300) {
       return response.data;
     }
@@ -77,9 +77,9 @@ const getPostsSortedByDate = async () => {
   }
 }
 
-const getRandomPosts = async () => {
+const getRandomPosts = async (pageCount) => {
   try {
-    const response = await axios.get(`${config.restAPI}/posts/getRandom`);    
+    const response = await axios.get(`${config.restAPI}/posts/getRandom/${pageCount}`);    
     if (response.status >= 200 && response.status < 300) {
       return response.data;
     }

@@ -1,6 +1,6 @@
 import { postService } from "../../services";
 
-const getFilteredPosts = async (filter) => {
+const getFilteredPosts = async (filter, pageCount) => {
   let posts = [];
   
   switch (filter) {
@@ -10,12 +10,12 @@ const getFilteredPosts = async (filter) => {
       break;
     }
     case 2: {
-      const sortedPosts = await postService.getPostsSortedByDate();
+      const sortedPosts = await postService.getPostsSortedByDate(pageCount);
       posts = sortedPosts;
       break;
     }
     case 3: {
-      const randomPosts = await postService.getRandomPosts();
+      const randomPosts = await postService.getRandomPosts(pageCount);
       posts = randomPosts;
       break;
     }
