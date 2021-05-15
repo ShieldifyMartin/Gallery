@@ -30,7 +30,7 @@
         {
             var user = await this.userManager.FindByIdAsync(this.currentUser.GetId());
             var roles = await this.userManager.GetRolesAsync(user);
-            if (roles[0] == "Admin")
+            if (roles.Contains("Admin"))
             {
                 return true;
             }

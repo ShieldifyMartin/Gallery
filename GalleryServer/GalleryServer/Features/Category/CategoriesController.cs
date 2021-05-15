@@ -6,11 +6,11 @@
 
     public class CategoriesController : ApiController
     {
-        private readonly ICategoriesService categories;
+        private readonly ICategoriesService categories;        
 
         public CategoriesController(ICategoriesService categories)
         {
-            this.categories = categories;
+            this.categories = categories;            
         }
 
         public async Task<ActionResult> All()
@@ -20,7 +20,7 @@
             return Accepted(nameof(this.All), categories);
         }
 
-        [HttpGet("{categoryId}/{currentPage}")]
+        [HttpGet("{categoryId}/{currentPage}")]        
         public async Task<ActionResult> Posts(int categoryId, int currentPage)
         {
             var posts = this.categories.GetPostsByCategory(categoryId, currentPage);

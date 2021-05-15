@@ -14,10 +14,12 @@
 
     public class PostsService : IPostsService
     {
+        private int countPostsPerPage = 9;
+
         private readonly ApplicationDbContext data;
         private readonly IDeletableEntityRepository<Post> posts;
         private readonly ICurrentUserService currentUser;
-        private readonly IConfiguration configuration;
+        private readonly IConfiguration configuration;        
 
         public PostsService(
             ApplicationDbContext data,
@@ -28,13 +30,11 @@
             this.data = data;
             this.posts = posts;
             this.currentUser = currentUser;
-            this.configuration = configuration;
+            this.configuration = configuration;            
         }
 
         public List<GetAllGetRequestModel> GetAll(int currentPage)
         {
-            string postCountOnPage = this.configuration["ApplicationSettings:PostCountOnPage"];
-            
             var posts = this.posts
                 .All()
                 .Select(p => new GetAllGetRequestModel
@@ -50,7 +50,7 @@
                     CreatedBy = p.CreatedBy
                 })
                 .OrderByDescending(p => p.Likes)
-                .Take((currentPage + 1) * 9)
+                .Take((currentPage + 1) * this.countPostsPerPage)
                 .ToList();
             return posts;
         }
@@ -59,7 +59,7 @@
             => this.posts
                 .AllWithDeleted()
                 .OrderByDescending(p => p.Likes)
-                .Take((currentPage + 1) * 9)
+                .Take((currentPage + 1) * this.countPostsPerPage)
                 .ToList();
 
         public int GetAllPostsCount()
@@ -67,6 +67,7 @@
                 .AllWithDeleted()
                 .ToList()
                 .Count;
+
         public List<GetAllGetRequestModel> GetAllSortedByDate(int currentPage)
             => this.GetAll(currentPage)
                 .OrderByDescending(p => p.CreatedOn)
@@ -114,7 +115,7 @@
                 .All()
                 .OrderByDescending(p => p.Likes)
                 .Where(p => p.CategoryId == categoryId)
-                .ToList();    
+                .ToList();
 
         public DetailsGetRequestModel GetById(string id)
         {

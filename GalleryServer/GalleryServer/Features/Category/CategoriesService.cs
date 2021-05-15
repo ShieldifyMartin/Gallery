@@ -10,15 +10,17 @@
 
     public class CategoriesService : ICategoriesService
     {
+        private int countPostsPerPage = 9;
+
         private readonly ApplicationDbContext data;
         private readonly IPostsService posts;
-        private readonly IDeletableEntityRepository<Post> postsRepo;
+        private readonly IDeletableEntityRepository<Post> postsRepo;        
 
         public CategoriesService(ApplicationDbContext data, IPostsService posts, IDeletableEntityRepository<Post> postsRepo)
         {
             this.data = data;
             this.posts = posts;
-            this.postsRepo = postsRepo;
+            this.postsRepo = postsRepo;            
         }
 
         public List<Category> GetAll()
@@ -43,10 +45,10 @@
 
         public List<Post> GetPostsByCategory(int id, int currentPage)
             => this.postsRepo
-                .All()                
+                .All()
                 .Where(p => p.CategoryId == id)
-                .OrderByDescending(p => p.Likes)
-                .Take((currentPage + 1) * 9)
+                .OrderByDescending(p => p.Likes)           
+                .Take((currentPage + 1) * this.countPostsPerPage)
                 .ToList();
 
         public async Task<Category> Add(string title)
