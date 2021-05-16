@@ -24,7 +24,7 @@ const routes = [
     component: () => import("@/views/SubmitPhoto/SubmitPhoto.vue")
   },
   {
-    path: "/:id",
+    path: "/details/:id",
     name: "Details",
     component: () => import("@/views/PostDetails/PostDetails.vue")
   },

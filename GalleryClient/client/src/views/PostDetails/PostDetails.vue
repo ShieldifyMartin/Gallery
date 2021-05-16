@@ -109,7 +109,7 @@ export default defineComponent({
     const getEditRoute = () => "/edit/" + state.post.id;
 
     watchEffect(async () => {
-      const id = window.location.href.split("/")[3];
+      const id = window.location.href.split("/")[4];
       const post = await postService.getById(id);
 
       if (store.state.auth.state.isAuth) {
@@ -124,6 +124,8 @@ export default defineComponent({
       state.post = post;
       state.createdOn = moment(post.createdOn, "YYYYMMDD").fromNow();
     });
+
+    const isAdmin = () => store.state.auth.state.isAdmin;
 
     const like = async () => {
       let status = await postService.like(
@@ -205,6 +207,7 @@ export default defineComponent({
       state,
       getProfileLink,
       getEditRoute,
+      isAdmin,
       like,
       unlike,
       toggleDeletePostAlert,
