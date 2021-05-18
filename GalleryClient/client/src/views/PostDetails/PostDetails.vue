@@ -43,6 +43,13 @@
             />
           </div>
         </div>
+        <div v-if="isAuth()">
+          <img
+            class="add-icon"
+            src="@/assets/icons/plus-square.svg"
+            alt="add to collection icon"
+          />
+        </div>
       </div>
     </div>
     <img v-if="state.loading" class="loader" src="@/assets/loading.gif" />
@@ -108,6 +115,9 @@ export default defineComponent({
     const getProfileLink = () => "/profile/" + state.post.authorId;
     const getEditRoute = () => "/edit/" + state.post.id;
 
+    const isAuth = () => store.state.auth.state.isAuth;
+    const isAdmin = () => store.state.auth.state.isAdmin;
+
     watchEffect(async () => {
       const id = window.location.href.split("/")[4];
       const post = await postService.getById(id);
@@ -124,8 +134,6 @@ export default defineComponent({
       state.post = post;
       state.createdOn = moment(post.createdOn, "YYYYMMDD").fromNow();
     });
-
-    const isAdmin = () => store.state.auth.state.isAdmin;
 
     const like = async () => {
       let status = await postService.like(
@@ -205,9 +213,10 @@ export default defineComponent({
 
     return {
       state,
+      isAuth,
+      isAdmin,
       getProfileLink,
       getEditRoute,
-      isAdmin,
       like,
       unlike,
       toggleDeletePostAlert,

@@ -142,7 +142,7 @@ export default defineComponent({
       isGuest: true,
     });
 
-    const getPostLink = (id) => "/" + id;
+    const getPostLink = (id) => "/details/" + id;
 
     watchEffect(async () => {
       const id = window.location.href.split("/")[4];
