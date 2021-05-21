@@ -47,6 +47,7 @@
           <img
             class="add-icon"
             src="@/assets/icons/plus-square.svg"
+            @click="addToCollection(state.post.id)"
             alt="add to collection icon"
           />
         </div>
@@ -211,6 +212,20 @@ export default defineComponent({
       }
     };
 
+    const addToCollection = (postId) => {
+      let collectionId = 1; //
+      const response = postService.addToCollection(
+        store.state.auth.state.token,
+        postId,
+        collectionId
+      );
+      if (response >= 200 && response <= 300) {
+        useAlert("Added to collection successfully!", true);
+      } else {
+        useAlert("Something went wrong!", false);
+      }
+    };
+
     return {
       state,
       isAuth,
@@ -221,6 +236,7 @@ export default defineComponent({
       unlike,
       toggleDeletePostAlert,
       deletePost,
+      addToCollection,
     };
   },
 });
