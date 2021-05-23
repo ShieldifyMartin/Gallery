@@ -212,17 +212,28 @@ export default defineComponent({
       }
     };
 
-    const addToCollection = (postId) => {
-      let collectionId = 1; //
-      const response = postService.addToCollection(
-        store.state.auth.state.token,
-        postId,
-        collectionId
-      );
-      if (response >= 200 && response <= 300) {
-        useAlert("Added to collection successfully!", true);
-      } else {
-        useAlert("Something went wrong!", false);
+    const addToCollection = async (postId) => {
+      const result = await Swal.fire({
+        position: "center",
+        icon: "error",
+        title: "In which collection do you want to add the picture?",
+        showConfirmButton: true,
+        showCancelButton: true,
+        width: 500,
+      });
+
+      if (result.isConfirmed) {
+        let collectionId = 1; //
+        const response = await postService.addToCollection(
+          store.state.auth.state.token,
+          postId,
+          collectionId
+        );
+        if (response >= 200 && response <= 300) {
+          useAlert("Added to collection successfully!", true);
+        } else {
+          useAlert("Something went wrong!", false);
+        }
       }
     };
 
