@@ -1,0 +1,1 @@
+export default "<ul><li>Favorite</li><li>Others</li></ul>";

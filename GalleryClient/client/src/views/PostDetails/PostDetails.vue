@@ -213,28 +213,33 @@ export default defineComponent({
     };
 
     const addToCollection = async (postId) => {
-      const result = await Swal.fire({
-        position: "center",
-        icon: "error",
-        title: "In which collection do you want to add the picture?",
-        showConfirmButton: true,
+      const collections = ["Favourite", "Others"]; // load all collections
+      await Swal.fire({
+        title: "Select field validation",
+        input: "select",
+        inputOptions: collections,
+        inputPlaceholder: "Select a colletion",
         showCancelButton: true,
-        width: 500,
+        inputValidator: (value) => {
+          return new Promise(() => {
+            if (Number(value) < collections.length) {
+              console.log("selected option is " + value);
+              console.log(postId);
+              // let collectionId = 1; //
+              // const response = await postService.addToCollection(
+              //   store.state.auth.state.token,
+              //   postId,
+              //   collectionId
+              // );
+              // if (response >= 200 && response <= 300) {
+              //   useAlert("Added to collection successfully!", true);
+              // } else {
+              //   useAlert("Something went wrong!", false);
+              // }
+            }
+          });
+        },
       });
-
-      if (result.isConfirmed) {
-        let collectionId = 1; //
-        const response = await postService.addToCollection(
-          store.state.auth.state.token,
-          postId,
-          collectionId
-        );
-        if (response >= 200 && response <= 300) {
-          useAlert("Added to collection successfully!", true);
-        } else {
-          useAlert("Something went wrong!", false);
-        }
-      }
     };
 
     return {
