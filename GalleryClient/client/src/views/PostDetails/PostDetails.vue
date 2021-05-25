@@ -219,23 +219,23 @@ export default defineComponent({
         input: "select",
         inputOptions: collections,
         inputPlaceholder: "Select a colletion",
+        showConfirmButton: true,
         showCancelButton: true,
         inputValidator: (value) => {
-          return new Promise(() => {
+          return new Promise((resolve) => {
             if (Number(value) < collections.length) {
-              console.log("selected option is " + value);
-              console.log(postId);
-              // let collectionId = 1; //
-              // const response = await postService.addToCollection(
-              //   store.state.auth.state.token,
-              //   postId,
-              //   collectionId
-              // );
-              // if (response >= 200 && response <= 300) {
-              //   useAlert("Added to collection successfully!", true);
-              // } else {
-              //   useAlert("Something went wrong!", false);
-              // }
+              postService.addToCollection(
+                store.state.auth.state.token,
+                postId,
+                value
+              ).then((response) => {
+                if (response >= 200 && response <= 300) {
+                  useAlert("Added to collection successfully!", true);
+                } else {
+                  useAlert("Something went wrong!", false);
+                }
+                resolve();
+              })
             }
           });
         },
