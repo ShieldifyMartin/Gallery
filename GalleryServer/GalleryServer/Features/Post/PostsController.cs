@@ -6,7 +6,6 @@
     using GalleryServer.Features.Cloudinary;
     using GalleryServer.Features.Post.Models;
     using GalleryServer.Infrastructure.Services;
-    using Microsoft.AspNetCore.Antiforgery;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
     using System.Threading.Tasks;
@@ -157,6 +156,20 @@
             }
 
             return Ok();
-        }        
+        }
+
+        [HttpGet("{postId}/{collectionId}")]
+        [Authorize]
+        public async Task<ActionResult> AddToCollection(string postId, string collectionId)
+        {
+            var result = await this.posts.AddToCollection(postId, collectionId);
+
+            if (result.Failure)
+            {
+                return BadRequest(result.Error);
+            }
+
+            return Ok();
+        }
     }
 }

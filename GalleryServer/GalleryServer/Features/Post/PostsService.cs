@@ -336,5 +336,14 @@
 
             return true;
         }
+
+        public async Task<Result> AddToCollection(string postId, string collectionId)
+        {
+            var post = this.posts
+                .All()
+                .Where(p => p.Id == postId);
+
+            return true;
+        }
     }
 }

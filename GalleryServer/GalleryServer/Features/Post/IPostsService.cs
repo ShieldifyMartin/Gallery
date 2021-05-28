@@ -39,5 +39,7 @@
         Task<Result> LikePost(string userId, string postId);
 
         Task<Result> UnLikePost(string userId, string postId);
+
+        Task<Result> AddToCollection(string postId, string collectionId);
     }
 }

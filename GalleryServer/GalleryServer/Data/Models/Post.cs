@@ -27,6 +27,10 @@
 
         public virtual Category Category { get; set; }
 
+        public int? CollectionId { get; set; }
+
+        public virtual Collection Collection { get; set; }
+
         [Required]
         public string UserId { get; set; }
 
