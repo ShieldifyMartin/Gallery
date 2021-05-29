@@ -337,11 +337,17 @@
             return true;
         }
 
-        public async Task<Result> AddToCollection(string postId, string collectionId)
+        public Result AddToCollection(string postId, int collectionId)
         {
             var post = this.posts
                 .All()
-                .Where(p => p.Id == postId);
+                .First(p => p.Id == postId);
+
+            var collection = this.data
+                .Collections
+                .First(c => c.Id == collectionId);
+
+            collection.Posts.Add(post);
 
             return true;
         }
