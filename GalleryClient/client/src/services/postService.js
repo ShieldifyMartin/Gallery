@@ -79,7 +79,7 @@ const getPostsSortedByDate = async (pageCount) => {
 
 const getRandomPosts = async (pageCount) => {
   try {
-    const response = await axios.get(`${config.restAPI}/posts/getRandom/${pageCount}`);    
+    const response = await axios.get(`${config.restAPI}/posts/getRandom/${pageCount}`);
     if (response.status >= 200 && response.status < 300) {
       return response.data;
     }
@@ -225,11 +225,11 @@ const addToCollection = async (token, postId, collectionId) => {
   applyDefaultHeaders(token);
 
   try {
-    console.log({token, postId, collectionId })
-    // const response = await axios.post(
-    //   `${config.restAPI}/posts/addCollection/${postId}/${collectionId}`
-    // );
-    // return response.status;
+    const response = await axios.post(
+      `${config.restAPI}/posts/addCollection/${postId}/${collectionId}`
+    );
+    console.log(response);
+    return response.status;
   } catch (err) {
     return err.response.status;
   }
