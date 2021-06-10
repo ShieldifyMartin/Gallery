@@ -226,7 +226,7 @@ const addToCollection = async (token, postId, collectionId) => {
 
   try {
     const response = await axios.post(
-      `${config.restAPI}/posts/addCollection/${postId}/${collectionId}`
+      `${config.restAPI}/posts/addToCollection/${postId}/${collectionId}`
     );
     console.log(response);
     return response.status;
