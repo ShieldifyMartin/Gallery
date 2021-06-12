@@ -17,7 +17,7 @@
             this.Id = Guid.NewGuid().ToString();
         }
 
-        public string PictureUrl { get; set; }
+        public string PictureUrl { get; set; }        
 
         public DateTime CreatedOn { get; set; }
 
@@ -32,6 +32,8 @@
         public DateTime? DeletedOn { get; set; }
 
         public virtual ICollection<IdentityUserRole<string>> Roles { get; set; }
+
+        public virtual ICollection<Collection> Collections { get; set; }
 
         public IEnumerable<Post> Posts { get; } = new HashSet<Post>();
     }

@@ -40,6 +40,6 @@
 
         Task<Result> UnLikePost(string userId, string postId);
 
-        Result AddToCollection(string postId, int collectionId);
+        Task<Result> AddToCollection(string postId, int collectionId);
     }
 }

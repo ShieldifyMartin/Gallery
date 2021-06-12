@@ -337,7 +337,7 @@
             return true;
         }
 
-        public Result AddToCollection(string postId, int collectionId)
+        public async Task<Result> AddToCollection(string postId, int collectionId)
         {
             var post = this.posts
                 .All()
@@ -348,6 +348,7 @@
                 .First(c => c.Id == collectionId);
 
             collection.Posts.Add(post);
+            await this.data.SaveChangesAsync();
 
             return true;
         }

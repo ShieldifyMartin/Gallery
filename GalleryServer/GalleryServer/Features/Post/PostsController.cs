@@ -158,11 +158,11 @@
             return Ok();
         }
 
-        [HttpGet("{postId}/{collectionId}")]
+        [HttpPost("{postId}/{collectionId}")]
         [Authorize]
-        public ActionResult AddToCollection(string postId, int collectionId)
+        public async Task<ActionResult> AddToCollection(string postId, int collectionId)
         {
-            var result = this.posts.AddToCollection(postId, collectionId);
+            var result = await this.posts.AddToCollection(postId, collectionId);
 
             if (result.Failure)
             {
