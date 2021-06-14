@@ -18,5 +18,10 @@
         {
             public const int MaxTitleLength = 12;
         }
+
+        public class Collection
+        {
+            public const int MaxTitleLength = 12;
+        }
     }
 }

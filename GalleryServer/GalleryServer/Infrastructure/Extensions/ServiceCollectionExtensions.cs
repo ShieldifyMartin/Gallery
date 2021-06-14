@@ -20,6 +20,7 @@
     using System.Text;
     using GalleryServer.Features.Post;
     using GalleryServer.Areas.Admin.Features.Dashboard;
+    using GalleryServer.Features.Collection;
 
     public static class ServiceCollectionExtensions
     {
@@ -93,6 +94,7 @@
                 .AddTransient<IPostsService, PostsService>()
                 .AddTransient<IProfilesService, ProfilesService>()
                 .AddTransient<IIdentityService, IdentityService>()
+                .AddTransient<ICollectionsService, CollectionsService>()
                 .AddTransient<IAdminService, AdminService>();
 
         public static IServiceCollection AddCloudinaryService(this IServiceCollection services, AppSettings appSettings)

@@ -23,7 +23,6 @@
         public DbSet<Category> Categories { get; set; }
         public DbSet<Post> Posts { get; set; }
         public DbSet<Vote> Votes { get; set; }
-
         public DbSet<Collection> Collections { get; set; }
 
         public override int SaveChanges(bool acceptAllChangesOnSuccess)
