@@ -30,6 +30,29 @@
             await this.data.SaveChangesAsync();
 
             return collection.Id;
-        }        
+        }
+
+        public async Task<Result> UpdatePost(int collectionId, string name)
+        {
+            var userId = this.currentUser.GetId();
+            var collection = this.data
+                .Collections                
+                .FirstOrDefault(c => c.Id == collectionId);
+
+            if (collection.UserId != userId)
+            {
+                return "You are not authorized to update this collection.";
+            }
+
+            if (collection == null)
+            {
+                return "This collection cannot be found.";
+            }
+
+            collection.Name = name;
+            await this.data.SaveChangesAsync();
+            
+            return true;
+        }
     }
 }
