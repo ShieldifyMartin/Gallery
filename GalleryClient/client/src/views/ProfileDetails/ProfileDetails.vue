@@ -30,6 +30,8 @@
         <p>{{ state.profile.userName }}</p>
       </div>
 
+      <button @click="addCollection" class="add-btn">Add Collection</button>
+
       <div class="wrapper">
         <div class="tabs">
           <div class="tab">
@@ -204,6 +206,11 @@ export default defineComponent({
       window.location.href = "/profile";
     };
 
+    const addCollection = () => {
+      console.log("addCollection");
+      //TODO
+    }
+
     const loadMorePosts = async () => {
       state.allPosts = true;
       const userPosts = await profileService.getUserPosts(state.allPosts);
@@ -237,6 +244,7 @@ export default defineComponent({
       state,
       clickImage,
       uploadImage,
+      addCollection,
       loadMorePosts,
       loadLessPosts,
       loadMoreLikedPosts,

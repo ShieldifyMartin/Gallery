@@ -30,6 +30,16 @@
       display: none;
     }
 
+    .add-btn {
+      margin: 1em auto;
+      padding: 0.75em 1.5em;      
+      border-radius: 0.75em;      
+    }
+
+    .add-btn:hover {
+      background-color: #ffff;
+    }
+
     .wrapper {
       width: 100%;
       margin: 0 auto;
@@ -92,7 +102,7 @@
           height: 15em;
           object-fit: cover;
           background-size: 100%;
-        }
+        }        
 
         .load-more,
         .load-less {
