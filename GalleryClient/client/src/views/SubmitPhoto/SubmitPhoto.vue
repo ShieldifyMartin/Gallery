@@ -39,8 +39,9 @@
           v-for="category in state.categories"
           :key="category.id"
           :value="category.id"
-          >{{ category.title }}</option
         >
+          {{ category.title }}
+        </option>
       </select>
       <input type="submit" value="Create" class="submit-btn" />
     </form>
@@ -93,12 +94,12 @@ export default defineComponent({
 
       if (response == 401) {
         router.push("/login");
-      } else if (response >= 400) {
-        useAlert("Something went wrong!", false);
-      } else {
+      } else if (response >= 200 && response < 300) {
         useAlert("Successful!", true);
         signalRService.returnPosts();
         router.push("/" + response);
+      } else {
+        useAlert("Something went wrong!", false);
       }
     };
 

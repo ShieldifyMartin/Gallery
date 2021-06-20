@@ -1,0 +1,43 @@
+.add-collection {
+  * {
+    display: block;
+    margin: 1em auto;
+  }
+
+  input {
+    width: 30em;
+    height: 2em;
+    border: 1px solid #000;
+  }
+
+  .fade-enter-from {
+    opacity: 0;
+  }
+  .fade-enter-to {
+    opacity: 1;
+  }
+  .fade-enter-active {
+    transition: all 1.5s ease;
+  }
+
+  .submit-btn {
+    border: none;
+    width: 30em;
+    background: #111111;
+    color: #ffff;
+  }
+}
+
+@media only screen and (max-width: 700px) {
+  .add-collection {
+    input {
+      width: 15em;
+      border: 1px solid #000;
+    }
+
+    .submit-btn {
+      width: 15em;
+      border: 1px solid #000;
+    }
+  }
+}

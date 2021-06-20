@@ -31,7 +31,7 @@
       </div>
 
       <button @click="addCollection" class="add-btn">Add Collection</button>
-
+      
       <div class="wrapper">
         <div class="tabs">
           <div class="tab">
