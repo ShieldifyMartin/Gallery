@@ -30,7 +30,7 @@
         <p>{{ state.profile.userName }}</p>
       </div>
 
-      <button @click="addCollection" class="add-btn">Add Collection</button>
+      <router-link to="/collection/add" @click="addCollection" class="add-btn">Add Collection</router-link>
       
       <div class="wrapper">
         <div class="tabs">

@@ -2,16 +2,14 @@
   <div class="add-collection">
     <h1>Add Collection</h1>
     <form method="post" @submit.prevent="handleSubmit">
-      <transition name="fade">
-        <input
-          type="text"
-          v-model="state.name"
-          name="name"
-          placeholder="Collection Name"
-          required
-        />
-        <input type="submit" value="Add" class="submit-btn" />
-      </transition>
+      <input
+        type="text"
+        v-model="state.name"
+        name="name"
+        placeholder="Collection Name"
+        required
+      />
+      <input type="submit" value="Add" class="submit-btn" />
     </form>
   </div>
 </template>

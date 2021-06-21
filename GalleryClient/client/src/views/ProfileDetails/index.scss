@@ -33,11 +33,13 @@
     .add-btn {
       margin: 1em auto;
       padding: 0.75em 1.5em;      
-      border-radius: 0.75em;      
+      border-radius: 0.75em;
+      width: 8em;
+      background-color: rgba(8, 8, 8, 0.288);
     }
 
     .add-btn:hover {
-      background-color: #ffff;
+      color: #ffff;
     }
 
     .wrapper {
