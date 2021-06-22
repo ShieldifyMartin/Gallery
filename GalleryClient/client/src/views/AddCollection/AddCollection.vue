@@ -19,7 +19,7 @@ import { defineComponent, reactive } from "vue";
 import useAlert from "../../components/Alert/UseAlert";
 import router from "../../router";
 import store from "../../store";
-import { postService } from "../../services/index";
+import { collectionService } from "../../services/index";
 import config from "@/config";
 
 export default defineComponent({
@@ -28,7 +28,7 @@ export default defineComponent({
       name: "",
     });
 
-    const handleSubmit = async () => {
+    const handleSubmit = async () => {        
       const { name } = state;
 
       if (name.length < 2 || name.length >= 5) {
@@ -36,9 +36,10 @@ export default defineComponent({
           `Max description length is ${config.maxCollectionNameLength}!`,
           false
         );
+        return;
       }
 
-      var response = await postService.create(
+      var response = await collection.add(
         store.state.auth.state.token,
         name
       );
