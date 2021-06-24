@@ -31,15 +31,15 @@ export default defineComponent({
     const handleSubmit = async () => {        
       const { name } = state;
 
-      if (name.length < 2 || name.length >= 5) {
+      if (name.length < config.minCollectionNameLength || name.length >= config.maxCollectionNameLength) {
         useAlert(
-          `Max description length is ${config.maxCollectionNameLength}!`,
+          `Description length is not between ${config.minCollectionNameLength} and ${config.maxCollectionNameLength}!`,
           false
         );
         return;
       }
 
-      var response = await collection.add(
+      var response = await collectionService.add(
         store.state.auth.state.token,
         name
       );

@@ -14,6 +14,32 @@ const get = async () => {
     }
 };
 
+const add = async (token, name) => {
+    axios.defaults.headers = {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + token,
+    };
+    const body = JSON.stringify({ name });
+
+    try {
+        const response = await axios
+            .post(`${config.restAPI}/collections/add`, body);
+        console.log(response);
+        if (response.status >= 200 && response.status < 300) {
+            var postId = response.data;
+            return postId;
+        }
+    }
+    catch (err) {
+        if (err.response.status === 400) {
+            return err.response.data;
+        }
+
+        return "Something went wrong!";
+    }    
+};
+
 export const collectionService = {
     get,
+    add
 };
