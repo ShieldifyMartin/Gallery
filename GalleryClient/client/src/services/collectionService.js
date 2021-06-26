@@ -23,11 +23,10 @@ const add = async (token, name) => {
 
     try {
         const response = await axios
-            .post(`${config.restAPI}/collections/add`, body);
-        console.log(response);
+            .post(`${config.restAPI}/collections/add`, body);        
         if (response.status >= 200 && response.status < 300) {
-            var postId = response.data;
-            return postId;
+            const status = response.status;
+            return status;
         }
     }
     catch (err) {

@@ -28,10 +28,13 @@ export default defineComponent({
       name: "",
     });
 
-    const handleSubmit = async () => {        
+    const handleSubmit = async () => {
       const { name } = state;
 
-      if (name.length < config.minCollectionNameLength || name.length >= config.maxCollectionNameLength) {
+      if (
+        name.length < config.minCollectionNameLength ||
+        name.length >= config.maxCollectionNameLength
+      ) {
         useAlert(
           `Description length is not between ${config.minCollectionNameLength} and ${config.maxCollectionNameLength}!`,
           false
@@ -39,16 +42,16 @@ export default defineComponent({
         return;
       }
 
-      var response = await collectionService.add(
+      var status = await collectionService.add(
         store.state.auth.state.token,
         name
-      );
+      );      
 
-      if (response == 401) {
+      if (status == 401) {
         router.push("/login");
-      } else if (response >= 200 && response < 300) {
+      } else if (status >= 200 && status < 300) {
         useAlert("Successful!", true);
-        router.push("/" + response);
+        router.push("/profile");
       } else {
         useAlert("Something went wrong!", false);
       }
