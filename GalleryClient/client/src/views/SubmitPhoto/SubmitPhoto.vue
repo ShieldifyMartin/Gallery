@@ -84,7 +84,7 @@ export default defineComponent({
       if (!isCorrect) {
         return;
       }
-      var response = await postService.create(
+      var responseObj = await postService.create(
         store.state.auth.state.token,
         picture,
         location,
@@ -92,12 +92,12 @@ export default defineComponent({
         categoryId
       );
 
-      if (response == 401) {
+      if (responseObj.status == 401) {
         router.push("/login");
-      } else if (response >= 200 && response < 300) {
+      } else if (responseObj.status >= 200 && responseObj.status < 300) {
         useAlert("Successful!", true);
         signalRService.returnPosts();
-        router.push("/" + response);
+        router.push("/" + responseObj.postId);
       } else {
         useAlert("Something went wrong!", false);
       }

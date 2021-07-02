@@ -68,6 +68,7 @@ const getTop5 = async () => {
 const getPostsSortedByDate = async (pageCount) => {
   try {
     const response = await axios.get(`${config.restAPI}/posts/getAllSortedByDate/${pageCount}`);
+    console.log(response);
     if (response.status >= 200 && response.status < 300) {
       return response.data;
     }
@@ -124,10 +125,16 @@ const create = async (token, picture, location, description, categoryId) => {
 
     if (response.status >= 200 && response.status < 300) {
       var postId = response.data;
-      return postId;
+      return {
+        postId, 
+        status: response.status
+      };
     }
   } catch (err) {
-    return err.response.status;
+    return {
+      postId: -1,
+      status: err.response.status
+    };
   }
 };
 
