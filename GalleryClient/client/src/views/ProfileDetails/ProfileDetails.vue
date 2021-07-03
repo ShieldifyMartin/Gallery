@@ -30,6 +30,15 @@
         <p>{{ state.profile.userName }}</p>
       </div>
 
+      <ul class="categories">
+        <li
+          v-for="collection in state.collections"
+          :key="collection.id"
+          @click="applyCollection(collection.id)"
+        >
+          {{collection.name}}
+        </li>
+      </ul>
       <router-link to="/collection/add" class="add-btn">Add Collection</router-link>
       
       <div class="wrapper">
@@ -127,13 +136,14 @@
 <script lang="ts">
 import { defineComponent, reactive, watchEffect } from "vue";
 import useAlert from "../../components/Alert/UseAlert";
-import { profileService } from "../../services";
+import { profileService, collectionService } from "../../services";
 import store from "../../store/index.js";
 
 export default defineComponent({
   setup() {
     const state = reactive({
       profile: {},
+      collections: [],
       loading: true,
       userPosts: [],
       userLikedPosts: [],
@@ -142,11 +152,14 @@ export default defineComponent({
       picture: "",
       maxSize: 15728640,
       isGuest: true,
+      setCollectionId: -1
     });
 
     const getPostLink = (id) => "/details/" + id;
 
     watchEffect(async () => {
+      const collections = await collectionService.get();
+      state.collections = collections;
       const id = window.location.href.split("/")[4];
 
       if (!id) {
@@ -206,6 +219,10 @@ export default defineComponent({
       window.location.href = "/profile";
     };
 
+    const applyCollection = (id) => {
+      state.setCollectionId = id;
+    }
+
     const loadMorePosts = async () => {
       state.allPosts = true;
       const userPosts = await profileService.getUserPosts(state.allPosts);
@@ -238,7 +255,8 @@ export default defineComponent({
       getPostLink,
       state,
       clickImage,
-      uploadImage,      
+      uploadImage,
+      applyCollection,
       loadMorePosts,
       loadLessPosts,
       loadMoreLikedPosts,

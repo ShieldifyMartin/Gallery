@@ -126,7 +126,7 @@ const create = async (token, picture, location, description, categoryId) => {
     if (response.status >= 200 && response.status < 300) {
       var postId = response.data;
       return {
-        postId, 
+        postId,
         status: response.status
       };
     }
