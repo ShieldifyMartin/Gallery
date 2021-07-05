@@ -59,6 +59,12 @@
                 .HasIndex(c => c.Title)
                 .IsUnique();
 
+            builder
+                .Entity<Collection>()
+                .HasOne(v => v.User)
+                .WithMany()
+                .HasForeignKey(v => v.UserId);
+
             base.OnModelCreating(builder);
         }
 

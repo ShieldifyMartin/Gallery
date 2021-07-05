@@ -8,5 +8,7 @@
         Task<int> Add(string name, string userId);
 
         Task<Result> UpdatePost(int collectionId, string name);
+
+        Task<Result> DeleteCollection(int collectionId);
     }
 }

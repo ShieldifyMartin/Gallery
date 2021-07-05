@@ -54,5 +54,27 @@
             
             return true;
         }
+
+        public async Task<Result> DeleteCollection(int collectionId)
+        {
+            var userId = this.currentUser.GetId();
+            var collection = this.data.Collections               
+                .FirstOrDefault(c => c.Id == collectionId);
+
+            if (collection == null)
+            {
+                return "This post cannot be found.";
+            }
+
+            if (collection.UserId != userId)
+            {
+                return "You are not authorized to delete this post.";
+            }
+
+            this.data.Collections.Remove(collection);
+            await this.data.SaveChangesAsync();
+
+            return true;
+        }
     }
 }
