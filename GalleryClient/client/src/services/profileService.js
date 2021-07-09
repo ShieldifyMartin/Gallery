@@ -17,7 +17,8 @@ const get = async () => {
     const response = await axios
       .get(`${config.restAPI}/profiles/details`);
     if (response.status >= 200 && response.status < 300) {
-      const data = response.data;      
+      const data = response.data;
+      console.log(data);
       return data;
     }
   }

@@ -29,18 +29,11 @@
         <b>Username:</b>
         <p>{{ state.profile.userName }}</p>
       </div>
-
-      <ul class="categories">
-        <li
-          v-for="collection in state.collections"
-          :key="collection.id"
-          @click="applyCollection(collection.id)"
-        >
-          {{collection.name}}
-        </li>
-      </ul>
-      <router-link to="/collection/add" class="add-btn">Add Collection</router-link>
       
+      <router-link to="/collection/add" class="add-btn"
+        >Add Collection</router-link
+      >
+
       <div class="wrapper">
         <div class="tabs">
           <div class="tab">
@@ -152,7 +145,7 @@ export default defineComponent({
       picture: "",
       maxSize: 15728640,
       isGuest: true,
-      setCollectionId: -1
+      setCollectionId: -1,
     });
 
     const getPostLink = (id) => "/details/" + id;
@@ -160,6 +153,8 @@ export default defineComponent({
     watchEffect(async () => {
       const collections = await collectionService.get();
       state.collections = collections;
+      console.log(collections);
+
       const id = window.location.href.split("/")[4];
 
       if (!id) {
@@ -221,7 +216,7 @@ export default defineComponent({
 
     const applyCollection = (id) => {
       state.setCollectionId = id;
-    }
+    };
 
     const loadMorePosts = async () => {
       state.allPosts = true;

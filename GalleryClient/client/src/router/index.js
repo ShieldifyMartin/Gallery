@@ -49,6 +49,11 @@ const routes = [
     component: () => import("@/views/Users/Users.vue")
   },
   {
+    path: "/collection/:id",
+    name: "Collections",
+    component: () => import("@/views/Collection/Collection.vue")
+  },
+  {
     path: "/dashboard",
     name: "AdminDashboard",
     component: () => import("@/views/AdminDashboard/AdminDashboard.vue"),
