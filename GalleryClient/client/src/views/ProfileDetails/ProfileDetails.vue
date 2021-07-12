@@ -29,11 +29,18 @@
         <b>Username:</b>
         <p>{{ state.profile.userName }}</p>
       </div>
-      
       <router-link to="/collection/add" class="add-btn"
         >Add Collection</router-link
       >
-
+      <div>
+        <router-link
+          v-for="collection in state.collections"
+          :key="collection.id"
+          :to="getCollectionLink(collection.id)"
+        >
+          {{ collection.name }}
+        </router-link>
+      </div>
       <div class="wrapper">
         <div class="tabs">
           <div class="tab">
@@ -149,12 +156,11 @@ export default defineComponent({
     });
 
     const getPostLink = (id) => "/details/" + id;
+    const getCollectionLink = (id) => "/collection/" + id;
 
     watchEffect(async () => {
       const collections = await collectionService.get();
       state.collections = collections;
-      console.log(collections);
-
       const id = window.location.href.split("/")[4];
 
       if (!id) {
@@ -247,8 +253,9 @@ export default defineComponent({
     };
 
     return {
-      getPostLink,
       state,
+      getPostLink,
+      getCollectionLink,
       clickImage,
       uploadImage,
       applyCollection,
