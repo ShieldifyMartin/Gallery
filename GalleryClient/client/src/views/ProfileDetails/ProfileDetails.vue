@@ -37,6 +37,7 @@
           v-for="collection in state.collections"
           :key="collection.id"
           :to="getCollectionLink(collection.id)"
+          class="collection-link"
         >
           {{ collection.name }}
         </router-link>
