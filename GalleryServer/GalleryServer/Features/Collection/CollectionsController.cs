@@ -19,6 +19,15 @@
             this.currentUser = currentUser;
             this.collectionService = collectionService;
         }
+                
+        [Authorize]
+        public async Task<ActionResult> All()
+        {
+            var userId = this.currentUser.GetId();
+            var collections = await this.collectionService.All(userId);
+
+            return Accepted(nameof(this.All), collections);
+        }
 
         [HttpPost]
         [Authorize]

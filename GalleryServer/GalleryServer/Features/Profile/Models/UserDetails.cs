@@ -15,6 +15,7 @@
         [Required]
         public string Email { get; set; }
 
+        #nullable enable
         public string? Picture { get; set; }
     }
 }

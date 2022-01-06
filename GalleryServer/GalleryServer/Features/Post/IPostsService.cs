@@ -26,10 +26,13 @@
 
         List<SearchPostRequestViewModel> Search(string input);
 
+        #nullable enable
         Task<string> Create(string? location, string description, string pictureUrl, string userId, int? categoryId);
         
+        #nullable enable
         Task<Result> UpdatePost(string userId, string postId, string? location, string description, string pictureUrl, int? categoryId);
 
+        #nullable enable
         Task<Result> UpdatePostAdmin(string userId, string postId, string? location, string description, string pictureUrl, int? categoryId);
 
         Task<Result> DeletePost(string userId, string postId);

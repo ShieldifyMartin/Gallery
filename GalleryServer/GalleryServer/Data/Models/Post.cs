@@ -11,6 +11,7 @@
         [Key]
         public string Id { get; set; }
 
+        #nullable enable
         [MaxLength(MaxLocationLength)]
         public string? Location { get; set; }
 
@@ -23,10 +24,12 @@
 
         public int Likes { get; set; } = 0;
 
+        #nullable enable
         public int? CategoryId { get; set; }
 
         public virtual Category Category { get; set; }
 
+        #nullable enable
         public int? CollectionId { get; set; }
 
         public virtual Collection Collection { get; set; }
@@ -38,6 +41,7 @@
 
         public DateTime CreatedOn { get; set; }
         public string CreatedBy { get; set; }
+        #nullable enable
         public DateTime? ModifiedOn { get; set; }
         public string? ModifiedBy { get; set; }
         

@@ -7,6 +7,7 @@
 
     public class UpdatePatchRequestModel
     {
+        #nullable enable
         public IFormFile? Picture { get; set; }
 
         [MaxLength(MaxLocationLength)]
@@ -16,6 +17,7 @@
         [MaxLength(MaxDescriptionLength)]
         public string Description { get; set; }
 
+        #nullable enable
         public int? CategoryId { get; set; }
     }
 }

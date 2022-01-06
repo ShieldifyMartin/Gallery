@@ -23,12 +23,15 @@
 
         public string CreatedBy { get; set; }
 
+        #nullable enable
         public DateTime? ModifiedOn { get; set; }
 
+        #nullable enable
         public string? ModifiedBy { get; set; }
 
         public bool IsDeleted { get; set; }
 
+        #nullable enable
         public DateTime? DeletedOn { get; set; }
 
         public virtual ICollection<IdentityUserRole<string>> Roles { get; set; }

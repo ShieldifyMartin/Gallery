@@ -10,6 +10,7 @@
         [Required]
         public string Id { get; set; }
         
+        #nullable enable
         public string? Location { get; set; }
 
         [Required]
@@ -24,9 +25,11 @@
         [Required]
         public int Likes { get; set; }
 
+        #nullable enable
         [Required]
         public bool? IsLiked { get; set; }
 
+        #nullable enable
         [Required]
         public int? CategoryId { get; set; }
 

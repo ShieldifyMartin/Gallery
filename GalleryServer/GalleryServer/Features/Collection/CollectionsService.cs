@@ -3,6 +3,7 @@
     using GalleryServer.Data;
     using GalleryServer.Data.Models;
     using GalleryServer.Infrastructure.Services;
+    using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
 
@@ -16,6 +17,15 @@
         {
             this.data = data;
             this.currentUser = currentUser;
+        }
+
+        public async Task<List<Collection>> All(string userId)
+        {
+            var collections = this.data.Collections
+                .Where(c => c.UserId == userId)
+                .ToList();            
+
+            return collections;
         }
 
         public async Task<int> Add(string name, string userId)

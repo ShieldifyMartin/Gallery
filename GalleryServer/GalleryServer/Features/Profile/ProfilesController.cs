@@ -54,7 +54,7 @@
         }
 
         [HttpGet("{all}")]
-        public ActionResult UserPosts(bool all = false)
+        public  ActionResult UserPosts(bool all = false)
         {
             var userId = this.currentUser.GetId();
             var userPosts = this.profiles.GetUserPosts(userId, all, ItemsPerPage);
@@ -92,7 +92,7 @@
         {
             var users = this.profiles.GetUsers(input);
 
-            return Ok(users);
+            return Accepted(users);
         }
     }
 }

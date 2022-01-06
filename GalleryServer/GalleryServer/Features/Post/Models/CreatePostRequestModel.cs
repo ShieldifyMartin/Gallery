@@ -10,6 +10,7 @@
         [Required]
         public IFormFile Picture { get; set; }
 
+        #nullable enable
         [MaxLength(MaxLocationLength)]
         public string? Location { get; set; }
 
@@ -17,6 +18,7 @@
         [MaxLength(MaxDescriptionLength)]
         public string Description { get; set; }
 
+        #nullable enable
         public int? CategoryId { get; set; }
     }    
 }

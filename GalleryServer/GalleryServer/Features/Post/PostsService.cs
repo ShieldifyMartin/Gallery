@@ -166,6 +166,7 @@
             return posts;
         }
 
+        #nullable enable
         public async Task<string> Create(string? location, string description, string pictureUrl, string userId, int? categoryId)
         {
             var post = new Post
@@ -184,6 +185,7 @@
             return post.Id;
         }
 
+        #nullable enable
         public async Task<Result> UpdatePost(string userId, string postId, string? location, string description, string? pictureUrl, int? categoryId)
         {
             var post = this.posts
@@ -216,6 +218,7 @@
             return true;
         }
 
+        #nullable enable
         public async Task<Result> UpdatePostAdmin(string userId, string postId, string? location, string description, string pictureUrl, int? categoryId)
         {
             var post = this.posts

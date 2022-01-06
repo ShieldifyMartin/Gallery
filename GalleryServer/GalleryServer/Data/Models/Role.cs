@@ -13,18 +13,21 @@ namespace GalleryServer.Data.Models
             this.Name = name;
         }
 
-        public string Name { get; set; }
+        public override string Name { get; set; }
 
         public DateTime CreatedOn { get; set; }
 
         public string CreatedBy { get; set; }
 
+        #nullable enable
         public DateTime? ModifiedOn { get; set; }
 
+        #nullable enable
         public string? ModifiedBy { get; set; }
 
         public bool IsDeleted { get; set; }
 
+        #nullable enable
         public DateTime? DeletedOn { get; set; }
 
         public IEnumerable<Post> Posts { get; } = new HashSet<Post>();
